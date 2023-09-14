@@ -1,0 +1,276 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HarmonyLib;
+using UnityEngine;
+
+
+namespace LackingImaginationV2
+{
+    public static class ObjectBDPatch
+    {
+
+        [HarmonyPatch(typeof(ObjectDB), "Awake")]
+        public static class ObjectDBAwake
+        {
+            public static void Postfix(ObjectDB __instance)
+            {
+                AddStatusEffect(__instance);
+                AddCooldownStatusEffect(__instance);
+            }
+        }
+
+        [HarmonyPatch(typeof(ObjectDB), "CopyOtherDB")]
+        public static class ObjectDBCopyOtherDB
+        {
+            public static void Postfix(ObjectDB __instance)
+            {
+                AddStatusEffect(__instance);
+                AddCooldownStatusEffect(__instance);
+            }
+        }
+        
+        
+         [HarmonyPatch(typeof(ObjectDB), "GetStatusEffect", new Type[] { typeof(int) })]
+        public static class ObjectDBGetStatusEffect
+        {
+            public static void Postfix(ObjectDB __instance, int nameHash, StatusEffect __result)
+            {
+                if (__result != null)
+                {
+                    if (nameHash == "SE_HorizonHaste".GetHashCode() )
+                    {
+                        (__result as SE_HorizonHaste).m_icon = SE_HorizonHaste.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_MoonlitLeap".GetHashCode())
+                    {
+                        (__result as SE_MoonlitLeap).m_icon = SE_MoonlitLeap.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_RavenousHunger".GetHashCode())
+                    {
+                        (__result as SE_RavenousHunger).m_icon = SE_RavenousHunger.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Ritual".GetHashCode())
+                    {
+                        (__result as SE_Ritual).m_icon = SE_Ritual.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Relentless".GetHashCode())
+                    {
+                        (__result as SE_Relentless).m_icon = SE_Relentless.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Giantization".GetHashCode())
+                    {
+                        (__result as SE_Giantization).m_icon = SE_Giantization.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Harbinger".GetHashCode())
+                    {
+                        (__result as SE_Harbinger).m_icon = SE_Harbinger.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_ThreeFreeze".GetHashCode())
+                    {
+                        (__result as SE_ThreeFreeze).m_icon = SE_ThreeFreeze.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_BloodSiphon".GetHashCode())
+                    {
+                        (__result as SE_BloodSiphon).m_icon = SE_BloodSiphon.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_TimedDeath".GetHashCode())
+                    {
+                        (__result as SE_TimedDeath).m_icon = SE_TimedDeath.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Bash".GetHashCode())
+                    {
+                        (__result as SE_Bash).m_icon = SE_Bash.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Longinus".GetHashCode())
+                    {
+                        (__result as SE_Longinus).m_icon = SE_Longinus.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_AncientAwe".GetHashCode())
+                    {
+                        (__result as SE_AncientAwe).m_icon = SE_AncientAwe.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_FumesSplit".GetHashCode())
+                    {
+                        (__result as SE_FumesSplit).m_icon = SE_FumesSplit.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Vigil".GetHashCode())
+                    {
+                        (__result as SE_Vigil).m_icon = SE_Vigil.AbilityIcon;
+                    }
+                    
+                    
+                    
+                    
+                    
+                    if (nameHash == "Ability1_CoolDown".GetHashCode())
+                    {
+                        (__result as CooldownStatusEffects_A1).m_icon = CooldownStatusEffects_A1.AbilityIcon;
+                    }
+                    else if (nameHash == "Ability2_CoolDown".GetHashCode())
+                    {
+                        (__result as CooldownStatusEffects_A2).m_icon = CooldownStatusEffects_A2.AbilityIcon;
+                    }
+                    else if (nameHash == "Ability3_CoolDown".GetHashCode())
+                    {
+                        (__result as CooldownStatusEffects_A3).m_icon = CooldownStatusEffects_A3.AbilityIcon;
+                    }
+                    else if (nameHash == "Ability4_CoolDown".GetHashCode())
+                    {
+                        (__result as CooldownStatusEffects_A4).m_icon = CooldownStatusEffects_A4.AbilityIcon;
+                    }
+                    else if (nameHash == "Ability5_CoolDown".GetHashCode())
+                    {
+                        (__result as CooldownStatusEffects_A5).m_icon = CooldownStatusEffects_A5.AbilityIcon;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+        [HarmonyPatch(typeof(Hud), "Awake")]
+        public static class HudAwake
+        {
+            public static void Postfix(Hud __instance)
+            {
+                SE_HorizonHaste.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDeer").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_MoonlitLeap.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyFenring").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_RavenousHunger.AbilityIcon = ZNetScene.instance.GetPrefab("Bloodbag").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Ritual.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinShaman").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Relentless.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDeathsquito").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Harbinger.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySurtling").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Giantization.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_ThreeFreeze.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyHatchling").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_BloodSiphon.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyLeech").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_TimedDeath.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyBonemass").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Bash.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGreydwarfBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Longinus.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblin").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_AncientAwe.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyTheElder").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_FumesSplit.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyBlob").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Vigil.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySkeleton").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                    
+                    
+            }
+        }
+
+        
+        private static void AddCooldownStatusEffect(ObjectDB odb)
+        {
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "Ability1_CoolDown"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<CooldownStatusEffects_A1>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "Ability2_CoolDown"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<CooldownStatusEffects_A2>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "Ability3_CoolDown"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<CooldownStatusEffects_A3>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "Ability4_CoolDown"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<CooldownStatusEffects_A4>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "Ability5_CoolDown"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<CooldownStatusEffects_A5>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "RitualProjectileCooldown"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<RitualProjectileCooldown>());
+            }
+        }
+
+
+        
+        private static void AddStatusEffect(ObjectDB odb)
+        {
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_HorizonHaste"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_HorizonHaste>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_MoonlitLeap"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_MoonlitLeap>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_RavenousHunger"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_RavenousHunger>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Ritual"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Shield>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Relentless"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Relentless>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Giantization"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Giantization>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Harbinger"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Harbinger>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_ThreeFreeze"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_ThreeFreeze>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_BloodSiphon"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_BloodSiphon>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_TimedDeath"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_TimedDeath>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Bash"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Bash>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Longinus"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Longinus>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_AncientAwe"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_AncientAwe>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_FumesSplit"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_FumesSplit>());
+            }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Vigil"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Vigil>());
+            }
+            
+            
+            
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}
