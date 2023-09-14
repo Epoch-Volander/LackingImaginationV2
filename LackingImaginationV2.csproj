@@ -228,7 +228,6 @@
         <Content Include="Libs\SkillManager.dll">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Include="Managers\LICENSE.md" />
         <Content Include="Managers\README.md" />
         <Content Include="README.md" />
         <Content Include="Thunderstore\CHANGELOG.md" />
