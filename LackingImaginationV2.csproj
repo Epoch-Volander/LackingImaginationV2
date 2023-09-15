@@ -152,6 +152,7 @@
         <Compile Include="SE_Ritual.cs" />
         <Compile Include="SE_ThreeFreeze.cs" />
         <Compile Include="SE_TimedDeath.cs" />
+        <Compile Include="SE_TwinSouls.cs" />
         <Compile Include="SE_Vigil.cs" />
         <Compile Include="VersionHandshake.cs" />
         <Compile Include="xAbominationEssence.cs" />

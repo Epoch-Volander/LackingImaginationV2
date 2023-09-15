@@ -185,7 +185,7 @@ namespace LackingImaginationV2
         public static bool playerEnabled = true;
 
         public static ConfigEntry<bool> EssenceSlotsEnabled;
-
+        public static bool UseGuardianPower = true;
 
         public static ConfigEntry<string> Ability1_Hotkey;
         public static ConfigEntry<string> Ability1_Hotkey_Combo;
@@ -282,6 +282,7 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_skeletonVigilSoulCap;
         public static ConfigEntry<float> li_abominationBaneArmor;
         public static ConfigEntry<float> li_abominationBaneHealth;
+        public static ConfigEntry<float> li_wraithTwinSoulsArmor;
         
         // public static List<string> equipedEssence = new();
         private static LackingImaginationV2Plugin _instance;
@@ -292,7 +293,7 @@ namespace LackingImaginationV2
         public static GameObject fx_Giantization;
         public static GameObject fx_Bash;
         public static GameObject fx_Longinus;
-
+        public static GameObject fx_TwinSouls;
 
 
 
@@ -540,6 +541,7 @@ namespace LackingImaginationV2
             fx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "RotVariant1");
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
             fx_Longinus = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantYellow");
+            fx_TwinSouls = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantWraith");
 
 
 
@@ -665,6 +667,8 @@ namespace LackingImaginationV2
             // abomination
             li_abominationBaneArmor = config("Essence Abomination Modifiers", "li_abominationBaneArmor", 30f, "Modifies bonus armor passive");
             li_abominationBaneHealth = config("Essence Abomination Modifiers", "li_abominationBaneHealth", 5f, "Modifies % health reduction");
+            //wraith
+            li_wraithTwinSoulsArmor = config("Essence Wraith Modifiers", "li_wraithTwinSoulsArmor", 10f, "Modifies armor reduction amount");
 
             
             LackingImaginationGlobal.ConfigStrings = new Dictionary<string, float>();
@@ -735,7 +739,7 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_skeletonVigilSoulCap", li_skeletonVigilSoulCap.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneArmor", li_abominationBaneArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneHealth", li_abominationBaneHealth.Value);
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsArmor", li_wraithTwinSoulsArmor.Value);
             
             
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
@@ -815,8 +819,11 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_skeletonVigilSoulCap);
             _ = ConfigSync.AddConfigEntry(li_abominationBaneArmor);
             _ = ConfigSync.AddConfigEntry(li_abominationBaneHealth);
-            
-            
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsArmor);
+                
+                
+                
+                
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
             SetupWatcher();
@@ -1057,9 +1064,32 @@ namespace LackingImaginationV2
             }
         }
 
+        [HarmonyPatch(typeof(Player), "Update")]
+        public static class AbilityInput_Prefix
+        {
+            public static bool Prefix(Player __instance)
+            {
+                if (ZInput.GetButtonDown("GP") || ZInput.GetButtonDown("JoyGP"))
+                {
+                    LackingImaginationV2Plugin.UseGuardianPower = true;
+                }
+                return true;
+            }
+        }
 
-
-
+        [HarmonyPatch(typeof(Player), "StartGuardianPower", null)]
+        public class StartPowerPrevention_Patch
+        {
+            public static bool Prefix(Player __instance, ref bool __result)
+            {
+                if (!UseGuardianPower)
+                {
+                    __result = false;
+                    return false;
+                }
+                return true;
+            }
+        }
 
 
 
@@ -1112,7 +1142,7 @@ namespace LackingImaginationV2
                     {
                         // Player.m_localPlayer.ShowTutorial("BurialChambers_TrollCave_Exp");
                         Tutorial.instance.ShowText("BurialChambers_TrollCave_Exp", true);
-                        ExpMethods.ImaginationExpIncrease(4);
+                        ExpMethods.ImaginationExpIncrease(2);
                         Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
                         Player.m_localPlayer.SetSeenTutorial("BurialChambers_TrollCave_Exp");
                     }
@@ -1132,6 +1162,47 @@ namespace LackingImaginationV2
                 }
             }
         }
+
+        [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.HandleLocationMusic))]
+        public class DungeonMusicDetection
+        {
+            public static void Postfix(ref string currentMusic)
+            {
+                if (currentMusic == "GoblinCamp" && !Player.m_localPlayer.HaveSeenTutorial("GoblinCamp_Exp"))
+                {
+                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"Goblin Camp exp gained");
+                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>) (x => x.m_name == "GoblinCamp_Exp"));
+                    if (tutorialText != null)
+                    {
+                        // Player.m_localPlayer.ShowTutorial("SunkenCrypt_Exp");
+                        Tutorial.instance.ShowText("GoblinCamp_Exp", true);
+                        ExpMethods.ImaginationExpIncrease(2);
+                        Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
+                        Player.m_localPlayer.SetSeenTutorial("GoblinCamp_Exp");
+                    }
+                }
+                
+                
+                
+            }
+        }
+        
+        // public enum Theme
+        // {
+        //     None = 0,
+        //     Crypt = 1,
+        //     SunkenCrypt = 2,
+        //     Cave = 4,
+        //     ForestCrypt = 8,
+        //     GoblinCamp = 16, // 0x00000010
+        //     MeadowsVillage = 32, // 0x00000020
+        //     MeadowsFarm = 64, // 0x00000040
+        //     DvergerTown = 128, // 0x00000080
+        //     DvergerBoss = 256, // 0x00000100
+        //     ForestCryptHildir = 512, // 0x00000200
+        //     CaveHildir = 1024, // 0x00000400
+        //     PlainsFortHildir = 2048, // 0x00000800
+        // }
         
         
         
@@ -1911,6 +1982,21 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_burialChambersTrollCaveExp);
                 }
+                //Open Dungeons
+                Tutorial.TutorialText _goblinCampExp = new Tutorial.TutorialText
+                {
+                    m_label = "xGoblin Camp",
+                    m_name = "GoblinCamp_Exp",
+                    m_text = " ",
+                     
+                    m_topic = "Goblin Camp"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_goblinCampExp))
+                {
+                    Tutorial.instance.m_texts.Add(_goblinCampExp);
+                }
+                
+                
             }
         }
         

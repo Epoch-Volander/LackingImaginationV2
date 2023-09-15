@@ -933,8 +933,36 @@ namespace LackingImaginationV2
             }
         }
         
+        //Wraith
         
-        
+        // public static float c_wraithTwinSoulsPhaseDuration
+        // {
+        //     get
+        //     {
+        //         try
+        //         {
+        //             return ConfigStrings["li_wraithTwinSoulsPhaseDuration"];
+        //         }
+        //         catch
+        //         {
+        //             return 60f;
+        //         }
+        //     }
+        // }
+        public static float c_wraithTwinSoulsArmor
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsArmor"];
+                }
+                catch
+                {
+                    return 10f;
+                }
+            }
+        }
         
         
         

@@ -100,7 +100,10 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_Vigil).m_icon = SE_Vigil.AbilityIcon;
                     }
-                    
+                    else if (nameHash == "SE_TwinSouls".GetHashCode())
+                    {
+                        (__result as SE_TwinSouls).m_icon = SE_TwinSouls.AbilityIcon;
+                    }
                     
                     
                     
@@ -152,7 +155,7 @@ namespace LackingImaginationV2
                 SE_AncientAwe.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyTheElder").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_FumesSplit.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyBlob").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Vigil.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySkeleton").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                    
+                SE_TwinSouls.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyWraith").GetComponent<ItemDrop>().m_itemData.GetIcon();
                     
             }
         }
@@ -250,7 +253,10 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Vigil>());
             }
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_TwinSouls"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_TwinSouls>());
+            } 
             
             
             

@@ -62,6 +62,8 @@ namespace LackingImaginationV2
                     //green lines on skin? hate me if you want trash XD
                     // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_goblinbrute_shout"), player.transform.position, Quaternion.identity);
                     // UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Giantization, player.transform.position, Quaternion.identity);
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                    
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
 
                     //Lingering effects

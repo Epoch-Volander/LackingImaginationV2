@@ -643,7 +643,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 70f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          

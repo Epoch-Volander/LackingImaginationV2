@@ -13,7 +13,7 @@ namespace LackingImaginationV2
         
         public static Sprite AbilityIcon;
 
-        [Header("SE_BloodSiphon")]
+        [Header("SE_Vigil")]
        
         public static float m_blood = 200f;
         
