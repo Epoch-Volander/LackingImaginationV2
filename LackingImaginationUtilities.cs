@@ -376,7 +376,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_draugr_essence")
             {
-                xDraugrEssence.Process_Input(Player.m_localPlayer);
+                xDraugrEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_fenring_essence")
@@ -646,7 +646,13 @@ namespace LackingImaginationV2
                  return 70f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
-         
+         public static float xDraugrCooldownTime
+         {
+             get
+             {
+                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+             }
+         }    
          
          
          

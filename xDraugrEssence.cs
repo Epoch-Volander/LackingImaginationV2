@@ -16,15 +16,26 @@ namespace LackingImaginationV2
 
     public class xDraugrEssence
     {
-        public static string Ability_Name = "PH";
-        public static void Process_Input(Player player)
+        public static string Ability_Name = "The Forgotten";
+        public static void Process_Input(Player player, int position)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
-            
+            if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
+            {
                 LackingImaginationV2Plugin.Log($"xDraugrEssence Button was pressed");
             
-            
+                //Ability Cooldown
+                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                se_cd.m_ttl = LackingImaginationUtilities.xDraugrCooldownTime;
+                player.GetSEMan().AddStatusEffect(se_cd);
+                
+                
+                
+                
+            }
+            else
+            {
+                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            }
         }
         
 
@@ -32,4 +43,8 @@ namespace LackingImaginationV2
     }
 
 
+    
+    
+    
+    
 }

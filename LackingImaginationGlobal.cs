@@ -300,7 +300,7 @@ namespace LackingImaginationV2
             {
                 try
                 {
-                    return ConfigStrings["li_deathsquitoRelentlessPassive"];
+                    return ConfigStrings["li_deathsquitoRelentlessPassive"]/100;
                 }
                 catch
                 {

@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xDraugrEliteEssence
     {
-        public static string Ability_Name = "PH";
+        public static string Ability_Name = "Fallen Hero";
         public static void Process_Input(Player player)
         {
             System.Random rnd = new System.Random();
