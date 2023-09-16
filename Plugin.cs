@@ -283,6 +283,7 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_abominationBaneArmor;
         public static ConfigEntry<float> li_abominationBaneHealth;
         public static ConfigEntry<float> li_wraithTwinSoulsArmor;
+        public static ConfigEntry<float> li_wraithTwinSoulsPassive;
         
         // public static List<string> equipedEssence = new();
         private static LackingImaginationV2Plugin _instance;
@@ -669,7 +670,11 @@ namespace LackingImaginationV2
             li_abominationBaneHealth = config("Essence Abomination Modifiers", "li_abominationBaneHealth", 5f, "Modifies % health reduction");
             //wraith
             li_wraithTwinSoulsArmor = config("Essence Wraith Modifiers", "li_wraithTwinSoulsArmor", 10f, "Modifies armor reduction amount");
-
+            li_wraithTwinSoulsPassive = config("Essence Wraith Modifiers", "li_wraithTwinSoulsPassive", 15f, "Modifies the % weapon spirit damage passive");
+            
+            
+            
+            
             
             LackingImaginationGlobal.ConfigStrings = new Dictionary<string, float>();
             LackingImaginationGlobal.ConfigStrings.Clear();

@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xNeckEssence
     {
-        private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", /*"piece",*/ "viewblock");
+        private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
 
         
         public static string Ability_Name = "Splash";

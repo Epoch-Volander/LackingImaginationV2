@@ -963,7 +963,20 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
+        public static float c_wraithTwinSoulsPassive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsPassive"]/100;
+                }
+                catch
+                {
+                    return 0.15f;
+                }
+            }
+        }
         
         
         

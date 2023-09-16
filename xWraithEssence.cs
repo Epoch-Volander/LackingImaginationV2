@@ -38,9 +38,9 @@ namespace LackingImaginationV2
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_wraith_alerted"), player.transform.position, Quaternion.identity);
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_wraith_death"), player.transform.position, Quaternion.identity);
                 
-                Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_TwinSouls, player.GetCenterPoint(), Quaternion.identity);
-
-                Aura.transform.parent = player.transform;
+                // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_TwinSouls, player.GetCenterPoint(), Quaternion.identity);
+                //
+                // Aura.transform.parent = player.transform;
                 
                 //Lingering effects
                 SE_TwinSouls se_twinsouls = (SE_TwinSouls)ScriptableObject.CreateInstance(typeof(SE_TwinSouls));
@@ -86,7 +86,6 @@ namespace LackingImaginationV2
                     foreach (CharacterDrop.Drop drop in wraith.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                     Wraith.Add(wraith.GetComponent<Character>());
                 }
-
             }
             else
             {
@@ -100,7 +99,6 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class  xWraithEssencePassive
     {
-        
         [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
         public static class Wraith_CustomFixedUpdate_Patch  
         {
@@ -115,22 +113,13 @@ namespace LackingImaginationV2
                     }
                     xWraithEssence.Wraith.Clear();
                 }
+                // if (xWraithEssence.Aura != null && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_TwinSouls"))
+                // {
+                //     UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
+                // }
             }
         }
         
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
-        public static class SWraith_CustomFixedUpdate_Patch
-        {
-            public static void Postfix(Character __instance)
-            {
-                if (xWraithEssence.Aura != null && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_TwinSouls"))
-                {
-                    UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
-                }
-                
-            }
-            
-        }
         [HarmonyPatch(typeof(Player), "GetBodyArmor")]
         public static class Wraith_GetBodyArmor_Patch
         {
@@ -147,7 +136,31 @@ namespace LackingImaginationV2
             }
         }
         
-        
+         [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        public static class Wraith_RPC_Damage_Patch
+        {
+            static void Prefix(Character __instance, ref HitData hit)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_wraith_essence") && hit.GetAttacker() != null)
+                {
+                    if (__instance.IsDebugFlying())
+                        return;
+                    if ((UnityEngine.Object) hit.GetAttacker() == (UnityEngine.Object) Player.m_localPlayer)
+                    {
+                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
+                        __instance.m_localPlayerHasHit = true;
+                    }
+                    if (!__instance.m_nview.IsOwner() || (double) __instance.GetHealth() <= 0.0 || __instance.IsDead() || __instance.IsTeleporting() || __instance.InCutscene() || hit.m_dodgeable && __instance.IsDodgeInvincible())
+                        return;
+                    Character attacker = hit.GetAttacker();
+                    if (hit.HaveAttacker() && (UnityEngine.Object)attacker == (UnityEngine.Object)null || __instance.IsPlayer() && !__instance.IsPVPEnabled() && (UnityEngine.Object)attacker != (UnityEngine.Object)null && attacker.IsPlayer() && !hit.m_ignorePVP)
+                        return;
+                    if (EnvMan.instance.IsDay() && (UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())
+                    {
+                        hit.m_damage.m_spirit += (Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_wraithTwinSoulsPassive;;
+                    }
+                }
+            }
+        }
     }
-
 }

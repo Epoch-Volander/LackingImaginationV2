@@ -151,7 +151,7 @@ namespace LackingImaginationV2
                     }
                     if (__instance.GetSEMan().HaveStatusEffect("Wet") && __instance.IsPlayer() && (UnityEngine.Object) attacker.m_baseAI != (UnityEngine.Object) null)
                     {
-                        LackingImaginationV2Plugin.Log($"Eikthyr you have been hit");
+                        // LackingImaginationV2Plugin.Log($"Eikthyr you have been hit");
                         hit.m_damage.m_lightning += hit.GetTotalDamage() * 0.05f;
                     }
                 }
