@@ -60,23 +60,46 @@ namespace LackingImaginationV2
                 Player.m_localPlayer.RaiseSkill("Imagination", 1000f);
             }
         }
-        
+
 
         public static void BiomeExpMethod(string biomeKey, Heightmap.Biome mapBiome)
         {
-            if (mapBiome == Player.m_localPlayer.m_currentBiome && !Player.m_localPlayer.HaveSeenTutorial(biomeKey))
+            Tutorial.TutorialText tutorialText =
+                Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == biomeKey));
+            if (tutorialText != null)
             {
-                MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft,
-                    $"{Player.m_localPlayer.m_currentBiome.ToString().ToLower()} exp gained");
-                Debug.Log($"Current Biome: {Player.m_localPlayer.m_currentBiome.ToString().ToLower()}");
-
-                Tutorial.TutorialText tutorialText =
-                    Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == biomeKey));
-                if (tutorialText != null)
+                if (mapBiome == Player.m_localPlayer.m_currentBiome && !Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
                 {
-                    // Player.m_localPlayer.ShowTutorial(biomeKey);
-                    Tutorial.instance.ShowText(biomeKey, true);
-                    Player.m_localPlayer.SetSeenTutorial(biomeKey);
+
+                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft,
+                        $"{Player.m_localPlayer.m_currentBiome.ToString().ToLower()} exp gained");
+                    Debug.Log($"Current Biome: {Player.m_localPlayer.m_currentBiome.ToString().ToLower()}");
+
+                    
+                    Player.m_localPlayer.ShowTutorial(biomeKey);
+                    // Tutorial.instance.ShowText(biomeKey, true);
+                    // Player.m_localPlayer.SetSeenTutorial(biomeKey);
+                    ImaginationExpIncrease(2);
+                    Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
+                    
+                }
+            }
+        }
+        
+        
+        public static void dungeonExpMethod(string tutorialValue)
+        {
+            Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == tutorialValue));
+            if (tutorialText != null)
+            {
+                // ZLog.Log((object) ("Detected environment change"+env));
+                if (!Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
+                {
+                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"{tutorialText.m_topic} exp gained");
+                    
+                    Player.m_localPlayer.ShowTutorial(tutorialValue);
+                    // Tutorial.instance.ShowText("InfectedMine_Exp", true);
+                    // Player.m_localPlayer.SetSeenTutorial("InfectedMine_Exp");
                     ImaginationExpIncrease(2);
                     Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
                 }
@@ -84,7 +107,12 @@ namespace LackingImaginationV2
         }
 
         
-         public static void TrophyExpMethod(List<string> tutorial, string item, string allItem)
+        
+        
+        
+        
+
+        public static void TrophyExpMethod(List<string> tutorial, string item, string allItem)
          {
              if (allItem == item)
              {

@@ -68,6 +68,22 @@ namespace LackingImaginationV2
             { "AshLands_Exp", Heightmap.Biome.AshLands },
             { "DeepNorth_Exp", Heightmap.Biome.DeepNorth }
         };
+        
+        public static Dictionary<string, string> dungeonDictionary = new Dictionary<string, string>
+        {
+            { "InfectedMine", "InfectedMine_Exp" },
+            { "Caves", "FrostCave_Exp" },
+            { "Crypt", "BurialChambers_TrollCave_Exp" },
+            { "SunkenCrypt", "SunkenCrypt_Exp" },
+        };
+        
+        public static Dictionary<string, string> dungeonMusicDictionary = new Dictionary<string, string>
+        {
+            { "GoblinCamp", "GoblinCamp_Exp" },
+            { "ForestCryptHildir", "ForestCryptHildir_Exp" },
+            { "CaveHildir", "CaveHildir_Exp" },
+            { "PlainsFortHildir", "PlainsFortHildir_Exp" },
+        };
 
         public static Dictionary<string, List<string>> trophyDictionary = new Dictionary<string, List<string>>
         {
@@ -102,14 +118,14 @@ namespace LackingImaginationV2
             { "$item_trophy_surtling", new List<string> { "Surtling_Exp", "1" } },
             { "$item_trophy_tick", new List<string> { "Tick_Exp", "1" } },
 
-            { "$item_trophy_goblinbrute", new List<string> { "FulingBerserker_Exp", "2" } },
-            { "$item_trophy_goblinshaman", new List<string> { "FulingShaman_Exp", "2" } },
-            { "$item_trophy_cultist", new List<string> { "Cultist_Exp", "2" } },
-            { "$item_trophy_dvergr", new List<string> { "Dvergr_Exp", "2" } },
-            { "$item_trophy_serpent", new List<string> { "Serpent_Exp", "2" } },
-            { "$item_trophy_skeletonpoison", new List<string> { "RancidRemains_Exp", "2" } },
-            { "$item_trophy_ulv", new List<string> { "Ulv_Exp", "2" } },
-            { "$item_trophy_wraith", new List<string> { "Wraith_Exp", "2" } },
+            { "$item_trophy_goblinbrute", new List<string> { "FulingBerserker_Exp", "1" } },
+            { "$item_trophy_goblinshaman", new List<string> { "FulingShaman_Exp", "1" } },
+            { "$item_trophy_cultist", new List<string> { "Cultist_Exp", "1" } },
+            { "$item_trophy_dvergr", new List<string> { "Dvergr_Exp", "1" } },
+            { "$item_trophy_serpent", new List<string> { "Serpent_Exp", "1" } },
+            { "$item_trophy_skeletonpoison", new List<string> { "RancidRemains_Exp", "1" } },
+            { "$item_trophy_ulv", new List<string> { "Ulv_Exp", "1" } },
+            { "$item_trophy_wraith", new List<string> { "Wraith_Exp", "1" } },
 
             { "$item_trophy_boar", new List<string> { "Boar_Exp", "1" } },
             { "$item_trophy_deer", new List<string> { "Deer_Exp", "1" } },
@@ -117,8 +133,13 @@ namespace LackingImaginationV2
             { "$item_trophy_lox", new List<string> { "Lox_Exp", "1" } },
             { "$item_trophy_neck", new List<string> { "Neck_Exp", "1" } },
             { "$item_trophy_wolf", new List<string> { "Wolf_Exp", "1" } },
+            
+            { "$item_trophy_cultist_hildir", new List<string> { "Geirrhafa_Exp", "2" } },
+            { "$item_trophy_skeleton_hildir", new List<string> { "Brenna_Exp", "2" } },
+            { "$item_trophy_shamanbro", new List<string> { "Zil_Exp", "2" } },
+            { "$item_trophy_brutebro", new List<string> { "Thungr_Exp", "2" } },
         };
-
+        
         public static Dictionary<string, List<string>> ItemBundleUnwrapDict = new Dictionary<string, List<string>>()
         {
             // { "Essence_Drop", new List<string> { "Essence", "An erie glow.", "Greydwarf", "0.5" } }
@@ -157,8 +178,8 @@ namespace LackingImaginationV2
             { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.5", "An erie glow." } },
             { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.5", "An erie glow." } },
             { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.5", "An erie glow." } },
-            // { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "Seeker", "0.5", "An erie glow." } },
-            // { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.5", "An erie glow." } },
+            { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "seeker", "0.5", "An erie glow." } },
+            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "seekerbrute", "0.5", "An erie glow." } },
             { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.5", "An erie glow." } },
             { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.5", "An erie glow." } },
             { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.5", "An erie glow." } },
@@ -167,10 +188,16 @@ namespace LackingImaginationV2
             { "$item_ulv_essence", new List<string> { "Ulv_Essence_Drop", "Ulv Essence", "Ulv", "0.5", "An erie glow." } },
             { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.5", "An erie glow." } },
             { "$item_wraith_essence", new List<string> { "Wraith_Essence_Drop", "Wraith Essence", "Wraith", "0.5", "An erie glow." } },
+            
+            { "$item_brenna_essence", new List<string> { "Brenna_Essence_Drop", "Brenna Essence", "Skeleton_Hildir", "0.5", "An erie glow." } },
+            { "$item_geirrhafa_essence", new List<string> { "Geirrhafa_Essence_Drop", "Geirrhafa Essence", "Fenring_Cultist_Hildir", "0.5", "An erie glow." } },
+            { "$item_zil_essence", new List<string> { "Zil_Essence_Drop", "Zil Essence", "GoblinShaman_Hildir", "0.5", "An erie glow." } },
+            { "$item_thungr_essence", new List<string> { "Thungr_Essence_Drop", "Thungr Essence", "GoblinBrute_Hildir", "0.5", "An erie glow." } },
         };
 
 
-        public static int EquipSlotCount => EquipSlotTypes.Count; // link this to imagination skill
+        // public static int EquipSlotCount => EquipSlotTypes.Count; // link this to imagination skill
+        public static int EquipSlotCount => 3; // link this to imagination skill
 
         public static readonly List<ItemDrop.ItemData.ItemType> EquipSlotTypes = new List<ItemDrop.ItemData.ItemType>()
         {
@@ -208,17 +235,15 @@ namespace LackingImaginationV2
 
         public static readonly Color abilityCooldownColor = new Color(1f, .3f, .3f, .5f);
 
-        public static Sprite Ability1_Sprite;
-        public static Sprite Ability2_Sprite;
-        public static Sprite Ability3_Sprite;
-        public static Sprite Ability4_Sprite;
-        public static Sprite Ability5_Sprite;
+        public static List<Sprite> AbilitySprites = new List<Sprite>
+        {
+            null,null,null,null,null,
+        };
 
-        public static string Ability1_Name;
-        public static string Ability2_Name;
-        public static string Ability3_Name;
-        public static string Ability4_Name;
-        public static string Ability5_Name;
+        public static List<string> AbilityNames = new List<string>
+        {
+            null,null,null,null,null,
+        };
 
         public static List<RectTransform> abilitiesStatus = new List<RectTransform> { };
         
@@ -952,7 +977,7 @@ namespace LackingImaginationV2
                                 string iconText = "";
                                 if (j == 0)
                                 {
-                                    component.sprite = Ability1_Sprite;
+                                    component.sprite = AbilitySprites[0];
                                     if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability1_CoolDown"))
                                     {
                                         component.color = abilityCooldownColor;
@@ -973,7 +998,7 @@ namespace LackingImaginationV2
                                 else if (j == 1)
                                 {
 
-                                    component.sprite = Ability2_Sprite;
+                                    component.sprite = AbilitySprites[1];
                                     if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability2_CoolDown"))
                                     {
                                         component.color = abilityCooldownColor;
@@ -993,7 +1018,7 @@ namespace LackingImaginationV2
                                 }
                                 else if (j == 2)
                                 {
-                                    component.sprite = Ability3_Sprite;
+                                    component.sprite = AbilitySprites[2];
                                     if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability3_CoolDown"))
                                     {
                                         component.color = abilityCooldownColor;
@@ -1013,7 +1038,7 @@ namespace LackingImaginationV2
                                 }
                                 else if (j == 3)
                                 {
-                                    component.sprite = Ability4_Sprite;
+                                    component.sprite = AbilitySprites[3];
                                     if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability4_CoolDown"))
                                     {
                                         component.color = abilityCooldownColor;
@@ -1033,7 +1058,7 @@ namespace LackingImaginationV2
                                 }
                                 else if (j == 4)
                                 {
-                                    component.sprite = Ability5_Sprite;
+                                    component.sprite = AbilitySprites[4];
                                     if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability5_CoolDown"))
                                     {
                                         component.color = abilityCooldownColor;
@@ -1098,99 +1123,8 @@ namespace LackingImaginationV2
 
 
 
-
-
-
-
-
-
-
         
-
-        [HarmonyPatch(typeof(EnvMan), nameof(EnvMan.SetForceEnvironment))]
-        public  class DungeonEnterDetection
-        {
-            public static void Postfix(string env)
-            {
-                // ZLog.Log((object) ("Detected environment change"+env));
-                if (env == "InfectedMine" && !Player.m_localPlayer.HaveSeenTutorial("InfectedMine_Exp"))
-                {
-                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"Infected Mine exp gained");
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>) (x => x.m_name == "InfectedMine_Exp"));
-                    if (tutorialText != null)
-                    {
-                        // Player.m_localPlayer.ShowTutorial("InfectedMine_Exp");
-                        Tutorial.instance.ShowText("InfectedMine_Exp", true);
-                        ExpMethods.ImaginationExpIncrease(2);
-                        Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
-                        Player.m_localPlayer.SetSeenTutorial("InfectedMine_Exp");
-                    }
-                }
-                else if (env == "Caves" && !Player.m_localPlayer.HaveSeenTutorial("FrostCave_Exp"))
-                {
-                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"Frost Cave exp gained");
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>) (x => x.m_name == "FrostCave_Exp"));
-                    if (tutorialText != null)
-                    {
-                        // Player.m_localPlayer.ShowTutorial("FrostCave_Exp");
-                        Tutorial.instance.ShowText("FrostCave_Exp", true);
-                        ExpMethods.ImaginationExpIncrease(2);
-                        Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
-                        Player.m_localPlayer.SetSeenTutorial("FrostCave_Exp");
-                    }
-                }
-                else if (env == "Crypt" && !Player.m_localPlayer.HaveSeenTutorial("BurialChambers_TrollCave_Exp"))
-                {
-                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"Burial Chambers & Troll Cave exp gained");
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>) (x => x.m_name == "BurialChambers_TrollCave_Exp"));
-                    if (tutorialText != null)
-                    {
-                        // Player.m_localPlayer.ShowTutorial("BurialChambers_TrollCave_Exp");
-                        Tutorial.instance.ShowText("BurialChambers_TrollCave_Exp", true);
-                        ExpMethods.ImaginationExpIncrease(2);
-                        Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
-                        Player.m_localPlayer.SetSeenTutorial("BurialChambers_TrollCave_Exp");
-                    }
-                }
-                else if (env == "SunkenCrypt" && !Player.m_localPlayer.HaveSeenTutorial("SunkenCrypt_Exp"))
-                {
-                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"Sunken Crypt exp gained");
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>) (x => x.m_name == "SunkenCrypt_Exp"));
-                    if (tutorialText != null)
-                    {
-                        // Player.m_localPlayer.ShowTutorial("SunkenCrypt_Exp");
-                        Tutorial.instance.ShowText("SunkenCrypt_Exp", true);
-                        ExpMethods.ImaginationExpIncrease(2);
-                        Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
-                        Player.m_localPlayer.SetSeenTutorial("SunkenCrypt_Exp");
-                    }
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.HandleLocationMusic))]
-        public class DungeonMusicDetection
-        {
-            public static void Postfix(ref string currentMusic)
-            {
-                if (currentMusic == "GoblinCamp" && !Player.m_localPlayer.HaveSeenTutorial("GoblinCamp_Exp"))
-                {
-                    MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"Goblin Camp exp gained");
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>) (x => x.m_name == "GoblinCamp_Exp"));
-                    if (tutorialText != null)
-                    {
-                        // Player.m_localPlayer.ShowTutorial("SunkenCrypt_Exp");
-                        Tutorial.instance.ShowText("GoblinCamp_Exp", true);
-                        ExpMethods.ImaginationExpIncrease(2);
-                        Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
-                        Player.m_localPlayer.SetSeenTutorial("GoblinCamp_Exp");
-                    }
-                }
-                
-                
-                
-            }
-        }
+        
         
         // public enum Theme
         // {
@@ -1228,43 +1162,7 @@ namespace LackingImaginationV2
         
         
         
-        // [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.LocationMusic))]
-        // public  class VillageEnterDetection
-        // {
-        //     public static void Postfix(string name)
-        //     {
-        //         
-        //         ZLog.Log((object) name);
-        //         
-        //         
-        //         
-        //     }
-        //     
-        // }
-        
-        // public void LocationMusic(string name) => this.m_locationMusic = name;
-        
-        
-        // public void SetForceEnvironment(string env)
-        // {
-        //     if (this.m_forceEnv == env)
-        //         return;
-        //     ZLog.Log((object) ("Setting forced environment " + env));
-        //     this.m_forceEnv = env;
-        //     this.FixedUpdate();
-        //     if (!(bool) (UnityEngine.Object) ReflectionUpdate.instance)
-        //         return;
-        //     ReflectionUpdate.instance.UpdateReflection();
-        // }
-        
-        // public string GetCurrentMusic()
-        // {
-        //     if (this.m_stopMusic)
-        //         return "";
-        //     if (this.m_queuedMusic != null)
-        //         return this.m_queuedMusic.m_name;
-        //     return this.m_currentMusic != null ? this.m_currentMusic.m_name : "";
-        // }
+       
         
         //Trophy Exp
         [HarmonyPatch(typeof(Player), "OnInventoryChanged")]
@@ -1303,6 +1201,31 @@ namespace LackingImaginationV2
             }
         }
         
+        // dungeonDictionary
+        //Dungeon Exp
+        [HarmonyPatch(typeof(EnvMan), nameof(EnvMan.SetForceEnvironment))]
+        public  class DungeonEnterDetection
+        {
+            public static void Postfix(string env)
+            {
+                if(dungeonDictionary.ContainsKey(env))
+                {
+                    ExpMethods.dungeonExpMethod(dungeonDictionary[env]);
+                }
+            }
+        }
+        [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.HandleLocationMusic))]
+        public class DungeonMusicDetection
+        {
+            public static void Postfix(ref string currentMusic)
+            {
+                if(dungeonMusicDictionary.ContainsKey(currentMusic))
+                {
+                    ExpMethods.dungeonExpMethod(dungeonMusicDictionary[currentMusic]);
+                }
+            }
+        }
+        
         // [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
         [HarmonyPatch(typeof(Player), "OnSpawned")]
         public static class PlayerModNotification
@@ -1311,10 +1234,11 @@ namespace LackingImaginationV2
             {
                 Tutorial.TutorialText LI = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label ="1Lacking Imagination",
                     m_name = "Lacking_Imagination",
-                    m_text =
-                        "This World is vast and dangerous. \n Explore, Kill and Conquer to grow your power!",
+                    m_text = "This World is vast and dangerous. \n Explore, Kill and Conquer to grow your power!",
+                    
                     m_topic = "Broaden your horizons!"
                 };
                 if (!Tutorial.instance.m_texts.Contains(LI))
@@ -1327,6 +1251,7 @@ namespace LackingImaginationV2
                 //Biome Entries
                 Tutorial.TutorialText _blackForestExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xBlack Forest",
                     m_name = "BlackForest_Exp",
                     m_text = "The Black Forest, home of the wood spirits, invaded by the lesser undead.",
@@ -1340,6 +1265,7 @@ namespace LackingImaginationV2
 
                 Tutorial.TutorialText _medowsExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xMeadows",
                     m_name = "Meadows_Exp",
                     m_text = "A peaceful land, yet untouched by evil.",
@@ -1352,6 +1278,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _plainsExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xPlains",
                     m_name = "Plains_Exp",
                     m_text = "A vast land claimed under the rule of the Eternal Blaze.",
@@ -1364,6 +1291,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _mountainExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xMountain",
                     m_name = "Mountain_Exp",
                     m_text = "Frigid spears piercing out from the lands, dominated by the Sky Empresses kin.",
@@ -1376,6 +1304,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _oceanExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xOcean",
                     m_name = "Ocean_Exp",
                     m_text = "Turbulent winds and deep waters, the shadow of death rises from below.",
@@ -1388,6 +1317,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _swampExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xSwamp",
                     m_name = "Swamp_Exp",
                     m_text = "",
@@ -1400,6 +1330,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _mistLandsExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xMistlands",
                     m_name = "Mistlands_Exp",
                     m_text = "",
@@ -1412,6 +1343,7 @@ namespace LackingImaginationV2
                 } 
                 Tutorial.TutorialText _ashLandsExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xAshLands",
                     m_name = "AshLands_Exp",
                     m_text = "",
@@ -1424,6 +1356,7 @@ namespace LackingImaginationV2
                 } 
                 Tutorial.TutorialText _deepNorthExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xDeep North",
                     m_name = "DeepNorth_Exp",
                     m_text = "",
@@ -1938,9 +1871,60 @@ namespace LackingImaginationV2
                     Tutorial.instance.m_texts.Add(_wolfExp);
                 }
                 
+                //Hildr Enemies
+                Tutorial.TutorialText _brennaExp = new Tutorial.TutorialText
+                {
+                    m_label = "xBrenna",
+                    m_name = "Brenna_Exp",
+                    m_text = "Essence Power: ",
+                     
+                    m_topic = "Brenna"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_brennaExp))
+                {
+                    Tutorial.instance.m_texts.Add(_brennaExp);
+                }
+                Tutorial.TutorialText _geirrhafaExp = new Tutorial.TutorialText
+                {
+                    m_label = "xGeirrhafa",
+                    m_name = "Geirrhafa_Exp",
+                    m_text = "Essence Power: ",
+                     
+                    m_topic = "Geirrhafa"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_geirrhafaExp))
+                {
+                    Tutorial.instance.m_texts.Add(_geirrhafaExp);
+                }
+                Tutorial.TutorialText _zilExp = new Tutorial.TutorialText
+                {
+                    m_label = "xZil",
+                    m_name = "Zil_Exp",
+                    m_text = "Essence Power: ",
+                     
+                    m_topic = "Zil"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_zilExp))
+                {
+                    Tutorial.instance.m_texts.Add(_zilExp);
+                }
+                Tutorial.TutorialText _thungrExp = new Tutorial.TutorialText
+                {
+                    m_label = "xThungr",
+                    m_name = "Thungr_Exp",
+                    m_text = "Essence Power: ",
+                     
+                    m_topic = "Thungr"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_thungrExp))
+                {
+                    Tutorial.instance.m_texts.Add(_thungrExp);
+                }
+
                 //Dungeon Entries
                 Tutorial.TutorialText _infectedMineExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xInfected Mine",
                     m_name = "InfectedMine_Exp",
                     m_text = " ",
@@ -1953,6 +1937,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _frostCaveExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xFrost Cave Mine",
                     m_name = "FrostCave_Exp",
                     m_text = " ",
@@ -1965,6 +1950,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _sunkenCryptExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xSunken Crypt",
                     m_name = "SunkenCrypt_Exp",
                     m_text = " ",
@@ -1977,6 +1963,7 @@ namespace LackingImaginationV2
                 }
                 Tutorial.TutorialText _burialChambersTrollCaveExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xBurial Chambers & Troll Cave",
                     m_name = "BurialChambers_TrollCave_Exp",
                     m_text = " ",
@@ -1990,6 +1977,7 @@ namespace LackingImaginationV2
                 //Open Dungeons
                 Tutorial.TutorialText _goblinCampExp = new Tutorial.TutorialText
                 {
+                    m_isMunin = true,
                     m_label = "xGoblin Camp",
                     m_name = "GoblinCamp_Exp",
                     m_text = " ",
@@ -2000,13 +1988,50 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_goblinCampExp);
                 }
-                
-                
+                Tutorial.TutorialText _forestCryptHildirExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xHildir Forest Crypt",
+                    m_name = "ForestCryptHildir_Exp",
+                    m_text = " ",
+                     
+                    m_topic = "Hildir Forest Crypt"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_forestCryptHildirExp))
+                {
+                    Tutorial.instance.m_texts.Add(_forestCryptHildirExp);
+                }
+                Tutorial.TutorialText _caveHildirExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xHildir Cave",
+                    m_name = "CaveHildir_Exp",
+                    m_text = " ",
+                     
+                    m_topic = "Hildir Cave"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_caveHildirExp))
+                {
+                    Tutorial.instance.m_texts.Add(_caveHildirExp);
+                }
+                Tutorial.TutorialText _plainsFortHildirExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xHildir Plains Fort",
+                    m_name = "PlainsFortHildir_Exp",
+                    m_text = " ",
+                     
+                    m_topic = "Hildir Plains Fort"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_plainsFortHildirExp))
+                {
+                    Tutorial.instance.m_texts.Add(_plainsFortHildirExp);
+                }
             }
         }
         
       
-       
+        
        // Essence Slots ////////////////////////////////////////////
        public static void Log(string message)
        {

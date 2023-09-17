@@ -79,7 +79,7 @@ namespace LackingImaginationV2
                     
                     if (colliders.Length > 1)
                     {
-                        LackingImaginationV2Plugin.Log($"length {colliders.Length}");
+                        // LackingImaginationV2Plugin.Log($"length {colliders.Length}");
                         // A collision has occurred
                         hasCollided = true;
                    

@@ -94,95 +94,31 @@ namespace LackingImaginationV2
             Quaternion rot = new Quaternion(0, 0, 0, 1);
             Transform t = hud.m_statusEffectListRoot;
             EssenceItemData.equipedEssence = EssenceItemData.GetEquippedEssence();
-            if (EssenceItemData.equipedEssence[0] != null && LackingImaginationV2Plugin.abilitiesStatus[0] == null)
+            for (int i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; i++)
             {
-                RectTransform rectTransform = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
-                rectTransform.gameObject.SetActive(value: true);
-                rectTransform.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.Ability1_Name).ToString());
-                LackingImaginationV2Plugin.abilitiesStatus[0] = rectTransform;
+                if (EssenceItemData.equipedEssence[i] != null && LackingImaginationV2Plugin.abilitiesStatus[i] == null)
+                {
+                    RectTransform rectTransform = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
+                    rectTransform.gameObject.SetActive(value: true);
+                    rectTransform.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
+                    LackingImaginationV2Plugin.abilitiesStatus[i] = rectTransform;
+                }
+                pos.x += xStep;
+                pos.y += yStep;
             }
-            pos.x += xStep;
-            pos.y += yStep;
-            if (EssenceItemData.equipedEssence[1] != null && LackingImaginationV2Plugin.abilitiesStatus[1] == null)
-            {
-                LackingImaginationV2Plugin.Log($"OnSelected{LackingImaginationV2Plugin.Ability2_Name}");
-                RectTransform rectTransform2 = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
-                rectTransform2.gameObject.SetActive(value: true);
-                rectTransform2.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.Ability2_Name).ToString());
-                LackingImaginationV2Plugin.abilitiesStatus[1] = rectTransform2;
-            }
-            pos.x += xStep;
-            pos.y += yStep;
-            if (EssenceItemData.equipedEssence[2] != null && LackingImaginationV2Plugin.abilitiesStatus[2] == null)
-            {
-                RectTransform rectTransform3 = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
-                rectTransform3.gameObject.SetActive(value: true);
-                rectTransform3.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.Ability3_Name).ToString());
-                LackingImaginationV2Plugin.abilitiesStatus[2] = rectTransform3;
-            }
-            
-            pos.x += xStep;
-            pos.y += yStep;
-            if (EssenceItemData.equipedEssence[3] != null && LackingImaginationV2Plugin.abilitiesStatus[3] == null)
-            {
-                RectTransform rectTransform4 = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
-                rectTransform4.gameObject.SetActive(value: true);
-                rectTransform4.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.Ability4_Name).ToString());
-                LackingImaginationV2Plugin.abilitiesStatus[3] = rectTransform4;
-            }
-            
-            pos.x += xStep;
-            pos.y += yStep;
-            if (EssenceItemData.equipedEssence[4] != null && LackingImaginationV2Plugin.abilitiesStatus[4] == null)
-            {
-                RectTransform rectTransform5 = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
-                rectTransform5.gameObject.SetActive(value: true);
-                rectTransform5.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.Ability5_Name).ToString());
-                LackingImaginationV2Plugin.abilitiesStatus[4] = rectTransform5;
-            }
-           
         }
          
          public static void NameEssence()
          {
-             if (EssenceItemData.equipedEssence[0] != null)
+             for (int i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; i++)
              {
-                 if (abilityNameDictionary.ContainsKey(EssenceItemData.equipedEssence[0]))
+                 if (EssenceItemData.equipedEssence[i] != null)
                  {
-                     LackingImaginationV2Plugin.Ability1_Name = abilityNameDictionary[EssenceItemData.equipedEssence[0]];
-                     LackingImaginationV2Plugin.Ability1_Sprite = EssenceItemData.equipedEssenceData[0].GetIcon();
-                 }
-             }
-             if (EssenceItemData.equipedEssence[1] != null)
-             {
-                 if (abilityNameDictionary.ContainsKey(EssenceItemData.equipedEssence[1]))
-                 {
-                     LackingImaginationV2Plugin.Ability2_Name = abilityNameDictionary[EssenceItemData.equipedEssence[1]];
-                     LackingImaginationV2Plugin.Ability2_Sprite = EssenceItemData.equipedEssenceData[1].GetIcon();
-                 }
-             }
-             if (EssenceItemData.equipedEssence[2] != null)
-             {
-                 if (abilityNameDictionary.ContainsKey(EssenceItemData.equipedEssence[2]))
-                 {
-                     LackingImaginationV2Plugin.Ability3_Name = abilityNameDictionary[EssenceItemData.equipedEssence[2]];
-                     LackingImaginationV2Plugin.Ability3_Sprite = EssenceItemData.equipedEssenceData[2].GetIcon();
-                 }
-             }
-             if (EssenceItemData.equipedEssence[3] != null)
-             {
-                 if (abilityNameDictionary.ContainsKey(EssenceItemData.equipedEssence[3]))
-                 {
-                     LackingImaginationV2Plugin.Ability4_Name = abilityNameDictionary[EssenceItemData.equipedEssence[3]];
-                     LackingImaginationV2Plugin.Ability4_Sprite = EssenceItemData.equipedEssenceData[3].GetIcon();
-                 }
-             }
-             if (EssenceItemData.equipedEssence[4] != null)
-             {
-                 if (abilityNameDictionary.ContainsKey(EssenceItemData.equipedEssence[4]))
-                 {
-                     LackingImaginationV2Plugin.Ability5_Name = abilityNameDictionary[EssenceItemData.equipedEssence[4]];
-                     LackingImaginationV2Plugin.Ability5_Sprite = EssenceItemData.equipedEssenceData[4].GetIcon();
+                     if (abilityNameDictionary.ContainsKey(EssenceItemData.equipedEssence[i]))
+                     {
+                         LackingImaginationV2Plugin.AbilityNames[i] = abilityNameDictionary[EssenceItemData.equipedEssence[i]];
+                         LackingImaginationV2Plugin.AbilitySprites[i] = EssenceItemData.equipedEssenceData[i].GetIcon();
+                     }
                  }
              }
          }

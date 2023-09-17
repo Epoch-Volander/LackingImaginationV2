@@ -19,8 +19,6 @@ namespace LackingImaginationV2
         public static string Ability_Name = "Fallen Hero";
         public static void Process_Input(Player player)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
             
                 LackingImaginationV2Plugin.Log($"xDraugrEliteEssence Button was pressed");
             
