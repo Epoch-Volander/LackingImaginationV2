@@ -197,8 +197,20 @@ namespace LackingImaginationV2
 
 
         // public static int EquipSlotCount => EquipSlotTypes.Count; // link this to imagination skill
-        public static int EquipSlotCount => 3; // link this to imagination skill
+        // public static int EquipSlotCount; // link this to imagination skill
 
+        public static int EquipSlotCount = 5;
+        
+        // Skill image = Skill.skillByName["Imagination"];
+        // Skills.SkillType imagine = image.skillDef.m_skill;
+        //
+        // float t = image.skillDef.m_skill.
+        // EquipSlotCount = image.skillDef.m_skill
+            
+        // EquipSlotCount = image.SkillEffectFactor;
+        
+        
+        
         public static readonly List<ItemDrop.ItemData.ItemType> EquipSlotTypes = new List<ItemDrop.ItemData.ItemType>()
         {
             ItemDrop.ItemData.ItemType.Customization,
@@ -541,12 +553,13 @@ namespace LackingImaginationV2
 
             {
                 //creates imagination skill to do, slots per 20 lvls
-                Skill imagination = new("Imagination",
-                    "YagluthDrop_icon.png"); // Skill name along with the skill icon. By default the icon is found in the icons folder. Put it there if you wish to load one.
+                Skill imagination = new("Imagination", "YagluthDrop_icon.png"); // Skill name along with the skill icon. By default the icon is found in the icons folder. Put it there if you wish to load one.
                 imagination.Description.English("Records Player Achievements.");
                 imagination.Configurable = true;
+                
+                
             }
-
+            
             //Uploads item prefabs
             foreach (KeyValuePair<string, List<string>> kvp in ItemBundleUnwrapDict)
             {
@@ -555,8 +568,6 @@ namespace LackingImaginationV2
 
             // PrefabManager.RegisterPrefab("essence_bundle_2","TrophyEikthyrEssence");
             // MaterialReplacer.RegisterGameObjectForShaderSwap(ZNetScene.instance.GetPrefab("TrophyEikthyrEssence"), MaterialReplacer.ShaderType.CustomCreature);
-
-
             // "gas_flame_harbinger"
             // effectBase.Name.English(list[1]);
             // GameObject location_harbinger = ExpMethods.GetLocationFromZoneSystem(ZoneSystem.m_instance, "FireHole");
@@ -573,7 +584,7 @@ namespace LackingImaginationV2
 
 
             abilitiesStatus.Clear();
-            for (int i = 0; i < EquipSlotCount; i++)
+            for (int i = 0; i < 5; i++)
             {
                 abilitiesStatus.Add(null);
             }
@@ -960,7 +971,7 @@ namespace LackingImaginationV2
                     { 
                         Debug.Log("== null plug");
                         abilitiesStatus = new List<RectTransform>();
-                        abilitiesStatus.Clear();    
+                        abilitiesStatus.Clear(); 
                         for (int i = 0; i < EquipSlotCount; i++) 
                         {
                             LackingImaginationV2Plugin.abilitiesStatus.Add(null);

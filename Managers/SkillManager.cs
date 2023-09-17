@@ -15,12 +15,12 @@ namespace SkillManager;
 [PublicAPI]
 public class Skill
 {
-    private static readonly Dictionary<Skills.SkillType, Skill> skills = new();
+    private static readonly Dictionary<Skills.SkillType, Skill> skills = new(); 
     internal static readonly Dictionary<string, Skill> skillByName = new();
 
     private readonly string skillName;
-    private readonly string internalSkillName;
-    private readonly Skills.SkillDef skillDef;
+    private readonly string internalSkillName;  
+    public readonly Skills.SkillDef skillDef; //made public
 
     public readonly LocalizeKey Name;
     public readonly LocalizeKey Description;

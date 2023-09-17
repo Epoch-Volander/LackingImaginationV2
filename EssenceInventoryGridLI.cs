@@ -38,7 +38,7 @@ namespace LackingImaginationV2
             var index = y * width + x;
             if (index < 0 || index >= __instance.m_elements.Count)
             {
-                LackingImaginationV2Plugin.LogError($"Tried to get element for item ({x}, {y}) in inventory ({__instance.m_inventory.m_name}) but that element is outside the bounds!");
+                // LackingImaginationV2Plugin.LogError($"Tried to get element for item ({x}, {y}) in inventory ({__instance.m_inventory.m_name}) but that element is outside the bounds!");
                 __result = null;
             }
             else
@@ -69,7 +69,6 @@ namespace LackingImaginationV2
                     new Vector2(4 * horizontalSpacing, 0), // 5
                     
                 };
-    
                 for (var i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; ++i)
                 {
                     var element = __instance.m_elements[i];
@@ -86,7 +85,22 @@ namespace LackingImaginationV2
                       element.m_go.RectTransform().anchoredPosition = offset + equipPositions[i];
                       // LackingImaginationV2Plugin.Log($"OnSelected: end of GridLI");
                     
+                    
                 }
+                foreach (InventoryGrid.Element element in __instance.m_elements)
+                {
+                    // element.m_go.GetComponent<Button>().colors.normalColor = Color.red;
+                    ColorBlock colorBlock = element.m_go.GetComponent<Button>().colors; 
+                    colorBlock.normalColor = Color.red;
+                    element.m_go.GetComponent<Button>().colors = colorBlock;
+                }
+
+                int slots = LackingImaginationV2Plugin.EquipSlotCount - ExpMethods.SkillLevelCalculator();
+                for (int i = 0; i < slots; i++)
+                {
+                    
+                }
+                
             }
         }
     }
