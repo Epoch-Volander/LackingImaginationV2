@@ -978,6 +978,55 @@ namespace LackingImaginationV2
             }
         }
         
+        //Draugr
+        public static float c_draugrForgottenRot
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugrForgottenRot"]/100;
+                }
+                catch
+                {
+                    return 0.05f;
+                }
+            }
+        }
+        public static float c_draugrForgottenPassiveCarry
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugrForgottenPassiveCarry"];
+                }
+                catch
+                {
+                    return 65f;
+                }
+            }
+        }
+        
+        
+        
+        //DraugrElite
+        public static float c_draugrFallenHeroRot
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugrFallenHeroRot"]/100;
+                }
+                catch
+                {
+                    return 0.1f;
+                }
+            }
+        }
+        
+        
         
         
         

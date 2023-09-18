@@ -37,7 +37,7 @@ namespace LackingImaginationV2
     {
         internal const string ModName = "LackingImaginationV2";
         internal const string ModVersion = "1.0.0";
-        internal const string Author = "Epoch-Pulsar";
+        internal const string Author = "Epoch-Volander";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
         private static string ConfigFileFullPath = Paths.ConfigPath + Path.DirectorySeparatorChar + ConfigFileName;
@@ -178,8 +178,8 @@ namespace LackingImaginationV2
             { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.5", "An erie glow." } },
             { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.5", "An erie glow." } },
             { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.5", "An erie glow." } },
-            { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "seeker", "0.5", "An erie glow." } },
-            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "seekerbrute", "0.5", "An erie glow." } },
+            { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "Seeker", "0.5", "An erie glow." } },
+            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.5", "An erie glow." } },
             { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.5", "An erie glow." } },
             { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.5", "An erie glow." } },
             { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.5", "An erie glow." } },
@@ -427,7 +427,8 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xLeechEssencePassive.LeechStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xGreydwarfEssencePassive.GreydwarfStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xSkeletonEssencePassive.SkeletonStats);
-                    
+                    LackingImaginationV2Plugin.li_stringList.Add(xDraugrRot.RotStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xDraugrEssencePassive.DraugrStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)

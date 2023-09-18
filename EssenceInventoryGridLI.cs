@@ -84,27 +84,49 @@ namespace LackingImaginationV2
                     
                       element.m_go.RectTransform().anchoredPosition = offset + equipPositions[i];
                       // LackingImaginationV2Plugin.Log($"OnSelected: end of GridLI");
-                    
-                    
-                }
-                foreach (InventoryGrid.Element element in __instance.m_elements)
-                {
-                    // element.m_go.GetComponent<Button>().colors.normalColor = Color.red;
-                    ColorBlock colorBlock = element.m_go.GetComponent<Button>().colors; 
-                    colorBlock.normalColor = Color.red;
-                    element.m_go.GetComponent<Button>().colors = colorBlock;
                 }
 
-                int slots = LackingImaginationV2Plugin.EquipSlotCount - ExpMethods.SkillLevelCalculator();
-                for (int i = 0; i < slots; i++)
+                for (int i = LackingImaginationV2Plugin.EquipSlotCount - 1; i >= ExpMethods.SkillLevelCalculator(); i--)
                 {
-                    
+                    ColorBlock colorBlock = __instance.m_elements[i].m_go.GetComponent<Button>().colors;
+                    colorBlock.normalColor = new Color(0.3897059f, 0.0f, 0.0f, 0.5019608f);
+                    colorBlock.highlightedColor = new Color(0.4897059f, 0.0f, 0.0f, 0.5019608f);
+                    colorBlock.pressedColor = new Color(0.2794118f, 0.0f, 0.0f, 1.0f);
+                    colorBlock.selectedColor = new Color(0.4897059f, 0.0f, 0.0f, 0.5019608f);
+                    __instance.m_elements[i].m_go.GetComponent<Button>().colors = colorBlock;
                 }
-                
+                ColorBlock colorBlockOriginal = __instance.m_elements[0].m_go.GetComponent<Button>().colors;
+                for (int i = 0; i < ExpMethods.SkillLevelCalculator(); i++)
+                {
+                    __instance.m_elements[i].m_go.GetComponent<Button>().colors = colorBlockOriginal;
+                }
             }
         }
     }
-    
+
+    // [HarmonyPatch(typeof(InventoryGrid), "UpdateInventory",typeof(Inventory), typeof(Player), typeof(ItemDrop.ItemData))]
+    // public static class EssenceUpdateInventoryGridLI
+    // {
+    //     private static void Postfix(InventoryGrid __instance)
+    //     {
+    //         if (__instance.name == "EssenceSlotGrid") //PlayerGrid
+    //         {
+    //             for (int i = LackingImaginationV2Plugin.EquipSlotCount - 1; i >= ExpMethods.SkillLevelCalculator(); i--)
+    //             {
+    //                 ColorBlock colorBlock = __instance.m_elements[i].m_go.GetComponent<Button>().colors;
+    //                 colorBlock.normalColor = new Color(0.3897059f, 0.0f, 0.0f, 0.5019608f);
+    //                 colorBlock.highlightedColor = new Color(0.4897059f, 0.0f, 0.0f, 0.5019608f);
+    //                 colorBlock.pressedColor = new Color(0.2794118f, 0.0f, 0.0f, 1.0f);
+    //                 colorBlock.selectedColor = new Color(0.4897059f, 0.0f, 0.0f, 0.5019608f);
+    //                 __instance.m_elements[i].m_go.GetComponent<Button>().colors = colorBlock;
+    //             }
+    //             
+    //         }
+    //     }
+    // }
+
+
+
     public static class GameObjectExtensions
     {
         public static RectTransform RectTransform(this GameObject go)

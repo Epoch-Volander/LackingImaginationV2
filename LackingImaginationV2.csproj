@@ -141,6 +141,7 @@
         <Compile Include="SE_AncientAwe.cs" />
         <Compile Include="SE_Bash.cs" />
         <Compile Include="SE_BloodSiphon.cs" />
+        <Compile Include="SE_Forgotten.cs" />
         <Compile Include="SE_FumesSplit.cs" />
         <Compile Include="SE_Giantization.cs" />
         <Compile Include="SE_Harbinger.cs" />
@@ -150,6 +151,7 @@
         <Compile Include="SE_RavenousHunger.cs" />
         <Compile Include="SE_Relentless.cs" />
         <Compile Include="SE_Ritual.cs" />
+        <Compile Include="SE_Rot.cs" />
         <Compile Include="SE_ThreeFreeze.cs" />
         <Compile Include="SE_TimedDeath.cs" />
         <Compile Include="SE_TwinSouls.cs" />
@@ -165,6 +167,7 @@
         <Compile Include="xDrakeEssence.cs" />
         <Compile Include="xDraugrEliteEssence.cs" />
         <Compile Include="xDraugrEssence.cs" />
+        <Compile Include="xDraugrRot.cs" />
         <Compile Include="xDvergrEssence.cs" />
         <Compile Include="xEikthyrEssence.cs" />
         <Compile Include="xElderEssence.cs" />

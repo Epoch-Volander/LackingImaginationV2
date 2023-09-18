@@ -192,7 +192,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_boar_essence")
             {
-                xBoarEssence.Process_Input(Player.m_localPlayer);
+                xBoarEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_wraith_essence")
@@ -589,7 +589,13 @@ namespace LackingImaginationV2
                  return 10f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
-         
+         public static float xBoarCooldownTime
+         {
+             get
+             {
+                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+             }
+         }    
          
          
          

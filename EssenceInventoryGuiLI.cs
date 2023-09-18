@@ -87,32 +87,6 @@ namespace LackingImaginationV2
                 grid.m_uiGroup = grid.gameObject.AddComponent<UIGroupHandler>();
                 grid.m_uiGroup.m_groupPriority = 1;
                 grid.m_uiGroup.m_active = true;
-
-                
-                
-                
-                // // Set the threshold value for X position
-                // float thresholdX = ExpMethods.SkillLevelCalculator(); // Replace with your actual threshold value
-                //
-                // // Create a new GameObject for the highlight
-                // var highlight = new GameObject("SelectedFrame", typeof(RectTransform));
-                // highlight.transform.SetParent(go.transform, false);
-                //
-                // // Create a new Image component for the highlight and set its color
-                // var highlightImage = highlight.AddComponent<Image>();
-                // highlightImage.color = (position.x > thresholdX) ? Color.red : Color.yellow;
-                //
-                // var highlightRT = (RectTransform)highlight.transform;
-                // highlightRT.SetAsFirstSibling();
-                // highlightRT.anchoredPosition = new Vector2(0, 0);
-                // highlightRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x + 2);
-                // highlightRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y + 2);
-                // highlightRT.localScale = new Vector3(1, 1, 1);
-                // grid.m_uiGroup.m_enableWhenActiveAndGamepad = highlight;
-                
-                
-                
-                
                 
                 var highlight = new GameObject("SelectedFrame", typeof(RectTransform));
                 highlight.transform.SetParent(go.transform, false);

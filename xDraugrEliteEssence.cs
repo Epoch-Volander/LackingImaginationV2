@@ -29,5 +29,31 @@ namespace LackingImaginationV2
 
     }
 
+    [HarmonyPatch]
+    public class xDraugrEliteEssencePassive
+    {
 
+        public static float DraugrEliteRot = LackingImaginationGlobal.c_draugrFallenHeroRot;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }
