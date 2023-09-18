@@ -39,7 +39,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence.Contains("$item_draugrelite_essence"))
             {
-                speed *= 1.05f;
+                speed *= 1.1f;
             }
             base.ModifySpeed(baseSpeed, ref speed);
         }

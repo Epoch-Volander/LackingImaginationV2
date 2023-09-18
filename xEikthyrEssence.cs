@@ -122,7 +122,7 @@ namespace LackingImaginationV2
     {
 
         [HarmonyPatch(typeof(Character), "RPC_Damage")]
-        class Character_RPC_Damage_Patch
+        class Eikthyr_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)
             {

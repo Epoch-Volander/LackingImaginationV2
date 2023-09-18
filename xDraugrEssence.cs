@@ -23,20 +23,32 @@ namespace LackingImaginationV2
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
                 LackingImaginationV2Plugin.Log($"xDraugrEssence Button was pressed");
-            
-                //Ability Cooldown
-                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-                se_cd.m_ttl = LackingImaginationUtilities.xDraugrCooldownTime;
-                player.GetSEMan().AddStatusEffect(se_cd);
+
+                if (float.Parse(xDraugrRot.RotStats[0]) <= 96f)
+                {
+                    
+                    //Ability Cooldown
+                    StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                    se_cd.m_ttl = LackingImaginationUtilities.xDraugrCooldownTime;
+                    player.GetSEMan().AddStatusEffect(se_cd);
+
+                    xDraugrRot.RotStats[0] = (float.Parse(xDraugrRot.RotStats[0]) + 3f).ToString();
+
+                    //Effects, animations, and sounds
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_draugr_alerted"), player.transform.position, Quaternion.identity);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_draugr_death"), player.transform.position, Quaternion.identity);
+                    
                 
+                    SE_Forgotten se_forgotten = (SE_Forgotten)ScriptableObject.CreateInstance(typeof(SE_Forgotten));
+                    se_forgotten.m_ttl = SE_Forgotten.m_baseTTL;
                 
-                
-                
-                
-                
-                
-                
-                
+                    player.GetSEMan().AddStatusEffect(se_forgotten);
+                    
+                }
+                else
+                {
+                    player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Will Break This One's Limit");
+                }
             }
             else
             {
@@ -44,8 +56,6 @@ namespace LackingImaginationV2
             }
         }
         
-
-
     }
 
     [HarmonyPatch]
@@ -101,20 +111,6 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
     }
 }

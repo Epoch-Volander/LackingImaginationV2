@@ -141,6 +141,7 @@
         <Compile Include="SE_AncientAwe.cs" />
         <Compile Include="SE_Bash.cs" />
         <Compile Include="SE_BloodSiphon.cs" />
+        <Compile Include="SE_FallenHero.cs" />
         <Compile Include="SE_Forgotten.cs" />
         <Compile Include="SE_FumesSplit.cs" />
         <Compile Include="SE_Giantization.cs" />

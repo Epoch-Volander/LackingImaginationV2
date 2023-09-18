@@ -429,6 +429,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xSkeletonEssencePassive.SkeletonStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrRot.RotStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrEssencePassive.DraugrStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xDraugrEliteEssencePassive.DraugrEliteStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)

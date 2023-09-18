@@ -1003,21 +1003,17 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 65f;
+                    return 60f;
                 }
             }
         }
-        
-        
-        
-        //DraugrElite
-        public static float c_draugrFallenHeroRot
+        public static float c_draugrForgottenActive
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_draugrFallenHeroRot"]/100;
+                    return ConfigStrings["li_draugrForgottenActive"]/100;
                 }
                 catch
                 {
@@ -1027,7 +1023,49 @@ namespace LackingImaginationV2
         }
         
         
-        
+        //DraugrElite
+        public static float c_draugreliteFallenHeroRot
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugreliteFallenHeroRot"]/100;
+                }
+                catch
+                {
+                    return 0.1f;
+                }
+            }
+        }
+        public static float c_draugreliteFallenHeroPassiveCarry
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugreliteFallenHeroPassiveCarry"];
+                }
+                catch
+                {
+                    return 70f;
+                }
+            }
+        }
+        public static float c_draugreliteFallenHeroActive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["lidraugreliteFallenHeroActive"]/100;
+                }
+                catch
+                {
+                    return 0.2f;
+                }
+            }
+        }
         
         
         

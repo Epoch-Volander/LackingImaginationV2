@@ -43,21 +43,17 @@ namespace LackingImaginationV2
                         return;
                     }
                 }
-                if (item.m_shared.m_name == "$item_entrails" && __instance.m_seman.HaveStatusEffect("SE_Rot"))
+                if (item.m_shared.m_name == "$item_entrails" && __instance.m_seman.HaveStatusEffect("SE_Rot") && xDraugrRot.RotStats[0] != "0")
                 {
                     __instance.m_consumeItemEffects.Create(Player.m_localPlayer.transform.position, Quaternion.identity);
                     __instance.m_zanim.SetTrigger("eat");
                     Player.m_localPlayer.m_inventory.RemoveItem("$item_entrails", 1);
                     RotStats[0] = (float.Parse(RotStats[0]) - 10f).ToString();
+                    if (float.Parse(RotStats[0]) < 0f) RotStats[0] = "0";
                     return;
                 }
             }
-            
-            
         }
-        
-        
-        
         
         [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
         public static class Rot_UpdateEnvStatusEffects_Patch

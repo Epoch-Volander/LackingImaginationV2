@@ -112,7 +112,10 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_Rot).m_icon = SE_Rot.AbilityIcon;
                     }
-                    
+                    else if (nameHash == "SE_FallenHero".GetHashCode())
+                    {
+                        (__result as SE_FallenHero).m_icon = SE_FallenHero.AbilityIcon;
+                    }
                     
                     if (nameHash == "Ability1_CoolDown".GetHashCode())
                     {
@@ -164,7 +167,7 @@ namespace LackingImaginationV2
                 SE_TwinSouls.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyWraith").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Forgotten.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDraugr").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Rot.AbilityIcon = ZNetScene.instance.GetPrefab("RottenMeat").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                
+                SE_FallenHero.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDraugrElite").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 
                 
             }
@@ -275,7 +278,10 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Rot>());
             } 
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_FallenHero"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_FallenHero>());
+            } 
         }
 
 

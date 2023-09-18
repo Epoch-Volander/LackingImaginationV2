@@ -8,22 +8,22 @@ using UnityEngine;
 namespace LackingImaginationV2
 
 {
-    public class SE_Forgotten : SE_Stats
+    public class SE_FallenHero : SE_Stats
     {
         
         public static Sprite AbilityIcon;
-        public static float m_baseTTL = LackingImaginationUtilities.xDraugrCooldownTime -15f;
+        public static float m_baseTTL = LackingImaginationUtilities.xDraugrEliteCooldownTime -15f;
         
-        [Header("SE_Forgotten")]
-        public static float bonusDmg = LackingImaginationGlobal.c_draugrForgottenActive + 1f;
+        [Header("SE_FallenHero")]
+        public static float bonusDmg = LackingImaginationGlobal.c_draugreliteFallenHeroActive + 1f;
         
         
-        public SE_Forgotten()
+        public SE_FallenHero()
         {
-            base.name = "SE_Forgotten";
+            base.name = "SE_FallenHero";
             m_icon = AbilityIcon;
-            m_tooltip = "Forgotten";
-            m_name = "Forgotten";
+            m_tooltip = "Fallen Hero";
+            m_name = "Fallen Hero";
             m_ttl = m_baseTTL;
 
         }
@@ -31,7 +31,7 @@ namespace LackingImaginationV2
         
         public override void ModifyAttack(Skills.SkillType skill, ref HitData hitData)
         {
-            if (skill == Skills.SkillType.Axes || skill == Skills.SkillType.Bows)
+            if (skill == Skills.SkillType.Swords || skill == Skills.SkillType.Polearms)
             {
                 hitData.m_damage.Modify(bonusDmg);
             }
