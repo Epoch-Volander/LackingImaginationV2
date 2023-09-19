@@ -35,9 +35,11 @@ namespace LackingImaginationV2
                 //Effects, animations, and sounds
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_eikthyr_death"), player.transform.position, Quaternion.identity);
-                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("Emote_point"); 
+                ZSyncAnimation animation = ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player));
+                animation.SetTrigger("Emote_point");
+                
                 // Emote.DoEmote(Emotes.Point);
-
+                /*.SetTrigger("Emote_point")*/
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_eikthyr_forwardshockwave"), player.transform.position, player.transform.rotation, player.transform);
 
                 // Assuming player is a reference to the player GameObject

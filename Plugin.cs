@@ -18,6 +18,7 @@ using UnityEngine;
 using PrefabManager = ItemManager.PrefabManager;
 using System.Collections.Generic;
 using System.CodeDom;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine.Rendering;
 using System.Runtime.CompilerServices;
@@ -27,7 +28,7 @@ using System.Threading;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
+using Debug = UnityEngine.Debug;
 
 
 namespace LackingImaginationV2
@@ -200,17 +201,7 @@ namespace LackingImaginationV2
         // public static int EquipSlotCount; // link this to imagination skill
 
         public static int EquipSlotCount = 5;
-        
-        // Skill image = Skill.skillByName["Imagination"];
-        // Skills.SkillType imagine = image.skillDef.m_skill;
-        //
-        // float t = image.skillDef.m_skill.
-        // EquipSlotCount = image.skillDef.m_skill
-            
-        // EquipSlotCount = image.SkillEffectFactor;
-        
-        
-        
+
         public static readonly List<ItemDrop.ItemData.ItemType> EquipSlotTypes = new List<ItemDrop.ItemData.ItemType>()
         {
             ItemDrop.ItemData.ItemType.Customization,
@@ -321,6 +312,18 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_abominationBaneHealth;
         public static ConfigEntry<float> li_wraithTwinSoulsArmor;
         public static ConfigEntry<float> li_wraithTwinSoulsPassive;
+        public static ConfigEntry<float> li_draugrForgottenRot;
+        public static ConfigEntry<float> li_draugrForgottenPassiveCarry;
+        public static ConfigEntry<float> li_draugrForgottenActive;
+        public static ConfigEntry<float> li_draugreliteFallenHeroRot;
+        public static ConfigEntry<float> li_draugreliteFallenHeroPassiveCarry;
+        public static ConfigEntry<float> lidraugreliteFallenHeroActive;
+        
+        
+      
+        
+        
+        
         
         // public static List<string> equipedEssence = new();
         private static LackingImaginationV2Plugin _instance;
@@ -334,6 +337,13 @@ namespace LackingImaginationV2
         public static GameObject fx_TwinSouls;
 
 
+        public static Animator creatureAnimator;
+        public static AnimationClip creatureAnimationClip;
+        
+        // public Animator sourceAnimator; // Reference to the source animator controller
+        // public Animator destinationAnimator; // Reference to the destination animator controller
+        //
+        // public string animationClipName; // The name of the animation clip to copy
 
 
 
@@ -567,7 +577,8 @@ namespace LackingImaginationV2
             {
                 ExpMethods.CreateEssenceBase(kvp.Value);
             }
-
+            
+            
             // PrefabManager.RegisterPrefab("essence_bundle_2","TrophyEikthyrEssence");
             // MaterialReplacer.RegisterGameObjectForShaderSwap(ZNetScene.instance.GetPrefab("TrophyEikthyrEssence"), MaterialReplacer.ShaderType.CustomCreature);
             // "gas_flame_harbinger"
@@ -581,16 +592,13 @@ namespace LackingImaginationV2
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
             fx_Longinus = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantYellow");
             fx_TwinSouls = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantWraith");
-
-
-
-
+            
             abilitiesStatus.Clear();
             for (int i = 0; i < 5; i++)
             {
                 abilitiesStatus.Add(null);
             }
-
+            
 
 
 
@@ -709,10 +717,16 @@ namespace LackingImaginationV2
             //wraith
             li_wraithTwinSoulsArmor = config("Essence Wraith Modifiers", "li_wraithTwinSoulsArmor", 10f, "Modifies armor reduction amount");
             li_wraithTwinSoulsPassive = config("Essence Wraith Modifiers", "li_wraithTwinSoulsPassive", 15f, "Modifies the % weapon spirit damage passive");
+            //draugr
+            li_draugrForgottenRot = config("Essence Draugr Modifiers", "li_draugrForgottenRot", 5f, "Modifies % dmg reduction system");
+            li_draugrForgottenPassiveCarry = config("Essence Draugr Modifiers", "li_draugrForgottenPassiveCarry", 60f, "Modifies the bonus Carry Weight Passive");
+            li_draugrForgottenActive = config("Essence Draugr Modifiers", "li_draugrForgottenActive", 10f, "Modifies % bonus dmg active to Axes and Bows");
+            //draugr elite
+            li_draugreliteFallenHeroRot = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroRot", 10f, "Modifies % dmg reduction system");
+            li_draugreliteFallenHeroPassiveCarry = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroPassiveCarry", 70f, "Modifies the bonus Carry Weight Passive");
+            lidraugreliteFallenHeroActive = config("Essence Draugr Elite Modifiers", "lidraugreliteFallenHeroActive", 20f, "Modifies % bonus dmg active to Swords and Polearms");
             
-            
-            
-            
+           
             
             LackingImaginationGlobal.ConfigStrings = new Dictionary<string, float>();
             LackingImaginationGlobal.ConfigStrings.Clear();
@@ -783,6 +797,14 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneArmor", li_abominationBaneArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneHealth", li_abominationBaneHealth.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsArmor", li_wraithTwinSoulsArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsPassive", li_wraithTwinSoulsPassive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenRot", li_draugrForgottenRot.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenPassiveCarry", li_draugrForgottenPassiveCarry.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenActive", li_draugrForgottenActive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugreliteFallenHeroRot", li_draugreliteFallenHeroRot.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugreliteFallenHeroPassiveCarry", li_draugreliteFallenHeroPassiveCarry.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("lidraugreliteFallenHeroActive", lidraugreliteFallenHeroActive.Value);
+            
             
             
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
@@ -863,8 +885,14 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_abominationBaneArmor);
             _ = ConfigSync.AddConfigEntry(li_abominationBaneHealth);
             _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsArmor);
-                
-                
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsPassive);
+            _ = ConfigSync.AddConfigEntry(li_draugrForgottenRot);
+            _ = ConfigSync.AddConfigEntry(li_draugrForgottenPassiveCarry);
+            _ = ConfigSync.AddConfigEntry(li_draugrForgottenActive);
+            _ = ConfigSync.AddConfigEntry(li_draugreliteFallenHeroRot);
+            _ = ConfigSync.AddConfigEntry(li_draugreliteFallenHeroPassiveCarry);
+            _ = ConfigSync.AddConfigEntry(lidraugreliteFallenHeroActive);
+            
                 
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -889,6 +917,28 @@ namespace LackingImaginationV2
                         break;
                     }
                 }
+                LogWarning($"T1.");
+                    creatureAnimator = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                    LogWarning($"T2.");
+                    foreach (AnimationClip clip in creatureAnimator.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name == "Frost AoE Spell Attack 3 Burst") // Replace with the actual name of the clip you're looking for.
+                            // if (clip.name == "attack_nova") // Replace with the actual name of the clip you're looking for.
+                        {
+                            creatureAnimationClip = clip;
+                            break; // Exit the loop once you've found the clip.
+                        }
+                    }
+                    if (creatureAnimationClip != null)
+                    {
+                        LogWarning($"You found the desired clip, and 'desiredClip' now holds a reference to it");
+                    }
+                    else
+                    {
+                        LogWarning($"The desired clip was not found.");
+                    }
+                    
+                    
             }
         }
 

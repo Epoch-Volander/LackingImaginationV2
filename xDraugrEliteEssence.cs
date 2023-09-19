@@ -34,14 +34,14 @@ namespace LackingImaginationV2
                 
                     //Effects, animations, and sounds
                     UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_draugr_alerted"), player.transform.position, Quaternion.identity);
-                    GameObject activateEffect =UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_DraugrSpawn"), player.GetCenterPoint(), Quaternion.identity);
+                    GameObject activateEffect =UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_DraugrSpawn"), player.transform.position + player.transform.up * 1.5f, Quaternion.identity);
                     ParticleSystem.MainModule mainModule = activateEffect.transform.Find("wetsplsh").GetComponent<ParticleSystem>().main;
-                    mainModule.startColor = Color.blue;
+                    mainModule.startColor = Color.blue + Color.red;
 
-                    SE_Forgotten se_forgotten = (SE_Forgotten)ScriptableObject.CreateInstance(typeof(SE_Forgotten));
-                    se_forgotten.m_ttl = SE_Forgotten.m_baseTTL;
+                    SE_FallenHero se_fallenhero = (SE_FallenHero)ScriptableObject.CreateInstance(typeof(SE_FallenHero));
+                    se_fallenhero.m_ttl = SE_FallenHero.m_baseTTL;
                 
-                    player.GetSEMan().AddStatusEffect(se_forgotten);
+                    player.GetSEMan().AddStatusEffect(se_fallenhero);
                     
                 }
                 else

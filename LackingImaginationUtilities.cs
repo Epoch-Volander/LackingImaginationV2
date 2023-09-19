@@ -68,6 +68,11 @@ namespace LackingImaginationV2
             { "$item_lox_essence", xLoxEssence.Ability_Name },
             { "$item_neck_essence", xNeckEssence.Ability_Name },
             { "$item_wolf_essence", xWolfEssence.Ability_Name },
+            
+            { "$item_brenna_essence", xBrennaEssence.Ability_Name },
+            { "$item_geirrhafa_essence", xGeirrhafaEssence.Ability_Name  },
+            { "$item_zil_essence", xZilEssence.Ability_Name },
+            { "$item_thungr_essence", xThungrEssence.Ability_Name },
         };
         
         
@@ -330,9 +335,32 @@ namespace LackingImaginationV2
                 xDrakeEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
+            if (EssenceItemData.equipedEssence[position] == "$item_brenna_essence")
+            {
+                xBrennaEssence.Process_Input(Player.m_localPlayer, position);
+                return;
+            }            
+            if (EssenceItemData.equipedEssence[position] == "$item_geirrhafa_essence")
+            {
+                xGeirrhafaEssence.Process_Input(Player.m_localPlayer, position);
+                return;
+            }   
+            if (EssenceItemData.equipedEssence[position] == "$item_zil_essence")
+            {
+                xZilEssence.Process_Input(Player.m_localPlayer, position);
+                return;
+            }            
+            if (EssenceItemData.equipedEssence[position] == "$item_thungr_essence")
+            {
+                xThungrEssence.Process_Input(Player.m_localPlayer, position);
+                return;
+            }   
+            
+            
+            
         }
 
-        
+         
          
          public static string CooldownString(int position)
          {
@@ -572,7 +600,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 120f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xWriathCooldownTime
@@ -595,9 +623,14 @@ namespace LackingImaginationV2
              {
                  return 60f * LackingImaginationGlobal.g_CooldownModifer;
              }
+         }
+         public static float xGeirrhafaCooldownTime
+         {
+             get
+             {
+                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+             }
          }    
-         
-         
          
          
          

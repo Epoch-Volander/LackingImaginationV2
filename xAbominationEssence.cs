@@ -82,9 +82,10 @@ namespace LackingImaginationV2
                 };
                 baby.GetComponent<CharacterDrop>().m_dropsEnabled = false;
                 foreach (CharacterDrop.Drop drop in baby.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
+                // baby.GetComponent<Character>().SetLevel(3);
                 Abom.Add(baby.GetComponent<Character>());
 
-                
+               
             }
             else
             {

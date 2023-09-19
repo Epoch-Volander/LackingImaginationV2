@@ -139,6 +139,7 @@ namespace LackingImaginationV2
             Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * 2f;
             Vector3 randomPosition = currentCharacter.transform.position + new Vector3(randomCirclePoint.x, 0f, randomCirclePoint.y);
             GameObject surt = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Surtling"), randomPosition, Quaternion.identity);
+            
             surt.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
             surt.GetComponent<Humanoid>().m_name = "Surtling(Ally)";
             surt.GetComponent<Humanoid>().SetMaxHealth(surt.GetComponent<Humanoid>().GetMaxHealthBase() * 4f);

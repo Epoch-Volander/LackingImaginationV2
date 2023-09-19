@@ -86,6 +86,9 @@
         <Reference Include="UnityEngine">
             <HintPath>$(CorlibPath)\UnityEngine.dll</HintPath>
         </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+          <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\unstripped_corlib\UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine.AssetBundleModule">
             <HintPath>$(CorlibPath)\UnityEngine.AssetBundleModule.dll</HintPath>
         </Reference>
@@ -162,6 +165,7 @@
         <Compile Include="xBlobEssence.cs" />
         <Compile Include="xBoarEssence.cs" />
         <Compile Include="xBoneMassEssence.cs" />
+        <Compile Include="xBrennaEssence.cs" />
         <Compile Include="xCultistEssence.cs" />
         <Compile Include="xDeathsquitoEssence.cs" />
         <Compile Include="xDeerEssence.cs" />
@@ -195,12 +199,14 @@
         <Compile Include="xSkeletonEssence.cs" />
         <Compile Include="xStoneGolemEssence.cs" />
         <Compile Include="xSurtlingEssence.cs" />
+        <Compile Include="xThungrEssence.cs" />
         <Compile Include="xTickEssence.cs" />
         <Compile Include="xTrollEssence.cs" />
         <Compile Include="xUlvEssence.cs" />
         <Compile Include="xWolfEssence.cs" />
         <Compile Include="xWraithEssence.cs" />
         <Compile Include="xYagluthEssence.cs" />
+        <Compile Include="xZilEssence.cs" />
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />

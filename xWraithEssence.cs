@@ -157,7 +157,7 @@ namespace LackingImaginationV2
                         return;
                     if (EnvMan.instance.IsDay() && (UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())
                     {
-                        hit.m_damage.m_spirit += (Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_wraithTwinSoulsPassive;;
+                        hit.m_damage.m_spirit += (Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_wraithTwinSoulsPassive;
                     }
                 }
             }
