@@ -86,7 +86,15 @@ namespace LackingImaginationV2
                     }
                 };
                 
-                // ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("attack_nova");
+                // string controllerName = "Original";
+                //        
+                // // in case this is called before the first Player.Start
+                // if (LackingImaginationV2Plugin.CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
+                // {
+                //     LackingImaginationV2Plugin.FastReplaceRAC(player, controller);
+                // }
+                
+                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
 
                 // player.gameObject.transform.Find("Visual").GetComponent<>().
                 // player.m_animator

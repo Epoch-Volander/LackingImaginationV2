@@ -29,6 +29,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using UnityEngine.Animations;
 
 
 namespace LackingImaginationV2
@@ -211,7 +212,7 @@ namespace LackingImaginationV2
             ItemDrop.ItemData.ItemType.Customization
         };
 
-
+        
         public static bool playerEnabled = true;
 
         public static ConfigEntry<bool> EssenceSlotsEnabled;
@@ -339,11 +340,10 @@ namespace LackingImaginationV2
 
         public static Animator creatureAnimator;
         public static AnimationClip creatureAnimationClip;
-        
-        // public Animator sourceAnimator; // Reference to the source animator controller
-        // public Animator destinationAnimator; // Reference to the destination animator controller
-        //
-        // public string animationClipName; // The name of the animation clip to copy
+        public static Animator playerAnimator;
+       
+        public static readonly Dictionary<string, AnimationClip> ExternalAnimations = new();
+        public static readonly Dictionary<string, RuntimeAnimatorController> CustomRuntimeControllers = new();
 
 
 
@@ -916,14 +916,12 @@ namespace LackingImaginationV2
                          LackingImaginationV2Plugin.fx_Harbinger = transform_harbinger.gameObject;
                         break;
                     }
-                }
-                LogWarning($"T1.");
+                    
                     creatureAnimator = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    LogWarning($"T2.");
+                    LogWarning($"T0.");
                     foreach (AnimationClip clip in creatureAnimator.runtimeAnimatorController.animationClips)
                     {
                         if (clip.name == "Frost AoE Spell Attack 3 Burst") // Replace with the actual name of the clip you're looking for.
-                            // if (clip.name == "attack_nova") // Replace with the actual name of the clip you're looking for.
                         {
                             creatureAnimationClip = clip;
                             break; // Exit the loop once you've found the clip.
@@ -931,17 +929,119 @@ namespace LackingImaginationV2
                     }
                     if (creatureAnimationClip != null)
                     {
-                        LogWarning($"You found the desired clip, and 'desiredClip' now holds a reference to it");
+                        LogWarning($"T1.");
                     }
-                    else
-                    {
-                        LogWarning($"The desired clip was not found.");
-                    }
-                    
-                    
+                }
             }
         }
+        
+        [HarmonyPatch(typeof(Player), nameof(Player.Start))]
+        private static class Patch_Player_Start
+        {
+            private static void Postfix(Player __instance)
+            {
+                
+                if (creatureAnimationClip !=null) //ZNetScene.instance
+                {
+                    AnimationClip copyOfCreatureAnimationClip = Instantiate(creatureAnimationClip);
+                    // copyOfCreatureAnimationClip.name = "Guardian Power";
+                    ExternalAnimations["GuardianPower"] = copyOfCreatureAnimationClip;
+                    LogWarning($"T2.");
+                    if (ExternalAnimations["GuardianPower"] != null)
+                    {
+                        LogWarning($"T3.");
+                    }
+                
+                    if (CustomRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
+                    {
+                        LogWarning($"T4.");
+                        CustomRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
+                        LogWarning($"T5.");
+                    }
+                }
+                else
+                {
+                    LogWarning($"T6.");
+                }
+                
+                
+                
+            }
+        }
+        private static RuntimeAnimatorController MakeAOC(Dictionary<string, string> replacement, RuntimeAnimatorController ORIGINAL)
+        {
+            AnimatorOverrideController aoc = new(ORIGINAL);
+            List<KeyValuePair<AnimationClip, AnimationClip>> anims = new();
+            foreach (AnimationClip animation in aoc.animationClips)
+            {
+                string name = animation.name;
+                if(name == "GuardianPower") LogWarning($"T7.{name}");
+                if(name == "Guardian Power") LogWarning($"T7.{name}");
+                if (replacement.TryGetValue(name, out string value))
+                {
+                    LogWarning($"T8.{name}");
+                    AnimationClip newClip = Instantiate(ExternalAnimations[value]);
+                    newClip.name = name;
+                    anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, newClip));
+                }
+                else
+                {
+                    anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, animation));
+                }
+            }
+            aoc.ApplyOverrides(anims);
+            return aoc;
+        }
+        
+        public static void FastReplaceRAC(Player player, RuntimeAnimatorController replace)
+        {
+            if (player.m_animator.runtimeAnimatorController == replace)
+            {
+                return;
+            }
 
+            player.m_animator.runtimeAnimatorController = replace;
+            player.m_animator.Update(Time.deltaTime);
+        }
+        
+        [HarmonyPatch(typeof(ZSyncAnimation), nameof(ZSyncAnimation.RPC_SetTrigger))]
+        private static class Patch_ZSyncAnimation_RPC_SetTrigger
+        {
+            private static void Prefix(ZSyncAnimation __instance, string name)
+            {
+                if (__instance.GetComponent<Player>() is { } player)
+                {
+                    // // ReSharper disable once PatternAlwaysMatches
+                    // ItemDrop.ItemData.SharedData? sharedData(Func<VisEquipment, int> eq) => eq(player.m_visEquipment) is int hash and not 0 ? ObjectDB.instance.GetItemPrefab(hash)?.GetComponent<ItemDrop>()?.m_itemData.m_shared : null;
+                    // ItemDrop.ItemData.SharedData? rightHand = sharedData(v => v.m_currentRightItemHash);
+                    // ItemDrop.ItemData.SharedData? leftHand = sharedData(v => v.m_currentLeftItemHash);
+                    // bool HasAttackName(string? anim) => (anim != null && name.StartsWith(anim, StringComparison.Ordinal) && anim.Length <= name.Length + 1) || anim == "swing_axe";
+                    // bool HasAttack(ItemDrop.ItemData.SharedData? data) => HasAttackName(data?.m_attack.m_attackAnimation) || HasAttackName(data?.m_secondaryAttack.m_attackAnimation);
+                    // if (HasAttack(leftHand) || HasAttack(rightHand))
+                    // {
+                        string controllerName = "Original";
+                       
+                        // in case this is called before the first Player.Start
+                        if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
+                        {
+                            FastReplaceRAC(player, controller);
+                        }
+                    // }
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         public static bool TakeInput(Player p)
         {
             bool result = (!(bool)Chat.instance || !Chat.instance.HasFocus()) && !Console.IsVisible() && !TextInput.IsVisible() && !StoreGui.IsVisible() && !InventoryGui.IsVisible() && !Menu.IsVisible() && (!(bool)TextViewer.instance || !TextViewer.instance.IsVisible()) && !Minimap.IsOpen() && !GameCamera.InFreeFly();
