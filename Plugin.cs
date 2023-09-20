@@ -331,20 +331,25 @@ namespace LackingImaginationV2
 
         // Prefabs type 1 //Pulled from in game
         public static GameObject fx_Harbinger;
+        
         //Prefabs type 2 //Pulled from assets
         public static GameObject fx_Giantization;
         public static GameObject fx_Bash;
         public static GameObject fx_Longinus;
         public static GameObject fx_TwinSouls;
+        //Sounds
+        public static GameObject sfx_Giantization;
 
-
-        public static Animator creatureAnimator;
-        public static AnimationClip creatureAnimationClip;
-        public static Animator playerAnimator;
-       
+        // Animation Clips // Pulled from in game
+        public static Animator creatureAnimatorGeirrhafa;
+        public static AnimationClip creatureAnimationClipGeirrhafaIceNova;
+        public static Animator creatureAnimatorElder;
+        public static AnimationClip creatureAnimationClipElderSummon;
+        
+        // Animation Clip swappers
         public static readonly Dictionary<string, AnimationClip> ExternalAnimations = new();
         public static readonly Dictionary<string, RuntimeAnimatorController> CustomRuntimeControllers = new();
-
+        private static readonly Dictionary<string, Dictionary<string, string>> replacementMap = new();
 
 
 
@@ -592,6 +597,9 @@ namespace LackingImaginationV2
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
             fx_Longinus = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantYellow");
             fx_TwinSouls = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantWraith");
+            
+            //Sound Prefabs
+            sfx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "sfx_goblinbrute_rage");
             
             abilitiesStatus.Clear();
             for (int i = 0; i < 5; i++)
@@ -902,6 +910,19 @@ namespace LackingImaginationV2
         }
 
         
+        private static void InitAnimation()
+        {
+            replacementMap["IceNova"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "IceNova",
+                // ["Block idle"] = "BlockExternal",
+            };
+            replacementMap["RootSummon"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "RootSummon",
+            };
+        }
+        
 
         [HarmonyPatch(typeof(ZoneSystem), "Start")]
         public static class ZoneSystem_Awake_Patch
@@ -917,19 +938,28 @@ namespace LackingImaginationV2
                         break;
                     }
                     
-                    creatureAnimator = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    LogWarning($"T0.");
-                    foreach (AnimationClip clip in creatureAnimator.runtimeAnimatorController.animationClips)
+                    creatureAnimatorGeirrhafa = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                    foreach (AnimationClip clip in creatureAnimatorGeirrhafa.runtimeAnimatorController.animationClips)
                     {
                         if (clip.name == "Frost AoE Spell Attack 3 Burst") // Replace with the actual name of the clip you're looking for.
                         {
-                            creatureAnimationClip = clip;
+                            creatureAnimationClipGeirrhafaIceNova = clip;
                             break; // Exit the loop once you've found the clip.
                         }
                     }
-                    if (creatureAnimationClip != null)
+                    // if (creatureAnimationClipGeirrhafaIceNova != null)
+                    // {
+                    //     LogWarning($"T1.");
+                    // }
+                    
+                    creatureAnimatorElder = ZNetScene.instance.GetPrefab("gd_king").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                    foreach (AnimationClip clip in creatureAnimatorElder.runtimeAnimatorController.animationClips)
                     {
-                        LogWarning($"T1.");
+                        if (clip.name == "Standing 1H Magic Attack 03") // Replace with the actual name of the clip you're looking for.
+                        {
+                            creatureAnimationClipElderSummon = clip;
+                            break; // Exit the loop once you've found the clip.
+                        }
                     }
                 }
             }
@@ -941,31 +971,22 @@ namespace LackingImaginationV2
             private static void Postfix(Player __instance)
             {
                 
-                if (creatureAnimationClip !=null) //ZNetScene.instance
+                if (creatureAnimationClipGeirrhafaIceNova !=null && creatureAnimationClipElderSummon !=null) //ZNetScene.instance
                 {
-                    AnimationClip copyOfCreatureAnimationClip = Instantiate(creatureAnimationClip);
-                    // copyOfCreatureAnimationClip.name = "Guardian Power";
-                    ExternalAnimations["GuardianPower"] = copyOfCreatureAnimationClip;
-                    LogWarning($"T2.");
-                    if (ExternalAnimations["GuardianPower"] != null)
-                    {
-                        LogWarning($"T3.");
-                    }
-                
+                    LogWarning($"animations good");
+                    AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
+                    ExternalAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
+                    AnimationClip copyOfcreatureAnimationClipElderSummon = Instantiate(creatureAnimationClipElderSummon);
+                    ExternalAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
+                    LackingImaginationV2Plugin.InitAnimation();
+                    
                     if (CustomRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
                     {
-                        LogWarning($"T4.");
                         CustomRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
-                        LogWarning($"T5.");
+                        CustomRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
+                        CustomRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
                     }
                 }
-                else
-                {
-                    LogWarning($"T6.");
-                }
-                
-                
-                
             }
         }
         private static RuntimeAnimatorController MakeAOC(Dictionary<string, string> replacement, RuntimeAnimatorController ORIGINAL)
@@ -975,11 +996,9 @@ namespace LackingImaginationV2
             foreach (AnimationClip animation in aoc.animationClips)
             {
                 string name = animation.name;
-                if(name == "GuardianPower") LogWarning($"T7.{name}");
-                if(name == "Guardian Power") LogWarning($"T7.{name}");
                 if (replacement.TryGetValue(name, out string value))
                 {
-                    LogWarning($"T8.{name}");
+                    // LogWarning($"T8.{name}");
                     AnimationClip newClip = Instantiate(ExternalAnimations[value]);
                     newClip.name = name;
                     anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, newClip));
@@ -999,7 +1018,6 @@ namespace LackingImaginationV2
             {
                 return;
             }
-
             player.m_animator.runtimeAnimatorController = replace;
             player.m_animator.Update(Time.deltaTime);
         }
@@ -1011,29 +1029,23 @@ namespace LackingImaginationV2
             {
                 if (__instance.GetComponent<Player>() is { } player)
                 {
-                    // // ReSharper disable once PatternAlwaysMatches
-                    // ItemDrop.ItemData.SharedData? sharedData(Func<VisEquipment, int> eq) => eq(player.m_visEquipment) is int hash and not 0 ? ObjectDB.instance.GetItemPrefab(hash)?.GetComponent<ItemDrop>()?.m_itemData.m_shared : null;
-                    // ItemDrop.ItemData.SharedData? rightHand = sharedData(v => v.m_currentRightItemHash);
-                    // ItemDrop.ItemData.SharedData? leftHand = sharedData(v => v.m_currentLeftItemHash);
-                    // bool HasAttackName(string? anim) => (anim != null && name.StartsWith(anim, StringComparison.Ordinal) && anim.Length <= name.Length + 1) || anim == "swing_axe";
-                    // bool HasAttack(ItemDrop.ItemData.SharedData? data) => HasAttackName(data?.m_attack.m_attackAnimation) || HasAttackName(data?.m_secondaryAttack.m_attackAnimation);
-                    // if (HasAttack(leftHand) || HasAttack(rightHand))
-                    // {
-                        string controllerName = "Original";
-                       
-                        // in case this is called before the first Player.Start
-                        if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
-                        {
-                            FastReplaceRAC(player, controller);
-                        }
-                    // }
+                    string controllerName = "Original";
+                    if (xGeirrhafaEssence.GeirrhafaController)
+                    {
+                         controllerName = "IceNovaControl";
+                    }
+                    if (xElderEssence.ElderController)
+                    {
+                        controllerName = "RootSummonControl";
+                    }
+                    // in case this is called before the first Player.Start
+                    if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
+                    {
+                        FastReplaceRAC(player, controller);
+                    }
                 }
             }
         }
-        
-        
-        
-        
         
         
         
@@ -1270,6 +1282,20 @@ namespace LackingImaginationV2
             }
         }
 
+        [HarmonyPatch(typeof(Player), "ActivateGuardianPower", null)]
+        public class ActivatePowerPrevention_Patch
+        {
+            public static bool Prefix(Player __instance, ref bool __result)
+            {                
+                if (!UseGuardianPower)
+                {
+                    __result = false;
+                    return false;
+                }
+                return true;
+            }
+        }
+        
         [HarmonyPatch(typeof(Player), "StartGuardianPower", null)]
         public class StartPowerPrevention_Patch
         {

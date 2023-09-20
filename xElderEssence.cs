@@ -15,10 +15,11 @@ namespace LackingImaginationV2
 {
     public class xElderEssence
     {
-        public static float minDistanceBetweenCharacters = 2f; // Set the minimum distance between characters
+        private static float minDistanceBetweenCharacters = 2f; // Set the minimum distance between characters
 
         public static string Ability_Name = "Ancient Awe";
         
+        public static bool ElderController = false;
         public static List<Character> Roots = new List<Character>();
         
         public static void Process_Input(Player player, int position)
@@ -42,6 +43,12 @@ namespace LackingImaginationV2
                     //Effects, animations, and sounds
                     // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ImpDeath"), player.transform.position, Quaternion.identity);
                 
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                
+                    ElderController = true;
+                    ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                    ElderController = false;
+                    
                     SE_AncientAwe se_ancientawe = (SE_AncientAwe)ScriptableObject.CreateInstance(typeof(SE_AncientAwe));
                     se_ancientawe.m_ttl = SE_AncientAwe.m_baseTTL;
                 

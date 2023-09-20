@@ -1021,8 +1021,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
-        
+
         //DraugrElite
         public static float c_draugreliteFallenHeroRot
         {
@@ -1063,6 +1062,22 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 0.2f;
+                }
+            }
+        }
+        
+        //Geirrhafa
+        public static float c_geirrhafaIceAgeAoe
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_geirrhafaIceAgeAoe"];
+                }
+                catch
+                {
+                    return 70f;
                 }
             }
         }
