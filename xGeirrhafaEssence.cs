@@ -41,16 +41,6 @@ namespace LackingImaginationV2
                 player.GetSEMan().AddStatusEffect(se_cd);
                 
                 //Effects, animations, and sounds
-                
-                
-                // //caverock_ice_stalagtite_falling  have these droop on enemies and a few random spots or maybe fall in groups of three
-                // Fenring_attack_IceNova
-                // fx_fenring_icenova
-                //     fx_fenring_frost_hand_aoestart
-                // Frost AoE Spell Attack 3 Burst
-                
-                // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_fenring_icenova"), player.transform.position, Quaternion.identity);
-
                 EffectList m_startEffects = new EffectList
                 {
                     m_effectPrefabs = new EffectList.EffectData[]
@@ -140,7 +130,7 @@ namespace LackingImaginationV2
              {
                  List<Character> allCharacters = new List<Character>();
                  allCharacters.Clear();
-                 Character.GetCharactersInRange(player.transform.position, 8f, allCharacters);
+                 Character.GetCharactersInRange(player.transform.position, 7f, allCharacters);
                  foreach (Character ch in allCharacters)
                  {
                      if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer)) 
@@ -151,7 +141,6 @@ namespace LackingImaginationV2
                          hitData.m_damage.m_blunt = 3f;
                          hitData.m_dir = ch.transform.position - player.transform.position;
                          hitData.ApplyModifier( LackingImaginationGlobal.c_geirrhafaIceAgeAoe);
-                         hitData.m_pushForce = 100f;
                          hitData.m_point = ch.transform.position;
                          hitData.SetAttacker(player);
                          ch.Damage(hitData);
@@ -192,7 +181,7 @@ namespace LackingImaginationV2
                          {
                              // Add the current character to the list of affected characters
                              affectedCharacters.Add(currentCharacter);
-                             SummonIce(currentCharacter, 2f);
+                             SummonIce(currentCharacter, 0.1f);
                              SummonIce(currentCharacter, 8f);
                                 
                          }
@@ -224,13 +213,16 @@ namespace LackingImaginationV2
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
-    
-    
-    
-    
-    
-    
     
     
 }
