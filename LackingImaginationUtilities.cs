@@ -182,7 +182,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_hare_essence")
             {
-                xHareEssence.Process_Input(Player.m_localPlayer);
+                xHareEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_dvergr_essence")
@@ -628,17 +628,23 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 25f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xCultistCooldownTime
          {
              get
              {
+                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+             }
+         }   
+         public static float xHareCooldownTime
+         {
+             get
+             {
                  return 10f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }   
-         
          
          
          

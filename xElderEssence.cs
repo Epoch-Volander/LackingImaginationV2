@@ -40,14 +40,49 @@ namespace LackingImaginationV2
                     se_cd.m_ttl = LackingImaginationUtilities.xElderCooldownTime;
                     player.GetSEMan().AddStatusEffect(se_cd);
                     
+                    EffectList m_HandEffectsRight = new EffectList
+                    {
+                        m_effectPrefabs = new EffectList.EffectData[]
+                        {
+                            new()
+                            {
+                                m_prefab = ZNetScene.instance.GetPrefab("fx_fenring_frost_hand_aoestart"),
+                                m_enabled = true,
+                                m_variant = 0,
+                                m_attach = false,
+                                m_follow = true,
+                                m_childTransform = "RightHand_Attach"
+                            }
+                        }
+                    };
+                    
                     //Effects, animations, and sounds
-                    // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ImpDeath"), player.transform.position, Quaternion.identity);
-                
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_gdking_spawn"), player.transform.position, Quaternion.identity);
+                    
+                    GameObject[] handEffect = m_HandEffectsRight.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
+                    foreach (GameObject effect in handEffect)
+                    {
+                        foreach (Transform child in effect.transform)
+                        {
+                            ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
+                            if (particleSystem != null)
+                            {
+                                ParticleSystem.MainModule mainModule = particleSystem.main;
+                                mainModule.startColor = Color.magenta;
+                            }
+                            Light lighting = child.GetComponent<Light>();
+                            if(lighting != null)
+                            {
+                                lighting.color = Color.magenta;
+                            }
+                        }
+                    }
+
                     LackingImaginationV2Plugin.UseGuardianPower = false;
                     ElderController = true;
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
                     ElderController = false;
-                    
+
                     SE_AncientAwe se_ancientawe = (SE_AncientAwe)ScriptableObject.CreateInstance(typeof(SE_AncientAwe));
                     se_ancientawe.m_ttl = SE_AncientAwe.m_baseTTL;
                 

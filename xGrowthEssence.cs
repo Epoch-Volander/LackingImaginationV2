@@ -161,7 +161,7 @@ namespace LackingImaginationV2
         }
         
         [HarmonyPatch(typeof(Player), "Update", null)]
-        public class Blob_AbilityInput_Postfix
+        public class Growth_AbilityInput_Patch
         {
             public static void Postfix(Player __instance)
             {

@@ -319,8 +319,11 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_draugreliteFallenHeroRot;
         public static ConfigEntry<float> li_draugreliteFallenHeroPassiveCarry;
         public static ConfigEntry<float> lidraugreliteFallenHeroActive;
-        
-        
+        public static ConfigEntry<float> li_geirrhafaIceAgeAoe;
+        public static ConfigEntry<float> li_geirrhafaIceAgePassiveEitr;
+        public static ConfigEntry<float> li_geirrhafaIceAgePassive;
+        public static ConfigEntry<float> li_cultistLoneSunAoe;
+        public static ConfigEntry<float> li_cultistLoneSunPassive;
       
         
         
@@ -537,21 +540,8 @@ namespace LackingImaginationV2
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        
         public enum Toggle
         {
             On = 1,
@@ -584,15 +574,10 @@ namespace LackingImaginationV2
                 ExpMethods.CreateEssenceBase(kvp.Value);
             }
             
-            
             // PrefabManager.RegisterPrefab("essence_bundle_2","TrophyEikthyrEssence");
             // MaterialReplacer.RegisterGameObjectForShaderSwap(ZNetScene.instance.GetPrefab("TrophyEikthyrEssence"), MaterialReplacer.ShaderType.CustomCreature);
-            // "gas_flame_harbinger"
-            // effectBase.Name.English(list[1]);
-            // GameObject location_harbinger = ExpMethods.GetLocationFromZoneSystem(ZoneSystem.m_instance, "FireHole");
-            // Transform transform_harbinger = location_harbinger.transform.Find("gas_flame");
-            // fx_Harbinger = transform_harbinger.gameObject;
-
+        
+            
             //Prefabs 2
             fx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "RotVariant1");
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
@@ -614,17 +599,17 @@ namespace LackingImaginationV2
             EssenceSlotsEnabled = Config.Bind("Toggles", "Enable Essence Slots", true, "Disabling this while items are in the slots will attempt to move them to your inventory.");
 
             //Ability1_Hotkey = ConfigManager.RegisterModConfigVariable<string>(ModName, "Ability1_Hotkey", "1", "Keybinds", "Ability 1 Hotkey", true); //\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc", true);
-            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", "1", "Ability 1 Hotkey\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc");
+            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", "1", "Ability 1 Hotkey\nUse mouse # to bind an ability to a mouse button");
             //Ability1_Hotkey_Combo = ConfigManager.RegisterModConfigVariable<string>(ModName, "Ability1_Hotkey_Combo", "left alt", "Keybinds", "Ability 1 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed", true); //\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank\nExamples: space, Q, left shift, left ctrl, right alt, right cmd", true);
-            Ability1_Hotkey_Combo = config("Keybinds", "Ability1_Hotkey_Combo", "left alt", "Ability 1 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", "2", "Ability 2 Hotkey\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc");
-            Ability2_Hotkey_Combo = config("Keybinds", "Ability2_Hotkey_Combo", "left alt", "Ability 2 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", "3", "Ability 3 Hotkey\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc");
-            Ability3_Hotkey_Combo = config("Keybinds", "Ability3_Hotkey_Combo", "left alt", "Ability 3 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", "4", "Ability 4 Hotkey\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc");
-            Ability4_Hotkey_Combo = config("Keybinds", "Ability4_Hotkey_Combo", "left alt", "Ability 4 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", "5", "Ability 5 Hotkey\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc");
-            Ability5_Hotkey_Combo = config("Keybinds", "Ability5_Hotkey_Combo", "left alt", "Ability 5 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
+            Ability1_Hotkey_Combo = config("Keybinds", "Ability1_Hotkey_Combo", "left alt", "Ability 1 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
+            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", "2", "Ability 2 Hotkey\nUse mouse # to bind an ability to a mouse button");
+            Ability2_Hotkey_Combo = config("Keybinds", "Ability2_Hotkey_Combo", "left alt", "Ability 2 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
+            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", "3", "Ability 3 Hotkey\nUse mouse # to bind an ability to a mouse button");
+            Ability3_Hotkey_Combo = config("Keybinds", "Ability3_Hotkey_Combo", "left alt", "Ability 3 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
+            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", "4", "Ability 4 Hotkey\nUse mouse # to bind an ability to a mouse button");
+            Ability4_Hotkey_Combo = config("Keybinds", "Ability4_Hotkey_Combo", "left alt", "Ability 4 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
+            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", "5", "Ability 5 Hotkey\nUse mouse # to bind an ability to a mouse button");
+            Ability5_Hotkey_Combo = config("Keybinds", "Ability5_Hotkey_Combo", "left alt", "Ability 5 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
 
             //li_cooldownMultiplier = ConfigManager.RegisterModConfigVariable<float>(ModName, "vl_mce_cooldownMultiplier", 1f, "Modifiers", "This value multiplied on overall cooldown time of abilities", false);
             li_cooldownMultiplier = config("Modifiers", "li_cooldownMultiplier", 100f, "This value multiplied on overall cooldown time of abilities");
@@ -734,8 +719,18 @@ namespace LackingImaginationV2
             li_draugreliteFallenHeroRot = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroRot", 10f, "Modifies % dmg reduction system");
             li_draugreliteFallenHeroPassiveCarry = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroPassiveCarry", 70f, "Modifies the bonus Carry Weight Passive");
             lidraugreliteFallenHeroActive = config("Essence Draugr Elite Modifiers", "lidraugreliteFallenHeroActive", 20f, "Modifies % bonus dmg active to Swords and Polearms");
+            //geirrhafa
+            li_geirrhafaIceAgeAoe = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgeAoe", 70f, "Modifies Active Damage");
+            li_geirrhafaIceAgePassiveEitr = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgePassiveEitr", 70f, "Modifies bonus Eitr Passive");
+            li_geirrhafaIceAgePassive = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgePassive", 30f, "Modifies the frost damage passive for Weapons");
+            //cultist
+            li_cultistLoneSunAoe = config("Essence Cultist Modifiers", "li_cultistLoneSunAoe", 50f, "Modifies Active Damage");
+            li_cultistLoneSunPassive = config("Essence Cultist Modifiers", "li_cultistLoneSunPassive", 15f, "Modifies the fire damage passive for Weapons");
+
             
-           
+            
+            
+               
             
             LackingImaginationGlobal.ConfigStrings = new Dictionary<string, float>();
             LackingImaginationGlobal.ConfigStrings.Clear();
@@ -813,6 +808,14 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_draugreliteFallenHeroRot", li_draugreliteFallenHeroRot.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_draugreliteFallenHeroPassiveCarry", li_draugreliteFallenHeroPassiveCarry.Value);
             LackingImaginationGlobal.ConfigStrings.Add("lidraugreliteFallenHeroActive", lidraugreliteFallenHeroActive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_geirrhafaIceAgeAoe", li_geirrhafaIceAgeAoe.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_geirrhafaIceAgePassiveEitr", li_geirrhafaIceAgePassiveEitr.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_geirrhafaIceAgePassive", li_geirrhafaIceAgePassive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_cultistLoneSunAoe", li_cultistLoneSunAoe.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_cultistLoneSunPassive", li_cultistLoneSunPassive.Value);
+            
+            
+            
             
             
             
@@ -901,8 +904,11 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_draugreliteFallenHeroRot);
             _ = ConfigSync.AddConfigEntry(li_draugreliteFallenHeroPassiveCarry);
             _ = ConfigSync.AddConfigEntry(lidraugreliteFallenHeroActive);
-            
-                
+            _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgeAoe);
+            _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgePassiveEitr);
+            _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgePassive);
+            _ = ConfigSync.AddConfigEntry(li_cultistLoneSunAoe);
+            _ = ConfigSync.AddConfigEntry(li_cultistLoneSunPassive);     
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
@@ -1102,7 +1108,9 @@ namespace LackingImaginationV2
                         LackingImaginationUtilities.AbilityInputPlugin(4, __instance, ___m_body, ___m_maxAirAltitude, ___m_lastGroundTouch);
                     }
                     
-                    int maxJumps = xBlobEssencePassive.canDoubleJump + xGrowthEssencePassive.canDoubleJump;
+                    int maxJumps = xBlobEssencePassive.canDoubleJump + xGrowthEssencePassive.canDoubleJump + xHareEssencePassive.canDoubleJump;
+
+                    if (__instance.GetSEMan().HaveStatusEffect("SE_LuckyFoot")) maxJumps *= 2;
                     
                     if (ZInput.GetButtonDown("Jump") && !__instance.IsDead() && !__instance.InAttack() && !__instance.IsEncumbered() 
                         && !__instance.InDodge() && !__instance.IsKnockedBack())

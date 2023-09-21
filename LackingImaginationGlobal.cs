@@ -1127,6 +1127,37 @@ namespace LackingImaginationV2
             }
         }
 
+        //Hare
+        public static float c_hareLuckyFoot
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_hareLuckyFoot"]/100f;
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
+        public static float c_hareLuckyFootArmor
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_hareLuckyFootArmor"]/100;
+                }
+                catch
+                {
+                    return 0.1f;
+                }
+            }
+        }
+        
+        
         
         
         

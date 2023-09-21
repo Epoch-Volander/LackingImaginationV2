@@ -20,7 +20,7 @@ namespace LackingImaginationV2
         
         public static string Ability_Name = "Giantization"; //all percentage based stat boosts, shield boost
         
-        public static bool roof;
+        public static bool noRoof;
         
         public static void Process_Input(Player player, int position, ref float altitude)
         {
@@ -38,16 +38,16 @@ namespace LackingImaginationV2
                 {
                     // A hit occurred, you can now access the distance to the hit point
                     float distanceToHit = hit.distance;
-                    roof = false;
+                    noRoof = false;
                     // Now you can use the distanceToHit for whatever you need
                     Debug.Log("Distance to the nearest solid object: " + distanceToHit);
                 }
                 else
                 {
-                    roof = true;
+                    noRoof = true;
                 }
                 
-                if (roof)
+                if (noRoof)
                 {
                     LackingImaginationV2Plugin.Log($"FB Button was pressed");
                 
@@ -100,7 +100,7 @@ namespace LackingImaginationV2
                 if (!giant && __instance.IsPlayer() && __instance.GetSEMan().HaveStatusEffect("SE_Giantization") )
                 {
                     float targetSize = 2.0f;
-                    float growthSpeed = 1f;
+                    float growthSpeed = 0.9f;
                     float currentSize = Player.m_localPlayer.transform.localScale.x;
                     
                     if (currentSize < targetSize)
@@ -120,7 +120,7 @@ namespace LackingImaginationV2
                 if (giant && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_Giantization"))
                 {
                     float targetSize = 1.0f;
-                    float shrinkSpeed = 1f; // You can adjust the speed as needed
+                    float shrinkSpeed = 0.9f; // You can adjust the speed as needed
                     float currentSize = Player.m_localPlayer.transform.localScale.x; // Use the object's current scale
                     
                     if (currentSize > targetSize) // Assuming 1.0f is the original size, adjust as needed

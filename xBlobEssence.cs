@@ -64,7 +64,7 @@ namespace LackingImaginationV2
         public static int canDoubleJump;
         
         [HarmonyPatch(typeof(Player), "Update", null)]
-        public class Blob_AbilityInput_Postfix
+        public class Blob_AbilityInput_Patch
         {
             public static void Postfix(Player __instance)
             {

@@ -30,8 +30,10 @@ namespace LackingImaginationV2
                 player.GetSEMan().AddStatusEffect(se_cd);
                 
                 //Effects, animations, and sounds
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_deer_death"), player.transform.position, Quaternion.identity);
+                GameObject odin = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
+                ParticleSystem.MainModule mainModule = odin.transform.Find("smoke_expl").GetComponent<ParticleSystem>().main;
+                mainModule.startColor = new Color(1f,0.490099f, 0.0f,0.4980392f);
 
                 //Lingering effects
                 SE_HorizonHaste se_horizonhaste = (SE_HorizonHaste)ScriptableObject.CreateInstance(typeof(SE_HorizonHaste));
@@ -88,7 +90,7 @@ namespace LackingImaginationV2
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_deer_essence"))
                 {
-                    __instance.m_equipmentMovementModifier += 0.1f;
+                    __instance.m_equipmentMovementModifier += 0.05f;
                 }
             }
         }
