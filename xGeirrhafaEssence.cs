@@ -85,7 +85,6 @@ namespace LackingImaginationV2
                     }
                 };
                 LackingImaginationV2Plugin.UseGuardianPower = false;
-                
                 GeirrhafaController = true;
                 ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
                 GeirrhafaController = false;
@@ -95,8 +94,7 @@ namespace LackingImaginationV2
                 
                 System.Threading.Timer timerAoe = new System.Threading.Timer
                     (_ => { ScheduleAoe(player); }, null, (int)(AoeDelay * 1000), System.Threading.Timeout.Infinite);
-
-
+                
             }
             else
             {
@@ -183,7 +181,7 @@ namespace LackingImaginationV2
                              affectedCharacters.Add(currentCharacter);
                              SummonIce(currentCharacter, 0.1f);
                              SummonIce(currentCharacter, 8f);
-                                
+                             SummonIce(currentCharacter, 8f);
                          }
                      }
                  }
@@ -208,20 +206,53 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xGeirrhafaEssencePassive
     {
+        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        class Geirrhafa_GetTotalFoodValue_Patch
+        {
+            public static void Postfix(Player __instance, ref float eitr)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_geirrhafa_essence"))
+                {
+                    eitr += LackingImaginationGlobal.c_geirrhafaIceAgePassiveEitr;
+                }
+            }
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        public static class Geirrhafa_RPC_Damage_Patch
+        {
+            public static void Prefix(Character __instance, ref HitData hit)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_geirrhafa_essence") && hit.GetAttacker() != null)
+                {
+                    if (__instance.IsDebugFlying())
+                        return;
+                    if ((UnityEngine.Object) hit.GetAttacker() == (UnityEngine.Object) Player.m_localPlayer)
+                    {
+                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
+                        __instance.m_localPlayerHasHit = true;
+                    }
+                    if (!__instance.m_nview.IsOwner() || (double) __instance.GetHealth() <= 0.0 || __instance.IsDead() || __instance.IsTeleporting() || __instance.InCutscene() || hit.m_dodgeable && __instance.IsDodgeInvincible())
+                        return;
+                    Character attacker = hit.GetAttacker();
+                    if (hit.HaveAttacker() && (UnityEngine.Object)attacker == (UnityEngine.Object)null || __instance.IsPlayer() && !__instance.IsPVPEnabled() && (UnityEngine.Object)attacker != (UnityEngine.Object)null && attacker.IsPlayer() && !hit.m_ignorePVP)
+                        return;
+                    if (__instance != null && __instance.IsPlayer() && (UnityEngine.Object) attacker.m_baseAI != (UnityEngine.Object) null)
+                    {
+                        int Dubious = UnityEngine.Random.Range(1, 21); // 1-20 inclusive
+                        if (Dubious == 1)
+                        {
+                            hit.m_damage.m_frost = hit.GetTotalDamage() * 0.05f;
+                        }
+                    }
+                    if ((UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())
+                    {
+                        hit.m_damage.m_frost += (Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_geirrhafaIceAgePassive;
+                    }
+                }
+            }
+        }
+
     }
     
     

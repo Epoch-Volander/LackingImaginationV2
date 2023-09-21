@@ -257,21 +257,6 @@ namespace LackingImaginationV2
              }
              return null; // Return null if the location is not found.
          }
-
-         // public static void DestroyNow(Character surt)
-         // {
-         //     if (!surt.m_nview.IsValid() || !surt.m_nview.IsOwner())
-         //         return;
-         //     surt.GetComponent<Character>().ApplyDamage(new HitData()
-         //     {
-         //         m_damage = {
-         //             m_damage = 99999f
-         //         },
-         //         m_point = surt.transform.position
-         //     }, false, true);
-         // }
-         
-         
          
          
          

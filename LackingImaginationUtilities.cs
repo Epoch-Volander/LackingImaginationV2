@@ -237,7 +237,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_cultist_essence")
             {
-                xCultistEssence.Process_Input(Player.m_localPlayer);
+                xCultistEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_tick_essence")
@@ -628,10 +628,16 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 25f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
-         
+         public static float xCultistCooldownTime
+         {
+             get
+             {
+                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+             }
+         }   
          
          
          

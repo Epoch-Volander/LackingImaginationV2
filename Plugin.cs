@@ -345,6 +345,7 @@ namespace LackingImaginationV2
         public static AnimationClip creatureAnimationClipGeirrhafaIceNova;
         public static Animator creatureAnimatorElder;
         public static AnimationClip creatureAnimationClipElderSummon;
+       
         
         // Animation Clip swappers
         public static readonly Dictionary<string, AnimationClip> ExternalAnimations = new();
@@ -978,13 +979,15 @@ namespace LackingImaginationV2
                     ExternalAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
                     AnimationClip copyOfcreatureAnimationClipElderSummon = Instantiate(creatureAnimationClipElderSummon);
                     ExternalAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
+                  
                     LackingImaginationV2Plugin.InitAnimation();
-                    
+
                     if (CustomRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
                     {
                         CustomRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
                         CustomRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
                         CustomRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
+                       
                     }
                 }
             }
@@ -1038,6 +1041,7 @@ namespace LackingImaginationV2
                     {
                         controllerName = "RootSummonControl";
                     }
+                   
                     // in case this is called before the first Player.Start
                     if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
                     {

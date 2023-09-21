@@ -44,7 +44,6 @@ namespace LackingImaginationV2
                     // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ImpDeath"), player.transform.position, Quaternion.identity);
                 
                     LackingImaginationV2Plugin.UseGuardianPower = false;
-                
                     ElderController = true;
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
                     ElderController = false;

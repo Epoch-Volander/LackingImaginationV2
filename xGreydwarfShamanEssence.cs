@@ -95,7 +95,7 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Character), "RPC_Damage")]
         public static class GreydwarfShaman_RPC_Damage_Patch
         {
-            public static void Postfix(Character __instance, ref HitData hit)
+            public static void Prefix(Character __instance, ref HitData hit)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_greydwarfshaman_essence") && hit.GetAttacker() != null)
                 {
@@ -116,13 +116,7 @@ namespace LackingImaginationV2
                         int Dubious = UnityEngine.Random.Range(1, 21); // 1-20 inclusive
                         if (Dubious == 1)
                         {
-                            LackingImaginationV2Plugin.Log($"Dubious{Dubious}");
-                            HitData hitData = new HitData();
-                            float damageScalePlayer = Game.instance.GetDifficultyDamageScalePlayer(__instance.transform.position);
-                            hitData.ApplyModifier(damageScalePlayer);
-                            hitData.m_damage.m_poison = hit.GetTotalDamage() * 0.1f;
-                            hitData.m_point = hit.m_point;
-                            __instance.Damage(hitData);
+                            hit.m_damage.m_poison += hit.GetTotalDamage() * 0.05f;
                         }
                     }
                 }

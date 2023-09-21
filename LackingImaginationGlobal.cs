@@ -935,20 +935,6 @@ namespace LackingImaginationV2
         
         //Wraith
         
-        // public static float c_wraithTwinSoulsPhaseDuration
-        // {
-        //     get
-        //     {
-        //         try
-        //         {
-        //             return ConfigStrings["li_wraithTwinSoulsPhaseDuration"];
-        //         }
-        //         catch
-        //         {
-        //             return 60f;
-        //         }
-        //     }
-        // }
         public static float c_wraithTwinSoulsArmor
         {
             get
@@ -1081,13 +1067,66 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_geirrhafaIceAgePassiveEitr
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_geirrhafaIceAgePassiveEitr"];
+                }
+                catch
+                {
+                    return 70f;
+                }
+            }
+        }
         
+        public static float c_geirrhafaIceAgePassive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_geirrhafaIceAgePassive"]/100;
+                }
+                catch
+                {
+                    return 0.3f;
+                }
+            }
+        }
         
-        
-        
-        
-        
-        
+        //Cultist
+        public static float c_cultistLoneSunAoe
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_cultistLoneSunAoe"];
+                }
+                catch
+                {
+                    return 50f;
+                }
+            }
+        }
+        public static float c_cultistLoneSunPassive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_cultistLoneSunPassive"]/100;
+                }
+                catch
+                {
+                    return 0.15f;
+                }
+            }
+        }
+
         
         
         
