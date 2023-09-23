@@ -212,7 +212,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_serpent_essence")
             {
-                xSeaSerpentEssence.Process_Input(Player.m_localPlayer);
+                xSeaSerpentEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_skeletonpoison_essence")
@@ -642,10 +642,16 @@ namespace LackingImaginationV2
          {
              get
              {
+                 return 40f * LackingImaginationGlobal.g_CooldownModifer;
+             }
+         }   
+         public static float xSeaSerpentCooldownTime
+         {
+             get
+             {
                  return 10f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }   
-         
          
          
          

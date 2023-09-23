@@ -47,7 +47,7 @@ namespace LackingImaginationV2
                 {
                     __instance.m_consumeItemEffects.Create(Player.m_localPlayer.transform.position, Quaternion.identity);
                     __instance.m_zanim.SetTrigger("eat");
-                    Player.m_localPlayer.m_inventory.RemoveItem("$item_entrails", 1);
+                    inventory.RemoveItem("$item_entrails", 1);
                     RotStats[0] = (float.Parse(RotStats[0]) - 10f).ToString();
                     if (float.Parse(RotStats[0]) < 0f) RotStats[0] = "0";
                     return;
@@ -172,15 +172,7 @@ namespace LackingImaginationV2
                     }
                 }
             }
-            
         }
-        
-        
-        
-        
-        
-        
-        
         
         
         

@@ -116,6 +116,17 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_FallenHero).m_icon = SE_FallenHero.AbilityIcon;
                     }
+                    else if (nameHash == "SE_Satiated".GetHashCode())
+                    {
+                        (__result as SE_Satiated).m_icon = SE_Satiated.AbilityIcon;
+                    }
+                    // else if (nameHash == "SE_Craving".GetHashCode())
+                    // {
+                    //     (__result as SE_Craving).m_icon = SE_Craving.AbilityIcon;
+                    // }
+                    
+                    
+                    
                     
                     if (nameHash == "Ability1_CoolDown".GetHashCode())
                     {
@@ -149,6 +160,20 @@ namespace LackingImaginationV2
         {
             public static void Postfix(Hud __instance)
             {
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish1").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish2").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish5").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish4_cave").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish3").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish8").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish6").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish7").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish12").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish9").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish11").GetComponent<ItemDrop>().m_itemData);
+                xSeaSerpentEssencePassive.allCravings.Add(ZNetScene.instance.GetPrefab("Fish10").GetComponent<ItemDrop>().m_itemData);
+                    
+
                 SE_HorizonHaste.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDeer").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_MoonlitLeap.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyFenring").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_RavenousHunger.AbilityIcon = ZNetScene.instance.GetPrefab("Bloodbag").GetComponent<ItemDrop>().m_itemData.GetIcon();
@@ -168,6 +193,11 @@ namespace LackingImaginationV2
                 SE_Forgotten.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDraugr").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Rot.AbilityIcon = ZNetScene.instance.GetPrefab("RottenMeat").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_FallenHero.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDraugrElite").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Satiated.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySerpent").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                // SE_Craving.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySerpent").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                
+                
+                
                 
                 
             }
@@ -282,22 +312,29 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_FallenHero>());
             } 
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Satiated"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Satiated>());
+            } 
+            // if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Craving"))
+            // {
+            //     odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Craving>());
+            // } 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
     }

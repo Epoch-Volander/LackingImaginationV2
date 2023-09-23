@@ -144,6 +144,7 @@
         <Compile Include="SE_AncientAwe.cs" />
         <Compile Include="SE_Bash.cs" />
         <Compile Include="SE_BloodSiphon.cs" />
+        <Compile Include="SE_Craving.cs" />
         <Compile Include="SE_FallenHero.cs" />
         <Compile Include="SE_Forgotten.cs" />
         <Compile Include="SE_FumesSplit.cs" />
@@ -157,6 +158,7 @@
         <Compile Include="SE_Relentless.cs" />
         <Compile Include="SE_Ritual.cs" />
         <Compile Include="SE_Rot.cs" />
+        <Compile Include="SE_Satiated.cs" />
         <Compile Include="SE_ThreeFreeze.cs" />
         <Compile Include="SE_TimedDeath.cs" />
         <Compile Include="SE_TwinSouls.cs" />

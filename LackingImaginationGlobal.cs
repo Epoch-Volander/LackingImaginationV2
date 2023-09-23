@@ -1157,6 +1157,36 @@ namespace LackingImaginationV2
             }
         }
         
+        //Sea Serpent
+        public static float c_seaSerpentSeaKingeProjectile
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_seaSerpentSeaKingeProjectile"]/100;
+                }
+                catch
+                {
+                    return 0.2f;
+                }
+            }
+        }
+        public static float c_seaSerpentSeaKingeProjectileDuration
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_seaSerpentSeaKingeProjectileDuration"];
+                }
+                catch
+                {
+                    return 6f;
+                }
+            }
+        }
+        
         
         
         

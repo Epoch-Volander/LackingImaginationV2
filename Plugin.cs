@@ -340,6 +340,7 @@ namespace LackingImaginationV2
         public static GameObject fx_Bash;
         public static GameObject fx_Longinus;
         public static GameObject fx_TwinSouls;
+        public static GameObject p_SeaKing;
         //Sounds
         public static GameObject sfx_Giantization;
 
@@ -449,6 +450,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrRot.RotStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrEssencePassive.DraugrStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrEliteEssencePassive.DraugrEliteStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xSeaSerpentEssencePassive.SeaSerpentStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
@@ -583,6 +585,7 @@ namespace LackingImaginationV2
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
             fx_Longinus = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantYellow");
             fx_TwinSouls = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantWraith");
+            p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
             
             //Sound Prefabs
             sfx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "sfx_goblinbrute_rage");

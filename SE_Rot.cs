@@ -24,7 +24,6 @@ namespace LackingImaginationV2
             m_icon = AbilityIcon;
             m_tooltip = "Rot";
             m_name = "Rot";
-            // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
 
         }
 
