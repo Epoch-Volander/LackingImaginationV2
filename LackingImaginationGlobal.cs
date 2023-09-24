@@ -34,6 +34,30 @@ namespace LackingImaginationV2
         
         
         
+        //Synergies
+        public static float c_draugrSynergyRot
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugrSynergyRot"]/100;
+                }
+                catch
+                {
+                    return 0.05f;
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1172,23 +1196,50 @@ namespace LackingImaginationV2
                 }
             }
         }
-        public static float c_seaSerpentSeaKingeProjectileDuration
+        
+        //Tick
+        public static float c_tickBloodWellLifeSteal
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_seaSerpentSeaKingeProjectileDuration"];
+                    return ConfigStrings["li_tickBloodWellLifeSteal"]/100;
                 }
                 catch
                 {
-                    return 6f;
+                    return 0.1f;
                 }
             }
         }
-        
-        
-        
+        public static float c_tickBloodWellArmor
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_tickBloodWellArmor"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
+        public static float c_tickBloodWellStackCap
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_tickBloodWellStackCap"];
+                }
+                catch
+                {
+                    return 500f;
+                }
+            }
+        }
         
         
         

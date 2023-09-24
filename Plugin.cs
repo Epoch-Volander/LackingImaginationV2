@@ -251,6 +251,13 @@ namespace LackingImaginationV2
 
         public static List<RectTransform> abilitiesStatus = new List<RectTransform> { };
         
+        
+        public static ConfigEntry<float> li_draugrSynergyRot;
+        
+        
+        
+        
+        
         public static ConfigEntry<float> li_deerHorizonHaste;
         public static ConfigEntry<float> li_deerHorizonHastePassive;
         public static ConfigEntry<float> li_eikthyrBlitzPassive;
@@ -451,6 +458,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrEssencePassive.DraugrStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrEliteEssencePassive.DraugrEliteStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xSeaSerpentEssencePassive.SeaSerpentStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xTickEssencePassive.TickStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
@@ -627,6 +635,13 @@ namespace LackingImaginationV2
             //icon_Y_Offset = ConfigManager.RegisterModConfigVariable<float>(ModName, "icon_Y_Offset", 0f, "Display", "Offsets the icon bar vertically. The icon bar is anchored to the Guardian power icon.", true);
             icon_Y_Offset = config("Display", "icon_Y_Offset", 0f, "Offsets the icon bar vertically. The icon bar is anchored to the Guardian power icon.");
 
+            //Synergies
+            //Draugr Synergy
+            li_draugrSynergyRot = config("Essence Synergy Modifiers", "li_draugrSynergyRot", 5f, "Modifies % dmg reduction system when all Draugr essences are equipped");
+            
+            
+            
+            
             //deer
             li_deerHorizonHaste = config("Essence Deer Modifiers", "li_deerHorizonHaste", 100f, "Modifies the movement speed for Horizon Haste");
             li_deerHorizonHastePassive = config("Essence Deer Modifiers", "li_deerHorizonHastePassive", 25f, "Bonus Stamina from Horizon Haste");
@@ -742,6 +757,14 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_cooldownMultiplier", li_cooldownMultiplier.Value);
 
             
+            
+            
+            //Synergies
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugrSynergyRot", li_draugrSynergyRot.Value);
+            
+            
+            
+            
             // Essence
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHaste", li_deerHorizonHaste.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHastePassive", li_deerHorizonHastePassive.Value);
@@ -838,7 +861,15 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(iconAlignment);
             _ = ConfigSync.AddConfigEntry(icon_X_Offset);
             _ = ConfigSync.AddConfigEntry(icon_Y_Offset);
+            
+            
+            
+            _ = ConfigSync.AddConfigEntry(li_draugrSynergyRot);
 
+            
+            
+            
+            
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHaste);
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHastePassive);
             _ = ConfigSync.AddConfigEntry(li_eikthyrBlitzPassive);
@@ -912,6 +943,12 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgePassive);
             _ = ConfigSync.AddConfigEntry(li_cultistLoneSunAoe);
             _ = ConfigSync.AddConfigEntry(li_cultistLoneSunPassive);     
+            
+            
+            
+            
+            
+            
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);

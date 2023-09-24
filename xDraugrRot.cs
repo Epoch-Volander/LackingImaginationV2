@@ -22,6 +22,7 @@ namespace LackingImaginationV2
 
         public static float startHP;
         
+        public static float SynergyRot = LackingImaginationGlobal.c_draugrSynergyRot;
         
         [HarmonyPatch(typeof(Humanoid), "UseItem")]
         public static class Rot_UseItem_Patch
@@ -132,9 +133,12 @@ namespace LackingImaginationV2
                         float multi = 1f;
                         if (EssenceItemData.equipedEssence.Contains("$item_draugr_essence")) multi -= xDraugrEssencePassive.DraugrRot;
                         if (EssenceItemData.equipedEssence.Contains("$item_draugrelite_essence")) multi -= xDraugrEliteEssencePassive.DraugrEliteRot;
+                        if (EssenceItemData.equipedEssence.Contains("$item_draugr_essence") && EssenceItemData.equipedEssence.Contains("$item_draugrelite_essence"))
+                        {
+                            multi -= SynergyRot;
+                        }
                         
                         hit.ApplyModifier(multi);
-                        
                     }
                 }
             }

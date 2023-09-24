@@ -33,7 +33,6 @@ namespace LackingImaginationV2
             { "$item_stonegolem_essence", xStoneGolemEssence.Ability_Name },
             { "$item_troll_essence", xTrollEssence.Ability_Name },
             
-            
             { "$item_blob_essence", xBlobEssence.Ability_Name },            
             { "$item_deathsquito_essence", xDeathsquitoEssence.Ability_Name },            
             { "$item_draugrelite_essence", xDraugrEliteEssence.Ability_Name },            
@@ -242,7 +241,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_tick_essence")
             {
-                xTickEssence.Process_Input(Player.m_localPlayer);
+                xTickEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_surtling_essence")

@@ -13,8 +13,8 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_Satiated")]
-        public static float m_baseTTL = 1800f;
-        // public static float m_baseTTL = 60f;
+        // public static float m_baseTTL = 1800f;
+        public static float m_baseTTL = 60f;
 
         public SE_Satiated()
         {

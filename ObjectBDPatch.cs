@@ -124,6 +124,11 @@ namespace LackingImaginationV2
                     // {
                     //     (__result as SE_Craving).m_icon = SE_Craving.AbilityIcon;
                     // }
+                    else if (nameHash == "SE_BloodWell".GetHashCode())
+                    {
+                        (__result as SE_BloodWell).m_icon = SE_BloodWell.AbilityIcon;
+                    }
+                    
                     
                     
                     
@@ -195,7 +200,7 @@ namespace LackingImaginationV2
                 SE_FallenHero.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDraugrElite").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Satiated.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySerpent").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 // SE_Craving.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySerpent").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                
+                SE_BloodWell.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyTick").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 
                 
                 
@@ -320,7 +325,10 @@ namespace LackingImaginationV2
             // {
             //     odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Craving>());
             // } 
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_BloodWell"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_BloodWell>());
+            } 
             
             
             

@@ -39,7 +39,7 @@ namespace LackingImaginationV2
                 Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f;
                 GameObject prefab = LackingImaginationV2Plugin.p_SeaKing;
                 ScheduleFireProjectile(player, vector, prefab);
-                
+                // LackingImaginationV2Plugin.Log($"Serpent {xSeaSerpentEssencePassive.FishQuality}");
             }
             else
             {
@@ -62,14 +62,21 @@ namespace LackingImaginationV2
             P_SeaKingProjectile.m_hitNoise = 100f;
             P_SeaKingProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_SeaKingProjectile.transform.localScale = Vector3.one;
-
+            
+            LackingImaginationV2Plugin.Log($"Serpent {P_SeaKingProjectile.m_spawnOnHit.name}");
+            P_SeaKingProjectile.m_spawnOnHit.GetComponent<TimedDestruction>().m_timeout += xSeaSerpentEssencePassive.FishQuality;
+           
+            ParticleSystem.MainModule mainModule1 = P_SeaKingProjectile.m_spawnOnHit.transform.Find("blue flames").GetComponent<ParticleSystem>().main;
+            mainModule1.startLifetime = xSeaSerpentEssencePassive.FishQuality + 3f;
+            ParticleSystem.MainModule mainModule2 = P_SeaKingProjectile.m_spawnOnHit.transform.Find("Particle System").GetComponent<ParticleSystem>().main;
+            mainModule2.duration = xSeaSerpentEssencePassive.FishQuality + 3f;   
+            
             RaycastHit hitInfo = default(RaycastHit);
             Vector3 player_position = player.transform.position;
             Vector3 target = (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (player_position + player.GetLookDir() * 1000f) : hitInfo.point;
             HitData hitData = new HitData();
-            // hitData.m_damage.m_slash = UnityEngine.Random.Range(2f, 4f);
-            // hitData.m_damage.m_blunt = UnityEngine.Random.Range(1f, 2f);
-             hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_seaSerpentSeaKingeProjectile));
+            hitData.m_damage.m_blunt = UnityEngine.Random.Range(1f, 2f);
+            hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_seaSerpentSeaKingeProjectile));
             hitData.m_pushForce = 3f;
             hitData.SetAttacker(player);
             Vector3 a = Vector3.MoveTowards(GO_SeaKingProjectile.transform.position, target, 1f);
@@ -116,11 +123,11 @@ namespace LackingImaginationV2
                 {
                     impactLocation = __instance.transform.position + __instance.transform.TransformDirection(__instance.m_spawnOffset);
                     float bonusRadius = 0.0f;
-                    float baseDuration = LackingImaginationGlobal.c_seaSerpentSeaKingeProjectileDuration;
+                    float baseDuration = 3f;
                     if (__instance.m_owner.GetSEMan().HaveStatusEffect("SE_Satiated"))
                     {
                         bonusRadius += FishQuality;
-                        baseDuration += FishQuality * 2;
+                        baseDuration += FishQuality;
                     }
                     List<Character> allCharacters = new List<Character>();
                     allCharacters.Clear();
@@ -130,7 +137,8 @@ namespace LackingImaginationV2
                         if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer)) 
                             && !ch.m_tamed ||ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI)
                         {
-                           //suck em in
+                            //suck em in
+                           ch.m_seman.AddStatusEffect("Wet".GetHashCode());
                            Fish.Add(ch);
                            FishTImer.Add(baseDuration);
                         }
@@ -178,7 +186,6 @@ namespace LackingImaginationV2
                         Fish.Remove(__instance);
                     }
                 }
-                
             }
         }
         
@@ -295,7 +302,17 @@ namespace LackingImaginationV2
                         SeaSerpentStats[0] = "";
                         __instance.m_seman.AddStatusEffect("SE_Satiated".GetHashCode());
                         FishQuality = FishIndex(item);
-                        LackingImaginationV2Plugin.Log($"SerpentQ {FishQuality}");
+                        return;
+                    }
+                }
+                if (__instance.m_seman.HaveStatusEffect("SE_Satiated"))
+                {
+                    if (FishIndex(item) > FishQuality)
+                    {
+                        __instance.m_consumeItemEffects.Create(Player.m_localPlayer.transform.position, Quaternion.identity);
+                        __instance.m_zanim.SetTrigger("eat");
+                        inventory.RemoveItem(item.m_shared.m_name, 1);
+                        FishQuality = FishIndex(item);
                         return;
                     }
                 }
