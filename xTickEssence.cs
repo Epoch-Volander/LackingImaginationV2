@@ -34,7 +34,7 @@ namespace LackingImaginationV2
 
                     LackingImaginationV2Plugin.Log($"Tick Button was pressed");
                     
-                    Activated = true;
+                    Activated = true;// needs its own aura effect
                     Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
                     Aura.transform.parent = player.transform;
                 }
@@ -82,7 +82,7 @@ namespace LackingImaginationV2
                         if (xTickEssence.Activated)
                         {
                             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_crit"), hit.m_point, Quaternion.identity);
-
+                            // needs its own hit effects   
                             
                             
                             hit.m_damage.m_slash += float.Parse(TickStats[0]);
@@ -143,7 +143,9 @@ namespace LackingImaginationV2
         {
             public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
             {
-                string iconText = TickStats[0];
+                float iconFloat = float.Parse(TickStats[0]);
+                int iconInt = (int)iconFloat;
+                string iconText = iconInt.ToString();
                 for (int index = 0; index < statusEffects.Count; ++index)
                 {
                     StatusEffect statusEffect1 = statusEffects[index];
