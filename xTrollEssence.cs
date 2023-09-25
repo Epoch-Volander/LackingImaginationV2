@@ -67,6 +67,7 @@ namespace LackingImaginationV2
             P_TrollTossProjectile.m_rayRadius = 0.5f;
             P_TrollTossProjectile.m_aoe = 3.5f;
             P_TrollTossProjectile.m_canHitWater = true;
+            P_TrollTossProjectile.m_owner = player;
             P_TrollTossProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_TrollTossProjectile.transform.localScale = Vector3.one;
             

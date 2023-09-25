@@ -29,13 +29,13 @@ namespace LackingImaginationV2
                 {
                     //Ability Cooldown
                     StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-                    se_cd.m_ttl = LackingImaginationUtilities.xSeaSerpentCooldownTime;
+                    se_cd.m_ttl = LackingImaginationUtilities.xTickCooldownTime;
                     player.GetSEMan().AddStatusEffect(se_cd);
 
                     LackingImaginationV2Plugin.Log($"Tick Button was pressed");
                     
                     Activated = true;// needs its own aura effect
-                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
+                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_BloodWell, player.GetCenterPoint(), Quaternion.identity);
                     Aura.transform.parent = player.transform;
                 }
                 else
@@ -83,7 +83,18 @@ namespace LackingImaginationV2
                         {
                             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_crit"), hit.m_point, Quaternion.identity);
                             // needs its own hit effects   
-                            
+                            GameObject hitEffect = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_blobtar_tarball_hit"), hit.m_point, Quaternion.identity);
+                            ParticleSystem.MainModule mainModule = hitEffect.GetComponent<ParticleSystem>().main;
+                            mainModule.startColor = new Color(1.0f, 0.3893779f, 0.0f, 1.0f);
+                            ParticleSystem.MainModule mainModule1 = hitEffect.transform.Find("fire").GetComponent<ParticleSystem>().main;
+                            mainModule1.startColor = Color.red;
+                            // ParticleSystem.MainModule mainModule2 = hitEffect.transform.Find("Chunks").GetComponent<ParticleSystem>().main;
+                            // mainModule2.startColor = Color.red;
+                            ParticleSystem.MainModule mainModule3 = hitEffect.transform.Find("Chunks").Find("blob_splat").GetComponent<ParticleSystem>().main;
+                            mainModule3.startColor = Color.red;
+                            ParticleSystem.MainModule mainModule4 = hitEffect.transform.Find("wetsplsh").GetComponent<ParticleSystem>().main;
+                            mainModule4.startColor = new Color(1.0f, 0.3893779f, 0.0f, 1.0f);
+                            hitEffect.transform.Find("blobs").GetComponent<Renderer>().enabled = false;
                             
                             hit.m_damage.m_slash += float.Parse(TickStats[0]);
                             TickStats[0] = "0";
@@ -113,7 +124,7 @@ namespace LackingImaginationV2
             }
         }
         
-          [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
         public static class Tick_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -166,6 +177,8 @@ namespace LackingImaginationV2
                 }
             }
         }
+        
+        
         
         
     }

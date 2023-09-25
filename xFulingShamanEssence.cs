@@ -81,6 +81,7 @@ namespace LackingImaginationV2
                         P_RitualProjectile.m_gravity = 5f;
                         P_RitualProjectile.m_rayRadius = .2f;
                         P_RitualProjectile.m_aoe = 3f;
+                        P_RitualProjectile.m_owner = player;
                         P_RitualProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
                         P_RitualProjectile.transform.localScale = Vector3.one;
                     

@@ -60,6 +60,7 @@ namespace LackingImaginationV2
             P_SeaKingProjectile.m_rayRadius = .3f;
             P_SeaKingProjectile.m_aoe = 3f;
             P_SeaKingProjectile.m_hitNoise = 100f;
+            P_SeaKingProjectile.m_owner = player;
             P_SeaKingProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_SeaKingProjectile.transform.localScale = Vector3.one;
             

@@ -18,8 +18,7 @@ namespace LackingImaginationV2
     public class xDrakeEssence
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
-
-
+        
         public static string Ability_Name = "Three Freeze";
 
         private static GameObject GO_ThreeFreezeProjectile;
@@ -68,8 +67,9 @@ namespace LackingImaginationV2
                 P_ThreeFreezeProjectile.m_spawnOnHit = null;
                 P_ThreeFreezeProjectile.m_ttl = 60f;
                 P_ThreeFreezeProjectile.m_gravity = 2.5f;
-                P_ThreeFreezeProjectile.m_rayRadius = .5f;
+                P_ThreeFreezeProjectile.m_rayRadius = 0.5f;
                 P_ThreeFreezeProjectile.m_aoe = 1f;
+                P_ThreeFreezeProjectile.m_owner = player;
                 P_ThreeFreezeProjectile.m_statusEffect = "SE_ThreeFreeze";
                 P_ThreeFreezeProjectile.m_hitNoise = 100f;
                 P_ThreeFreezeProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));

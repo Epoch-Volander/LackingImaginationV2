@@ -142,6 +142,7 @@ namespace LackingImaginationV2
                 P_RandomizeIceProjectile.m_rayRadius = .2f;
                 P_RandomizeIceProjectile.m_aoe = 3f;
                 P_RandomizeIceProjectile.m_hitNoise = 100f;
+                P_RandomizeIceProjectile.m_owner = player;
                 P_RandomizeIceProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
                 P_RandomizeIceProjectile.transform.localScale = Vector3.one;
 
@@ -186,6 +187,7 @@ namespace LackingImaginationV2
             P_RandomizeFireProjectile.m_gravity = 5f;
             P_RandomizeFireProjectile.m_rayRadius = .3f;
             P_RandomizeFireProjectile.m_aoe = 3f;
+            P_RandomizeFireProjectile.m_owner = player;
             P_RandomizeFireProjectile.m_hitNoise = 100f;
             P_RandomizeFireProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_RandomizeFireProjectile.transform.localScale = Vector3.one;

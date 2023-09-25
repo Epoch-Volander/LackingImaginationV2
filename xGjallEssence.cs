@@ -62,6 +62,7 @@ namespace LackingImaginationV2
                 P_GjallGjallarhornProjectile.m_gravity = 2f;
                 P_GjallGjallarhornProjectile.m_rayRadius = 0.5f;
                 P_GjallGjallarhornProjectile.m_aoe = 4f;
+                P_GjallGjallarhornProjectile.m_owner = player;
                 P_GjallGjallarhornProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector1));
                 P_GjallGjallarhornProjectile.transform.localScale = Vector3.one;
             
@@ -94,6 +95,7 @@ namespace LackingImaginationV2
                 P_GjallGjallarhornSpawn.m_ttl = 60f;
                 P_GjallGjallarhornSpawn.m_gravity = 2f;
                 P_GjallGjallarhornSpawn.m_rayRadius = 0.2f;
+                P_GjallGjallarhornSpawn.m_owner = player;
                 P_GjallGjallarhornSpawn.m_aoe = 6f;
                 P_GjallGjallarhornSpawn.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector2));
                 P_GjallGjallarhornSpawn.transform.localScale = Vector3.one;

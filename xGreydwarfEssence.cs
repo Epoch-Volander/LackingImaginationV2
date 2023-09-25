@@ -74,6 +74,7 @@ namespace LackingImaginationV2
             P_GreydwarfPebbleProjectile.m_gravity = 10f;
             P_GreydwarfPebbleProjectile.m_rayRadius = 0.5f;
             P_GreydwarfPebbleProjectile.m_aoe = 0f;
+            P_GreydwarfPebbleProjectile.m_owner = player;
             P_GreydwarfPebbleProjectile.m_canHitWater = true;
             P_GreydwarfPebbleProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_GreydwarfPebbleProjectile.transform.localScale = Vector3.one;

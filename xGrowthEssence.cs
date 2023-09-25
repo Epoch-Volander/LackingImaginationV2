@@ -66,6 +66,7 @@ namespace LackingImaginationV2
                 P_TarProjectile.m_rayRadius = .3f;
                 P_TarProjectile.m_aoe = 2f;
                 P_TarProjectile.m_hitNoise = 100f;
+                P_TarProjectile.m_owner = player;
                 P_TarProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
                 P_TarProjectile.transform.localScale = Vector3.one;
 

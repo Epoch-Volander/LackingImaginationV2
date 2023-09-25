@@ -347,6 +347,8 @@ namespace LackingImaginationV2
         public static GameObject fx_Bash;
         public static GameObject fx_Longinus;
         public static GameObject fx_TwinSouls;
+        public static GameObject fx_BloodWell;
+        //Prefab3
         public static GameObject p_SeaKing;
         //Sounds
         public static GameObject sfx_Giantization;
@@ -593,7 +595,13 @@ namespace LackingImaginationV2
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
             fx_Longinus = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantYellow");
             fx_TwinSouls = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantWraith");
+            fx_BloodWell = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantTick");
+            
+            //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
+            
+            
+            
             
             //Sound Prefabs
             sfx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "sfx_goblinbrute_rage");

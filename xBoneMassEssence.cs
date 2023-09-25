@@ -79,6 +79,7 @@ namespace LackingImaginationV2
             P_BoneMassMassReleaseProjectile.m_rayRadius = 0.5f;
             P_BoneMassMassReleaseProjectile.m_aoe = 6f;
             P_BoneMassMassReleaseProjectile.m_canHitWater = true;
+            P_BoneMassMassReleaseProjectile.m_owner = player;
             P_BoneMassMassReleaseProjectile.m_skill = Skills.SkillType.None;
             P_BoneMassMassReleaseProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_BoneMassMassReleaseProjectile.transform.localScale = Vector3.one;

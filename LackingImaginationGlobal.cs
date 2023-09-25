@@ -1241,6 +1241,32 @@ namespace LackingImaginationV2
             }
         }
         
+        //Moder
+        public static float c_moderDraconicFrostProjectile
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_moderDraconicFrostProjectile"]/100;
+                }
+                catch
+                {
+                    return 0.05f;
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
