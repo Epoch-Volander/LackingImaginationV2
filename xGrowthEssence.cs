@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace LackingImaginationV2
         private static Projectile P_TarProjectile;
 
         private static float shotDelay = 0.3f;
-        private static int shotsFired = 0;
+      
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -42,7 +43,7 @@ namespace LackingImaginationV2
                 // Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f;
                 GameObject prefab = ZNetScene.instance.GetPrefab("blobtar_projectile_tarball");
                 // Schedule the first projectile
-                ScheduleProjectile(player, prefab);
+                ScheduleProjectiles(player, prefab);
                 
             }
             else
@@ -50,9 +51,18 @@ namespace LackingImaginationV2
                 player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
             }
         }
-        private static void ScheduleProjectile(Player player, GameObject prefab)
+        
+        private static void ScheduleProjectiles(Player player, GameObject prefab)
         {
-            if (shotsFired < 4)
+            CoroutineRunner.Instance.StartCoroutine(ScheduleProjectilesCoroutine(player, prefab));
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleProjectilesCoroutine(Player player, GameObject prefab)
+        {
+            int shotsFired = 0;
+            
+            while (shotsFired < 4)
             {
                 Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f;
                 // Create the projectile
@@ -89,15 +99,8 @@ namespace LackingImaginationV2
                 // Increment the shots fired counter
                 shotsFired++;
 
-                // Schedule the next projectile with a delay
-                System.Threading.Timer timer = new System.Threading.Timer(
-                    _ => { ScheduleProjectile(player, prefab); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
-                
-            }
-            else
-            {
-                GO_TarProjectile = null;
-                shotsFired = 0;
+                // Delay before the next projectile
+                yield return new WaitForSeconds(shotDelay);
             }
         }
     }

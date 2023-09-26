@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,8 +45,8 @@ namespace LackingImaginationV2
                 Vector3 vector = player.transform.position + player.transform.up  * 2f + player.GetLookDir() * .5f;
                 GameObject prefab = ZNetScene.instance.GetPrefab("troll_throw_projectile");
                 player.transform.rotation = Quaternion.LookRotation(player.GetLookDir()); // test
-                System.Threading.Timer timer = new System.Threading.Timer
-                    (_ => { ScheduleProjectile(player, vector, prefab); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                
+                ScheduleProjectiles(player, vector, prefab);
                 
             }
             else
@@ -55,8 +56,16 @@ namespace LackingImaginationV2
         }
         //passive heavy, throw rock that does dmg based on hp and/or armor
 
-        private static void ScheduleProjectile(Player player, Vector3 vector, GameObject prefab)
+        private static void ScheduleProjectiles(Player player, Vector3 vector, GameObject prefab)
         {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleProjectilesCoroutine(player, vector, prefab));
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleProjectilesCoroutine(Player player, Vector3 vector, GameObject prefab)
+        {
+            yield return new WaitForSeconds(shotDelay);
+            
             GO_TrollTossProjectile = UnityEngine.Object.Instantiate(prefab, new Vector3(vector.x, vector.y, vector.z), Quaternion.identity);
             P_TrollTossProjectile = GO_TrollTossProjectile.GetComponent<Projectile>();
             P_TrollTossProjectile.name = "Boulder Attack";

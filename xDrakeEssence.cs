@@ -25,7 +25,6 @@ namespace LackingImaginationV2
         private static Projectile P_ThreeFreezeProjectile;
 
         private static float shotDelay = 0.2f;
-        private static int shotsFired = 0;
 
         public static void Process_Input(Player player, int position)
         {
@@ -46,7 +45,7 @@ namespace LackingImaginationV2
                 // Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f;
                 GameObject prefab = ZNetScene.instance.GetPrefab("hatchling_cold_projectile");
                 // Schedule the first projectile
-                ScheduleProjectile(player, prefab);
+                ScheduleProjectiles(player, prefab);
             }
             else
             {
@@ -54,14 +53,22 @@ namespace LackingImaginationV2
             }
         }
 
-        private static void ScheduleProjectile(Player player, GameObject prefab)
+        private static void ScheduleProjectiles(Player player, GameObject prefab)
         {
-            if (shotsFired < 3)
+            CoroutineRunner.Instance.StartCoroutine(ScheduleProjectilesCoroutine(player, prefab));
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleProjectilesCoroutine(Player player, GameObject prefab)
+        {
+            int shotsFired = 0;
+
+            while (shotsFired < 3)
             {
-                Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f;
+                Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * 0.5f;
                 // Create the projectile
-                GO_ThreeFreezeProjectile = UnityEngine.Object.Instantiate(prefab, new Vector3(vector.x, vector.y, vector.z), Quaternion.identity);
-                P_ThreeFreezeProjectile = GO_ThreeFreezeProjectile.GetComponent<Projectile>();
+                GameObject GO_ThreeFreezeProjectile = UnityEngine.Object.Instantiate(prefab, vector, Quaternion.identity);
+                Projectile P_ThreeFreezeProjectile = GO_ThreeFreezeProjectile.GetComponent<Projectile>();
                 P_ThreeFreezeProjectile.name = "Three Freeze Shots";
                 P_ThreeFreezeProjectile.m_respawnItemOnHit = false;
                 P_ThreeFreezeProjectile.m_spawnOnHit = null;
@@ -76,37 +83,26 @@ namespace LackingImaginationV2
                 P_ThreeFreezeProjectile.transform.localScale = Vector3.one;
 
                 RaycastHit hitInfo = default(RaycastHit);
-                Vector3 player_position = player.transform.position;
-                Vector3 target =
-                    (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (player_position + player.GetLookDir() * 1000f) : hitInfo.point;
+                Vector3 playerPosition = player.transform.position;
+                Vector3 target = (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !hitInfo.collider) ? (playerPosition + player.GetLookDir() * 1000f) : hitInfo.point;
                 target += UnityEngine.Random.insideUnitSphere * 2f;
                 HitData hitData = new HitData();
                 hitData.m_damage.m_frost = UnityEngine.Random.Range(2f, 4f);
                 hitData.m_damage.m_spirit = UnityEngine.Random.Range(1f, 2f);
-                hitData.ApplyModifier( ((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_drakeThreeFreezeProjectile));
+                hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_drakeThreeFreezeProjectile));
                 hitData.m_pushForce = 0.5f;
                 hitData.m_statusEffectHash = Player.s_statusEffectFreezing;
                 hitData.SetAttacker(player);
-                Vector3 a = Vector3.MoveTowards(GO_ThreeFreezeProjectile.transform.position, target, 1f);
-                P_ThreeFreezeProjectile.Setup(player, (a - GO_ThreeFreezeProjectile.transform.position) * 25f, -1f,
-                    hitData, null, null);
-                
+                Vector3 destination = Vector3.MoveTowards(GO_ThreeFreezeProjectile.transform.position, target, 1f);
+                P_ThreeFreezeProjectile.Setup(player, (destination - GO_ThreeFreezeProjectile.transform.position) * 25f, -1f, hitData, null, null);
+
                 // Increment the shots fired counter
                 shotsFired++;
 
-                // Schedule the next projectile with a delay
-                System.Threading.Timer timer = new System.Threading.Timer
-                (_ => { ScheduleProjectile(player, prefab); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
-                
-            }
-            else
-            {
-                GO_ThreeFreezeProjectile = null;
-                // Reset the shots fired counter after firing 3 shots
-                shotsFired = 0;
+                // Delay before the next projectile
+                yield return new WaitForSeconds(shotDelay);
             }
         }
-
     }
     
     [HarmonyPatch]

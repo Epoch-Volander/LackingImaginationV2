@@ -119,6 +119,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="CooldownStatusEffectsLI.cs" />
+        <Compile Include="CoroutineRunner.cs" />
         <Compile Include="EssenceInventoryGridLI.cs" />
         <Compile Include="EssenceInventoryGuiLI.cs" />
         <Compile Include="EssenceHumanoidLI.cs" />

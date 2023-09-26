@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace LackingImaginationV2
         private static GameObject GO_GjallGjallarhornSpawn;        
         private static Projectile P_GjallGjallarhornSpawn;
         
-        private static float shotDelay = 0.5f;
+        private static float shotDelay = 2f;
 
         public static void Process_Input(Player player, int position) // gjall_egg_projectile  //gjall_spit_projectile
         {
@@ -45,12 +46,26 @@ namespace LackingImaginationV2
                 //Effects, animations, and sounds
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_gjall_alerted"), player.transform.position, Quaternion.identity);
                 
-                
-                // player.transform.rotation = Quaternion.LookRotation(player.GetLookDir());
-                // System.Threading.Timer timer = new System.Threading.Timer
-                //     (_ => { ScheduleProjectile(player); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                ScheduleProjectiles(player);
 
-                Vector3 vector1 = player.transform.position + player.transform.up * 2f + player.GetLookDir() * .5f;
+            }
+            else
+            {
+                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            }
+        }
+        
+        private static void ScheduleProjectiles(Player player)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleProjectilesCoroutine(player));
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleProjectilesCoroutine(Player player)
+        {
+            yield return new WaitForSeconds(shotDelay);
+
+             Vector3 vector1 = player.transform.position + player.transform.up * 2f + player.GetLookDir() * .5f;
                 GameObject prefab1 = ZNetScene.instance.GetPrefab("gjall_spit_projectile");
                 
                 GO_GjallGjallarhornProjectile = UnityEngine.Object.Instantiate(prefab1, new Vector3(vector1.x, vector1.y, vector1.z), Quaternion.identity);
@@ -111,15 +126,11 @@ namespace LackingImaginationV2
             
                 GO_GjallGjallarhornSpawn = null;
                 
-                
-            }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
         }
-
     }
+    
+    
+    
 
     [HarmonyPatch]
     public static class xGjallEssencePassive

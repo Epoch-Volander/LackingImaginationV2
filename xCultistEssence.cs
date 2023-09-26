@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,8 +60,7 @@ namespace LackingImaginationV2
 
                 GameObject prefab = ZNetScene.instance.GetPrefab("DvergerStaffFire_fire_aoe");
 
-                System.Threading.Timer timer = new System.Threading.Timer
-                    (_ => { ScheduleAoe(player, prefab); }, null, (int)(aoeDelay * 1000), System.Threading.Timeout.Infinite);
+                ScheduleAoes(player, prefab);
             }
             else
             {
@@ -68,8 +68,17 @@ namespace LackingImaginationV2
             }
         }
 
-        private static void ScheduleAoe(Player player, GameObject prefab)
+        private static void ScheduleAoes(Player player, GameObject prefab)
         {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleAoe(player, prefab));
+        }
+        
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleAoe(Player player, GameObject prefab)
+        {
+            yield return new WaitForSeconds(aoeDelay);
+            
             GO_CultistLoneSunAoe = UnityEngine.Object.Instantiate(prefab, player.transform.position, Quaternion.identity);
             A_CultistLoneSunAoe = GO_CultistLoneSunAoe.GetComponent<Aoe>();
             A_CultistLoneSunAoe.m_owner = player;

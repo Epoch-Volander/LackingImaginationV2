@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,12 +22,8 @@ namespace LackingImaginationV2
         public static string Ability_Name = "Ice Age";
 
         public static bool GeirrhafaController = false;
-        
-        private static float effectDelay = 4f;
-        private static int effectCast = 0;
 
         private static float AoeDelay = 1.46f;
-        private static int AoeCast = 0;
         private static float minDistanceBetweenCharacters = 2f;
 
         public static void Process_Input(Player player, int position)
@@ -90,7 +87,7 @@ namespace LackingImaginationV2
                 GeirrhafaController = false;
 
                 m_startEffects.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
-                ScheduleEffect(player, m_HandEffectsRight, m_HandEffectsLeft);
+                ScheduleEffects(player, m_HandEffectsRight, m_HandEffectsLeft);
                 
                 System.Threading.Timer timerAoe = new System.Threading.Timer
                     (_ => { ScheduleAoe(player); }, null, (int)(AoeDelay * 1000), System.Threading.Timeout.Infinite);
@@ -102,29 +99,38 @@ namespace LackingImaginationV2
             }
         }
 
-         private static void ScheduleEffect(Player player, EffectList Right, EffectList Left)
+        
+        private static void ScheduleEffects(Player player, EffectList Right, EffectList Left)
         {
-            if (effectCast < 3)
+            CoroutineRunner.Instance.StartCoroutine(ScheduleEffectsCoroutine(player, Right, Left));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleEffectsCoroutine(Player player, EffectList Right, EffectList Left)
+        {
+            float effectDelay = 4f;
+            int effectCast = 0;
+            
+            while (effectCast < 3)
             {
-               
                 Right.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 Left.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 effectCast++;
                 effectDelay *= 0.5f;
                 
-                System.Threading.Timer timer = new System.Threading.Timer
-                (_ => { ScheduleEffect(player, Right, Left); }, null, (int)(effectDelay * 1000), System.Threading.Timeout.Infinite);
-                
-            }
-            else
-            {
-                effectCast = 0;
-                effectDelay = 4f;
+                yield return new WaitForSeconds(effectDelay);
             }
         }
+         
          private static void ScheduleAoe(Player player)
          {
-             if (AoeCast < 3)
+             CoroutineRunner.Instance.StartCoroutine(ScheduleAoeCoroutine(player));
+         }
+         // ReSharper disable Unity.PerformanceAnalysis
+         private static IEnumerator ScheduleAoeCoroutine(Player player)
+         {
+             int AoeCast = 0;
+             
+             while (AoeCast < 3)
              {
                  List<Character> allCharacters = new List<Character>();
                  allCharacters.Clear();
@@ -144,16 +150,11 @@ namespace LackingImaginationV2
                          ch.Damage(hitData);
                      }
                  }
-                 
                  AoeCast++;
                  
-                 System.Threading.Timer timerAoe = new System.Threading.Timer
-                     (_ => { ScheduleAoe(player); }, null, (int)(AoeDelay * 1000), System.Threading.Timeout.Infinite);
-                
+                 yield return new WaitForSeconds(AoeDelay);
              }
-             else
              {
-                 AoeCast = 0;
                  List<Character> allCharacters = new List<Character>();
                  allCharacters.Clear();
                  Character.GetCharactersInRange(Player.m_localPlayer.GetCenterPoint(), 15f, allCharacters);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace LackingImaginationV2
        
         public static bool Eitr_Pay;
         private static float shotDelay = 0.3f;
-        private static int shotsFiredIce = 0;
+        
 
         public static void Process_Input(Player player, int position)
         {
@@ -47,9 +48,9 @@ namespace LackingImaginationV2
 
                     // randomly cast 1 of 3 abilities, fireball, ice shards, heal (faction targeted heal)
                 
-                    int RNDM = Random.Range(1, 9); // 1-8 inclusive
+                    int RNDM = Random.Range(1, 8); // 1-7 inclusive
                    
-                    if (RNDM == 1 || RNDM == 5 || RNDM == 8)//iceshards
+                    if (RNDM == 1 || RNDM == 4 || RNDM == 6)//iceshards
                     {
                         //Effects, animations, and sounds
                         //DvergerStaffIce_projectile
@@ -57,12 +58,12 @@ namespace LackingImaginationV2
                         // Vector3 vector = player.transform.position + player.transform.up  * 1.5f + player.GetLookDir() * .5f;
                         GameObject prefab = ZNetScene.instance.GetPrefab("DvergerStaffIce_projectile");
                     
-                        int RNDMice = Random.Range(5, 11); // 1-10 inclusive
+                        int RNDMice = Random.Range(5, 11); // 5-10 inclusive
                         // Schedule the first projectile
                         ScheduleIceProjectile(player, prefab, RNDMice);
                     
                     }
-                    if (RNDM == 2 || RNDM == 6 || RNDM == 7)//fireball
+                    if (RNDM == 2 || RNDM == 5 || RNDM == 7)//fireball
                     {
                         //Effects, animations, and sounds
                         //   DvergerStaffFire_fireball_projectile  big boy         ???  DvergerStaffFire_clusterbomb_projectile  ???
@@ -82,7 +83,7 @@ namespace LackingImaginationV2
                             ScheduleFireProjectile(player, vector, prefab);
                         }
                     }
-                    if (RNDM == 3 || RNDM == 4)// healAoe
+                    if (RNDM == 3)// healAoe
                     {
                         //Effects, animations, and sounds
                         //DvergerStaffHeal_aoe
@@ -126,9 +127,17 @@ namespace LackingImaginationV2
             }
             return false;
         }
-         private static void ScheduleIceProjectile(Player player, GameObject prefab, int RNDMice)
+        
+        private static void ScheduleIceProjectile(Player player, GameObject prefab, int RNDMice)
         {
-            if (shotsFiredIce < RNDMice)
+            CoroutineRunner.Instance.StartCoroutine(ScheduleProjectileCoroutine(player, prefab, RNDMice));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleProjectileCoroutine(Player player, GameObject prefab, int RNDMice)
+        {
+            int shotsFiredIce = 0;
+            
+            while (shotsFiredIce < RNDMice)
             {
                 Vector3 vector = player.transform.position + player.transform.up  * 1.5f + player.GetLookDir() * .5f;
                 // Create the projectile
@@ -163,17 +172,11 @@ namespace LackingImaginationV2
                 // Increment the shots fired counter
                 shotsFiredIce++;
 
-                // Schedule the next projectile with a delay
-                System.Threading.Timer timer = new System.Threading.Timer
-                (_ => { ScheduleIceProjectile(player, prefab, RNDMice); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
-                
-            }
-            else
-            {
-                GO_RandomizeIceProjectile = null;
-                shotsFiredIce = 0;
+                // Delay before the next projectile
+                yield return new WaitForSeconds(shotDelay);
             }
         }
+        
          private static void ScheduleFireProjectile(Player player, Vector3 vector, GameObject prefab)
         {
             // Create the projectile

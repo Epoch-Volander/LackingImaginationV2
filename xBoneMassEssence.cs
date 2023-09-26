@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,8 +49,8 @@ namespace LackingImaginationV2
                 GameObject prefab = ZNetScene.instance.GetPrefab("bonemass_throw_projectile");
                 // ExpMethods.LogGameObjectInfo(prefab);
                 player.transform.rotation = Quaternion.LookRotation(player.GetLookDir()); 
-                System.Threading.Timer timer = new System.Threading.Timer
-                    (_ => { ScheduleProjectile(player, vector, prefab); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                
+                ScheduleProjectiles(player, vector, prefab);
                 
             }
             else
@@ -57,8 +58,17 @@ namespace LackingImaginationV2
                 player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
             }
         }
-        private static void ScheduleProjectile(Player player, Vector3 vector, GameObject prefab)
+        
+        private static void ScheduleProjectiles(Player player, Vector3 vector, GameObject prefab)
         {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleProjectilesCoroutine(player, vector, prefab));
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleProjectilesCoroutine(Player player, Vector3 vector, GameObject prefab)
+        {
+            yield return new WaitForSeconds(shotDelay);
+            
             GO_BoneMassMassReleaseProjectile = UnityEngine.Object.Instantiate(prefab, new Vector3(vector.x, vector.y, vector.z), Quaternion.identity);
             
             // GO_BoneMassMassReleaseSkeleton = GO_BoneMassMassReleaseProjectile.GetComponent<Projectile>().m_spawnOnHit.GetComponent<SpawnAbility>().m_spawnPrefab[0];
