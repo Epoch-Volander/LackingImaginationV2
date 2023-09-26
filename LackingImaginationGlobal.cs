@@ -1116,7 +1116,7 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 0.3f;
+                    return 0.2f;
                 }
             }
         }
@@ -1257,7 +1257,20 @@ namespace LackingImaginationV2
             }
         }
         
-        
+        public static float c_moderDraconicFrostPassive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_moderDraconicFrostProjectile"]/100;
+                }
+                catch
+                {
+                    return 0.25f;
+                }
+            }
+        }
         
         
         

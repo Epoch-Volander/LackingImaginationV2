@@ -146,6 +146,7 @@
         <Compile Include="SE_Bash.cs" />
         <Compile Include="SE_BloodWell.cs" />
         <Compile Include="SE_BloodSiphon.cs" />
+        <Compile Include="SE_Calm.cs" />
         <Compile Include="SE_Craving.cs" />
         <Compile Include="SE_FallenHero.cs" />
         <Compile Include="SE_Forgotten.cs" />

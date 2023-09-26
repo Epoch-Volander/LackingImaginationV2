@@ -60,7 +60,7 @@ namespace LackingImaginationV2
                 // sfx_dragon_coldbreath_start
                 //sfx_dragon_coldbreath_trailon
 
-                if (player.IsBlocking())
+                if (player.IsBlocking())//just frost
                 {
                     UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldbreath_start"), player.transform.position, Quaternion.identity);
                     GameObject Breath = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint(), player.transform.rotation, player.transform);
@@ -190,8 +190,8 @@ namespace LackingImaginationV2
                     Vector3 target = (!Physics.Raycast(spawnPosition, direction, out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (spawnPosition + direction * 1000f) : hitInfo.point;
                     
                     HitData hitData = new HitData();
-                    hitData.m_damage.m_frost = UnityEngine.Random.Range(2f, 4f);
-                    hitData.m_damage.m_spirit = UnityEngine.Random.Range(1f, 2f);
+                    hitData.m_damage.m_frost = UnityEngine.Random.Range(10f, 20f);
+                    hitData.m_damage.m_pierce = UnityEngine.Random.Range(1f, 3f);
                     hitData.ApplyModifier(player.GetCurrentWeapon().GetDamage().GetTotalDamage() * LackingImaginationGlobal.c_moderDraconicFrostProjectile);
                     hitData.m_pushForce = 0.5f;
                     hitData.m_statusEffectHash = Player.s_statusEffectFreezing;
@@ -216,8 +216,6 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
-     
     }
 
 
@@ -225,8 +223,91 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xModerEssencePassive
     {
+        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        public static class Moder_RPC_Damage_Patch
+        {
+            public static void Prefix(Character __instance, ref HitData hit)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_dragonqueen_essence") && hit.GetAttacker() != null)
+                {
+                    if (__instance.IsDebugFlying())
+                        return;
+                    if ((UnityEngine.Object) hit.GetAttacker() == (UnityEngine.Object) Player.m_localPlayer)
+                    {
+                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
+                        __instance.m_localPlayerHasHit = true;
+                    }
+                    if (!__instance.m_nview.IsOwner() || (double) __instance.GetHealth() <= 0.0 || __instance.IsDead() || __instance.IsTeleporting() || __instance.InCutscene() || hit.m_dodgeable && __instance.IsDodgeInvincible())
+                        return;
+                    Character attacker = hit.GetAttacker();
+                    if (hit.HaveAttacker() && (UnityEngine.Object)attacker == (UnityEngine.Object)null || __instance.IsPlayer() && !__instance.IsPVPEnabled() && (UnityEngine.Object)attacker != (UnityEngine.Object)null && attacker.IsPlayer() && !hit.m_ignorePVP)
+                        return;
+                    if ((UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())
+                    {
+                        hit.m_damage.m_frost += (Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_moderDraconicFrostPassive;
+                    }
+                }
+            }
+        }
         
+        [HarmonyPatch(typeof(EnvMan), "IsCold")]
+        public static class Moder_IsCold_Patch
+        {
+            public static void Postfix(ref bool __result)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_dragonqueen_essence") && !Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Calm"))
+                {
+                    __result = true;
+                }
+            }
+        }
         
+        [HarmonyPatch(typeof(Character), "GetDamageModifiers")]
+        public static class Moder_GetDamageModifiers_Patch
+        {
+            public static void Postfix(ref HitData.DamageModifiers __result)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_dragonqueen_essence") && !Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Calm"))
+                {
+                    __result.m_frost = HitData.DamageModifier.Normal;
+                }
+            }
+        }
+        
+        [HarmonyPatch(typeof(Humanoid), "UseItem")]
+        public static class Moder_UseItem_Patch
+        {
+            public static void Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
+            {
+                if (inventory == null)
+                    inventory = __instance.m_inventory;
+                if (!inventory.ContainsItem(item))
+                    return;
+                GameObject hoverObject = __instance.GetHoverObject();
+                Hoverable componentInParent1 = (bool) (UnityEngine.Object) hoverObject ? hoverObject.GetComponentInParent<Hoverable>() : (Hoverable) null;
+                if (componentInParent1 != null && !fromInventoryGui)
+                {
+                    Interactable componentInParent2 = hoverObject.GetComponentInParent<Interactable>();
+                    if (componentInParent2 != null && componentInParent2.UseItem(__instance, item))
+                    {
+                        __instance.DoInteractAnimation(hoverObject.transform.position);
+                        return;
+                    }
+                }
+                if (!__instance.m_seman.HaveStatusEffect("SE_Calm"))
+                {
+                    if (item.m_shared.m_name == "$item_freezegland")
+                    {
+                        __instance.m_consumeItemEffects.Create(Player.m_localPlayer.transform.position, Quaternion.identity);
+                        __instance.m_zanim.SetTrigger("eat");
+                        inventory.RemoveItem(item.m_shared.m_name, 1);
+                        __instance.m_seman.AddStatusEffect("SE_Calm".GetHashCode());
+                        return;
+                    }
+                }
+               
+            }
+        }
         
         
         

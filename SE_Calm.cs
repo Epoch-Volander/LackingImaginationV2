@@ -8,20 +8,20 @@ using UnityEngine;
 namespace LackingImaginationV2
 
 {
-    public class SE_Satiated : SE_Stats
+    public class SE_Calm : SE_Stats
     {
         public static Sprite AbilityIcon;
 
-        [Header("SE_Satiated")]
+        [Header("SE_Calm")]
         public static float m_baseTTL = 1800f;
         // public static float m_baseTTL = 60f;
 
-        public SE_Satiated()
+        public SE_Calm()
         {
-            base.name = "SE_Satiated";
+            base.name = "SE_Calm";
             m_icon = AbilityIcon;
-            m_tooltip = "Satiated";
-            m_name = "Satiated";
+            m_tooltip = "Calm";
+            m_name = "Calm";
             m_ttl = m_baseTTL;
         }
         
