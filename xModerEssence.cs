@@ -17,6 +17,7 @@ namespace LackingImaginationV2
     public class xModerEssence  //got to do dragon breath
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
+        private static int Script_Projectile_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
         
         public static string Ability_Name = "Draconic Frost"; //freezing aura passive
@@ -60,16 +61,92 @@ namespace LackingImaginationV2
                 if (player.IsBlocking())
                 {
                     UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldbreath_start"), player.transform.position, Quaternion.identity);
-                    GameObject Breath = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.transform.position, Quaternion.identity);
+                    GameObject Breath = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint(), player.transform.rotation, player.transform);
                     
+                    
+                    float rayLength = 30f; // Set the desired ray length.
+                    float minDistance = 2f; // Set the minimum distance to truncate the cone.
+                    float coneAngle = 10f; // Set the cone angle in degrees.
+                    int numRays = 360; // Number of rays to cast in the cone.
+
+                    
+                    // Create a HashSet to keep track of detected objects.
+                    HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+                    
+                    // Loop through the cone of rays.
+                    for (int i = 0; i < numRays; i++)
+                    {
+                        // Calculate the direction of the current ray based on the angle.
+                        Vector3 rayDirection = Quaternion.Euler(0, i * (360f / numRays), 0) * Breath.transform.forward;
+
+                        // // Create the ray.
+                        // Ray ray = new Ray(Breath.transform.position, rayDirection);
+                        //
+                        // // Adjust the ray's starting point slightly to prevent self-intersections.
+                        // ray.origin += rayDirection * 0.1f;
+                        
+                        // Create the ray.
+                        Ray ray = new Ray(Breath.transform.position - rayDirection * 2f, rayDirection); // Subtract 2f from the starting position.
+
+                        // Initialize the hitInfo.
+                        RaycastHit hitInfo = default(RaycastHit);
+
+                        // Perform the raycast.
+                        if (Physics.Raycast(ray, out hitInfo, rayLength, Script_Projectile_Layermask))
+                        {
+                            // Calculate the distance from the ray's origin to the hit point.
+                            float distanceToHit = hitInfo.distance;
+
+                            // Check if the hit point is closer than the minimum distance.
+                            if (distanceToHit > minDistance)
+                            {
+                                if (hitInfo.collider.gameObject != null)
+                                {
+                                    // Debug.Log("1Hit detected on layer: " + LayerMask.LayerToName(hitInfo.collider.gameObject.layer));
+                                    // Debug.Log("1Hit name: " + hitInfo.collider.gameObject.name);
+                                    
+                                    // Check if the hit object has a component that implements the IDestructible interface.
+                                    // IDestructible destructibleComponent = hitInfo.collider.gameObject.GetComponent<IDestructible>();
+                                    //
+                                    // if (destructibleComponent != null)
+                                    // {
+                                    if (detectedObjects.Any())
+                                    {
+                                        Debug.Log("why is it not empty");
+                                    }
+                                        // This is a valid target (creature) if it hasn't been detected before.
+                                        if (!detectedObjects.Contains(hitInfo.collider.gameObject))
+                                        {
+                                            // Add the object to the detected set to prevent future detections.
+                                            detectedObjects.Add(hitInfo.collider.gameObject);
+
+                                            Debug.Log("1Hit detected on layer: " + LayerMask.LayerToName(hitInfo.collider.gameObject.layer));
+                                            Debug.Log("1Hit name: " + hitInfo.collider.gameObject.name);
+
+                                            // Deal damage or perform other actions on the creature.
+                                            // Call a method on the destructibleComponent, e.g., destructibleComponent.TakeDamage(damageAmount);
+
+                                            // Set didDamage to true if you want to track if damage was dealt.
+                                            
+                                            // didDamage = true;
+                                        }
+                                    // }
+                                    
+                                }
+                            }
+                        }
+                    }
                     
                     
                 }
                 else
                 {
-                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_start"), player.transform.position, player.transform.rotation, player.transform);
-                    GameObject prefab = ZNetScene.instance.GetPrefab("dragon_ice_projectile");
-                    ScheduleProjectile(player, prefab, 6, 6, 45f);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ColdBall_launch"), player.transform.position, player.transform.rotation, player.transform);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_start"), player.transform.position, Quaternion.identity);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_launch"), player.transform.position, Quaternion.identity);
+
+                    // GameObject prefab = ZNetScene.instance.GetPrefab("dragon_ice_projectile");
+                    ScheduleProjectile(player, 6, 6, 45f);
                 }
             }
             else
@@ -78,12 +155,16 @@ namespace LackingImaginationV2
             }
         }
         
-        private static void ScheduleProjectile(Player player, GameObject prefab, int rows, int projectilesPerRow, float initialConeAngle)
+        private static void ScheduleProjectile(Player player, int inputRows, int inputProjectilesPerRow, float inputConeAngle)
         {
+            GameObject prefab = ZNetScene.instance.GetPrefab("dragon_ice_projectile");
+            int rows = inputRows;
+            int projectilesPerRow = inputProjectilesPerRow;
+            float initialConeAngle = inputConeAngle;
+            
             if (rows > 0)
-            {
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ColdBall_launch"), player.transform.position, player.transform.rotation, player.transform);
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_launch"), player.transform.position, player.transform.rotation, player.transform);
+            { 
+                // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_launch"), player.transform.position, Quaternion.identity);
                 if (projectilesPerRow > 0)
                 {
                     Vector3 playerPosition = player.transform.position;
@@ -140,16 +221,18 @@ namespace LackingImaginationV2
                     
                     projectilesPerRow--;
                     
-                    System.Threading.Timer timer = new System.Threading.Timer
-                    ((_) => { ScheduleProjectile(player, prefab, rows, projectilesPerRow, initialConeAngle); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                    // System.Threading.Timer timer = new System.Threading.Timer
+                    // ((_) => { ScheduleProjectile(player, rows, projectilesPerRow, initialConeAngle); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                    ScheduleProjectile(player, rows, projectilesPerRow, initialConeAngle);
                 }
                 else
                 {
                     rows--;
                     projectilesPerRow = rows;
                     
-                    System.Threading.Timer timer = new System.Threading.Timer
-                        ((_) => { ScheduleProjectile(player, prefab, rows, projectilesPerRow, initialConeAngle); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                    // System.Threading.Timer timer = new System.Threading.Timer
+                    //     ((_) => { ScheduleProjectile(player, rows, projectilesPerRow, initialConeAngle); }, null, (int)(shotDelay * 1000), System.Threading.Timeout.Infinite);
+                    ScheduleProjectile(player, rows, projectilesPerRow, initialConeAngle);
                 }
             }
         }
