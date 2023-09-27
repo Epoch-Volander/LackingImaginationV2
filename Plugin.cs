@@ -331,9 +331,17 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_geirrhafaIceAgePassive;
         public static ConfigEntry<float> li_cultistLoneSunAoe;
         public static ConfigEntry<float> li_cultistLoneSunPassive;
-      
+        public static ConfigEntry<float> li_hareLuckyFoot;
+        public static ConfigEntry<float> li_hareLuckyFootArmor;
+        public static ConfigEntry<float> li_seaSerpentSeaKingProjectile;
+        public static ConfigEntry<float> li_tickBloodWellLifeSteal;
+        public static ConfigEntry<float> li_tickBloodWellArmor;
+        public static ConfigEntry<float> li_tickBloodWellStackCap;
+        public static ConfigEntry<float> li_moderDraconicFrostProjectile;
+        public static ConfigEntry<float> li_moderDraconicFrostPassive;
+        public static ConfigEntry<float> li_moderDraconicFrostDragonBreath;
         
-        
+    
         
         
         // public static List<string> equipedEssence = new();
@@ -727,7 +735,7 @@ namespace LackingImaginationV2
             li_gjallGjallarhornProjectile = config("Essence Gjall Modifiers", "li_gjallGjallarhornProjectile", 130f, "Modifies the Damage of the Gjallarhorn Projectile");
             li_gjallGjallarhornArmor = config("Essence Gjall Modifiers", "li_gjallGjallarhornArmor", 50f, "Bonus Armor passive");
             // greydwarf
-            li_greydwarfPebbleProjectile = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleProjectile", 20f, "Modifies the Damage of the Pubble Projectile");
+            li_greydwarfPebbleProjectile = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleProjectile", 20f, "Modifies the Damage of the Pebble Projectile");
             li_greydwarfPebblePassiveCarry = config("Essence Greydwarf Modifiers", "li_greydwarfPebblePassiveCarry", 50f, "Modifies the bonus Carry Weight Passive");
             li_greydwarfPebbleForestAnger = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleForestAnger", 10f, "Modifies % Bonus Damage Forest creature do to you");
             // elder
@@ -759,8 +767,20 @@ namespace LackingImaginationV2
             //cultist
             li_cultistLoneSunAoe = config("Essence Cultist Modifiers", "li_cultistLoneSunAoe", 50f, "Modifies Active Damage");
             li_cultistLoneSunPassive = config("Essence Cultist Modifiers", "li_cultistLoneSunPassive", 15f, "Modifies the fire damage passive for Weapons");
+            //hare
+            li_hareLuckyFoot = config("Essence Hare Modifiers", "li_hareLuckyFoot", 100f, "Modifies Bonus Speed Active(2x * %)");
+            li_hareLuckyFootArmor = config("Essence Hare Modifiers", "li_hareLuckyFootArmor", 10f, "Modifies % Armor Reduction passive");
+            //Serpent
+            li_seaSerpentSeaKingProjectile = config("Essence Sea Serpent Modifiers", "li_seaSerpentSeaKingProjectile", 20f, "Modifies the % weapon Damage of the Sea King Projectile");
+            //tick
+            li_tickBloodWellLifeSteal = config("Essence Tick Modifiers", "li_tickBloodWellLifeSteal", 10f, "Modifies % Lifesteal Passive");
+            li_tickBloodWellArmor = config("Essence Tick Modifiers", "li_tickBloodWellArmor", 25f, "Modifies Bonus Armor Reduction passive");
+            li_tickBloodWellStackCap = config("Essence Tick Modifiers", "li_tickBloodWellStackCap", 500f, "Modifies the maximum stored damage");
+            //moder
+            li_moderDraconicFrostProjectile = config("Essence Moder Modifiers", "li_moderDraconicFrostProjectile", 5f, "Modifies the % weapon Damage of the Draconic Frost Projectile");
+            li_moderDraconicFrostPassive = config("Essence Moder Modifiers", "li_moderDraconicFrostPassive", 25f, "Modifies the % weapon bonus frost damage passive");
+            li_moderDraconicFrostDragonBreath = config("Essence Moder Modifiers", "li_moderDraconicFrostDragonBreath", 200f, "Modifies the damage of Draconic Frost Dragon Breath");
 
-            
             
             
                
@@ -854,8 +874,15 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_geirrhafaIceAgePassive", li_geirrhafaIceAgePassive.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_cultistLoneSunAoe", li_cultistLoneSunAoe.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_cultistLoneSunPassive", li_cultistLoneSunPassive.Value);
-            
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFoot", li_hareLuckyFoot.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFootArmor", li_hareLuckyFootArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seaSerpentSeaKingProjectile", li_seaSerpentSeaKingProjectile.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellLifeSteal", li_tickBloodWellLifeSteal.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellArmor", li_tickBloodWellArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellStackCap", li_tickBloodWellStackCap.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostProjectile", li_moderDraconicFrostProjectile.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostPassive", li_moderDraconicFrostPassive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostDragonBreath", li_moderDraconicFrostDragonBreath.Value);
             
             
             
@@ -957,9 +984,16 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgePassiveEitr);
             _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgePassive);
             _ = ConfigSync.AddConfigEntry(li_cultistLoneSunAoe);
-            _ = ConfigSync.AddConfigEntry(li_cultistLoneSunPassive);     
-            
-            
+            _ = ConfigSync.AddConfigEntry(li_cultistLoneSunPassive);
+            _ = ConfigSync.AddConfigEntry(li_hareLuckyFoot);
+            _ = ConfigSync.AddConfigEntry(li_hareLuckyFootArmor);
+            _ = ConfigSync.AddConfigEntry(li_seaSerpentSeaKingProjectile);
+            _ = ConfigSync.AddConfigEntry(li_tickBloodWellLifeSteal);
+            _ = ConfigSync.AddConfigEntry(li_tickBloodWellArmor);
+            _ = ConfigSync.AddConfigEntry(li_tickBloodWellStackCap);
+            _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostProjectile);
+            _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostPassive);
+            _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostDragonBreath);     
             
             
             

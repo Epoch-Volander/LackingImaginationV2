@@ -1182,13 +1182,13 @@ namespace LackingImaginationV2
         }
         
         //Sea Serpent
-        public static float c_seaSerpentSeaKingeProjectile
+        public static float c_seaSerpentSeaKingProjectile
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_seaSerpentSeaKingeProjectile"]/100;
+                    return ConfigStrings["li_seaSerpentSeaKingProjectile"]/100;
                 }
                 catch
                 {
@@ -1263,7 +1263,7 @@ namespace LackingImaginationV2
             {
                 try
                 {
-                    return ConfigStrings["li_moderDraconicFrostProjectile"]/100;
+                    return ConfigStrings["li_moderDraconicFrostPassive"]/100;
                 }
                 catch
                 {
