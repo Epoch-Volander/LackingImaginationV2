@@ -27,23 +27,12 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Humanoid), "UseItem")]
         public static class Rot_UseItem_Patch
         {
-            public static void Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
+            public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
             {
                 if (inventory == null)
                     inventory = __instance.m_inventory;
                 if (!inventory.ContainsItem(item))
-                    return;
-                GameObject hoverObject = __instance.GetHoverObject();
-                Hoverable componentInParent1 = (bool) (UnityEngine.Object) hoverObject ? hoverObject.GetComponentInParent<Hoverable>() : (Hoverable) null;
-                if (componentInParent1 != null && !fromInventoryGui)
-                {
-                    Interactable componentInParent2 = hoverObject.GetComponentInParent<Interactable>();
-                    if (componentInParent2 != null && componentInParent2.UseItem(__instance, item))
-                    {
-                        __instance.DoInteractAnimation(hoverObject.transform.position);
-                        return;
-                    }
-                }
+                    return true;
                 if (item.m_shared.m_name == "$item_entrails" && __instance.m_seman.HaveStatusEffect("SE_Rot") && xDraugrRot.RotStats[0] != "0")
                 {
                     __instance.m_consumeItemEffects.Create(Player.m_localPlayer.transform.position, Quaternion.identity);
@@ -51,8 +40,9 @@ namespace LackingImaginationV2
                     inventory.RemoveItem("$item_entrails", 1);
                     RotStats[0] = (float.Parse(RotStats[0]) - 10f).ToString();
                     if (float.Parse(RotStats[0]) < 0f) RotStats[0] = "0";
-                    return;
+                    return false;
                 }
+                return true;
             }
         }
         

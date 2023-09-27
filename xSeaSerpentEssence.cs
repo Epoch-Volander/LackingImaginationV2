@@ -275,23 +275,12 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Humanoid), "UseItem")]
         public static class SeaSerpent_UseItem_Patch
         {
-            public static void Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
+            public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
             {
                 if (inventory == null)
                     inventory = __instance.m_inventory;
                 if (!inventory.ContainsItem(item))
-                    return;
-                GameObject hoverObject = __instance.GetHoverObject();
-                Hoverable componentInParent1 = (bool) (UnityEngine.Object) hoverObject ? hoverObject.GetComponentInParent<Hoverable>() : (Hoverable) null;
-                if (componentInParent1 != null && !fromInventoryGui)
-                {
-                    Interactable componentInParent2 = hoverObject.GetComponentInParent<Interactable>();
-                    if (componentInParent2 != null && componentInParent2.UseItem(__instance, item))
-                    {
-                        __instance.DoInteractAnimation(hoverObject.transform.position);
-                        return;
-                    }
-                }
+                    return true;
                 if (__instance.m_seman.HaveStatusEffect("SE_Craving"))
                 {
                     if (item.m_shared.m_name == FishName(__instance.m_seman.GetStatusEffect("SE_Craving".GetStableHashCode()).m_icon))
@@ -303,7 +292,7 @@ namespace LackingImaginationV2
                         SeaSerpentStats[0] = "";
                         __instance.m_seman.AddStatusEffect("SE_Satiated".GetHashCode());
                         FishQuality = FishIndex(item);
-                        return;
+                        return false;
                     }
                 }
                 if (__instance.m_seman.HaveStatusEffect("SE_Satiated"))
@@ -314,9 +303,10 @@ namespace LackingImaginationV2
                         __instance.m_zanim.SetTrigger("eat");
                         inventory.RemoveItem(item.m_shared.m_name, 1);
                         FishQuality = FishIndex(item);
-                        return;
+                        return false;
                     }
                 }
+                return true;
             }
         }
         public static string FishName(Sprite icon)

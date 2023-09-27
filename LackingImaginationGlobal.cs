@@ -1271,8 +1271,20 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
-        
+        public static float c_moderDraconicFrostDragonBreath
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_moderDraconicFrostDragonBreath"];
+                }
+                catch
+                {
+                    return 200f;
+                }
+            }
+        }
         
         
         

@@ -20,23 +20,19 @@ namespace LackingImaginationV2
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
         private static int Script_Projectile_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
+        public static bool ModerController = false;
         
         public static string Ability_Name = "Draconic Frost"; //freezing aura passive
-        
-        // private static GameObject GO_DraconicFrostProjectile;
-        // private static Projectile P_DraconicFrostProjectile;
-        
 
         private static float shotDelay = 0.05f;
-        // private static float triangleSize = 2.0f;
-        // private static int shotsFired = 0;
-        
+        private static float breathDelay = 1f;
+
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
                 LackingImaginationV2Plugin.Log($"Moder Button was pressed");
-                LackingImaginationV2Plugin.Log($"Moder {player.transform.position}");
+                // LackingImaginationV2Plugin.Log($"Moder {player.transform.position}");
                 
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
@@ -44,7 +40,6 @@ namespace LackingImaginationV2
                 player.GetSEMan().AddStatusEffect(se_cd);
                 
                 // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_death"), player.transform.position, Quaternion.identity);
-
                 // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("dragon_coldbreath"), player.transform.position, player.transform.rotation, player.transform);
                 
                 //dragon_spit_shotgun //accuracy 13, burst 16, interval 0.05
@@ -53,8 +48,6 @@ namespace LackingImaginationV2
                 //vfx_ColdBall_launch
                 //sfx_dragon_coldball_launch
                 
-                
-                
                 //dragon_coldbreath
                 // vfx_dragon_coldbreath
                 // sfx_dragon_coldbreath_start
@@ -62,69 +55,15 @@ namespace LackingImaginationV2
 
                 if (player.IsBlocking())//just frost
                 {
-                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldbreath_start"), player.transform.position, Quaternion.identity);
-                    GameObject Breath = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint(), player.transform.rotation, player.transform);
-                    
-                    // Create a HashSet to keep track of detected objects.
-                    HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
-                    Debug.Log("start");
-                    
-                    Vector3 capsuleCenter = player.GetCenterPoint() + player.transform.forward * 0.5f;
-                    float capsuleRadius = 0.65f; // Radius of the capsule
-                    float capsuleHeight = 37f; // Height of the capsule (equals the ray length)
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                    ModerController = true;
+                    ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                    ModerController = false;
 
-                    // Perform the capsule overlap check with the specified layer mask
-                    Collider[] colliders = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + player.transform.forward * capsuleHeight, capsuleRadius, Script_Projectile_Layermask);
-
-                    foreach (Collider collider in colliders)
-                    {
-                        // IDestructible destructibleComponent = hitInfo.collider.gameObject.GetComponent<IDestructible>();
-                        IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
-                        if (destructibleComponent != null)
-                        {
-                            // This is a valid target (creature) if it hasn't been detected before.
-                            if (!detectedObjects.Contains(collider.gameObject))
-                            {
-                                // Add the object to the detected set to prevent future detections.
-                                detectedObjects.Add(collider.gameObject);
-                        
-                                Debug.Log("1Hit detected on layer: " + LayerMask.LayerToName(collider.gameObject.layer));
-                                Debug.Log("1Hit name: " + collider.gameObject.name);
-                        
-                                // Deal damage or perform other actions on the creature.
-                                // Call a method on the destructibleComponent, e.g., destructibleComponent.TakeDamage(damageAmount);
-                        
-                                // Set didDamage to true if you want to track if damage was dealt.
-                                
-                                // didDamage = true;
-                            }
-                        }
-                        Character characterComponent = collider.gameObject.GetComponent<Character>();
-                        if (characterComponent != null)
-                        {
-                            // This is a valid target (creature) if it hasn't been detected before.
-                            if (!detectedObjects.Contains(collider.gameObject))
-                            {
-                                // Add the object to the detected set to prevent future detections.
-                                detectedObjects.Add(collider.gameObject);
-                        
-                                Debug.Log("2Hit detected on layer: " + LayerMask.LayerToName(collider.gameObject.layer));
-                                Debug.Log("2Hit name: " + collider.gameObject.name);
-                        
-                                // Deal damage or perform other actions on the creature.
-                                // Call a method on the destructibleComponent, e.g., destructibleComponent.TakeDamage(damageAmount);
-                        
-                                // Set didDamage to true if you want to track if damage was dealt.
-                                
-                                // didDamage = true;
-                            }
-                        }
-                        
-                    }
+                    ScheduleBreath(player);
                 }
                 else
                 {
-                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ColdBall_launch"), player.transform.position, player.transform.rotation, player.transform);
                     UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_start"), player.transform.position, Quaternion.identity);
                     UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldball_launch"), player.transform.position, Quaternion.identity);
 
@@ -137,13 +76,89 @@ namespace LackingImaginationV2
                 player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
             }
         }
-        
-        
+        private static void ScheduleBreath(Player player)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleBreathCoroutine(player));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleBreathCoroutine(Player player)
+        {
+            yield return new WaitForSeconds(breathDelay);
+            
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldbreath_start"), player.transform.position, Quaternion.identity);
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint() +player.transform.forward * 0.5f, player.transform.rotation, player.transform);
+            
+            // Create a HashSet to keep track of detected objects.
+            HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+
+            Vector3 capsuleCenter = player.GetCenterPoint() + player.transform.forward * 0.5f;
+            float capsuleRadius = 2f; // Radius of the capsule
+            float capsuleHeight = 37f; // Height of the capsule (equals the ray length)
+
+            // Perform the capsule overlap check with the specified layer mask
+            Collider[] colliders = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + player.transform.forward * capsuleHeight, capsuleRadius, Script_Projectile_Layermask);
+
+            foreach (Collider collider in colliders)
+            {
+                IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                if (destructibleComponent != null)
+                {
+                    // This is a valid target (creature) if it hasn't been detected before.
+                    if (!detectedObjects.Contains(collider.gameObject))
+                    {
+                        detectedObjects.Add(collider.gameObject);
+                        
+                        HitData hitData = new HitData();
+                        hitData.m_hitCollider = collider;
+                        hitData.m_statusEffectHash = Player.s_statusEffectFreezing;
+                        hitData.m_dodgeable = true;
+                        hitData.m_blockable = true;
+                        hitData.m_ranged = true;
+                        hitData.m_damage.m_frost = LackingImaginationGlobal.c_moderDraconicFrostDragonBreath;
+                        hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
+                        // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                        hitData.m_pushForce = 100f;
+                        hitData.m_backstabBonus = 2f;
+                        hitData.m_staggerMultiplier = 2f;
+                        hitData.m_point = collider.gameObject.transform.position;
+                        hitData.SetAttacker(player);
+                        hitData.m_hitType = HitData.HitType.PlayerHit;
+                        destructibleComponent.Damage(hitData);
+                    }
+                }
+                Character characterComponent = collider.gameObject.GetComponent<Character>();
+                if (characterComponent != null && !characterComponent.IsOwner())
+                {
+                    // This is a valid target (creature) if it hasn't been detected before.
+                    if (!detectedObjects.Contains(collider.gameObject))
+                    {
+                        detectedObjects.Add(collider.gameObject);
+                        
+                        HitData hitData = new HitData();
+                        hitData.m_hitCollider = collider;
+                        hitData.m_statusEffectHash = Player.s_statusEffectFreezing;
+                        hitData.m_dodgeable = true;
+                        hitData.m_blockable = true;
+                        hitData.m_ranged = true;
+                        hitData.m_damage.m_frost = LackingImaginationGlobal.c_moderDraconicFrostDragonBreath;
+                        hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
+                        // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                        hitData.m_pushForce = 100f;
+                        hitData.m_backstabBonus = 2f;
+                        hitData.m_staggerMultiplier = 2f;
+                        hitData.m_point = collider.gameObject.transform.position;
+                        hitData.SetAttacker(player);
+                        hitData.m_hitType = HitData.HitType.PlayerHit;
+                        characterComponent.Damage(hitData);
+                    }
+                }
+            }
+        }
+
         private static void ScheduleProjectiles(Player player, int inputRows, int inputProjectilesPerRow, float inputConeAngle)
         {
             CoroutineRunner.Instance.StartCoroutine(ScheduleProjectilesCoroutine(player, inputRows, inputProjectilesPerRow, inputConeAngle));
         }
-        
         // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator ScheduleProjectilesCoroutine(Player player, int rows, int projectilesPerRow, float initialConeAngle)
         {
@@ -153,6 +168,8 @@ namespace LackingImaginationV2
             {
                 if (projectilesPerRow > 0)
                 {
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_ColdBall_launch"), player.transform.position, player.transform.rotation, player.transform);
+                    
                     Vector3 playerPosition = player.transform.position;
                     Vector3 forwardDirection = player.GetLookDir();
                     Vector3 upDirection = player.transform.up;
@@ -217,9 +234,7 @@ namespace LackingImaginationV2
             }
         }
     }
-
-
-
+    
     [HarmonyPatch]
     public class xModerEssencePassive
     {
@@ -277,23 +292,12 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Humanoid), "UseItem")]
         public static class Moder_UseItem_Patch
         {
-            public static void Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
+            public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
             {
                 if (inventory == null)
                     inventory = __instance.m_inventory;
                 if (!inventory.ContainsItem(item))
-                    return;
-                GameObject hoverObject = __instance.GetHoverObject();
-                Hoverable componentInParent1 = (bool) (UnityEngine.Object) hoverObject ? hoverObject.GetComponentInParent<Hoverable>() : (Hoverable) null;
-                if (componentInParent1 != null && !fromInventoryGui)
-                {
-                    Interactable componentInParent2 = hoverObject.GetComponentInParent<Interactable>();
-                    if (componentInParent2 != null && componentInParent2.UseItem(__instance, item))
-                    {
-                        __instance.DoInteractAnimation(hoverObject.transform.position);
-                        return;
-                    }
-                }
+                    return true;
                 if (!__instance.m_seman.HaveStatusEffect("SE_Calm"))
                 {
                     if (item.m_shared.m_name == "$item_freezegland")
@@ -302,15 +306,13 @@ namespace LackingImaginationV2
                         __instance.m_zanim.SetTrigger("eat");
                         inventory.RemoveItem(item.m_shared.m_name, 1);
                         __instance.m_seman.AddStatusEffect("SE_Calm".GetHashCode());
-                        return;
+                        return false;
                     }
                 }
-               
+                return true;
             }
         }
-        
-        
-        
+
     }
     
    

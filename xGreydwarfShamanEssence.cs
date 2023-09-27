@@ -1,5 +1,6 @@
 using System;
 using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,9 @@ namespace LackingImaginationV2
     public class xGreydwarfShamanEssence
     {
         public static string Ability_Name = "Dubious Heal";
+        
+        public static bool GreydwarfShamanController = false;
+        private static float shotDelay = 0.3f;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -31,29 +35,45 @@ namespace LackingImaginationV2
                 
                 //Effects, animations, and sounds
                 
-                // simple heal (faction targeted heal)
-                List<Character> allCharacters = new List<Character>();
-                allCharacters.Clear();
-                Character.GetCharactersInRange(player.GetCenterPoint(), 30f, allCharacters);
-                foreach (Character ch in allCharacters)
-                {
-                    if (ch != null && ch.m_faction == Character.Faction.Players && ch.IsPlayer())
-                    {
-                        // LackingImaginationV2Plugin.Log($"{ch.name}");
-                        UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("shaman_heal_aoe"), ch.transform.position, Quaternion.identity);
-                        ch.Heal(LackingImaginationGlobal.c_greydwarfshamanDubiousHealPlayer);
-                    }
-                    if (ch.GetBaseAI() != null && ch.m_faction == Character.Faction.Players || ch.GetBaseAI() != null && ch.m_tamed)
-                    {
-                        // LackingImaginationV2Plugin.Log($"{ch.name}");
-                        UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("shaman_heal_aoe"), ch.transform.position, Quaternion.identity);
-                        ch.Heal(ch.GetMaxHealth() * LackingImaginationGlobal.c_greydwarfshamanDubiousHealCreature);
-                    }
-                }
+                LackingImaginationV2Plugin.UseGuardianPower = false;
+                GreydwarfShamanController = true;
+                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                GreydwarfShamanController = false;
+
+                ScheduleHeal(player);
             }
             else
             {
                 player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            }
+        }
+        private static void ScheduleHeal(Player player)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleHealCoroutine(player));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleHealCoroutine(Player player)
+        {
+            yield return new WaitForSeconds(shotDelay);
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_greydwarf_shaman_heal"), player.transform.position, Quaternion.identity);
+            // simple heal (faction targeted heal)
+            List<Character> allCharacters = new List<Character>();
+            allCharacters.Clear();
+            Character.GetCharactersInRange(player.GetCenterPoint(), 30f, allCharacters);
+            foreach (Character ch in allCharacters)
+            {
+                if (ch != null && ch.m_faction == Character.Faction.Players && ch.IsPlayer())
+                {
+                    // LackingImaginationV2Plugin.Log($"{ch.name}");
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("shaman_heal_aoe"), ch.transform.position, Quaternion.identity);
+                    ch.Heal(LackingImaginationGlobal.c_greydwarfshamanDubiousHealPlayer);
+                }
+                if (ch.GetBaseAI() != null && ch.m_faction == Character.Faction.Players || ch.GetBaseAI() != null && ch.m_tamed)
+                {
+                    // LackingImaginationV2Plugin.Log($"{ch.name}");
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("shaman_heal_aoe"), ch.transform.position, Quaternion.identity);
+                    ch.Heal(ch.GetMaxHealth() * LackingImaginationGlobal.c_greydwarfshamanDubiousHealCreature);
+                }
             }
         }
     }

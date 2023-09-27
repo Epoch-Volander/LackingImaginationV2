@@ -356,9 +356,16 @@ namespace LackingImaginationV2
         // Animation Clips // Pulled from in game
         public static Animator creatureAnimatorGeirrhafa;
         public static AnimationClip creatureAnimationClipGeirrhafaIceNova;
+        public static AnimationClip creatureAnimationClipCultistSpray; // Flame Spell Attack
         public static Animator creatureAnimatorElder;
         public static AnimationClip creatureAnimationClipElderSummon;
-       
+        public static Animator creatureAnimatorFenring;
+        public static AnimationClip creatureAnimationClipFenringLeapAttack; //Leap Attack
+        public static Animator creatureAnimatorGreyShaman;
+        public static AnimationClip creatureAnimationClipGreyShamanHeal; //Standing 1H Cast Spell 01
+        public static Animator creatureAnimatorHaldor;
+        public static AnimationClip creatureAnimationClipHaldorGreet; //Greet
+        
         
         // Animation Clip swappers
         public static readonly Dictionary<string, AnimationClip> ExternalAnimations = new();
@@ -976,6 +983,24 @@ namespace LackingImaginationV2
             {
                 ["GuardianPower"] = "RootSummon",
             };
+            replacementMap["AttackSpray"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "AttackSpray",
+            };
+            replacementMap["FenringLeap"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "FenringLeap",
+            };
+            replacementMap["GreyShamanHeal"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "GreyShamanHeal",
+            };
+            replacementMap["HaldorGreet"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "HaldorGreet",
+            };
+            
+            
         }
         
 
@@ -999,20 +1024,55 @@ namespace LackingImaginationV2
                         if (clip.name == "Frost AoE Spell Attack 3 Burst") // Replace with the actual name of the clip you're looking for.
                         {
                             creatureAnimationClipGeirrhafaIceNova = clip;
-                            break; // Exit the loop once you've found the clip.
+                            // break; // Exit the loop once you've found the clip.
+                        }
+                        if (clip.name == "Flame Spell Attack") // Replace with the actual name of the clip you're looking for.
+                        {
+                            creatureAnimationClipCultistSpray = clip;
+                        }
+                        if (creatureAnimationClipGeirrhafaIceNova != null && creatureAnimationClipCultistSpray != null)
+                        {
+                            // LogWarning($"T1.");
+                            break;
                         }
                     }
                     // if (creatureAnimationClipGeirrhafaIceNova != null)
                     // {
                     //     LogWarning($"T1.");
                     // }
-                    
                     creatureAnimatorElder = ZNetScene.instance.GetPrefab("gd_king").gameObject.transform.Find("Visual").GetComponent<Animator>();
                     foreach (AnimationClip clip in creatureAnimatorElder.runtimeAnimatorController.animationClips)
                     {
                         if (clip.name == "Standing 1H Magic Attack 03") // Replace with the actual name of the clip you're looking for.
                         {
                             creatureAnimationClipElderSummon = clip;
+                            break; // Exit the loop once you've found the clip.
+                        }
+                    }
+                    creatureAnimatorFenring = ZNetScene.instance.GetPrefab("Fenring").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                    foreach (AnimationClip clip in creatureAnimatorFenring.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name == "LeapAttack") // Replace with the actual name of the clip you're looking for.
+                        {
+                            creatureAnimationClipFenringLeapAttack = clip;
+                            break; // Exit the loop once you've found the clip.
+                        }
+                    }
+                    creatureAnimatorGreyShaman = ZNetScene.instance.GetPrefab("Greydwarf_Shaman").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                    foreach (AnimationClip clip in creatureAnimatorGreyShaman.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name == "Standing 1H Cast Spell 01") // Replace with the actual name of the clip you're looking for.
+                        {
+                            creatureAnimationClipGreyShamanHeal = clip;
+                            break; // Exit the loop once you've found the clip.
+                        }
+                    }
+                    creatureAnimatorHaldor = ZNetScene.instance.GetPrefab("Haldor").gameObject.transform.Find("HaldorTheTrader").GetComponent<Animator>();
+                    foreach (AnimationClip clip in creatureAnimatorHaldor.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name == "Greet") // Replace with the actual name of the clip you're looking for.
+                        {
+                            creatureAnimationClipHaldorGreet = clip;
                             break; // Exit the loop once you've found the clip.
                         }
                     }
@@ -1033,7 +1093,15 @@ namespace LackingImaginationV2
                     ExternalAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
                     AnimationClip copyOfcreatureAnimationClipElderSummon = Instantiate(creatureAnimationClipElderSummon);
                     ExternalAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
-                  
+                    AnimationClip copyOfcreatureAnimationClipCultistSpray = Instantiate(creatureAnimationClipCultistSpray);
+                    ExternalAnimations["AttackSpray"] = copyOfcreatureAnimationClipCultistSpray;
+                    AnimationClip copyOfcreatureAnimationClipFenringLeapAttack = Instantiate(creatureAnimationClipFenringLeapAttack);
+                    ExternalAnimations["FenringLeap"] = copyOfcreatureAnimationClipFenringLeapAttack;
+                    AnimationClip copyOfcreatureAnimationClipGreyShamanHeal = Instantiate(creatureAnimationClipGreyShamanHeal);
+                    ExternalAnimations["GreyShamanHeal"] = copyOfcreatureAnimationClipGreyShamanHeal;
+                    AnimationClip copyOfcreatureAnimationClipHaldorGreet = Instantiate(creatureAnimationClipHaldorGreet);
+                    ExternalAnimations["HaldorGreet"] = copyOfcreatureAnimationClipHaldorGreet;
+                    
                     LackingImaginationV2Plugin.InitAnimation();
 
                     if (CustomRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
@@ -1041,7 +1109,11 @@ namespace LackingImaginationV2
                         CustomRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
                         CustomRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
                         CustomRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
-                       
+                        CustomRuntimeControllers["AttackSprayControl"] = MakeAOC(replacementMap["AttackSpray"], __instance.m_animator.runtimeAnimatorController);
+                        CustomRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);//
+                        CustomRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
+                        CustomRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);//
+
                     }
                 }
             }
@@ -1095,6 +1167,16 @@ namespace LackingImaginationV2
                     {
                         controllerName = "RootSummonControl";
                     }
+                    if (xModerEssence.ModerController)
+                    {
+                        controllerName = "AttackSprayControl";
+                    }
+                    if (xGreydwarfShamanEssence.GreydwarfShamanController)
+                    {
+                        controllerName = "GreyShamanHealControl";
+                    }
+                    
+                    
                    
                     // in case this is called before the first Player.Start
                     if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
