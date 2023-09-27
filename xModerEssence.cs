@@ -221,15 +221,11 @@ namespace LackingImaginationV2
                     yield return new WaitForSeconds(shotDelay);
 
                     projectilesPerRow--;
-                    
-                    // ScheduleProjectiles(player, rows, projectilesPerRow, initialConeAngle);
                 }
                 else
                 {
                     rows--;
                     projectilesPerRow = rows;
-                    
-                    // ScheduleProjectiles(player, rows, projectilesPerRow, initialConeAngle);
                 }
             }
         }

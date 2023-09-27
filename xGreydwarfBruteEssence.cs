@@ -67,9 +67,7 @@ namespace LackingImaginationV2
                 // //     }
                 // }
 
-
-
-// status effect no timer, empowered attack, double effect for clubs, racid remains on hit cloud effect, grey and crit effect
+                // status effect no timer, empowered attack, double effect for clubs, racid remains on hit cloud effect, grey and crit effect
 
             }
             else
@@ -124,8 +122,7 @@ namespace LackingImaginationV2
                             
                             hit.ApplyModifier(LackingImaginationGlobal.c_greydwarfbruteBashMultiplier);
                             
-                            StatusEffect se_bash = Player.m_localPlayer.GetSEMan().GetStatusEffect("SE_Bash".GetStableHashCode());
-                            Player.m_localPlayer.GetSEMan().RemoveStatusEffect(se_bash);
+                            Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
                             
                             UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                             
@@ -143,11 +140,17 @@ namespace LackingImaginationV2
         public static class GreydwarfBrute_GetTotalFoodValue_Patch
         {
             [HarmonyPriority(Priority.High)]
-            public static void Postfix( ref float hp)
+            public static void Postfix(Player __instance, ref float hp)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_greydwarfbrute_essence"))
                 {
                     hp += 25f;
+                }
+                if (!EssenceItemData.equipedEssence.Contains("$item_greydwarfbrute_essence") && __instance.GetSEMan().HaveStatusEffect("SE_Bash"))
+                {
+                    Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
+
+                    UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                 }
             }
         }

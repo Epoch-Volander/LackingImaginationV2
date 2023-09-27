@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xFulingEssencePassive
     {
+        private static float equipDelay = 0.5f;
 
         [HarmonyPatch(typeof(Projectile), "SpawnOnHit")]
         public static class Fuling_SpawnOnHit_Patch
@@ -67,7 +69,8 @@ namespace LackingImaginationV2
                         if (Player.m_localPlayer.m_inventory.CanAddItem(__instance.m_spawnItem)) //.m_dropPrefab.GetComponent<ItemDrop>().m_itemData
                         {
                             Player.m_localPlayer.m_inventory.AddItem(__instance.m_spawnItem);
-                            Player.m_localPlayer.EquipItem(__instance.m_spawnItem);
+                            // Player.m_localPlayer.EquipItem(__instance.m_spawnItem);
+                            ScheduleEquip(ref __instance.m_spawnItem);
                         }
                         else
                         {
@@ -78,10 +81,20 @@ namespace LackingImaginationV2
                         // LackingImaginationV2Plugin.Log($"Fuling {__instance.m_spawnItem.m_dropPrefab.GetComponent<ItemDrop>().m_itemData.m_shared.m_skillType}");d
                     }
                 }
-
             }
         }
 
+        private static void ScheduleEquip(ref ItemDrop.ItemData spear)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleEquipCoroutine(spear));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleEquipCoroutine(ItemDrop.ItemData spear)
+        {
+            yield return new WaitForSeconds(equipDelay);
+            
+            Player.m_localPlayer.EquipItem(spear);
+        }
 
         [HarmonyPatch(typeof(Character), "RPC_Damage")]
         class Fuling_RPC_Damage_Patch
@@ -165,7 +178,7 @@ namespace LackingImaginationV2
         public static class Fuling_GetTotalFoodValue_Patch
         {
             [HarmonyPriority(Priority.High)]
-            public static void Postfix(ref float stamina)
+            public static void Postfix(Player __instance, ref float stamina)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_goblin_essence"))
                 {
@@ -177,7 +190,12 @@ namespace LackingImaginationV2
                     {
                         stamina -= (stamina * LackingImaginationGlobal.c_fulingLonginusPassiveDemotivated);
                     }
+                }
+                if (!EssenceItemData.equipedEssence.Contains("$item_goblin_essence") && __instance.GetSEMan().HaveStatusEffect("SE_Longinus"))
+                {
+                    Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
 
+                    UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
                 }
             }
         }
