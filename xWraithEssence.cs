@@ -99,7 +99,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class  xWraithEssencePassive
     {
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class Wraith_CustomFixedUpdate_Patch  
         {
             public static void Postfix(Character __instance)
@@ -120,7 +120,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "GetBodyArmor")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Wraith_GetBodyArmor_Patch
         {
             public static void Postfix(ref float __result)
@@ -136,7 +136,7 @@ namespace LackingImaginationV2
             }
         }
         
-         [HarmonyPatch(typeof(Character), "RPC_Damage")]
+         [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Wraith_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)

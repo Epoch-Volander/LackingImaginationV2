@@ -17,16 +17,16 @@ namespace LackingImaginationV2
         
         public static float m_baseTTL = LackingImaginationUtilities.xWriathCooldownTime - 10f;
 
-        public bool hasCollided;
+        private bool hasCollided;
         // public Collider IgnoreCollision;
-        public List<Collider> CollisionList = new List<Collider>();
+        private List<Collider> CollisionList = new List<Collider>();
         // private float delayTimer = 0.4f; // Delay timer set to 1 second.
         // private bool isDelaying; // Flag to track whether we are in the delay period.
 
-        public int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
-        public int collisionMaskDungeon = LayerMask.GetMask("piece", "piece_nonsolid", "static_solid", "Default_small", "vehicle", "character");
+        private int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
+        private int collisionMaskDungeon = LayerMask.GetMask("piece", "piece_nonsolid", "static_solid", "Default_small", "vehicle", "character");
 
-        public float Duration = m_baseTTL - 2f;
+        private float Duration = m_baseTTL - 2f;
         private float m_timer = 1f;
 
         public SE_TwinSouls()
@@ -97,8 +97,7 @@ namespace LackingImaginationV2
                         {
                             if(col != null && col != Player.m_localPlayer.m_collider)  Physics.IgnoreCollision(Player.m_localPlayer.m_collider, col, false);
                         }
-                        if(CollisionList.Count > 20) CollisionList.Clear();
-                      
+                       
                         hasCollided = false;
                     }
                 }
@@ -109,6 +108,7 @@ namespace LackingImaginationV2
                 {
                     if(col != null && col != Player.m_localPlayer.m_collider) Physics.IgnoreCollision(Player.m_localPlayer.m_collider, col, false);
                 }
+                CollisionList.Clear();
             }
 
         }

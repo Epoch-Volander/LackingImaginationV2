@@ -207,7 +207,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xGeirrhafaEssencePassive
     {
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         class Geirrhafa_GetTotalFoodValue_Patch
         {
             public static void Postfix(Player __instance, ref float eitr)
@@ -219,7 +219,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Geirrhafa_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)

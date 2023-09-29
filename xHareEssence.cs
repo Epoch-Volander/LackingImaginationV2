@@ -52,8 +52,8 @@ namespace LackingImaginationV2
     {
         public static int canDoubleJump;
         
-        [HarmonyPatch(typeof(Player), "Update", null)]
-        public class Hare_AbilityInput_Postfix
+        [HarmonyPatch(typeof(Player), nameof(Player.Update), null)]
+        public class Hare_Update_Postfix
         {
             public static void Postfix(Player __instance)
             {
@@ -69,7 +69,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "GetBodyArmor")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Hare_GetBodyArmor_Patch
         {
             public static void Postfix(ref float __result)
@@ -80,7 +80,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        [HarmonyPatch(typeof(Player), "UpdateMovementModifier")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateMovementModifier))]
         public static class Hare_UpdateMovementModifier_Patch
         {
             public static void Postfix(Player __instance)

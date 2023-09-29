@@ -18,7 +18,7 @@ namespace LackingImaginationV2
     public class xModerEssence  //got to do dragon breath
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
-        private static int Script_Projectile_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+        private static int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
         public static bool ModerController = false;
         
@@ -96,7 +96,7 @@ namespace LackingImaginationV2
             float capsuleHeight = 37f; // Height of the capsule (equals the ray length)
 
             // Perform the capsule overlap check with the specified layer mask
-            Collider[] colliders = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + player.transform.forward * capsuleHeight, capsuleRadius, Script_Projectile_Layermask);
+            Collider[] colliders = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + player.transform.forward * capsuleHeight, capsuleRadius, Script_Breath_Layermask);
 
             foreach (Collider collider in colliders)
             {
@@ -234,7 +234,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xModerEssencePassive
     {
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Moder_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)
@@ -261,7 +261,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(EnvMan), "IsCold")]
+        [HarmonyPatch(typeof(EnvMan), nameof(EnvMan.IsCold))]
         public static class Moder_IsCold_Patch
         {
             public static void Postfix(ref bool __result)
@@ -273,7 +273,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "GetDamageModifiers")]
+        [HarmonyPatch(typeof(Character), nameof(Character.GetDamageModifiers))]
         public static class Moder_GetDamageModifiers_Patch
         {
             public static void Postfix(ref HitData.DamageModifiers __result)
@@ -285,7 +285,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Humanoid), "UseItem")]
+        [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UseItem))]
         public static class Moder_UseItem_Patch
         {
             public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)

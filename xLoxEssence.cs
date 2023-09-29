@@ -70,7 +70,7 @@ namespace LackingImaginationV2
         public static List<string> LoxEaten = new List<string>();
 
         
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         class Lox_GetTotalFoodValue_Patch
         {
             public static void Prefix(Player __instance, ref float hp)
@@ -99,7 +99,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "EatFood")] 
+        [HarmonyPatch(typeof(Player), nameof(Player.EatFood))] 
         class Lox_EatFood_Patch
         {
             static void Postfix(Player __instance, ref ItemDrop.ItemData item)
@@ -119,7 +119,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateFood")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateFood))]
         class Lox_UpdateFood_Patch
         {
             static void Prefix(Player __instance)
@@ -135,7 +135,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Player), "ClearFood")]
+        [HarmonyPatch(typeof(Player), nameof(Player.ClearFood))]
         class Lox_ClearFood_Patch
         {
             static void Postfix(Player __instance)
@@ -144,7 +144,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "RemoveOneFood")]
+        [HarmonyPatch(typeof(Player), nameof(Player.RemoveOneFood))]
         class Lox_RemoveOneFood_Patch
         {
             static void Prefix(Player __instance)

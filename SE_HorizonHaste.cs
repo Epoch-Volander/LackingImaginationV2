@@ -16,8 +16,8 @@ namespace LackingImaginationV2
 
         [Header("SE_HorizonHaste")]
         public static float m_baseTTL = LackingImaginationUtilities.xDeerCooldownTime -5f;
-        public float speedDuration = LackingImaginationUtilities.xDeerCooldownTime -5f;
-        public float speedAmount = 1.5f;
+        private float speedDuration = LackingImaginationUtilities.xDeerCooldownTime -5f;
+        private float speedAmount = 1.5f;
         private float m_timer = 1f;
         
         public SE_HorizonHaste()

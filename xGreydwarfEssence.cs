@@ -118,7 +118,7 @@ namespace LackingImaginationV2
     {
         public static List<string> GreydwarfStats = new List<string>(){"off"};
         
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         class Greydwarf_GetTotalFoodValue_Patch
         {
             public static void Postfix(Player __instance)
@@ -139,7 +139,7 @@ namespace LackingImaginationV2
             }
         }
     }
-    [HarmonyPatch(typeof(Player), "UpdateMovementModifier")]
+    [HarmonyPatch(typeof(Player), nameof(Player.UpdateMovementModifier))]
     public static class Greydwarf_UpdateMovementModifier_Patch
     {
         public static void Postfix(Player __instance)
@@ -150,7 +150,7 @@ namespace LackingImaginationV2
             }
         }
     }
-    [HarmonyPatch(typeof(Character), "RPC_Damage")]
+    [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
     public static class Greydwarf_RPC_Damage_Patch
     {
         public static void Prefix(Character __instance, ref HitData hit)

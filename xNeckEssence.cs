@@ -14,10 +14,9 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xNeckEssence
+    public class xNeckEssence //make the water dash smoother
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
-
         
         public static string Ability_Name = "Splash";
         public static void Process_Input(Player player, int position)
@@ -124,7 +123,7 @@ namespace LackingImaginationV2
     {
         public static List<string> NeckStats = new List<string>(){"off"};
         
-        [HarmonyPatch(typeof(Character), "UpdateSwimming")]
+        [HarmonyPatch(typeof(Character), nameof(Character.UpdateSwimming))]
         public static class Neck_UpdateSwimming_Patch
         {
             public static void Prefix(Character __instance)
@@ -147,7 +146,7 @@ namespace LackingImaginationV2
         
         //negative
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Neck_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)

@@ -159,7 +159,7 @@ namespace LackingImaginationV2
     public static class xElderEssencePassive
     {
         
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class Elder_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
@@ -190,7 +190,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateFood")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateFood))]
         public static class Elder_UpdateFood_Patch
         {
             public static void Postfix(Player __instance)// regen
@@ -209,7 +209,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Elder_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance,ref float dt)

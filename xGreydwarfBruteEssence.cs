@@ -83,7 +83,7 @@ namespace LackingImaginationV2
     public class xGreydwarfBruteEssencePassive
     {
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class GreydwarfBrute_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)
@@ -136,7 +136,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class GreydwarfBrute_GetTotalFoodValue_Patch
         {
             [HarmonyPriority(Priority.High)]

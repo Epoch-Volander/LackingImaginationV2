@@ -135,7 +135,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xGjallEssencePassive
     {
-        [HarmonyPatch(typeof(Projectile), "FixedUpdate")]
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.FixedUpdate))]
         public class Gjall_FixedUpdate_Patch
         {
             
@@ -171,7 +171,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Projectile), "SpawnOnHit")]
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
         public static class Gjall_SpawnOnHit_Patch
         {
             public static void Postfix(Projectile __instance, ref GameObject go)
@@ -208,7 +208,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Player), "GetBodyArmor")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Gjall_GetBodyArmor_Patch
         {
             public static void Postfix(ref float __result)
@@ -220,7 +220,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Gjall_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)

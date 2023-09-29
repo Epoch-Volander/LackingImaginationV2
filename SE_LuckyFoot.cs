@@ -16,7 +16,7 @@ namespace LackingImaginationV2
         
         [Header("SE_LuckyFoot")]
         public static float m_baseTTL = LackingImaginationUtilities.xHareCooldownTime * 0.5f;
-        public float speedAmount = 2f;
+        private float speedAmount = 2f;
 
         public SE_LuckyFoot()
         {

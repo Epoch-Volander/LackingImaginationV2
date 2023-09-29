@@ -114,7 +114,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xBoneMassEssencePassive
     {
-        [HarmonyPatch(typeof(Projectile), "SpawnOnHit")]
+        [HarmonyPatch(typeof(Projectile),  nameof(Projectile.SpawnOnHit))]
         public static class BoneMass_SpawnOnHit_Patch
         {
             public static void Postfix(Projectile __instance, ref GameObject go)
@@ -152,7 +152,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class BoneMass_RPC_Damage_Patch
         {
             public static void Postfix(Character __instance, ref HitData hit)

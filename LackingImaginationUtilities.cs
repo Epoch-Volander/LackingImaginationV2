@@ -206,7 +206,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_ulv_essence")
             {
-                xUlvEssence.Process_Input(Player.m_localPlayer);
+                xUlvEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_serpent_essence")
@@ -291,7 +291,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_stonegolem_essence")
             {
-                xStoneGolemEssence.Process_Input(Player.m_localPlayer);
+                xStoneGolemEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_troll_essence")
@@ -662,25 +662,18 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 1f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
              }
-         }  
-         
-         
-         
-         
-         
-         
-         
-         
-         
+         }
          public static float xBoarCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
+         
+         
          
          
          

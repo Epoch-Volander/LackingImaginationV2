@@ -1286,9 +1286,36 @@ namespace LackingImaginationV2
             }
         }
         
-        
-        
-        
+        //boar
+        public static float c_boarRecklessCharge
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_boarRecklessCharge"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
+        public static float c_boarRecklessChargePassive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_boarRecklessChargePassive"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
+
         
         
         

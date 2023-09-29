@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -19,6 +20,12 @@ namespace LackingImaginationV2
     public class xEikthyrEssence 
     {
         public static string Ability_Name = "Blitz";
+        
+        public static bool EikthyrController = false;
+        
+        private static int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+
+        private static float lightningDelay = 1f;
 
         // public static float xxx = Player.m_localPlayer.GetSkillLevel(Skills.SkillType.Clubs);
         public static void Process_Input(Player player, int position)
@@ -35,87 +42,106 @@ namespace LackingImaginationV2
                 //Effects, animations, and sounds
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_eikthyr_death"), player.transform.position, Quaternion.identity);
-                ZSyncAnimation animation = ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player));
-                animation.SetTrigger("Emote_point");
-                
-                // Emote.DoEmote(Emotes.Point);
-                /*.SetTrigger("Emote_point")*/
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_eikthyr_forwardshockwave"), player.transform.position, player.transform.rotation, player.transform);
+               
+                LackingImaginationV2Plugin.UseGuardianPower = false;
+                EikthyrController = true;
+                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                EikthyrController = false;
 
-                // Assuming player is a reference to the player GameObject
-                Vector3 coneDirection = player.transform.forward;
-                float coneAngle = 70f; // Adjust the cone angle as needed
-                float coneLength = 150f; // Adjust the cone length as needed
-                int rayCount = 20; // Adjust the number of rays vertically
+                ScheduleLightning(player);
 
-                RaycastHit[] hits;
-                List<Vector3> rayDirections = GenerateRayDirections(coneDirection, rayCount, coneAngle * 0.5f);
-
-                foreach (Vector3 rayDir in rayDirections)
-                {
-                    hits = Physics.RaycastAll(player.GetEyePoint(), rayDir, coneLength);
-
-                    foreach (RaycastHit hit in hits)
-                    {
-                        Vector3 toObject = hit.transform.position - player.transform.position;
-                        float angle = Vector3.Angle(coneDirection, toObject);
-                        if (angle <= coneAngle * 0.5f)
-                        {
-                            // Object is within the cone's angle
-                            // Do something with the detected object (hit.transform)
-                            if (hit.transform.gameObject.GetComponent<Character>() != null)
-                            {
-                                Character ch = hit.transform.gameObject.GetComponent<Character>();
-                                   
-                                HitData hitData = new HitData();
-                                hitData.m_damage.m_lightning = UnityEngine.Random.Range(2f, 5f);
-                                hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_eikthyrBlitz));
-                                hitData.m_pushForce = 0f;
-                                hitData.SetAttacker(player);
-                                hitData.m_point = ch.GetEyePoint();
-                                    
-                                ch.Damage(hitData);
-                                    
-                            }
-                        }
-                    }
-                }
-
-                List<Character> allCharacters = new List<Character>();
-                allCharacters.Clear();
-                Character.GetCharactersInRange(player.transform.position, 4f, allCharacters);
-                foreach (Character ch in allCharacters)
-                {
-                    if (BaseAI.IsEnemy(player, ch))
-                    {
-                        HitData hitData = new HitData();
-                        hitData.m_damage.m_lightning = UnityEngine.Random.Range(10f, 15f);
-                        hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_eikthyrBlitz));
-                        hitData.SetAttacker(player);
-                        hitData.m_point = ch.GetEyePoint();
-                        ch.Damage(hitData);
-                    }
-                }
-                
-                // Generates ray directions within the specified cone angle
-                List<Vector3> GenerateRayDirections(Vector3 coneDirection, int rayCount, float maxAngle)
-                {
-                    List<Vector3> rayDirections = new List<Vector3>();
-
-                    for (int i = 0; i < rayCount; i++)
-                    {
-                        float angle = Mathf.Lerp(-maxAngle, maxAngle, (float)i / (float)(rayCount - 1));
-                        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
-                        rayDirections.Add(rotation * coneDirection);
-                    }
-
-                    return rayDirections;
-                }
+                // // Assuming player is a reference to the player GameObject
+                // Vector3 coneDirection = player.transform.forward;
+                // float coneAngle = 70f; // Adjust the cone angle as needed
+                // float coneLength = 150f; // Adjust the cone length as needed
+                // int rayCount = 20; // Adjust the number of rays vertically
+                //
+                // RaycastHit[] hits;
+                // List<Vector3> rayDirections = GenerateRayDirections(coneDirection, rayCount, coneAngle * 0.5f);
+                //
+                // foreach (Vector3 rayDir in rayDirections)
+                // {
+                //     hits = Physics.RaycastAll(player.GetEyePoint(), rayDir, coneLength);
+                //
+                //     foreach (RaycastHit hit in hits)
+                //     {
+                //         Vector3 toObject = hit.transform.position - player.transform.position;
+                //         float angle = Vector3.Angle(coneDirection, toObject);
+                //         if (angle <= coneAngle * 0.5f)
+                //         {
+                //             // Object is within the cone's angle
+                //             // Do something with the detected object (hit.transform)
+                //             if (hit.transform.gameObject.GetComponent<Character>() != null)
+                //             {
+                //                 Character ch = hit.transform.gameObject.GetComponent<Character>();
+                //                    
+                //                 HitData hitData = new HitData();
+                //                 hitData.m_damage.m_lightning = UnityEngine.Random.Range(2f, 5f);
+                //                 hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_eikthyrBlitz));
+                //                 hitData.m_pushForce = 0f;
+                //                 hitData.SetAttacker(player);
+                //                 hitData.m_point = ch.GetEyePoint();
+                //                     
+                //                 ch.Damage(hitData);
+                //                     
+                //             }
+                //         }
+                //     }
+                // }
+                //
+                // List<Character> allCharacters = new List<Character>();
+                // allCharacters.Clear();
+                // Character.GetCharactersInRange(player.transform.position, 4f, allCharacters);
+                // foreach (Character ch in allCharacters)
+                // {
+                //     if (BaseAI.IsEnemy(player, ch))
+                //     {
+                //         HitData hitData = new HitData();
+                //         hitData.m_damage.m_lightning = UnityEngine.Random.Range(10f, 15f);
+                //         hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_eikthyrBlitz));
+                //         hitData.SetAttacker(player);
+                //         hitData.m_point = ch.GetEyePoint();
+                //         ch.Damage(hitData);
+                //     }
+                // }
+                //
+                // // Generates ray directions within the specified cone angle
+                // List<Vector3> GenerateRayDirections(Vector3 coneDirection, int rayCount, float maxAngle)
+                // {
+                //     List<Vector3> rayDirections = new List<Vector3>();
+                //
+                //     for (int i = 0; i < rayCount; i++)
+                //     {
+                //         float angle = Mathf.Lerp(-maxAngle, maxAngle, (float)i / (float)(rayCount - 1));
+                //         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+                //         rayDirections.Add(rotation * coneDirection);
+                //     }
+                //
+                //     return rayDirections;
+                // }
             }
             else
             {
                 player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
             }
+        }
+        private static void ScheduleLightning(Player player)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleLightningCoroutine(player));
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleLightningCoroutine(Player player)
+        {
+            yield return new WaitForSeconds(lightningDelay);
+            
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_eikthyr_forwardshockwave"), player.transform.position, player.transform.rotation, player.transform);
+
+
+            
+            
+            
+            
         }
     }
 
@@ -123,7 +149,7 @@ namespace LackingImaginationV2
     public static class xEikthyrEssencePassive
     {
 
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), (nameof(Character.RPC_Damage)))]
         class Eikthyr_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)

@@ -139,7 +139,7 @@ namespace LackingImaginationV2
     {
         public static List<string> FulingShamanStats = new List<string>(){"off", "0"};
         
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         class FulingShaman_GetTotalFoodValue_Patch
         {
             public static void Postfix(Player __instance, ref float eitr)

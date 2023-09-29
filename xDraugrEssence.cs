@@ -66,7 +66,7 @@ namespace LackingImaginationV2
         
         public static List<string> DraugrStats = new List<string>(){"off"};
 
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Draugr_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -91,7 +91,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         class Draugr_GetTotalFoodValue_Patch
         {
             public static void Postfix(Player __instance)

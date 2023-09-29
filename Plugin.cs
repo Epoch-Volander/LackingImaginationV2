@@ -368,11 +368,15 @@ namespace LackingImaginationV2
         public static Animator creatureAnimatorElder;
         public static AnimationClip creatureAnimationClipElderSummon;
         public static Animator creatureAnimatorFenring;
-        public static AnimationClip creatureAnimationClipFenringLeapAttack; //Leap Attack
+        public static AnimationClip creatureAnimationClipFenringLeapAttack; //Leap Attack//
         public static Animator creatureAnimatorGreyShaman;
-        public static AnimationClip creatureAnimationClipGreyShamanHeal; //Standing 1H Cast Spell 01
+        public static AnimationClip creatureAnimationClipGreyShamanHeal; //Standing 1H Cast Spell 01 
         public static Animator creatureAnimatorHaldor;
-        public static AnimationClip creatureAnimationClipHaldorGreet; //Greet
+        public static AnimationClip creatureAnimationClipHaldorGreet; //Greet//
+        public static Animator creatureAnimatorPlayer;
+        public static AnimationClip creatureAnimationClipPlayerEmoteCower; 
+        public static AnimationClip creatureAnimationClipPlayerMace2; 
+        public static AnimationClip creatureAnimationClipPlayerEmotePoint; 
         
         
         // Animation Clip swappers
@@ -1011,7 +1015,7 @@ namespace LackingImaginationV2
             replacementMap["IceNova"] = new Dictionary<string, string>
             {
                 ["GuardianPower"] = "IceNova",
-                // ["Block idle"] = "BlockExternal",
+                // [original] = "ExternalAnimations",
             };
             replacementMap["RootSummon"] = new Dictionary<string, string>
             {
@@ -1033,7 +1037,18 @@ namespace LackingImaginationV2
             {
                 ["GuardianPower"] = "HaldorGreet",
             };
-            
+            replacementMap["PlayerCowerEmote"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "PlayerCower",
+            };
+            replacementMap["PlayerPointEmote"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "PlayerPoint",
+            };
+            replacementMap["PlayerMace2"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "PlayerMace2",
+            };
             
         }
         
@@ -1077,43 +1092,58 @@ namespace LackingImaginationV2
                     creatureAnimatorElder = ZNetScene.instance.GetPrefab("gd_king").gameObject.transform.Find("Visual").GetComponent<Animator>();
                     foreach (AnimationClip clip in creatureAnimatorElder.runtimeAnimatorController.animationClips)
                     {
-                        if (clip.name == "Standing 1H Magic Attack 03") // Replace with the actual name of the clip you're looking for.
+                        if (clip.name == "Standing 1H Magic Attack 03") 
                         {
                             creatureAnimationClipElderSummon = clip;
-                            break; // Exit the loop once you've found the clip.
+                            break; 
                         }
                     }
                     creatureAnimatorFenring = ZNetScene.instance.GetPrefab("Fenring").gameObject.transform.Find("Visual").GetComponent<Animator>();
                     foreach (AnimationClip clip in creatureAnimatorFenring.runtimeAnimatorController.animationClips)
                     {
-                        if (clip.name == "LeapAttack") // Replace with the actual name of the clip you're looking for.
+                        if (clip.name == "LeapAttack") 
                         {
                             creatureAnimationClipFenringLeapAttack = clip;
-                            break; // Exit the loop once you've found the clip.
+                            break; 
                         }
                     }
                     creatureAnimatorGreyShaman = ZNetScene.instance.GetPrefab("Greydwarf_Shaman").gameObject.transform.Find("Visual").GetComponent<Animator>();
                     foreach (AnimationClip clip in creatureAnimatorGreyShaman.runtimeAnimatorController.animationClips)
                     {
-                        if (clip.name == "Standing 1H Cast Spell 01") // Replace with the actual name of the clip you're looking for.
+                        if (clip.name == "Standing 1H Cast Spell 01") 
                         {
                             creatureAnimationClipGreyShamanHeal = clip;
-                            break; // Exit the loop once you've found the clip.
+                            break; 
                         }
                     }
                     creatureAnimatorHaldor = ZNetScene.instance.GetPrefab("Haldor").gameObject.transform.Find("HaldorTheTrader").GetComponent<Animator>();
                     foreach (AnimationClip clip in creatureAnimatorHaldor.runtimeAnimatorController.animationClips)
                     {
-                        if (clip.name == "Greet") // Replace with the actual name of the clip you're looking for.
+                        if (clip.name == "Greet") 
                         {
                             creatureAnimationClipHaldorGreet = clip;
-                            break; // Exit the loop once you've found the clip.
+                            break; 
                         }
                     }
+                    creatureAnimatorPlayer = ZNetScene.instance.GetPrefab("Player").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                    foreach (AnimationClip clip in creatureAnimatorPlayer.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name == "Cower") creatureAnimationClipPlayerEmoteCower = clip;
+                        
+                        if (clip.name == "Point") creatureAnimationClipPlayerEmotePoint = clip;
+                        
+                        if (clip.name == "MaceAltAttack") creatureAnimationClipPlayerMace2 = clip;
+                        
+                        if (creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null && creatureAnimationClipPlayerMace2 != null)
+                        {
+                            break;
+                        }
+                    }
+                    
                 }
             }
         }
-        
+         
         [HarmonyPatch(typeof(Player), nameof(Player.Start))]
         private static class Patch_Player_Start
         {
@@ -1135,6 +1165,14 @@ namespace LackingImaginationV2
                     ExternalAnimations["GreyShamanHeal"] = copyOfcreatureAnimationClipGreyShamanHeal;
                     AnimationClip copyOfcreatureAnimationClipHaldorGreet = Instantiate(creatureAnimationClipHaldorGreet);
                     ExternalAnimations["HaldorGreet"] = copyOfcreatureAnimationClipHaldorGreet;
+                    AnimationClip copyOfcreatureAnimationClipPlayerEmoteCower = Instantiate(creatureAnimationClipPlayerEmoteCower);
+                    ExternalAnimations["PlayerCower"] = copyOfcreatureAnimationClipPlayerEmoteCower;
+                    AnimationClip copyOfcreatureAnimationClipPlayerEmotePoint = Instantiate(creatureAnimationClipPlayerEmotePoint);
+                    ExternalAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
+                    AnimationClip copyOfcreatureAnimationClipPlayerMace2 = Instantiate(creatureAnimationClipPlayerMace2);
+                    ExternalAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
+                    
+                    
                     
                     LackingImaginationV2Plugin.InitAnimation();
 
@@ -1147,7 +1185,11 @@ namespace LackingImaginationV2
                         CustomRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);//
                         CustomRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
                         CustomRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);//
+                        CustomRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
+                        CustomRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
+                        CustomRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
 
+                        
                     }
                 }
             }
@@ -1161,7 +1203,6 @@ namespace LackingImaginationV2
                 string name = animation.name;
                 if (replacement.TryGetValue(name, out string value))
                 {
-                    // LogWarning($"T8.{name}");
                     AnimationClip newClip = Instantiate(ExternalAnimations[value]);
                     newClip.name = name;
                     anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, newClip));
@@ -1209,8 +1250,18 @@ namespace LackingImaginationV2
                     {
                         controllerName = "GreyShamanHealControl";
                     }
-                    
-                    
+                    if (xBoarEssence.BoarController)
+                    {
+                        controllerName = "PlayerCowerControl";
+                    }
+                    if (xEikthyrEssence.EikthyrController)
+                    {
+                        controllerName = "PlayerPointControl";
+                    }
+                    if (xCultistEssence.CultistController)
+                    {
+                        controllerName = "PlayerMace2Control";
+                    }
                    
                     // in case this is called before the first Player.Start
                     if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
@@ -1242,7 +1293,7 @@ namespace LackingImaginationV2
         int maxJumps = xBlobEssencePassive.canDoubleJump + xGrowthEssencePassive.canDoubleJump;
         public static int jumpCount = 0;
 
-        [HarmonyPatch(typeof(Player), "Update", null)]
+        [HarmonyPatch(typeof(Player), (nameof(Player.Update)), null)]
         public class AbilityInput_Postfix
         {
             public static bool Prefix(Player __instance, ref float ___m_maxAirAltitude, ref Rigidbody ___m_body, ref float ___m_lastGroundTouch /*,ref Animator ___m_animator, float ___m_waterLevel*/)

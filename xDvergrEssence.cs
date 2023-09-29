@@ -28,7 +28,7 @@ namespace LackingImaginationV2
         private static GameObject GO_RandomizeIceProjectile;        
         private static Projectile P_RandomizeIceProjectile;
        
-        public static bool Eitr_Pay;
+        private static bool Eitr_Pay;
         private static float shotDelay = 0.3f;
         
 
@@ -215,9 +215,8 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xDvergrEssencePassive
     {
-        
         // bonus eitr, bonus crossbow dmg
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Dvergr_GetTotalFoodValue_Patch
         {
             public static void Postfix( ref float eitr)
@@ -228,7 +227,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class Dvergr_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)

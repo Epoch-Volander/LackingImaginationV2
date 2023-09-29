@@ -57,7 +57,7 @@ namespace LackingImaginationV2
     {
         private static float equipDelay = 0.5f;
 
-        [HarmonyPatch(typeof(Projectile), "SpawnOnHit")]
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
         public static class Fuling_SpawnOnHit_Patch
         {
             public static void Prefix(Projectile __instance)
@@ -96,7 +96,7 @@ namespace LackingImaginationV2
             Player.m_localPlayer.EquipItem(spear);
         }
 
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class Fuling_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)
@@ -174,7 +174,7 @@ namespace LackingImaginationV2
         }
 
 
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Fuling_GetTotalFoodValue_Patch
         {
             [HarmonyPriority(Priority.High)]

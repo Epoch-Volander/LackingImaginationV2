@@ -110,7 +110,7 @@ namespace LackingImaginationV2
     {
         public static int canDoubleJump;
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Growth_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance,ref float dt)
@@ -127,7 +127,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class Growth_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)
@@ -164,8 +164,8 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "Update", null)]
-        public class Growth_AbilityInput_Patch
+        [HarmonyPatch(typeof(Player), nameof(Player.Update), null)]
+        public class Growth_Update_Patch
         {
             public static void Postfix(Player __instance)
             {

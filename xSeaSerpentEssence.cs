@@ -91,13 +91,13 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xSeaSerpentEssencePassive
     {
-        public static List<Character> Fish = new List<Character>();
-        public static List<float> FishTImer = new List<float>();
-        public static Vector3 impactLocation;
+        private static List<Character> Fish = new List<Character>();
+        private static List<float> FishTImer = new List<float>();
+        private static Vector3 impactLocation;
         public static float FishQuality = 0.0f;
 
         public static List<ItemDrop.ItemData> allCravings = new List<ItemDrop.ItemData>() { };
-        public static Dictionary<string, string> nameCravings = new Dictionary<string, string>()
+        private static Dictionary<string, string> nameCravings = new Dictionary<string, string>()
         {
             { "$animal_fish1", "Perch" },            
             { "$animal_fish2", "Pike" },
@@ -115,7 +115,7 @@ namespace LackingImaginationV2
 
         public static List<string> SeaSerpentStats = new List<string>(){"",};
         
-        [HarmonyPatch(typeof(Projectile), "SpawnOnHit")]
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
         public static class SeaSerpent_SpawnOnHit_Patch
         {
             public static void Postfix(Projectile __instance, ref GameObject go)
@@ -148,7 +148,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class SeaSerpent_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
@@ -190,7 +190,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class SeaSerpent_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -215,7 +215,7 @@ namespace LackingImaginationV2
                 }
             }
             
-            [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
+            [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
             public static class SeaSerpent_UpdateStatusEffectsn_Patch
             {
                 public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
@@ -272,7 +272,7 @@ namespace LackingImaginationV2
         }
     
         
-        [HarmonyPatch(typeof(Humanoid), "UseItem")]
+        [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UseItem))]
         public static class SeaSerpent_UseItem_Patch
         {
             public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
@@ -309,7 +309,7 @@ namespace LackingImaginationV2
                 return true;
             }
         }
-        public static string FishName(Sprite icon)
+        private static string FishName(Sprite icon)
         {
             for (int i = 0; i < allCravings.Count; i++)
             {
@@ -321,7 +321,7 @@ namespace LackingImaginationV2
             return "none";
         }
 
-        public static float FishIndex(ItemDrop.ItemData item)
+        private static float FishIndex(ItemDrop.ItemData item)
         {
             for (int i = 0; i < allCravings.Count; i++)
             {

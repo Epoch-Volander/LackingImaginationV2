@@ -63,7 +63,7 @@ namespace LackingImaginationV2
     {
         public static int canDoubleJump;
         
-        [HarmonyPatch(typeof(Player), "Update", null)]
+        [HarmonyPatch(typeof(Player), nameof(Player.Update), null)]
         public class Blob_AbilityInput_Patch
         {
             public static void Postfix(Player __instance)
@@ -80,7 +80,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character),  nameof(Character.RPC_Damage))]
         public static class Blob_RPC_Damage_Patch
         {
             public static void Postfix(Character __instance, ref HitData hit)

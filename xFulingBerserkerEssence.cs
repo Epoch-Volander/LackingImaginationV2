@@ -14,13 +14,13 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xFulingBerserkerEssence
+    public class xFulingBerserkerEssence // still have to fix bow arrow aim and proj spawn point
     {
         private static int m_LOSMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "terrain");
         
         public static string Ability_Name = "Giantization"; //all percentage based stat boosts, shield boost
         
-        public static bool noRoof;
+        private static bool noRoof;
         
         public static void Process_Input(Player player, int position, ref float altitude)
         {
@@ -87,11 +87,11 @@ namespace LackingImaginationV2
 
 
     [HarmonyPatch]
-    public static class xFulingBerserkerEssencePassive // check out floating
+    public static class xFulingBerserkerEssencePassive 
     {
-        public static bool giant;
+        private static bool giant;
         
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class FulingBerserker_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
@@ -139,7 +139,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(VisEquipment), "SetRightHandEquipped")]
+        [HarmonyPatch(typeof(VisEquipment), nameof(VisEquipment.SetRightHandEquipped))]
         public static class FulingBerserker_SetRightHandEquipped_Patch
         {
             static void Prefix(ref int hash, VisEquipment __instance)
@@ -160,7 +160,7 @@ namespace LackingImaginationV2
         }
         
         
-        [HarmonyPatch(typeof(VisEquipment), "SetLeftHandEquipped")]
+        [HarmonyPatch(typeof(VisEquipment), nameof(VisEquipment.SetLeftHandEquipped))]
         public static class FulingBerserker_SetLeftHandEquipped_Patch
         {
             static void Prefix(ref int hash, ref int variant, VisEquipment __instance)
@@ -179,7 +179,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(VisEquipment),"AttachBackItem")]
+        [HarmonyPatch(typeof(VisEquipment),nameof(VisEquipment.AttachBackItem))]
         public static class FulingBerserker_AttachBackItem_Patch
         {
             static void Postfix(GameObject __result)
@@ -198,7 +198,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Attack), "DoMeleeAttack")]//Attack GameObject m_spawnOnTrigger (projectile? start)
+        [HarmonyPatch(typeof(Attack), nameof(Attack.DoMeleeAttack))]//Attack GameObject m_spawnOnTrigger (projectile? start)
         public static class FulingBerserker_DoMeleeAttack_Patch
         {
             static void Prefix(Attack __instance)
@@ -289,7 +289,7 @@ namespace LackingImaginationV2
 
         
         
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class FulingBerserker_GetTotalFoodValue_Patch
         {
             [HarmonyPriority(Priority.High)]

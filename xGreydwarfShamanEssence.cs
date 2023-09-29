@@ -82,7 +82,7 @@ namespace LackingImaginationV2
     public static class xGreydwarfShamanEssencePassive
     {
         // regen?
-        [HarmonyPatch(typeof(Player), "UpdateFood")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateFood))]
         public static class GreydwarfShaman_UpdateFood_Patch
         {
             public static void Postfix(Player __instance)//doubles regen
@@ -100,7 +100,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class GreydwarfShaman_GetTotalFoodValue_Patch
         {
             public static void Postfix( ref float eitr)
@@ -112,7 +112,7 @@ namespace LackingImaginationV2
             }
         }
         //negative
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class GreydwarfShaman_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)
@@ -142,6 +142,5 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
     }
 }

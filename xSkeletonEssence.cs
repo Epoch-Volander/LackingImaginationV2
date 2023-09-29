@@ -20,7 +20,6 @@ namespace LackingImaginationV2
         public static string Ability_Name = "Vigil"; // kill skeletons as currency to cast, summon ghosts//summon the shattered fragments of the soul
         //negative, fall damage doubled, exposed bones
         public static int Charges;
-        
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -112,7 +111,7 @@ namespace LackingImaginationV2
     {
         public static List<string> SkeletonStats = new List<string>() { "0" };
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Skeleton_RPC_Damage_Patch
         {
             public static void Postfix(Character __instance, ref HitData hit)
@@ -171,7 +170,7 @@ namespace LackingImaginationV2
             
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Skeleton_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -191,8 +190,8 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
-        public static class Skeleton_UpdateStatusEffectsn_Patch
+        [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
+        public static class Skeleton_UpdateStatusEffects_Patch
         {
             public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
             {

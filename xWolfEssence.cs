@@ -52,7 +52,8 @@ namespace LackingImaginationV2
     public static class xWolfEssencePassive
     {
         public static List<string> WolfStats = new List<string>(){"off", "0", "off"};
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Wolf_GetTotalFoodValue_Patch
         {
             public static void Postfix(ref float stamina, Player __instance)
@@ -93,7 +94,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "Jump")]
+        [HarmonyPatch(typeof(Character), nameof(Character.Jump))]
         public class Wolf_Jump_Patch
         {
             public static void Prefix(Character __instance) 
@@ -117,7 +118,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class Wolf_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)

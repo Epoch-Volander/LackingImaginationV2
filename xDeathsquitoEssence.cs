@@ -51,7 +51,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xDeathsquitoEssencePassive
     {
-        [HarmonyPatch(typeof(Projectile), "FixedUpdate")]
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.FixedUpdate))]
         public class Deathsquito_FixedUpdate_Patch
         {
             static void Prefix(Projectile __instance)
@@ -128,7 +128,7 @@ namespace LackingImaginationV2
         }
 
 
-        [HarmonyPatch(typeof(Projectile), "Setup")]
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.Setup))]
         public class Deathsquito_Setup_Patch
         {
             static void Prefix(ref HitData hitData)

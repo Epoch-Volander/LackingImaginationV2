@@ -23,6 +23,8 @@ namespace LackingImaginationV2
         private static Aoe A_CultistLoneSunAoe;     
         
         private static float aoeDelay = 1.1f;
+        
+        public static bool CultistController = false;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -55,8 +57,10 @@ namespace LackingImaginationV2
                 
                 m_HandEffectsRight.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
 
-                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("mace_secondary");
-                
+                LackingImaginationV2Plugin.UseGuardianPower = false;
+                CultistController = true;
+                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                CultistController = false;
 
                 GameObject prefab = ZNetScene.instance.GetPrefab("DvergerStaffFire_fire_aoe");
 
@@ -93,7 +97,7 @@ namespace LackingImaginationV2
     public static class xCultistEssencePassive
     {
 
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class Cultist_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
@@ -109,8 +113,8 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
-        public static class Geirrhafa_RPC_Damage_Patch
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
+        public static class Cultist_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)
             {

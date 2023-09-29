@@ -17,12 +17,9 @@ namespace LackingImaginationV2
     public class xStoneGolemEssence
     {
         public static string Ability_Name = "PH";
-        public static void Process_Input(Player player)
+        public static void Process_Input(Player player, int position)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
-            
-                LackingImaginationV2Plugin.Log($"xStoneGolemEssence Button was pressed");
+            LackingImaginationV2Plugin.Log($"xStoneGolemEssence Button was pressed");
             
             
         }

@@ -147,6 +147,7 @@
         <Compile Include="SE_BloodWell.cs" />
         <Compile Include="SE_BloodSiphon.cs" />
         <Compile Include="SE_Calm.cs" />
+        <Compile Include="SE_Courage.cs" />
         <Compile Include="SE_Craving.cs" />
         <Compile Include="SE_FallenHero.cs" />
         <Compile Include="SE_Forgotten.cs" />
@@ -158,6 +159,7 @@
         <Compile Include="SE_LuckyFoot.cs" />
         <Compile Include="SE_MoonlitLeap.cs" />
         <Compile Include="SE_RavenousHunger.cs" />
+        <Compile Include="SE_RecklessCharge.cs" />
         <Compile Include="SE_Relentless.cs" />
         <Compile Include="SE_Ritual.cs" />
         <Compile Include="SE_Rot.cs" />

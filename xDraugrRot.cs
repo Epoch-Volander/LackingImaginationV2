@@ -20,11 +20,11 @@ namespace LackingImaginationV2
     {
         public static List<string> RotStats = new List<string>() { "0" };
 
-        public static float startHP;
+        private static float startHP;
         
-        public static float SynergyRot = LackingImaginationGlobal.c_draugrSynergyRot;
+        private static float SynergyRot = LackingImaginationGlobal.c_draugrSynergyRot;
         
-        [HarmonyPatch(typeof(Humanoid), "UseItem")]
+        [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UseItem))]
         public static class Rot_UseItem_Patch
         {
             public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
@@ -46,7 +46,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Rot_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -66,7 +66,7 @@ namespace LackingImaginationV2
                 
             }
             
-            [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
+            [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
             public static class Rot_UpdateStatusEffectsn_Patch
             {
                 public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
@@ -97,7 +97,7 @@ namespace LackingImaginationV2
 
         
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Rot_RPC_Damage_Patch
         {
 

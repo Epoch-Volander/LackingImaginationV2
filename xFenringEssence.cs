@@ -14,7 +14,7 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xFenringEssence
+    public class xFenringEssence // to do over, has leap animation to add
     {
         public static string Ability_Name = "Moonlit Leap";
         public static void Process_Input(Player player, int position)
@@ -72,7 +72,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class Fenring_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)

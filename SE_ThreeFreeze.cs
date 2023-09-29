@@ -15,7 +15,7 @@ namespace LackingImaginationV2
 
         [Header("SE_ThreeFreeze")]
         public static float m_baseTTL = 3f;
-        public float speedAmount =0f;
+        private float speedAmount =0f;
         private float m_timer = 1f;
 
         public SE_ThreeFreeze()

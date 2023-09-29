@@ -58,7 +58,7 @@ namespace LackingImaginationV2
     {
         public static List<string> TickStats = new List<string>() {"0", };
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Tick_RPC_Damage_Patch
         {
             static void Prefix(Character __instance, ref HitData hit)
@@ -111,7 +111,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        [HarmonyPatch(typeof(Player), "GetBodyArmor")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Tick_GetBodyArmor_Patch
         {
             public static void Postfix(ref float __result)
@@ -124,7 +124,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Tick_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -149,8 +149,8 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
-        public static class Leech_UpdateStatusEffectsn_Patch
+        [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
+        public static class Tick_UpdateStatusEffects_Patch
         {
             public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
             {

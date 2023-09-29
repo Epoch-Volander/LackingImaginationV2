@@ -98,7 +98,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xAbominationEssencePassive
     {
-        [HarmonyPatch(typeof(Player), "GetBodyArmor")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Abomination_GetBodyArmor_Patch
         {
             public static void Postfix(ref float __result)
@@ -110,7 +110,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Abomination_GetTotalFoodValue_Patch
         {
             public static void Postfix( ref float hp)

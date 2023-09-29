@@ -17,8 +17,8 @@ namespace LackingImaginationV2
 
         [Header("SE_MoonlitLeap")]
         public static float m_baseTTL = LackingImaginationUtilities.xFenringCooldownTime;
-        public float JumpDuration = LackingImaginationUtilities.xFenringCooldownTime -5f;
-        public float JumpAmount = 1.5f;
+        private float JumpDuration = LackingImaginationUtilities.xFenringCooldownTime -5f;
+        private float JumpAmount = 1.5f;
         private float m_timer = 1f;
         private float FallDuration = LackingImaginationUtilities.xFenringCooldownTime;
         

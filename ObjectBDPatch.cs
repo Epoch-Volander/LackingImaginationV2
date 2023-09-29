@@ -132,8 +132,14 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_Calm).m_icon = SE_Calm.AbilityIcon;
                     }
-                    
-                    
+                    else if (nameHash == "SE_Courage".GetHashCode())
+                    {
+                        (__result as SE_Courage).m_icon = SE_Courage.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_RecklessCharge".GetHashCode())
+                    {
+                        (__result as SE_RecklessCharge).m_icon = SE_RecklessCharge.AbilityIcon;
+                    }
                     
                     
                     if (nameHash == "Ability1_CoolDown".GetHashCode())
@@ -205,8 +211,8 @@ namespace LackingImaginationV2
                 // SE_Craving.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySerpent").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_BloodWell.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyTick").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Calm.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDragonQueen").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                
-                
+                SE_Courage.AbilityIcon = ZNetScene.instance.GetPrefab("Torch").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_RecklessCharge.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyBoar").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 
             }
         }
@@ -336,8 +342,14 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Calm>());
             } 
-            
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Courage"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Courage>());
+            } 
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_RecklessCharge"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_RecklessCharge>());
+            } 
             
             
             

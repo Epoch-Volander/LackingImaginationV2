@@ -110,7 +110,7 @@ namespace LackingImaginationV2
     {
         public static List<string> DrakeStats = new List<string>(){"off"};
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Drake_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)
@@ -139,7 +139,7 @@ namespace LackingImaginationV2
         
         
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Drake_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance,ref float dt)

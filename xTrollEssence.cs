@@ -99,7 +99,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xTrollEssencePassive
     {
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Troll_GetTotalFoodValue_Patch
         {
             public static void Postfix( ref float hp)
@@ -111,7 +111,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Troll_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)

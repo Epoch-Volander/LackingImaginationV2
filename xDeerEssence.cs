@@ -71,7 +71,7 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xDeerEssencePassive
     {
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Deer_GetTotalFoodValue_Patch
         {
             public static void Postfix(ref float stamina, ref float hp)
@@ -83,7 +83,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-        [HarmonyPatch(typeof(Player), "UpdateMovementModifier")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateMovementModifier))]
         public static class Deer_UpdateMovementModifier_Patch
         {
             public static void Postfix(Player __instance)

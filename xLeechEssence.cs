@@ -128,7 +128,7 @@ namespace LackingImaginationV2
     {
         public static List<string> LeechStats = new List<string>() { "off", "0" };
 
-        [HarmonyPatch(typeof(Player), "GetTotalFoodValue")]
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Leech_GetTotalFoodValue_Patch
         {
             public static void Prefix(Player __instance)
@@ -154,7 +154,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class Leech_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
@@ -184,7 +184,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Leech_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance, ref float dt)
@@ -204,8 +204,8 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
-        public static class Leech_UpdateStatusEffectsn_Patch
+        [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
+        public static class Leech_UpdateStatusEffects_Patch
         {
             public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
             {
@@ -231,7 +231,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Leech_RPC_Damage_Patch
         {
             public static void Postfix(Character __instance, ref HitData hit)

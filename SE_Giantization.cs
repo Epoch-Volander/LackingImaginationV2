@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
         
         
-        public float giantDuration = LackingImaginationUtilities.xFulingBerserkerCooldownTime -5f; //-30
+        private float giantDuration = LackingImaginationUtilities.xFulingBerserkerCooldownTime -5f; //-30
         private float m_timer = 1f;
         
         [Header("SE_Giantization")]

@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         public static string Ability_Name = "Harbinger";
         public static int Charges;
         
-        public static float minDistanceBetweenCharacters = LackingImaginationGlobal.c_surtlingHarbingerMinDistance; // Set the minimum distance between characters
+        private static float minDistanceBetweenCharacters = LackingImaginationGlobal.c_surtlingHarbingerMinDistance; // Set the minimum distance between characters
         
         public static List<GameObject> Rifts = new List<GameObject>();
         public static List<Character> Surts = new List<Character>();
@@ -157,7 +157,7 @@ namespace LackingImaginationV2
         public static List<string> SurtlingStats = new List<string>(){"0"};
 
 
-        [HarmonyPatch(typeof(Character), "CustomFixedUpdate")]
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
         public static class Surtling_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
@@ -199,7 +199,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "UpdateEnvStatusEffects")]
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Surtling_UpdateEnvStatusEffects_Patch
         {
             public static void Prefix(Player __instance,ref float dt)
@@ -214,7 +214,7 @@ namespace LackingImaginationV2
         
         //Damaged or Debuff when wet?
         
-        [HarmonyPatch(typeof(Character), "RPC_Damage")]
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         public static class Surtling_RPC_Damage_Patch
         {
             public static void Prefix(Character __instance, ref HitData hit)
