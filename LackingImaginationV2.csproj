@@ -153,6 +153,7 @@
         <Compile Include="SE_Forgotten.cs" />
         <Compile Include="SE_FumesSplit.cs" />
         <Compile Include="SE_Giantization.cs" />
+        <Compile Include="SE_GolemCore.cs" />
         <Compile Include="SE_Harbinger.cs" />
         <Compile Include="SE_HorizonHaste.cs" />
         <Compile Include="SE_Longinus.cs" />
@@ -223,6 +224,7 @@
         <Content Include=".gitignore" />
         <Content Include="assets\DropAssetBundleInThisFolder.txt" />
         <EmbeddedResource Include="assets\essence_bundle_2" />
+        <EmbeddedResource Include="assets\sgasset" />
         <Content Include="environment.props" />
         <Content Include="icons\README.txt" />
         <EmbeddedResource Include="icons\YagluthDrop_icon.png" />

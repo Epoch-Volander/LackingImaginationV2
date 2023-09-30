@@ -30,8 +30,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_RecklessCharge";
             m_icon = AbilityIcon;
-            m_tooltip = "Reckless Charge";
-            m_name = "Reckless Charge";
+            m_tooltip = "Reckless \nCharge";
+            m_name = "Reckless \nCharge";
             m_ttl = m_baseTTL;
 
         }

@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xDraugrEliteEssence
     {
-        public static string Ability_Name = "Fallen Hero";
+        public static string Ability_Name = "Fallen \nHero";
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))

@@ -17,7 +17,7 @@ namespace LackingImaginationV2
 
     public class xTickEssence
     {
-        public static string Ability_Name = "Blood Well";
+        public static string Ability_Name = "Blood \nWell";
         
         public static GameObject Aura;
         public static bool Activated;

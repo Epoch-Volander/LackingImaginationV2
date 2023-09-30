@@ -17,7 +17,7 @@ namespace LackingImaginationV2
 
     public class xBoarEssence
     {
-        public static string Ability_Name = "Reckless Charge";
+        public static string Ability_Name = "Reckless \nCharge";
 
         public static bool BoarController = false;
        

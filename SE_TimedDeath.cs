@@ -24,8 +24,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_TimedDeath";
             m_icon = AbilityIcon;
-            m_tooltip = "Timed Death";
-            m_name = "Timed Death";
+            m_tooltip = "Timed \nDeath";
+            m_name = "Timed \nDeath";
             m_ttl = m_baseTTL;
 
         }

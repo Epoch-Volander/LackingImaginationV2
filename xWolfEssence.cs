@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xWolfEssence
     {
-        public static string Ability_Name = "Ravenous Hunger";
+        public static string Ability_Name = "Ravenous \nHunger";
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))

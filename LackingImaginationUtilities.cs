@@ -105,6 +105,8 @@ namespace LackingImaginationV2
                     RectTransform rectTransform = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
                     rectTransform.gameObject.SetActive(value: true);
                     rectTransform.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
+                    rectTransform.GetComponentInChildren<Text>().fontSize += 3;
+                    // rectTransform.GetComponentInChildren<Text>().resizeTextForBestFit = false;
                     LackingImaginationV2Plugin.abilitiesStatus[i] = rectTransform;
                 }
                 pos.x += xStep;
@@ -426,7 +428,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 45f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 25f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          
@@ -672,7 +674,13 @@ namespace LackingImaginationV2
                  return 30f * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
-         
+         public static float xStoneGolemCooldownTime
+         {
+             get
+             {
+                 return 5f * LackingImaginationGlobal.g_CooldownModifer;
+             }
+         }    
          
          
          

@@ -356,11 +356,16 @@ namespace LackingImaginationV2
         public static GameObject fx_Longinus;
         public static GameObject fx_TwinSouls;
         public static GameObject fx_BloodWell;
-        //Prefab3
+        //Prefab3 //originals
         public static GameObject p_SeaKing;
         //Sounds
         public static GameObject sfx_Giantization;
-
+        
+        //Prefab4 new bundle
+        public static GameObject SG_Spiked_Arms;
+        
+        
+        
         // Animation Clips // Pulled from in game
         public static Animator creatureAnimatorGeirrhafa;
         public static AnimationClip creatureAnimationClipGeirrhafaIceNova;
@@ -480,6 +485,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xDraugrEliteEssencePassive.DraugrEliteStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xSeaSerpentEssencePassive.SeaSerpentStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xTickEssencePassive.TickStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xStoneGolemEssencePassive.StoneGolemStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
@@ -619,7 +625,8 @@ namespace LackingImaginationV2
             //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
             
-            
+            //Prefab 4
+            SG_Spiked_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_spikes_Player");
             
             
             //Sound Prefabs

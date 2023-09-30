@@ -8,30 +8,29 @@ using UnityEngine;
 namespace LackingImaginationV2
 
 {
-    public class SE_RavenousHunger : SE_Stats
+    public class SE_GolemCore : StatusEffect
     {
         
         public static Sprite AbilityIcon;
 
-        [Header("SE_RavenousHunger")]
-        public static float m_baseTTL = LackingImaginationUtilities.xWolfCooldownTime - 20f;
-
-        public SE_RavenousHunger()
+        [Header("SE_GolemCore")]
+        public static float m_blood = 200f;
+        
+        
+        public SE_GolemCore()
         {
-            base.name = "SE_RavenousHunger";
+            base.name = "SE_GolemCore";
             m_icon = AbilityIcon;
-            m_tooltip = "Ravenous \nHunger";
-            m_name = "Ravenous \nHunger";
-            m_ttl = m_baseTTL;
+            m_tooltip = "Golem Core";
+            m_name = "Golem Core";
             
         }
-        
-        
+
         public override bool CanAdd(Character character)
         {
             return character.IsPlayer();
         }
-
+        
     }
 }
 

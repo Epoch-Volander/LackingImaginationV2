@@ -20,7 +20,7 @@ namespace LackingImaginationV2
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
 
-        public static string Ability_Name = "Mass Release";
+        public static string Ability_Name = "Mass \nRelease";
         
         private static GameObject GO_BoneMassMassReleaseProjectile;        
         private static Projectile P_BoneMassMassReleaseProjectile;

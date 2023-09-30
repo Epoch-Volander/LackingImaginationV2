@@ -22,8 +22,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_FallenHero";
             m_icon = AbilityIcon;
-            m_tooltip = "Fallen Hero";
-            m_name = "Fallen Hero";
+            m_tooltip = "Fallen \nHero";
+            m_name = "Fallen \nHero";
             m_ttl = m_baseTTL;
 
         }

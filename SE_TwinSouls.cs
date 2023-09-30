@@ -33,8 +33,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_TwinSouls";
             m_icon = AbilityIcon;
-            m_tooltip = "Twin Souls";
-            m_name = "Twin Souls";
+            m_tooltip = "Twin \nSouls";
+            m_name = "Twin \nSouls";
             m_ttl = m_baseTTL;
 
         }

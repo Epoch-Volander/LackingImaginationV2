@@ -22,8 +22,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_LuckyFoot";
             m_icon = AbilityIcon;
-            m_tooltip = "Lucky Foot";
-            m_name = "Lucky Foot";
+            m_tooltip = "Lucky \nFoot";
+            m_name = "Lucky \nFoot";
             m_ttl = m_baseTTL;
             
         }

@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xLoxEssence
     {
-        public static string Ability_Name = "Wild Tremor ";
+        public static string Ability_Name = "Wild \nTremor ";
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))

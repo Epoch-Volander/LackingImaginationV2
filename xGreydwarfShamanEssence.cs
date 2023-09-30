@@ -18,7 +18,7 @@ namespace LackingImaginationV2
 
     public class xGreydwarfShamanEssence
     {
-        public static string Ability_Name = "Dubious Heal";
+        public static string Ability_Name = "Dubious \nHeal";
         
         public static bool GreydwarfShamanController = false;
         private static float shotDelay = 0.3f;

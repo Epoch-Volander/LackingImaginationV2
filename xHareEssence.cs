@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xHareEssence
     {
-        public static string Ability_Name = "Lucky Foot";
+        public static string Ability_Name = "Lucky \nFoot";
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))

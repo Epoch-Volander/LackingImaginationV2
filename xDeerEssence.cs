@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 {
     public class xDeerEssence
     {
-        public static string Ability_Name = "Horizon Haste";
+        public static string Ability_Name = "Horizon \nHaste";
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))

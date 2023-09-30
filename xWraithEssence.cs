@@ -18,7 +18,7 @@ namespace LackingImaginationV2
     public class xWraithEssence
     {
         
-        public static string Ability_Name = "Twin Souls";// resist physical, weak elemental
+        public static string Ability_Name = "Twin \nSouls";// resist physical, weak elemental
         
         public static List<Character> Wraith = new List<Character>();
         

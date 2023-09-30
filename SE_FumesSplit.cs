@@ -21,8 +21,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_FumesSplit";
             m_icon = AbilityIcon;
-            m_tooltip = "Fumes Split";
-            m_name = "Fumes Split";
+            m_tooltip = "Fumes \nSplit";
+            m_name = "Fumes \nSplit";
             m_ttl = m_baseTTL;
            
 

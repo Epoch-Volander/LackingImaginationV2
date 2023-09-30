@@ -23,7 +23,7 @@ namespace LackingImaginationV2
         
         public static bool EikthyrController = false;
         
-        private static int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+        private static int Script_Lightning_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
         private static float lightningDelay = 1f;
 
@@ -47,7 +47,8 @@ namespace LackingImaginationV2
                 EikthyrController = true;
                 ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
                 EikthyrController = false;
-
+              
+                
                 ScheduleLightning(player);
 
                 // // Assuming player is a reference to the player GameObject
@@ -137,11 +138,73 @@ namespace LackingImaginationV2
             
             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_eikthyr_forwardshockwave"), player.transform.position, player.transform.rotation, player.transform);
 
+            HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
 
-            
-            
-            
-            
+            Vector3 capsuleCenter = player.GetCenterPoint() + player.transform.forward * 0.5f;
+            float capsuleRadius = 2f; // Radius of the capsule
+            float capsuleHeight = 30f; // Height of the capsule (equals the ray length)
+
+            // Perform the capsule overlap check with the specified layer mask
+            Collider[] collidersRight = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + (player.transform.forward * capsuleHeight) + (player.transform.right * capsuleRadius) , capsuleRadius, Script_Lightning_Layermask);
+            Collider[] collidersLeft = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + (player.transform.forward * capsuleHeight) + -(player.transform.right * capsuleRadius) , capsuleRadius, Script_Lightning_Layermask);
+            // Combine the results into a single array
+            Collider[] combinedColliders = collidersRight.Concat(collidersLeft).ToArray();
+
+             foreach (Collider collider in combinedColliders)
+            {
+                IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                if (destructibleComponent != null)
+                {
+                    // This is a valid target (creature) if it hasn't been detected before.
+                    if (!detectedObjects.Contains(collider.gameObject))
+                    {
+                        detectedObjects.Add(collider.gameObject);
+                        
+                        HitData hitData = new HitData();
+                        hitData.m_hitCollider = collider;
+                        hitData.m_dodgeable = true;
+                        hitData.m_blockable = true;
+                        hitData.m_ranged = true;
+                        hitData.m_damage.m_lightning = LackingImaginationGlobal.c_moderDraconicFrostDragonBreath;
+                        hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
+                        // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                        hitData.m_pushForce = 10f;
+                        hitData.m_backstabBonus = 2f;
+                        hitData.m_staggerMultiplier = 2f;
+                        hitData.m_point = collider.gameObject.transform.position;
+                        hitData.SetAttacker(player);
+                        hitData.m_hitType = HitData.HitType.PlayerHit;
+                        destructibleComponent.Damage(hitData);
+                    }
+                }
+                Character characterComponent = collider.gameObject.GetComponent<Character>();
+                if (characterComponent != null && !characterComponent.IsOwner())
+                {
+                    // This is a valid target (creature) if it hasn't been detected before.
+                    if (!detectedObjects.Contains(collider.gameObject))
+                    {
+                        detectedObjects.Add(collider.gameObject);
+                        
+                        HitData hitData = new HitData();
+                        hitData.m_hitCollider = collider;
+                        hitData.m_dodgeable = true;
+                        hitData.m_blockable = true;
+                        hitData.m_ranged = true;
+                        hitData.m_damage.m_lightning = LackingImaginationGlobal.c_moderDraconicFrostDragonBreath;
+                        hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
+                        // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                        hitData.m_pushForce = 10f;
+                        hitData.m_backstabBonus = 2f;
+                        hitData.m_staggerMultiplier = 2f;
+                        hitData.m_point = collider.gameObject.transform.position;
+                        hitData.SetAttacker(player);
+                        hitData.m_hitType = HitData.HitType.PlayerHit;
+                        characterComponent.Damage(hitData);
+                    }
+                }
+            }
+             
+             
         }
     }
 

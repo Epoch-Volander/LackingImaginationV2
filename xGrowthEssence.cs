@@ -19,7 +19,7 @@ namespace LackingImaginationV2
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
 
-        public static string Ability_Name = "Ancient Tar";
+        public static string Ability_Name = "Ancient \nTar";
 
         private static GameObject GO_TarProjectile;
         private static Projectile P_TarProjectile;

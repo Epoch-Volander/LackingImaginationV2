@@ -17,7 +17,7 @@ namespace LackingImaginationV2
     {
         private static float minDistanceBetweenCharacters = 2f; // Set the minimum distance between characters
 
-        public static string Ability_Name = "Ancient Awe";
+        public static string Ability_Name = "Ancient \nAwe";
         
         public static bool ElderController = false;
         public static List<Character> Roots = new List<Character>();

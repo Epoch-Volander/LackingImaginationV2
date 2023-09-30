@@ -24,8 +24,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_HorizonHaste";
             m_icon = AbilityIcon;
-            m_tooltip = "Horizon Haste";
-            m_name = "Horizon Haste";
+            m_tooltip = "Horizon \nHaste";
+            m_name = "Horizon \nHaste";
             m_ttl = m_baseTTL;
             
         }

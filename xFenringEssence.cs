@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xFenringEssence // to do over, has leap animation to add
     {
-        public static string Ability_Name = "Moonlit Leap";
+        public static string Ability_Name = "Moonlit \nLeap";
         public static void Process_Input(Player player, int position)
         {
             System.Random rnd = new System.Random();

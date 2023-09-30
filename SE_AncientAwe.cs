@@ -25,8 +25,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_AncientAwe";
             m_icon = AbilityIcon;
-            m_tooltip = "Ancient Awe";
-            m_name = "Ancient Awe";
+            m_tooltip = "Ancient \nAwe";
+            m_name = "Ancient \nAwe";
             m_ttl = m_baseTTL;
             
         }

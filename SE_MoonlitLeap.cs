@@ -27,8 +27,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_MoonlitLeap";
             m_icon = AbilityIcon;
-            m_tooltip = "Moonlit Leap";
-            m_name = "Moonlit Leap";
+            m_tooltip = "Moonlit \nLeap";
+            m_name = "Moonlit \nLeap";
             m_ttl = m_baseTTL;
             
         }

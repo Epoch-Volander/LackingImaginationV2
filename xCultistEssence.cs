@@ -17,7 +17,7 @@ namespace LackingImaginationV2
 
     public class xCultistEssence
     {
-        public static string Ability_Name = "Lone Sun";
+        public static string Ability_Name = "Lone \nSun";
         
         private static GameObject GO_CultistLoneSunAoe;        
         private static Aoe A_CultistLoneSunAoe;     

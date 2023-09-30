@@ -83,7 +83,6 @@ namespace LackingImaginationV2
                 }
             }
         }
-
         private static void ScheduleEquip(ref ItemDrop.ItemData spear)
         {
             CoroutineRunner.Instance.StartCoroutine(ScheduleEquipCoroutine(spear));

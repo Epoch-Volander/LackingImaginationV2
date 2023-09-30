@@ -19,7 +19,7 @@ namespace LackingImaginationV2
 
     public class xGeirrhafaEssence
     {
-        public static string Ability_Name = "Ice Age";
+        public static string Ability_Name = "Ice \nAge";
 
         public static bool GeirrhafaController = false;
 

@@ -22,8 +22,8 @@ namespace LackingImaginationV2
         {
             base.name = "SE_BloodSiphon";
             m_icon = AbilityIcon;
-            m_tooltip = "Blood Siphon";
-            m_name = "Blood Siphon";
+            m_tooltip = "Blood \nSiphon";
+            m_name = "Blood \nSiphon";
             // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
 
         }

@@ -22,7 +22,7 @@ namespace LackingImaginationV2
 
         public static bool ModerController = false;
         
-        public static string Ability_Name = "Draconic Frost"; //freezing aura passive
+        public static string Ability_Name = "Draconic \nFrost"; //freezing aura passive
 
         private static float shotDelay = 0.05f;
         private static float breathDelay = 1f;
@@ -294,7 +294,7 @@ namespace LackingImaginationV2
                     inventory = __instance.m_inventory;
                 if (!inventory.ContainsItem(item))
                     return true;
-                if (!__instance.m_seman.HaveStatusEffect("SE_Calm"))
+                if (!__instance.m_seman.HaveStatusEffect("SE_Calm") && EssenceItemData.equipedEssence.Contains("$item_dragonqueen_essence"))
                 {
                     if (item.m_shared.m_name == "$item_freezegland")
                     {

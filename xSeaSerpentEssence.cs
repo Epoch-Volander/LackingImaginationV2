@@ -20,7 +20,7 @@ namespace LackingImaginationV2
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
 
-        public static string Ability_Name = "Sea King"; // Aoe vortex that pulls enemies in, ref fuling berserker for smooth movement
+        public static string Ability_Name = "Sea \nKing"; // Aoe vortex that pulls enemies in, ref fuling berserker for smooth movement
 
         private static GameObject GO_SeaKingProjectile;
         private static Projectile P_SeaKingProjectile;
@@ -104,13 +104,13 @@ namespace LackingImaginationV2
             { "$animal_fish5", "Trollfish" },
             { "$animal_fish4", "Tetra" },
             { "$animal_fish3", "Tuna" },
-            { "$animal_fish8", "Coral Cod" },
-            { "$animal_fish6", "Giant Herring" },
+            { "$animal_fish8", "Coral \nCod" },
+            { "$animal_fish6", "Giant \nHerring" },
             { "$animal_fish7", "Grouper" },
             { "$animal_fish12", "Pufferfish" },
             { "$animal_fish9", "Anglerfish" },
             { "$animal_fish11", "Magmafish" },
-            { "$animal_fish10", "Northern Salmon" },
+            { "$animal_fish10", "Northern \nSalmon" },
         };
 
         public static List<string> SeaSerpentStats = new List<string>(){"",};

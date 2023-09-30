@@ -1316,6 +1316,46 @@ namespace LackingImaginationV2
             }
         }
 
+        //Stone Golem
+        
+        public static float c_stonegolemCoreStacks
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_stonegolemCoreStacks"];
+                }
+                catch
+                {
+                    return 100f;
+                }
+            }
+        }
+        public static float c_stonegolemCoreOverdriveArmor
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_stonegolemCoreOverdriveArmor"];
+                }
+                catch
+                {
+                    return 2f;
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         

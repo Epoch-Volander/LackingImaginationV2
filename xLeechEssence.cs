@@ -18,7 +18,7 @@ namespace LackingImaginationV2
 
     public class xLeechEssence // make the drop red
     {
-        public static string Ability_Name = "Blood Siphon";
+        public static string Ability_Name = "Blood \nSiphon";
         
         public static List<Character> Marked = new List<Character>();
         public static void Process_Input(Player player, int position)
