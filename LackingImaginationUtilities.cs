@@ -153,7 +153,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_yagluth_essence")
             {
-                xYagluthEssence.Process_Input(Player.m_localPlayer);
+                xYagluthEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_seekerqueen_essence")
@@ -678,14 +678,29 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 5f * LackingImaginationGlobal.g_CooldownModifer;
+                 return 5f * LackingImaginationGlobal.g_CooldownModifer;//adjust
              }
          }    
-         
-         
+         public static float xUlvCooldownTime
+         {
+             get
+             {
+                 return 5f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+             }
+         }  
+         public static float xYagluthCooldownTime
+         {
+             get
+             {
+                 return 5f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+             }
+         }   
          
          
         
+         
+         
+         
          
          
          

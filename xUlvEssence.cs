@@ -19,7 +19,11 @@ namespace LackingImaginationV2
         public static string Ability_Name = "PH3";
         public static void Process_Input(Player player, int position)
         {
-
+            //Ability Cooldown
+            StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+            se_cd.m_ttl = LackingImaginationUtilities.xUlvCooldownTime;
+            player.GetSEMan().AddStatusEffect(se_cd);
+            
             LackingImaginationV2Plugin.Log($"Wolf Button was pressed");
             
             

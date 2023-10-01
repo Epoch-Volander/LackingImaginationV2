@@ -17,12 +17,16 @@ namespace LackingImaginationV2
     public class xYagluthEssence
     {
         public static string Ability_Name = "PH";
-        public static void Process_Input(Player player)
+        public static void Process_Input(Player player, int position)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
+            //Ability Cooldown
+            StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+            se_cd.m_ttl = LackingImaginationUtilities.xYagluthCooldownTime;
+            player.GetSEMan().AddStatusEffect(se_cd);
             
-                LackingImaginationV2Plugin.Log($"Yag Button was pressed");
+            LackingImaginationV2Plugin.Log($"Yag Button was pressed");
+            
+            
             
             
         }
@@ -31,5 +35,12 @@ namespace LackingImaginationV2
 
     }
 
-
+    [HarmonyPatch]
+    public class xYagluthEssencePassive
+    {
+        
+        
+        
+        
+    }
 }
