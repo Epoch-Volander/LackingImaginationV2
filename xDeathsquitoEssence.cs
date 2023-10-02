@@ -56,7 +56,7 @@ namespace LackingImaginationV2
         {
             static void Prefix(Projectile __instance)
             {
-                if (EssenceItemData.equipedEssence.Contains("$item_deathsquito_essence") && Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Relentless"))
+                if (__instance.m_owner == Player.m_localPlayer && EssenceItemData.equipedEssence.Contains("$item_deathsquito_essence") && Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Relentless"))
                 {
                     if (__instance.m_didHit) return; // Skip if the projectile already hit
 

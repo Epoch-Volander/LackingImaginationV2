@@ -62,7 +62,7 @@ namespace LackingImaginationV2
         {
             public static void Prefix(Projectile __instance)
             {
-                if (EssenceItemData.equipedEssence.Contains("$item_goblin_essence") &&  __instance.m_spawnItem?.m_shared.m_skillType == Skills.SkillType.Spears)
+                if (__instance.m_owner == Player.m_localPlayer && EssenceItemData.equipedEssence.Contains("$item_goblin_essence") &&  __instance.m_spawnItem?.m_shared.m_skillType == Skills.SkillType.Spears)
                 {
                     if (__instance.m_spawnItem != null)
                     {

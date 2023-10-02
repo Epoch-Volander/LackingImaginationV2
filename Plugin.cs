@@ -363,7 +363,9 @@ namespace LackingImaginationV2
         
         //Prefab4 new bundle
         public static GameObject SG_Spiked_Arms;
-        
+        public static GameObject StoneGolem_Player;
+        public static GameObject SG_Club_Arms;
+        public static GameObject SG_Hat;
         
         
         // Animation Clips // Pulled from in game
@@ -627,6 +629,14 @@ namespace LackingImaginationV2
             
             //Prefab 4
             SG_Spiked_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_spikes_Player");
+            StoneGolem_Player = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_Player");
+            SG_Hat = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_hat_Player");
+            SG_Club_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_clubs_Player");
+            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack1_spike_Player");
+            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack2_left_groundslam_Player");
+            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack3_spikesweep_Player");
+            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack_doublesmash_Player");
+            
             
             
             //Sound Prefabs
@@ -1253,7 +1263,7 @@ namespace LackingImaginationV2
                     {
                         controllerName = "AttackSprayControl";
                     }
-                    if (xGreydwarfShamanEssence.GreydwarfShamanController)
+                    if (xGreydwarfShamanEssence.GreydwarfShamanController || xYagluthEssence.YagluthController2)
                     {
                         controllerName = "GreyShamanHealControl";
                     }
@@ -1261,7 +1271,7 @@ namespace LackingImaginationV2
                     {
                         controllerName = "PlayerCowerControl";
                     }
-                    if (xEikthyrEssence.EikthyrController)
+                    if (xEikthyrEssence.EikthyrController || xYagluthEssence.YagluthController1)
                     {
                         controllerName = "PlayerPointControl";
                     }

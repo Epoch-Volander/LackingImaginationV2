@@ -25,8 +25,10 @@ namespace LackingImaginationV2
             player.GetSEMan().AddStatusEffect(se_cd);
             
             LackingImaginationV2Plugin.Log($"Wolf Button was pressed");
+
             
-            
+            UnityEngine.GameObject.Destroy(xStoneGolemEssence.Aura);
+
         }
         
 

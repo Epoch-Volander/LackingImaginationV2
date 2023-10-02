@@ -43,6 +43,7 @@ namespace LackingImaginationV2
                 // troll_throw_projectile
 
                 Vector3 vector = player.transform.position + player.transform.up  * 2f + player.GetLookDir() * .5f;
+                // GameObject prefab = ZNetScene.instance.GetPrefab("projectile_beam");
                 GameObject prefab = ZNetScene.instance.GetPrefab("troll_throw_projectile");
                 player.transform.rotation = Quaternion.LookRotation(player.GetLookDir()); // test
                 
@@ -88,6 +89,8 @@ namespace LackingImaginationV2
             hitData.m_damage.m_chop = UnityEngine.Random.Range(1f , 2f);
             hitData.ApplyModifier(player.GetMaxHealth() * LackingImaginationGlobal.c_trollTrollTossProjectile);
             hitData.m_pushForce = 4f;
+            hitData.m_dodgeable = true;
+            hitData.m_blockable = true;
             hitData.SetAttacker(player);
             Vector3 a = Vector3.MoveTowards(GO_TrollTossProjectile.transform.position, target, 1f);
             P_TrollTossProjectile.Setup(player, (a - GO_TrollTossProjectile.transform.position) * 25f, -1f, hitData, null, null);

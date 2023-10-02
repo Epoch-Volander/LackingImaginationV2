@@ -51,20 +51,20 @@ namespace LackingImaginationV2
             //
             // Player.m_localPlayer.m_inventory.AddItem(clubs.GetComponent<ItemDrop>().m_itemData);
             
-            Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.SG_Spiked_Arms, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+            Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
             Aura.transform.parent = player.transform;
 
-            prefabAnimator = Aura.transform.Find("attach_skin").transform.Find("Mountain_Golem_Spike_Arm").GetComponent<Animator>();
-            
-            LackingImaginationV2Plugin.Log($"xbefore");
-            
+             prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
+            //
+            // LackingImaginationV2Plugin.Log($"xbefore");
+            //
             prefabAnimator.SetBool("sleeping", false);
-
+            //
             prefabAnimator.SetTrigger("Movement");
-            
-            prefabAnimator.SetTrigger("attack3");
-
-            LackingImaginationV2Plugin.Log($"xafterd");
+            //
+            // prefabAnimator.SetTrigger("attack3");
+            //
+            // LackingImaginationV2Plugin.Log($"xafterd");
         }
         
         //vfx_stonegolem_hurt
