@@ -22,6 +22,8 @@ namespace LackingImaginationV2
         public static GameObject Aura;
         
         public static Animator prefabAnimator;
+
+        private static bool able = false;
         public static void Process_Input(Player player, int position)
         {
             //Ability Cooldown
@@ -50,21 +52,29 @@ namespace LackingImaginationV2
             // clubs.GetComponent<ItemDrop>().m_itemData = spikes;
             //
             // Player.m_localPlayer.m_inventory.AddItem(clubs.GetComponent<ItemDrop>().m_itemData);
-            
-            Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
-            Aura.transform.parent = player.transform;
 
-             prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
-            //
-            // LackingImaginationV2Plugin.Log($"xbefore");
-            //
-            prefabAnimator.SetBool("sleeping", false);
-            //
-            prefabAnimator.SetTrigger("Movement");
-            //
-            // prefabAnimator.SetTrigger("attack3");
-            //
-            // LackingImaginationV2Plugin.Log($"xafterd");
+
+
+            if(able)
+            {
+                Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+                Aura.transform.parent = player.transform;
+
+                prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
+                //
+                // LackingImaginationV2Plugin.Log($"xbefore");
+                //
+                prefabAnimator.SetBool("sleeping", false);
+                //
+                prefabAnimator.SetTrigger("Movement");
+                //
+                // prefabAnimator.SetTrigger("attack3");
+                //
+                // LackingImaginationV2Plugin.Log($"xafterd");
+            }
+            
+            
+            
         }
         
         //vfx_stonegolem_hurt

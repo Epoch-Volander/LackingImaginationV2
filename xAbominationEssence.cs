@@ -19,7 +19,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Bane";
         
-        public static List<Character> Abom = new List<Character>();
+        public static Character Abom;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -30,12 +30,11 @@ namespace LackingImaginationV2
                 se_cd.m_ttl = LackingImaginationUtilities.xAbominationCooldownTime;
                 player.GetSEMan().AddStatusEffect(se_cd);
                 
-                foreach (Character ch in xAbominationEssence.Abom)
+                if(Abom != null)
                 {
-                    if(ch.GetComponent<Tameable>() == null) break;
-                    ch.GetComponent<Tameable>().UnSummon();
+                    if(Abom.GetComponent<Tameable>() != null) Abom.GetComponent<Tameable>().UnSummon();
                 }
-                xAbominationEssence.Abom.Clear();
+                Abom = null;
                 
                 LackingImaginationV2Plugin.Log($"xAbominationEssence Button was pressed");
 
@@ -55,9 +54,9 @@ namespace LackingImaginationV2
                 GameObject baby = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Abomination"), randomPosition, Quaternion.identity);
                 baby.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                 baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
-                baby.GetComponent<Humanoid>().m_name = "Bane(Ally)";
+                baby.GetComponent<Humanoid>().m_name = "Bane";
                 baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
-                baby.GetComponent<Humanoid>().m_speed = 3f;
+                baby.GetComponent<Humanoid>().m_speed = 4f;
                 baby.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                 baby.GetComponent<MonsterAI>().m_consumeItems = new List<ItemDrop>() {ZNetScene.instance.GetPrefab("Wood").GetComponent<ItemDrop>()};
                 baby.GetComponent<MonsterAI>().m_consumeRange = 2f;
@@ -66,9 +65,8 @@ namespace LackingImaginationV2
                 baby.AddComponent<Tameable>();
                 // baby.GetComponent<Tameable>().m_startsTamed = true;
                 baby.GetComponent<Tameable>().Tame();
-                baby.GetComponent<Tameable>().m_unsummonDistance = 150f;
-                baby.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                 baby.GetComponent<Tameable>().m_commandable = true;
+                baby.GetComponent<Tameable>().Command(player);
                 baby.GetComponent<Tameable>().m_unSummonEffect = new EffectList()
                 {
                     m_effectPrefabs = new EffectList.EffectData[]
@@ -80,10 +78,12 @@ namespace LackingImaginationV2
                         }
                     }
                 };
+                baby.GetComponent<Tameable>().m_unsummonDistance = 100f;
+                baby.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                 baby.GetComponent<CharacterDrop>().m_dropsEnabled = false;
                 foreach (CharacterDrop.Drop drop in baby.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                 // baby.GetComponent<Character>().SetLevel(3);
-                Abom.Add(baby.GetComponent<Character>());
+                Abom = (baby.GetComponent<Character>());
 
                
             }

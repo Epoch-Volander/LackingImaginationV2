@@ -20,7 +20,7 @@ namespace LackingImaginationV2
         
         public static string Ability_Name = "Twin \nSouls";// resist physical, weak elemental
         
-        public static List<Character> Wraith = new List<Character>();
+        public static Character Wraith;
         
         public static GameObject Aura;
         public static void Process_Input(Player player, int position)
@@ -50,27 +50,25 @@ namespace LackingImaginationV2
                 
                 if (EnvMan.instance.IsNight() && player.IsBlocking())
                 {
-                    foreach (Character ch in Wraith)
+                    if(Wraith != null)
                     {
-                        if(ch == null) break;
-                        ch.GetComponent<Tameable>().UnSummon();
+                        if(Wraith.GetComponent<Tameable>() != null) Wraith.GetComponent<Tameable>().UnSummon();
                     }
-                    Wraith.Clear();
+                    Wraith = null;
                     
                     Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * 3f;
                     Vector3 randomPosition = player.transform.position + new Vector3(randomCirclePoint.x, 0f, randomCirclePoint.y);
                     GameObject wraith = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Wraith"), randomPosition, Quaternion.identity);
                     wraith.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
-                    wraith.GetComponent<Humanoid>().m_name = "Second(Ally)";
+                    wraith.GetComponent<Humanoid>().m_name = "Second";
                     wraith.GetComponent<Humanoid>().SetMaxHealth(wraith.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
-                    wraith.GetComponent<Humanoid>().m_speed = 3f;
+                    wraith.GetComponent<Humanoid>().m_speed = 4f;
                     wraith.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                     wraith.AddComponent<Tameable>();
                     // baby.GetComponent<Tameable>().m_startsTamed = true;
                     wraith.GetComponent<Tameable>().Tame();
-                    wraith.GetComponent<Tameable>().m_unsummonDistance = 150f;
-                    wraith.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                     wraith.GetComponent<Tameable>().m_commandable = true;
+                    wraith.GetComponent<Tameable>().Command(player);
                     wraith.GetComponent<Tameable>().m_unSummonEffect = new EffectList()
                     {
                         m_effectPrefabs = new EffectList.EffectData[]
@@ -82,9 +80,11 @@ namespace LackingImaginationV2
                             }
                         }
                     };
+                    wraith.GetComponent<Tameable>().m_unsummonDistance = 100f;
+                    wraith.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                     wraith.GetComponent<CharacterDrop>().m_dropsEnabled = false;
                     foreach (CharacterDrop.Drop drop in wraith.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
-                    Wraith.Add(wraith.GetComponent<Character>());
+                    Wraith = (wraith.GetComponent<Character>());
                 }
             }
             else
@@ -104,14 +104,13 @@ namespace LackingImaginationV2
         {
             public static void Postfix(Character __instance)
             {
-                if (__instance.m_name == "Second(Ally)" && (!EssenceItemData.equipedEssence.Contains("$item_wraith_essence") ||  EnvMan.instance.IsDay()))
+                if (__instance.m_name == "Second" && (!EssenceItemData.equipedEssence.Contains("$item_wraith_essence") ||  EnvMan.instance.IsDay()))
                 {
-                    foreach (Character ch in xWraithEssence.Wraith)
+                    if(xWraithEssence.Wraith != null)
                     {
-                        if(ch == null) break;
-                        ch.GetComponent<Tameable>().UnSummon();
+                        if(xWraithEssence.Wraith.GetComponent<Tameable>() != null) xWraithEssence.Wraith.GetComponent<Tameable>().UnSummon();
                     }
-                    xWraithEssence.Wraith.Clear();
+                    xWraithEssence.Wraith = null;
                 }
                 if (xWraithEssence.Aura != null && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_TwinSouls"))
                 {

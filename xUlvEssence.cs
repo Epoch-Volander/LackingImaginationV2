@@ -27,8 +27,10 @@ namespace LackingImaginationV2
             LackingImaginationV2Plugin.Log($"Wolf Button was pressed");
 
             
-            UnityEngine.GameObject.Destroy(xStoneGolemEssence.Aura);
 
+            
+            
+            
         }
         
 

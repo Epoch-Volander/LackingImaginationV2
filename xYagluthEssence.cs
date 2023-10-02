@@ -10,6 +10,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using System.Threading;
+using UnityEngine.UI;
 
 
 namespace LackingImaginationV2
@@ -18,7 +19,6 @@ namespace LackingImaginationV2
     public class xYagluthEssence
     {
         private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
-        private static int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
         
         public static string Ability_Name = "Culmination";
         
@@ -26,6 +26,7 @@ namespace LackingImaginationV2
         public static bool YagluthController2 = false;
         private static float breathDelay = 0.1f;
         private static float meteorDelay = 1f;
+        private static float novaDelay = 1f;
         
         public static void Process_Input(Player player, int position)
         {
@@ -39,7 +40,7 @@ namespace LackingImaginationV2
             
             //projectile_meteor
             //projectile_beam
-
+            int staticCharge;
 
             if (player.IsBlocking())
             {
@@ -49,8 +50,11 @@ namespace LackingImaginationV2
                 YagluthController1 = false;
 
                 ScheduleMeteor(player);
+                staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
+                staticCharge += 20;
+                xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
             }
-            if (player.IsCrouching())
+            else if (player.IsCrouching())
             {
                 LackingImaginationV2Plugin.UseGuardianPower = false;
                 YagluthController2 = true;
@@ -58,10 +62,22 @@ namespace LackingImaginationV2
                 YagluthController2 = false;
 
                 ScheduleNova(player);
+                staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
+                staticCharge -= 10;
+                if (staticCharge < 0) staticCharge = 0;
+                xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
+                
+                HitData hitData = new HitData();
+                hitData.m_damage.m_lightning = 100f;
+                hitData.m_hitType = HitData.HitType.EnemyHit;
+                player.Damage(hitData);
             }
             else
             {
                 ScheduleBeam(player);
+                staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
+                staticCharge += 20;
+                xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
             }
 
 
@@ -113,11 +129,11 @@ namespace LackingImaginationV2
                 Vector3 target = (!Physics.Raycast(spawnPosition, forwardDirection, out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (spawnPosition + forwardDirection * 1000f) : hitInfo.point;
                     
                 HitData hitData = new HitData();
-                hitData.m_damage.m_fire = 4f;
-                hitData.m_damage.m_lightning = 2f;
-                hitData.m_damage.m_chop = 5f;
-                hitData.m_damage.m_pickaxe = 5f;
-                // hitData.ApplyModifier(player.GetCurrentWeapon().GetDamage().GetTotalDamage() * LackingImaginationGlobal.c_moderDraconicFrostProjectile);
+                hitData.m_damage.m_fire = 40f;
+                hitData.m_damage.m_lightning = 20f;
+                hitData.m_damage.m_chop = 50f;
+                hitData.m_damage.m_pickaxe = 50f;
+                hitData.ApplyModifier(LackingImaginationGlobal.c_yagluthCulmination);
                 hitData.m_pushForce = 0.5f;
                 hitData.SetAttacker(player);
                 hitData.m_dodgeable = true;
@@ -142,9 +158,10 @@ namespace LackingImaginationV2
         // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator ScheduleNovaCoroutine(Player player)
         {
-            yield return new WaitForSeconds(0.1f);
-            
-            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("aoe_nova"), player.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(novaDelay);
+
+            GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("aoe_nova"), player.transform.position, Quaternion.identity);
+            Aoe.GetComponent<Aoe>().m_owner = player;
             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_goblinking_nova"), player.transform.position, Quaternion.identity);
 
             List<Character> allCharacters = new List<Character>();
@@ -159,7 +176,7 @@ namespace LackingImaginationV2
                     hitData.m_damage.m_fire = 65f;
                     hitData.m_damage.m_blunt = 65f;
                     hitData.m_dir = ch.transform.position - player.transform.position;
-                    // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                    hitData.ApplyModifier(LackingImaginationGlobal.c_yagluthCulmination);
                     hitData.m_pushForce = 10f;
                     hitData.m_point = ch.transform.position;
                     hitData.SetAttacker(player);
@@ -167,6 +184,8 @@ namespace LackingImaginationV2
                 }
             }
             
+            ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("Crouch");
+            // player.SetCrouch(false);
         }
 
         private static void ScheduleMeteor(Player player)
@@ -178,8 +197,6 @@ namespace LackingImaginationV2
         {
             yield return new WaitForSeconds(meteorDelay);
             
-            // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("projectile_beam"), player.GetCenterPoint() +player.transform.forward * 0.5f, player.transform.rotation, player.transform);
-           
             GameObject prefab = ZNetScene.instance.GetPrefab("projectile_meteor");
             
             int maxUsages = 12;
@@ -191,8 +208,6 @@ namespace LackingImaginationV2
             
             while (count <= maxUsages)
             {
-                // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("GoblinKing").GetComponent<Humanoid>().m_defaultItems[1].GetComponent<ItemDrop>().m_itemData.m_shared.m_trailStartEffect.m_effectPrefabs[0], player.transform.position, Quaternion.identity);
-                
                 Vector3 spawnPosition = playerPosition + upDirection * 50f + Direction * 0.5f;
                 GameObject GO_CulminationMeteorProjectile = UnityEngine.Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
 
@@ -216,11 +231,11 @@ namespace LackingImaginationV2
                 target += UnityEngine.Random.insideUnitSphere * 15f;
                 
                 HitData hitData = new HitData();
-                hitData.m_damage.m_fire = 12f;
-                hitData.m_damage.m_blunt = 4f;
-                hitData.m_damage.m_chop = 5f;
-                hitData.m_damage.m_pickaxe = 5f;
-                // hitData.ApplyModifier(player.GetCurrentWeapon().GetDamage().GetTotalDamage() * LackingImaginationGlobal.c_moderDraconicFrostProjectile);
+                hitData.m_damage.m_fire = 120f;
+                hitData.m_damage.m_blunt = 40f;
+                hitData.m_damage.m_chop = 50f;
+                hitData.m_damage.m_pickaxe = 50f;
+                hitData.ApplyModifier(LackingImaginationGlobal.c_yagluthCulmination);
                 hitData.m_pushForce = 0.5f;
                 hitData.SetAttacker(player);
                 hitData.m_dodgeable = true;
@@ -239,13 +254,104 @@ namespace LackingImaginationV2
             }
         }
         
-        
-        
     }
 
     [HarmonyPatch]
     public class xYagluthEssencePassive
     {
+        public static List<string> YagluthStats = new List<string>() { "0" };
+
+        private static float timer = 30f;
+        public static GameObject Aura;
+        public static bool boolAura;
+        
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
+        public static class Yagluth_UpdateEnvStatusEffects_Patch
+        {
+            public static void Prefix(Player __instance, ref float dt)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_yagluth_essence"))
+                {
+                    if(YagluthStats[0] != "0")
+                    {
+                        timer -= dt;
+                        if (timer <= 0f)
+                        {
+                            timer = 30f;
+                            YagluthStats[0] = (int.Parse(YagluthStats[0]) - 5).ToString();
+                        }
+                    }
+                    if (int.Parse(YagluthStats[0]) >= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap - 19
+                        && int.Parse(YagluthStats[0]) <= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap
+                        && !boolAura)
+                    {
+                        Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("fx_Lightning"), __instance.GetCenterPoint(), Quaternion.identity);
+                        Aura.transform.parent = __instance.transform;
+                        Aura.transform.Find("sfx").GetComponent<ZSFX>().m_minVol = 0.2f;
+                        Aura.transform.Find("sfx").GetComponent<ZSFX>().m_maxVol = 0.2f;
+                        Aura.transform.Find("sfx").GetComponent<ZSFX>().m_vol = 0.2f;
+                        boolAura = true;
+                    }
+                    if (int.Parse(YagluthStats[0]) < (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap - 19 && boolAura)
+                    {
+                        UnityEngine.GameObject.Destroy(Aura);
+                        boolAura = false;
+                    }
+                    if (int.Parse(YagluthStats[0]) > (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap)
+                    {
+                        GameObject Lightning = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("lightningAOE"), __instance.transform.position, Quaternion.identity);
+                        Aoe Aoe = Lightning.transform.Find("AOE_ROD").GetComponent<Aoe>();
+                        Aoe.m_useTriggers = true;
+
+                        YagluthStats[0] = "0";
+                    }
+                    if (!__instance.GetSEMan().HaveStatusEffect("SE_Culmination"))
+                    {
+                        __instance.GetSEMan().AddStatusEffect("SE_Culmination".GetStableHashCode());
+                    }
+                    if (__instance.GetSEMan().HaveStatusEffect("Burning"))
+                    {
+                        __instance.GetSEMan().RemoveStatusEffect("Burning".GetStableHashCode());
+                        
+                        YagluthStats[0] = (int.Parse(YagluthStats[0]) + 5).ToString();
+                    }
+                }
+                else if (__instance.GetSEMan().HaveStatusEffect("SE_Culmination"))
+                {
+                    __instance.GetSEMan().RemoveStatusEffect("SE_Culmination".GetStableHashCode());
+                }
+                
+            }
+        }
+        [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
+        public static class Yagluth_UpdateStatusEffects_Patch
+        {
+            public static void Postfix(Hud __instance, ref List<StatusEffect> statusEffects)
+            {
+                string iconText = YagluthStats[0];
+                for (int index = 0; index < statusEffects.Count; ++index)
+                {
+                    StatusEffect statusEffect1 = statusEffects[index];
+                    if (statusEffect1.name == "SE_Culmination")
+                    {
+                        RectTransform statusEffect2 = __instance.m_statusEffects[index];
+                        Text component2 = statusEffect2.Find("TimeText").GetComponent<Text>();
+                        if (!string.IsNullOrEmpty(iconText))
+                        {
+                            component2.gameObject.SetActive(value: true);
+                            component2.text = iconText;
+                        }
+                        else
+                        {
+                            component2.gameObject.SetActive(value: false);
+                        }
+                    }
+                }
+            }
+        }
+        
+       
+        
         
         
         

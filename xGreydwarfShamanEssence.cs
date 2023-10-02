@@ -21,7 +21,8 @@ namespace LackingImaginationV2
         public static string Ability_Name = "Dubious \nHeal";
         
         public static bool GreydwarfShamanController = false;
-        private static float shotDelay = 0.3f;
+        private static float animDelay = 0.3f;
+        private static float healDelay = 0.3f;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -34,12 +35,8 @@ namespace LackingImaginationV2
                 player.GetSEMan().AddStatusEffect(se_cd);
                 
                 //Effects, animations, and sounds
+                player.SetCrouch(true);
                 
-                LackingImaginationV2Plugin.UseGuardianPower = false;
-                GreydwarfShamanController = true;
-                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                GreydwarfShamanController = false;
-
                 ScheduleHeal(player);
             }
             else
@@ -54,7 +51,15 @@ namespace LackingImaginationV2
         // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator ScheduleHealCoroutine(Player player)
         {
-            yield return new WaitForSeconds(shotDelay);
+            yield return new WaitForSeconds(animDelay);
+            
+            LackingImaginationV2Plugin.UseGuardianPower = false;
+            GreydwarfShamanController = true;
+            ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+            GreydwarfShamanController = false;
+            
+            yield return new WaitForSeconds(healDelay);
+            
             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_greydwarf_shaman_heal"), player.transform.position, Quaternion.identity);
             // simple heal (faction targeted heal)
             List<Character> allCharacters = new List<Character>();
@@ -85,10 +90,12 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Player), nameof(Player.UpdateFood))]
         public static class GreydwarfShaman_UpdateFood_Patch
         {
-            public static void Postfix(Player __instance)//doubles regen
+            public static void Postfix(Player __instance, ref float dt)//doubles regen
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_greydwarfshaman_essence"))
                 {
+                    if ((double) __instance.m_foodRegenTimer < (10.0 + dt))
+                        return;
                     float num1 = 0.0f;
                     foreach (Player.Food food in __instance.m_foods)
                         num1 += food.m_item.m_shared.m_foodRegen;

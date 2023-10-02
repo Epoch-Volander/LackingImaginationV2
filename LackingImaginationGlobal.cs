@@ -1347,10 +1347,35 @@ namespace LackingImaginationV2
             }
         }
         
-        
-        
-        
-        
+        //Yagluth
+        public static float c_yagluthCulminationStaticCap
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_yagluthCulminationStaticCap"];
+                }
+                catch
+                {
+                    return 100f;
+                }
+            }
+        }
+        public static float c_yagluthCulmination
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_yagluthCulmination"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
         
         
         

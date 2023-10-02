@@ -488,6 +488,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xSeaSerpentEssencePassive.SeaSerpentStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xTickEssencePassive.TickStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xStoneGolemEssencePassive.StoneGolemStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xYagluthEssencePassive.YagluthStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
