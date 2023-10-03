@@ -55,8 +55,8 @@ namespace LackingImaginationV2
                 baby.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                 baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
                 baby.GetComponent<Humanoid>().m_name = "Bane";
-                baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
-                baby.GetComponent<Humanoid>().m_speed = 4f;
+                baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * 5f * LackingImaginationGlobal.c_abominationBaneAllyHealth);
+                baby.GetComponent<Humanoid>().m_speed = 4f * LackingImaginationGlobal.c_abominationBaneAllySpeed;
                 baby.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                 baby.GetComponent<MonsterAI>().m_consumeItems = new List<ItemDrop>() {ZNetScene.instance.GetPrefab("Wood").GetComponent<ItemDrop>()};
                 baby.GetComponent<MonsterAI>().m_consumeRange = 2f;
@@ -121,7 +121,32 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
+        [HarmonyPatch(typeof(Character), (nameof(Character.RPC_Damage)))]
+        class Abomination_RPC_Damage_Patch
+        {
+            static void Prefix(Character __instance, ref HitData hit)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_abomination_essence") && hit.GetAttacker() != null)
+                {
+                    if (__instance.IsDebugFlying())
+                        return;
+                    if ((UnityEngine.Object) hit.GetAttacker() == (UnityEngine.Object) Player.m_localPlayer)
+                    {
+                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
+                        __instance.m_localPlayerHasHit = true;
+                    }
+                    if (!__instance.m_nview.IsOwner() || (double) __instance.GetHealth() <= 0.0 || __instance.IsDead() || __instance.IsTeleporting() || __instance.InCutscene() || hit.m_dodgeable && __instance.IsDodgeInvincible())
+                        return;
+                    Character attacker = hit.GetAttacker();
+                    if (hit.HaveAttacker() && (UnityEngine.Object)attacker == (UnityEngine.Object)null || __instance.IsPlayer() && !__instance.IsPVPEnabled() && (UnityEngine.Object)attacker != (UnityEngine.Object)null && attacker.IsPlayer() && !hit.m_ignorePVP)
+                        return;
+                    if ((UnityEngine.Object) attacker.m_baseAI != (UnityEngine.Object) null && attacker.m_name == "Bane")
+                    {
+                        hit.ApplyModifier(LackingImaginationGlobal.c_abominationBaneAllyAttack);
+                    }
+                }
+            }
+        }
         
     }
 }

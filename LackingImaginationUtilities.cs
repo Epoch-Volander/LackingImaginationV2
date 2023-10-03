@@ -428,7 +428,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 25f * LackingImaginationGlobal.g_CooldownModifer;
+                 return  Math.Max(LackingImaginationGlobal.c_eikthyrBlitzCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          
@@ -436,7 +436,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_deerHorizonHasteCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          
@@ -444,7 +444,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_fenringMoonlitLeapCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          
@@ -452,7 +452,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 25f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_loxWildTremorCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          
@@ -460,7 +460,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 120f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_wolfRavenousHungerCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          
@@ -468,219 +468,226 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_fulingshamanRitualCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xDeathsquitoCooldownTime
          {
              get
              {
-                 return 60f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_deathsquitoRelentlessCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xSurtlingCooldownTime
          {
              get
              {
-                 return 60f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_surtlingHarbingerCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xFulingBerserkerCooldownTime
          {
              get
              {
-                 return 60f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_fulingberserkerGiantizationCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xDrakeCooldownTime
          {
              get
              {
-                 return 12f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_drakeThreeFreezeCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xGrowthCooldownTime
          {
              get
              {
-                 return 15f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_growthAncientTarCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xTrollCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_trollTrollTossCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xGreydwarfShamanCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_greydwarfshamanDubiousHealCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xDvergrCooldownTime
          {
              get
              {
-                 return 2f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_dvergrRandomizeCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xNeckCooldownTime
          {
              get
              {
-                 return 3f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_neckSplashCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xLeechCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_leechBloodSiphonCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xBoneMassCooldownTime
          {
              get
              {
-                 return 20f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_bonemassMassReleaseCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xGreydwarfBruteCooldownTime
          {
              get
              {
-                 return 8f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_greydwarfbruteBashCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xFulingCooldownTime
          {
              get
              {
-                 return 8f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_fulingLonginusCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xGjallCooldownTime
          {
              get
              {
-                 return 25f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_gjallGjallarhornCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xGreydwarfCooldownTime
          {
              get
              {
-                 return 5f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_greydwarfPebbleCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xElderCooldownTime
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_elderAncientAweCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xBlobCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_blobFumesCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }         
          public static float xSkeletonCooldownTime
          {
              get
              {
-                 return 50f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_skeletonVigilCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xAbominationCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_abominationBaneCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xWriathCooldownTime
          {
              get
              {
-                 return 70f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_wraithTwinSoulsCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xDraugrCooldownTime
          {
              get
              {
-                 return 60f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_draugrForgottenCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xDraugrEliteCooldownTime
          {
              get
              {
-                 return 60f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_draugreliteFallenHeroCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xGeirrhafaCooldownTime
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_geirrhafaIceAgeCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xCultistCooldownTime
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_cultistLoneSunCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }   
          public static float xHareCooldownTime
          {
              get
              {
-                 return 40f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_hareLuckyFootCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }   
          public static float xSeaSerpentCooldownTime
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_seaserpentSeaKingCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }   
          public static float xTickCooldownTime
          {
              get
              {
-                 return 10f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_tickBloodWellCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }  
          public static float xModerCooldownTime
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_moderDraconicFrostCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
          public static float xBoarCooldownTime
          {
              get
              {
-                 return 30f * LackingImaginationGlobal.g_CooldownModifer;
+                 return Math.Max(LackingImaginationGlobal.c_boarRecklessChargeCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }    
          public static float xStoneGolemCooldownTime
          {
              get
              {
-                 return 5f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+                 return Math.Max(LackingImaginationGlobal.c_stonegolemCoreOverdriveCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;//adjust
              }
-         }    
+         }
+         public static float xYagluthCooldownTime
+         {
+             get
+             {
+                 return Math.Max(LackingImaginationGlobal.c_yagluthCulminationCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;//adjust
+             }
+         }   
          public static float xUlvCooldownTime
          {
              get
@@ -688,14 +695,6 @@ namespace LackingImaginationV2
                  return 5f * LackingImaginationGlobal.g_CooldownModifer;//adjust
              }
          }  
-         public static float xYagluthCooldownTime
-         {
-             get
-             {
-                 return 20f * LackingImaginationGlobal.g_CooldownModifer;//adjust
-             }
-         }   
-         
          
         
          

@@ -68,6 +68,20 @@ namespace LackingImaginationV2
         
         
         //Deer
+        public static float c_deerHorizonHasteCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_deerHorizonHasteCD"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
         public static float c_deerHorizonHaste
         {
             get
@@ -98,6 +112,20 @@ namespace LackingImaginationV2
         }
         
         //Eikthyr
+        public static float c_eikthyrBlitzCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_eikthyrBlitzCD"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
         public static float c_eikthyrBlitzPassive
         {
             get
@@ -128,6 +156,20 @@ namespace LackingImaginationV2
         }
         
         //Fenring
+        public static float c_fenringMoonlitLeapCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fenringMoonlitLeapCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
         public static float c_fenringMoonlitLeap
         {
             get
@@ -158,6 +200,20 @@ namespace LackingImaginationV2
         }
         
         //Lox
+        public static float c_loxWildTremorCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_loxWildTremorCD"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
         public static float c_loxWildTremor
         {
             get
@@ -188,6 +244,20 @@ namespace LackingImaginationV2
         }
         
         // Wolf
+        public static float c_wolfRavenousHungerCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wolfRavenousHungerCD"];
+                }
+                catch
+                {
+                    return 120f;
+                }
+            }
+        }
         public static float c_wolfRavenousHunger
         {
             get
@@ -232,6 +302,20 @@ namespace LackingImaginationV2
         }
         
         // Fuling Shaman
+        public static float c_fulingshamanRitualCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fulingshamanRitualCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
         public static float c_fulingshamanRitualShield
         {
             get
@@ -304,6 +388,20 @@ namespace LackingImaginationV2
         }
         
         // Deathsquito
+        public static float c_deathsquitoRelentlessCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_deathsquitoRelentlessCD"];
+                }
+                catch
+                {
+                    return 60f;
+                }
+            }
+        }
         public static float c_deathsquitoRelentlessHoming
         {
             get
@@ -334,7 +432,20 @@ namespace LackingImaginationV2
         }
         
         //Surtling
-        
+        public static float c_surtlingHarbingerCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_surtlingHarbingerCD"];
+                }
+                catch
+                {
+                    return 60f;
+                }
+            }
+        }
         public static float c_surtlingHarbingerCharges
         {
             get
@@ -380,8 +491,35 @@ namespace LackingImaginationV2
         }
         
         //FulingBerserker?
-        
+        public static float c_fulingberserkerGiantizationCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fulingberserkerGiantizationCD"];
+                }
+                catch
+                {
+                    return 60f;
+                }
+            }
+        }
         //Drake
+        public static float c_drakeThreeFreezeCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_drakeThreeFreezeCD"];
+                }
+                catch
+                {
+                    return 12f;
+                }
+            }
+        }
         public static float  c_drakeThreeFreezeProjectile
         {
             get
@@ -398,6 +536,20 @@ namespace LackingImaginationV2
         }
         
         //Growth
+        public static float c_growthAncientTarCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_growthAncientTarCD"];
+                }
+                catch
+                {
+                    return 15f;
+                }
+            }
+        }
         public static float  c_growthAncientTarProjectile
         {
             get
@@ -428,6 +580,20 @@ namespace LackingImaginationV2
         }
         
         //Greydwarf Shaman
+        public static float c_greydwarfshamanDubiousHealCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_greydwarfshamanDubiousHealCD"];
+                }
+                catch
+                {
+                    return 60f;
+                }
+            }
+        }
         public static float  c_greydwarfshamanDubiousHealPlayer
         {
             get
@@ -485,7 +651,21 @@ namespace LackingImaginationV2
             }
         }
         
-        //Troll        
+        //Troll    
+        public static float c_trollTrollTossCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_trollTrollTossCD"];
+                }
+                catch
+                {
+                    return 10f;
+                }
+            }
+        }
         public static float c_trollTrollTossProjectile
         {
             get
@@ -516,6 +696,20 @@ namespace LackingImaginationV2
         }
         
         //Dvergr
+        public static float c_dvergrRandomizeCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_dvergrRandomizeCD"];
+                }
+                catch
+                {
+                    return 2f;
+                }
+            }
+        }
         public static float c_dvergrRandomizeCost
         {
             get
@@ -614,7 +808,36 @@ namespace LackingImaginationV2
                 }
             }
         }
+        //Neck
+        public static float c_neckSplashCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_neckSplashCD"];
+                }
+                catch
+                {
+                    return 3f;
+                }
+            }
+        }
         //Leech
+        public static float c_leechBloodSiphonCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_leechBloodSiphonCD"];
+                }
+                catch
+                {
+                    return 10f;
+                }
+            }
+        }
         public static float c_leechBloodSiphonStack
         {
             get
@@ -645,6 +868,20 @@ namespace LackingImaginationV2
         }
         
         //BoneMass
+        public static float c_bonemassMassReleaseCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_bonemassMassReleaseCD"];
+                }
+                catch
+                {
+                    return 20f;
+                }
+            }
+        }
         public static float c_bonemassMassReleaseSummonDuration
         {
             get
@@ -674,6 +911,20 @@ namespace LackingImaginationV2
             }
         }
         //GreydwarfBrute
+        public static float c_greydwarfbruteBashCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_greydwarfbruteBashCD"];
+                }
+                catch
+                {
+                    return 8f;
+                }
+            }
+        }
         public static float c_greydwarfbruteBashMultiplier
         {
             get
@@ -704,6 +955,20 @@ namespace LackingImaginationV2
         }
         
         //fuling
+        public static float c_fulingLonginusCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fulingLonginusCD"];
+                }
+                catch
+                {
+                    return 8f;
+                }
+            }
+        }
         public static float c_fulingLonginusMultiplier
         {
             get
@@ -762,6 +1027,20 @@ namespace LackingImaginationV2
         }
         
         //Gjall
+        public static float c_gjallGjallarhornCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_gjallGjallarhornCD"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
         public static float c_gjallGjallarhornSummonDuration
         {
             get
@@ -806,7 +1085,20 @@ namespace LackingImaginationV2
         }
         
         //Greydwarf
-        
+        public static float c_greydwarfPebbleCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_greydwarfPebbleCD"];
+                }
+                catch
+                {
+                    return 5f;
+                }
+            }
+        }
         public static float c_greydwarfPebbleProjectile
         {
             get
@@ -851,6 +1143,20 @@ namespace LackingImaginationV2
         }
         
         //Elder
+        public static float c_elderAncientAweCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_elderAncientAweCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
         public static float c_elderAncientAwePassive
         {
             get
@@ -867,6 +1173,20 @@ namespace LackingImaginationV2
         }
          
         //Blob
+        public static float c_blobFumesCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_blobFumesCD"];
+                }
+                catch
+                {
+                    return 10f;
+                }
+            }
+        }
         public static float c_blobFumes
         {
             get
@@ -883,6 +1203,20 @@ namespace LackingImaginationV2
         }
         
         //Skeleton
+        public static float c_skeletonVigilCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_skeletonVigilCD"];
+                }
+                catch
+                {
+                    return 50f;
+                }
+            }
+        }
         public static float c_skeletonVigilSummons
         {
             get
@@ -928,6 +1262,20 @@ namespace LackingImaginationV2
         }
         
         //Abomination
+        public static float c_abominationBaneCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_abominationBaneCD"];
+                }
+                catch
+                {
+                    return 60f;
+                }
+            }
+        }
         public static float c_abominationBaneArmor
         {
             get
@@ -956,9 +1304,64 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_abominationBaneAllySpeed
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_abominationBaneAllySpeed"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
+        public static float c_abominationBaneAllyHealth
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_abominationBaneAllyHealth"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
+        public static float c_abominationBaneAllyAttack
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_abominationBaneAllyAttack"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
         
         //Wraith
-        
+        public static float c_wraithTwinSoulsCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsCD"];
+                }
+                catch
+                {
+                    return 70f;
+                }
+            }
+        }
         public static float c_wraithTwinSoulsArmor
         {
             get
@@ -987,8 +1390,63 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
+        public static float c_wraithTwinSoulsAllySpeed
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsAllySpeed"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
+        public static float c_wraithTwinSoulsAllyHealth
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsAllyHealth"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
+        public static float c_wraithTwinSoulsAllyAttack
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsAllyAttack"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
         //Draugr
+        public static float c_draugrForgottenCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugrForgottenCD"];
+                }
+                catch
+                {
+                    return 0f;
+                }
+            }
+        }
         public static float c_draugrForgottenRot
         {
             get
@@ -1033,6 +1491,20 @@ namespace LackingImaginationV2
         }
 
         //DraugrElite
+        public static float c_draugreliteFallenHeroCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugreliteFallenHeroCD"];
+                }
+                catch
+                {
+                    return 60f;
+                }
+            }
+        }
         public static float c_draugreliteFallenHeroRot
         {
             get
@@ -1077,6 +1549,20 @@ namespace LackingImaginationV2
         }
         
         //Geirrhafa
+        public static float c_geirrhafaIceAgeCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_geirrhafaIceAgeCD"];
+                }
+                catch
+                {
+                    return 45f;
+                }
+            }
+        }
         public static float c_geirrhafaIceAgeAoe
         {
             get
@@ -1122,6 +1608,20 @@ namespace LackingImaginationV2
         }
         
         //Cultist
+        public static float c_cultistLoneSunCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_cultistLoneSunCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
         public static float c_cultistLoneSunAoe
         {
             get
@@ -1152,6 +1652,20 @@ namespace LackingImaginationV2
         }
 
         //Hare
+        public static float c_hareLuckyFootCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_hareLuckyFootCD"];
+                }
+                catch
+                {
+                    return 40f;
+                }
+            }
+        }
         public static float c_hareLuckyFoot
         {
             get
@@ -1182,13 +1696,27 @@ namespace LackingImaginationV2
         }
         
         //Sea Serpent
-        public static float c_seaSerpentSeaKingProjectile
+        public static float c_seaserpentSeaKingCD
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_seaSerpentSeaKingProjectile"]/100;
+                    return ConfigStrings["li_seaserpentSeaKingCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
+        public static float c_seaserpentSeaKingProjectile
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_seaserpentSeaKingProjectile"]/100;
                 }
                 catch
                 {
@@ -1198,6 +1726,20 @@ namespace LackingImaginationV2
         }
         
         //Tick
+        public static float c_tickBloodWellCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_tickBloodWellCD"];
+                }
+                catch
+                {
+                    return 10f;
+                }
+            }
+        }
         public static float c_tickBloodWellLifeSteal
         {
             get
@@ -1242,6 +1784,20 @@ namespace LackingImaginationV2
         }
         
         //Moder
+        public static float c_moderDraconicFrostCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_moderDraconicFrostCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
         public static float c_moderDraconicFrostProjectile
         {
             get
@@ -1287,6 +1843,20 @@ namespace LackingImaginationV2
         }
         
         //boar
+        public static float c_boarRecklessChargeCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_boarRecklessChargeCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
         public static float c_boarRecklessCharge
         {
             get
@@ -1317,14 +1887,27 @@ namespace LackingImaginationV2
         }
 
         //Stone Golem
-        
-        public static float c_stonegolemCoreStacks
+        public static float c_stonegolemCoreOverdriveCD
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_stonegolemCoreStacks"];
+                    return ConfigStrings["li_stonegolemCoreOverdriveCD"];
+                }
+                catch
+                {
+                    return 5f;
+                }
+            }
+        }
+        public static float c_stonegolemCoreOverdriveStacks
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_stonegolemCoreOverdriveStacks"];
                 }
                 catch
                 {
@@ -1348,6 +1931,20 @@ namespace LackingImaginationV2
         }
         
         //Yagluth
+        public static float c_yagluthCulminationCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_yagluthCulminationCD"];
+                }
+                catch
+                {
+                    return 20f;
+                }
+            }
+        }
         public static float c_yagluthCulminationStaticCap
         {
             get
@@ -1377,7 +1974,7 @@ namespace LackingImaginationV2
             }
         }
         
-        
+        //Ulv
         
         
         

@@ -61,8 +61,8 @@ namespace LackingImaginationV2
                     GameObject wraith = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Wraith"), randomPosition, Quaternion.identity);
                     wraith.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                     wraith.GetComponent<Humanoid>().m_name = "Second";
-                    wraith.GetComponent<Humanoid>().SetMaxHealth(wraith.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
-                    wraith.GetComponent<Humanoid>().m_speed = 4f;
+                    wraith.GetComponent<Humanoid>().SetMaxHealth(wraith.GetComponent<Humanoid>().GetMaxHealthBase() * 5f * LackingImaginationGlobal.c_wraithTwinSoulsAllyHealth);
+                    wraith.GetComponent<Humanoid>().m_speed = 4f * LackingImaginationGlobal.c_wraithTwinSoulsAllySpeed;
                     wraith.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                     wraith.AddComponent<Tameable>();
                     // baby.GetComponent<Tameable>().m_startsTamed = true;
@@ -157,6 +157,10 @@ namespace LackingImaginationV2
                     if (EnvMan.instance.IsDay() && (UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())
                     {
                         hit.m_damage.m_spirit += (Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_wraithTwinSoulsPassive;
+                    }
+                    if ((UnityEngine.Object) attacker.m_baseAI != (UnityEngine.Object) null && attacker.m_name == "Second")
+                    {
+                        hit.ApplyModifier(LackingImaginationGlobal.c_wraithTwinSoulsAllyAttack);
                     }
                 }
             }

@@ -62,7 +62,7 @@ namespace LackingImaginationV2
         {
             { "BlackForest_Exp", Heightmap.Biome.BlackForest },
             { "Meadows_Exp", Heightmap.Biome.Meadows },
-            { "Mistlands_Exp", Heightmap.Biome.Mistlands },
+            { "         Mistlands_Exp", Heightmap.Biome.Mistlands },
             { "Mountain_Exp", Heightmap.Biome.Mountain },
             { "Ocean_Exp", Heightmap.Biome.Ocean },
             { "Plains_Exp", Heightmap.Biome.Plains },
@@ -256,6 +256,43 @@ namespace LackingImaginationV2
         
         
         
+        public static ConfigEntry<float> li_eikthyrBlitzCD;
+        public static ConfigEntry<float> li_deerHorizonHasteCD;
+        public static ConfigEntry<float> li_fenringMoonlitLeapCD;
+        public static ConfigEntry<float> li_loxWildTremorCD;
+        public static ConfigEntry<float> li_wolfRavenousHungerCD;
+        public static ConfigEntry<float> li_fulingshamanRitualCD;
+        public static ConfigEntry<float> li_deathsquitoRelentlessCD;
+        public static ConfigEntry<float> li_surtlingHarbingerCD;
+        public static ConfigEntry<float> li_fulingberserkerGiantizationCD;
+        public static ConfigEntry<float> li_drakeThreeFreezeCD;
+        public static ConfigEntry<float> li_growthAncientTarCD;
+        public static ConfigEntry<float> li_trollTrollTossCD;
+        public static ConfigEntry<float> li_greydwarfshamanDubiousHealCD;
+        public static ConfigEntry<float> li_dvergrRandomizeCD;
+        public static ConfigEntry<float> li_neckSplashCD;
+        public static ConfigEntry<float> li_leechBloodSiphonCD;
+        public static ConfigEntry<float> li_bonemassMassReleaseCD;
+        public static ConfigEntry<float> li_greydwarfbruteBashCD;
+        public static ConfigEntry<float> li_fulingLonginusCD;
+        public static ConfigEntry<float> li_gjallGjallarhornCD;
+        public static ConfigEntry<float> li_greydwarfPebbleCD;
+        public static ConfigEntry<float> li_elderAncientAweCD;
+        public static ConfigEntry<float> li_blobFumesCD;
+        public static ConfigEntry<float> li_skeletonVigilCD;
+        public static ConfigEntry<float> li_abominationBaneCD;
+        public static ConfigEntry<float> li_wraithTwinSoulsCD;
+        public static ConfigEntry<float> li_draugrForgottenCD;
+        public static ConfigEntry<float> li_draugreliteFallenHeroCD;
+        public static ConfigEntry<float> li_geirrhafaIceAgeCD;
+        public static ConfigEntry<float> li_cultistLoneSunCD;
+        public static ConfigEntry<float> li_hareLuckyFootCD;
+        public static ConfigEntry<float> li_seaserpentSeaKingCD;
+        public static ConfigEntry<float> li_tickBloodWellCD;
+        public static ConfigEntry<float> li_moderDraconicFrostCD;
+        public static ConfigEntry<float> li_boarRecklessChargeCD;
+        public static ConfigEntry<float> li_stonegolemCoreOverdriveCD;
+        public static ConfigEntry<float> li_yagluthCulminationCD;
         
         
         public static ConfigEntry<float> li_deerHorizonHaste;
@@ -318,8 +355,14 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_skeletonVigilSoulCap;
         public static ConfigEntry<float> li_abominationBaneArmor;
         public static ConfigEntry<float> li_abominationBaneHealth;
+        public static ConfigEntry<float> li_abominationBaneAllySpeed;
+        public static ConfigEntry<float> li_abominationBaneAllyHealth;
+        public static ConfigEntry<float> li_abominationBaneAllyAttack;
         public static ConfigEntry<float> li_wraithTwinSoulsArmor;
         public static ConfigEntry<float> li_wraithTwinSoulsPassive;
+        public static ConfigEntry<float> li_wraithTwinSoulsAllySpeed;
+        public static ConfigEntry<float> li_wraithTwinSoulsAllyHealth;
+        public static ConfigEntry<float> li_wraithTwinSoulsAllyAttack;
         public static ConfigEntry<float> li_draugrForgottenRot;
         public static ConfigEntry<float> li_draugrForgottenPassiveCarry;
         public static ConfigEntry<float> li_draugrForgottenActive;
@@ -333,16 +376,21 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_cultistLoneSunPassive;
         public static ConfigEntry<float> li_hareLuckyFoot;
         public static ConfigEntry<float> li_hareLuckyFootArmor;
-        public static ConfigEntry<float> li_seaSerpentSeaKingProjectile;
+        public static ConfigEntry<float> li_seaserpentSeaKingProjectile;
         public static ConfigEntry<float> li_tickBloodWellLifeSteal;
         public static ConfigEntry<float> li_tickBloodWellArmor;
         public static ConfigEntry<float> li_tickBloodWellStackCap;
         public static ConfigEntry<float> li_moderDraconicFrostProjectile;
         public static ConfigEntry<float> li_moderDraconicFrostPassive;
         public static ConfigEntry<float> li_moderDraconicFrostDragonBreath;
-        
+        public static ConfigEntry<float> li_boarRecklessCharge;
+        public static ConfigEntry<float> li_boarRecklessChargePassive;
+        public static ConfigEntry<float> li_stonegolemCoreOverdriveStacks;
+        public static ConfigEntry<float> li_stonegolemCoreOverdriveArmor;
+        public static ConfigEntry<float> li_yagluthCulminationStaticCap;
+        public static ConfigEntry<float> li_yagluthCulmination;
     
-        
+       
         
         // public static List<string> equipedEssence = new();
         private static LackingImaginationV2Plugin _instance;
@@ -668,9 +716,8 @@ namespace LackingImaginationV2
             Ability5_Hotkey_Combo = config("Keybinds", "Ability5_Hotkey_Combo", "left alt", "Ability 5 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
 
             //li_cooldownMultiplier = ConfigManager.RegisterModConfigVariable<float>(ModName, "vl_mce_cooldownMultiplier", 1f, "Modifiers", "This value multiplied on overall cooldown time of abilities", false);
-            li_cooldownMultiplier = config("Modifiers", "li_cooldownMultiplier", 100f, "This value multiplied on overall cooldown time of abilities");
-
-
+            li_cooldownMultiplier = config("Modifiers", "CooldownMultiplier", 100f, "This value multiplied on overall cooldown time of abilities");
+            
             //showAbilityIcons = ConfigManager.RegisterModConfigVariable<bool>(ModName, "showAbilityIcons", true, "Display", "Displays Icons on Hud for each ability", true);
             showAbilityIcons = config("Display", "showAbilityIcons", true, "Displays Icons on Hud for each ability");
             //iconAlignment = ConfigManager.RegisterModConfigVariable<string>(ModName, "iconAlignment", "horizontal", "Display", "Aligns icons horizontally or vertically off the guardian power icon; options are horizontal or vertical", true);
@@ -680,6 +727,11 @@ namespace LackingImaginationV2
             //icon_Y_Offset = ConfigManager.RegisterModConfigVariable<float>(ModName, "icon_Y_Offset", 0f, "Display", "Offsets the icon bar vertically. The icon bar is anchored to the Guardian power icon.", true);
             icon_Y_Offset = config("Display", "icon_Y_Offset", 0f, "Offsets the icon bar vertically. The icon bar is anchored to the Guardian power icon.");
 
+            //Cooldown
+            
+            
+            
+            
             //Synergies
             //Draugr Synergy
             li_draugrSynergyRot = config("Essence Synergy Modifiers", "li_draugrSynergyRot", 5f, "Modifies % dmg reduction system when all Draugr essences are equipped");
@@ -688,49 +740,63 @@ namespace LackingImaginationV2
             
             
             //deer
+            li_deerHorizonHasteCD = config("Essence Deer Modifiers", "li_deerHorizonHasteCD", 25f, "Cooldown");
             li_deerHorizonHaste = config("Essence Deer Modifiers", "li_deerHorizonHaste", 100f, "Modifies the movement speed for Horizon Haste");
             li_deerHorizonHastePassive = config("Essence Deer Modifiers", "li_deerHorizonHastePassive", 25f, "Bonus Stamina from Horizon Haste");
             // eikthyr
+            li_eikthyrBlitzCD = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzCD", 25f, "Cooldown");
             li_eikthyrBlitzPassive = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzPassive", 10f, "Modifies the lightning damage passive for Weapons");
             li_eikthyrBlitz = config("Essence Eikthyr Modifiers", "li_eikthyrBlitz", 100f, "Modifies the lightning damage for Blitz");
             // fenring
+            li_fenringMoonlitLeapCD = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapCD", 30f, "Cooldown");
             li_fenringMoonlitLeap = config("Essence Fenring Modifiers", "li_fenringMoonlitLeap", 100f, "Modifies the jump force for Moonlit Leap");
             li_fenringMoonlitLeapPassive = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapPassive", 10f, "Modifies the % slash damage passive for Fist Weapons");
             // lox
+            li_loxWildTremorCD = config("Essence Lox Modifiers", "li_loxWildTremorCD", 25f, "Cooldown");
             li_loxWildTremor = config("Essence Lox Modifiers", "li_loxWildTremor", 100f, "Modifies the blunt damage for Wild Tremor");
             li_loxWildTremorPassive = config("Essence Lox Modifiers", "li_loxWildTremorPassive", 30f, "Bonus Health from Wild Tremor on eat");
             // wolf
+            li_wolfRavenousHungerCD = config("Essence Wolf Modifiers", "li_wolfRavenousHungerCD", 120f, "Cooldown");
             li_wolfRavenousHunger = config("Essence Wolf Modifiers", "li_wolfRavenousHunger", 5f, "Modifies % max HP dmg for Ravenous Hunger");
             li_wolfRavenousHungerStaminaPassive = config("Essence Wolf Modifiers", "li_wolfRavenousHungerStaminaPassive", 65f, "Bonus Stamina per stage of Ravenous Hunger");
             li_wolfRavenousHungerPassive = config("Essence Wolf Modifiers", "li_wolfRavenousHungerPassive", 100f, "Modifies the Damage multiplier of Ravenous Hunger");
             // fulingshaman
+            li_fulingshamanRitualCD = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualCD", 30f, "Cooldown");
             li_fulingshamanRitualShield = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualShield", 200f, "Modifies health of Ritual Shield");
             li_fulingshamanRitualShieldGrowthCap = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualShieldGrowthCap", 800f, "Modifies Max health growth, increases by 1 per cast");
             li_fulingshamanRitualProjectile = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualProjectile", 100f, "Modifies the damage of Ritual Projectile");
             li_fulingshamanRitualPassiveEitr = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualPassiveEitr", 50f, "Modifies bonus Eitr passive");
             li_fulingshamanRitualPassiveCarry = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualPassiveCarry", 100f, "Modifies Carry Weight reduction");
             // deathsquito
+            li_deathsquitoRelentlessCD = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessCD", 60f, "Cooldown");
             li_deathsquitoRelentlessHoming = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessHoming", 100f, "Modifies projectile Homing aggression");
             li_deathsquitoRelentlessPassive = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessPassive", 10f, "Modifies % bonus pierce damage on projectiles");
-            //fuling brute unchangeable? xD
-            // surtling
+            //surtling
+            li_surtlingHarbingerCD = config("Essence Surtling Modifiers", "li_surtlingHarbingerCD", 60f, "Cooldown");
             li_surtlingHarbingerCharges = config("Essence Surtling Modifiers", "li_surtlingHarbingerCharges", 10f, "Modifies the number of casts per Core");
             li_surtlingHarbingerBurn = config("Essence Surtling Modifiers", "li_surtlingHarbingerBurn", 100f, "Modifies the Aoe Dmg");
             li_surtlingHarbingerMinDistance = config("Essence Surtling Modifiers", "li_surtlingHarbingerMinDistance", 8f, "Modifies the distance a creature has to be from another for a rift to spawn");
-            // drake
+            // fuling brute unchangeable? xD
+            li_fulingberserkerGiantizationCD = config("Essence Fuling Brute Modifiers", "li_fulingberserkerGiantizationCD", 60f, "Cooldown");
+             // drake
+            li_drakeThreeFreezeCD = config("Essence Drake Modifiers", "li_drakeThreeFreezeCD", 12f, "Cooldown");
             li_drakeThreeFreezeProjectile = config("Essence Drake Modifiers", "li_drakeThreeFreezeProjectile", 50f, "Modifies the % weapon damage for Three Freeze");
             // growth
+            li_growthAncientTarCD = config("Essence Growth Modifiers", "li_growthAncientTarCD", 15f, "Cooldown");
             li_growthAncientTarProjectile = config("Essence Growth Modifiers", "li_growthAncientTarProjectile", 50f, "Modifies the % weapon damage for Ancient Tar");
             li_growthAncientTarPassive = config("Essence Growth Modifiers", "li_growthAncientTarPassive", 10f, "Modifies the % weapon damage for Ancient Tar Passive for Weapons");
             // greydwarfshaman
+            li_greydwarfshamanDubiousHealCD = config("Essence Greydwarf Modifiers", "li_greydwarfshamanDubiousHealCD", 60f, "Cooldown");
             li_greydwarfshamanDubiousHealPlayer = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealPlayer", 50f, "Modifies the Aoe heal Players receive");
             li_greydwarfshamanDubiousHealCreature = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealCreature", 20f, "Modifies the % max health Aoe heal ally creatures receive");
             li_greydwarfshamanDubiousHealPassive = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealPassive", 2f, "Modifies the Passive regen multiplier ");
             li_greydwarfshamanDubiousHealPassiveEitr = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealPassiveEitr", 20f, "Modifies bonus Eitr passive");
             // troll
+            li_trollTrollTossCD = config("Essence Troll Modifiers", "li_trollTrollTossCD", 10f, "Cooldown");
             li_trollTrollTossProjectile = config("Essence Troll Modifiers", "li_trollTrollTossProjectile", 100f, "Modifies the damage of Toss Projectile");
             li_trollTrollTossPassive = config("Essence Troll Modifiers", "li_trollTrollTossPassive", 100f, "Modifies the bonus health passive");
             // dvergr
+            li_dvergrRandomizeCD = config("Essence Dvergr Modifiers", "li_dvergrRandomizeCD", 2f, "Cooldown");
             li_dvergrRandomizeIceProjectile = config("Essence Dvergr Modifiers", "li_dvergrRandomizeIceProjectile", 5f, "Modifies the % weapon damage of Randomize Ice Projectile");
             li_dvergrRandomizeFireProjectile = config("Essence Dvergr Modifiers", "li_dvergrRandomizeFireProjectile", 50f, "Modifies the % weapon damage of Randomize Fire Projectile");
             li_dvergrRandomizeHealPlayer = config("Essence Dvergr Modifiers", "li_dvergrRandomizeHealPlayer", 110f, "Modifies the Aoe heal Players receive");
@@ -738,74 +804,117 @@ namespace LackingImaginationV2
             li_dvergrRandomizeCost = config("Essence Dvergr Modifiers", "li_dvergrRandomizeCost", 50f, "Modifies the Eitr cost to cast");
             li_dvergrRandomizePassiveEitr = config("Essence Dvergr Modifiers", "li_dvergrRandomizePassiveEitr", 80f, "Modifies bonus Eitr passive");
             li_dvergrRandomizePassive = config("Essence Dvergr Modifiers", "li_dvergrRandomizePassive", 60f, "Modifies the % pierce damage passive for Crossbow Weapons");
+            //neck
+            li_neckSplashCD = config("Essence Neck Modifiers", "li_neckSplashCD", 3f, "Cooldown");
             // leech
+            li_leechBloodSiphonCD = config("Essence Leech Modifiers", "li_leechBloodSiphonCD", 10f, "Cooldown");
             li_leechBloodSiphonStack = config("Essence Leech Modifiers", "li_leechBloodSiphonStack", 10f, "Modifies the Blood Stacks per marked kill");
             li_leechBloodSiphonStackCap = config("Essence Leech Modifiers", "li_leechBloodSiphonStackCap", 500f, "Modifies the Max Blood Stacks you can hold");
             // bonemass
+            li_bonemassMassReleaseCD = config("Essence BoneMass Modifiers", "li_bonemassMassReleaseCD", 20f, "Cooldown");
             li_bonemassMassReleaseSummonDuration = config("Essence BoneMass Modifiers", "li_bonemassMassReleaseSummonDuration", 70f, "Modifies the time before summons die");
             li_bonemassMassReleaseProjectile = config("Essence BoneMass Modifiers", "li_bonemassMassReleaseProjectile", 100f, "Modifies the Damage of the Mass Release Projectile");
             // greydwarfbrute
+            li_greydwarfbruteBashCD = config("Essence Greydwarf Brute Modifiers", "li_greydwarfbruteBashCD", 8f, "Cooldown");
             li_greydwarfbruteBashMultiplier = config("Essence Greydwarf Brute Modifiers", "li_greydwarfbruteBashMultiplier", 2f, "Modifies the Damage multiplier");
             li_greydwarfbruteRangedReductionPassive = config("Essence Greydwarf Brute Modifiers", "li_greydwarfbruteRangedReductionPassive", 2f, "Modifies the Damage multiplier of active melee hit");
             // fuling
+            li_fulingLonginusCD = config("Essence Fuling Modifiers", "li_fulingLonginusCD", 8f, "Cooldown");
             li_fulingLonginusMultiplier = config("Essence Fuling Modifiers", "li_fulingLonginusMultiplier", 3f, "Modifies the Damage multiplier of active spear throw");
             li_fulingLonginusPassiveBlockMultiplier = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveBlockMultiplier", 2f, "Modifies the Block force multiplier passive");
             li_fulingLonginusPassiveMotivated = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveMotivated", 60f, "Modifies the Bonus Stamina when holding gold");
             li_fulingLonginusPassiveDemotivated = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveDemotivated", 50f, "Percentage Stamina reduction when not holding gold");
             // gjall
+            li_gjallGjallarhornCD = config("Essence Gjall Modifiers", "li_gjallGjallarhornCD", 25f, "Cooldown");
             li_gjallGjallarhornSummonDuration = config("Essence Gjall Modifiers", "li_gjallGjallarhornSummonDuration", 70f, "Modifies the time before summons die");
             li_gjallGjallarhornProjectile = config("Essence Gjall Modifiers", "li_gjallGjallarhornProjectile", 130f, "Modifies the Damage of the Gjallarhorn Projectile");
             li_gjallGjallarhornArmor = config("Essence Gjall Modifiers", "li_gjallGjallarhornArmor", 50f, "Bonus Armor passive");
             // greydwarf
+            li_greydwarfPebbleCD = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleCD", 5f, "Cooldown");
             li_greydwarfPebbleProjectile = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleProjectile", 20f, "Modifies the Damage of the Pebble Projectile");
             li_greydwarfPebblePassiveCarry = config("Essence Greydwarf Modifiers", "li_greydwarfPebblePassiveCarry", 50f, "Modifies the bonus Carry Weight Passive");
             li_greydwarfPebbleForestAnger = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleForestAnger", 10f, "Modifies % Bonus Damage Forest creature do to you");
             // elder
+            li_elderAncientAweCD = config("Essence Elder Modifiers", "li_elderAncientAweCD", 30f, "Cooldown");
             li_elderAncientAwePassive = config("Essence Elder Modifiers", "li_elderAncientAwePassive", 3f, "Modifies the Passive regen multiplier");
             // blob
+            li_blobFumesCD = config("Essence Blob Modifiers", "li_blobFumesCD", 10f, "Cooldown");
             li_blobFumes = config("Essence Blob Modifiers", "li_blobFumes", 50f, "Modifies the % weapon damage added to Fumes");
             // skeleton
+            li_skeletonVigilCD = config("Essence Skeleton Modifiers", "li_skeletonVigilCD", 50f, "Cooldown");
             li_skeletonVigilSummons = config("Essence Skeleton Modifiers", "li_skeletonVigilSummons", 10f, "Modifies the number of ghosts summoned");
             li_skeletonVigilSummonDuration = config("Essence Skeleton Modifiers", "li_skeletonVigilSummonDuration", 70f, "Modifies the time before summons die");
             li_skeletonVigilSoulCap = config("Essence Skeleton Modifiers", "li_skeletonVigilSoulCap", 300f, "Modifies the number of souls you can store");
             // abomination
+            li_abominationBaneCD = config("Essence Abomination Modifiers", "li_abominationBaneCD", 60f, "Cooldown");
             li_abominationBaneArmor = config("Essence Abomination Modifiers", "li_abominationBaneArmor", 30f, "Modifies bonus armor passive");
             li_abominationBaneHealth = config("Essence Abomination Modifiers", "li_abominationBaneHealth", 5f, "Modifies % health reduction");
+            li_abominationBaneAllySpeed = config("Essence Abomination Modifiers", "li_abominationBaneAllySpeed", 1f, "Modifies creature speed");
+            li_abominationBaneAllyHealth = config("Essence Abomination Modifiers", "li_abominationBaneAllyHealth", 1f, "Modifies creature health");
+            li_abominationBaneAllyAttack = config("Essence Abomination Modifiers", "li_abominationBaneAllyAttack", 1f, "Modifies creature attack");
             //wraith
+            li_wraithTwinSoulsCD = config("Essence Wraith Modifiers", "li_wraithTwinSoulsCD", 70f, "Cooldown");
             li_wraithTwinSoulsArmor = config("Essence Wraith Modifiers", "li_wraithTwinSoulsArmor", 10f, "Modifies armor reduction amount");
             li_wraithTwinSoulsPassive = config("Essence Wraith Modifiers", "li_wraithTwinSoulsPassive", 15f, "Modifies the % weapon spirit damage passive");
+            li_wraithTwinSoulsAllySpeed = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllySpeed", 1f, "Modifies creature speed");
+            li_wraithTwinSoulsAllyHealth = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllyHealth", 1f, "Modifies creature health");
+            li_wraithTwinSoulsAllyAttack = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllyAttack", 1f, "Modifies creature attack");
             //draugr
+            li_draugrForgottenCD = config("Essence Draugr Modifiers", "li_draugrForgottenCD", 60f, "Cooldown");
             li_draugrForgottenRot = config("Essence Draugr Modifiers", "li_draugrForgottenRot", 5f, "Modifies % dmg reduction system");
             li_draugrForgottenPassiveCarry = config("Essence Draugr Modifiers", "li_draugrForgottenPassiveCarry", 60f, "Modifies the bonus Carry Weight Passive");
             li_draugrForgottenActive = config("Essence Draugr Modifiers", "li_draugrForgottenActive", 10f, "Modifies % bonus dmg active to Axes and Bows");
             //draugr elite
+            li_draugreliteFallenHeroCD = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroCD", 60f, "Cooldown");
             li_draugreliteFallenHeroRot = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroRot", 10f, "Modifies % dmg reduction system");
             li_draugreliteFallenHeroPassiveCarry = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroPassiveCarry", 70f, "Modifies the bonus Carry Weight Passive");
             lidraugreliteFallenHeroActive = config("Essence Draugr Elite Modifiers", "lidraugreliteFallenHeroActive", 20f, "Modifies % bonus dmg active to Swords and Polearms");
             //geirrhafa
+            li_geirrhafaIceAgeCD = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgeCD", 45f, "Cooldown");
             li_geirrhafaIceAgeAoe = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgeAoe", 70f, "Modifies Active Damage");
             li_geirrhafaIceAgePassiveEitr = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgePassiveEitr", 70f, "Modifies bonus Eitr Passive");
             li_geirrhafaIceAgePassive = config("Essence Geirrhafa Modifiers", "li_geirrhafaIceAgePassive", 20f, "Modifies the frost damage passive for Weapons");
             //cultist
+            li_cultistLoneSunCD = config("Essence Cultist Modifiers", "li_cultistLoneSunCD", 30f, "Cooldown");
             li_cultistLoneSunAoe = config("Essence Cultist Modifiers", "li_cultistLoneSunAoe", 50f, "Modifies Active Damage");
             li_cultistLoneSunPassive = config("Essence Cultist Modifiers", "li_cultistLoneSunPassive", 15f, "Modifies the fire damage passive for Weapons");
             //hare
+            li_hareLuckyFootCD = config("Essence Hare Modifiers", "li_hareLuckyFootCD", 40f, "Cooldown");
             li_hareLuckyFoot = config("Essence Hare Modifiers", "li_hareLuckyFoot", 100f, "Modifies Bonus Speed Active(2x * %)");
             li_hareLuckyFootArmor = config("Essence Hare Modifiers", "li_hareLuckyFootArmor", 10f, "Modifies % Armor Reduction passive");
-            //Serpent
-            li_seaSerpentSeaKingProjectile = config("Essence Sea Serpent Modifiers", "li_seaSerpentSeaKingProjectile", 20f, "Modifies the % weapon Damage of the Sea King Projectile");
+            //serpent
+            li_seaserpentSeaKingCD = config("Essence Sea Serpent Modifiers", "li_seaserpentSeaKingCD", 30f, "Cooldown");
+            li_seaserpentSeaKingProjectile = config("Essence Sea Serpent Modifiers", "li_seaserpentSeaKingProjectile", 20f, "Modifies the % weapon Damage of the Sea King Projectile");
             //tick
+            li_tickBloodWellCD = config("Essence Tick Modifiers", "li_tickBloodWellCD", 10f, "Cooldown");
             li_tickBloodWellLifeSteal = config("Essence Tick Modifiers", "li_tickBloodWellLifeSteal", 10f, "Modifies % Lifesteal Passive");
             li_tickBloodWellArmor = config("Essence Tick Modifiers", "li_tickBloodWellArmor", 25f, "Modifies Bonus Armor Reduction passive");
             li_tickBloodWellStackCap = config("Essence Tick Modifiers", "li_tickBloodWellStackCap", 500f, "Modifies the maximum stored damage");
             //moder
+            li_moderDraconicFrostCD = config("Essence Moder Modifiers", "li_moderDraconicFrostCD", 30f, "Cooldown");
             li_moderDraconicFrostProjectile = config("Essence Moder Modifiers", "li_moderDraconicFrostProjectile", 5f, "Modifies the % weapon Damage of the Draconic Frost Projectile");
             li_moderDraconicFrostPassive = config("Essence Moder Modifiers", "li_moderDraconicFrostPassive", 25f, "Modifies the % weapon bonus frost damage passive");
             li_moderDraconicFrostDragonBreath = config("Essence Moder Modifiers", "li_moderDraconicFrostDragonBreath", 200f, "Modifies the damage of Draconic Frost Dragon Breath");
+            //boar
+            li_boarRecklessChargeCD = config("Essence Boar Modifiers", "li_boarRecklessChargeCD", 30f, "Cooldown");
+            li_boarRecklessCharge = config("Essence Boar Modifiers", "li_boarRecklessCharge", 30f, "Modifies Active Damage");
+            li_boarRecklessChargePassive = config("Essence Boar Modifiers", "li_boarRecklessChargePassive", 30f, "Modifies bonus stamina passive");
+            //stone golem
+            li_stonegolemCoreOverdriveCD = config("Essence Stone Golem Modifiers", "li_stonegolemCoreOverdriveCD", 5f, "Cooldown");
+            li_stonegolemCoreOverdriveStacks = config("Essence Stone Golem Modifiers", "li_stonegolemCoreOverdriveStacks", 100f, "Modifies maximum bonus armor stacks");
+            li_stonegolemCoreOverdriveArmor = config("Essence Stone Golem Modifiers", "li_stonegolemCoreOverdriveArmor", 2f, "Modifies bonus armor passive multiplier");
+            //yagluth
+            li_yagluthCulminationCD = config("Essence Yagluth Modifiers", "li_yagluthCulminationCD", 20f, "Cooldown");
+            li_yagluthCulminationStaticCap = config("Essence Yagluth Modifiers", "li_yagluthCulminationStaticCap", 100f, "Modifies maximum static build up before punishment");
+            li_yagluthCulmination = config("Essence Yagluth Modifiers", "li_yagluthCulmination", 1f, "Modifies active damage multipliers");
 
             
-            
-               
+
+
+
+
+
+
             
             LackingImaginationGlobal.ConfigStrings = new Dictionary<string, float>();
             LackingImaginationGlobal.ConfigStrings.Clear();
@@ -820,6 +929,48 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_draugrSynergyRot", li_draugrSynergyRot.Value);
             
             
+            
+            
+            
+            //Cooldowns
+             LackingImaginationGlobal.ConfigStrings.Add("li_eikthyrBlitzCD", li_eikthyrBlitzCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHasteCD", li_deerHorizonHasteCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_fenringMoonlitLeapCD", li_fenringMoonlitLeapCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_loxWildTremorCD", li_loxWildTremorCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wolfRavenousHungerCD", li_wolfRavenousHungerCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_fulingshamanRitualCD", li_fulingshamanRitualCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_deathsquitoRelentlessCD", li_deathsquitoRelentlessCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_surtlingHarbingerCD", li_surtlingHarbingerCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_fulingberserkerGiantizationCD", li_fulingberserkerGiantizationCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_drakeThreeFreezeCD", li_drakeThreeFreezeCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_growthAncientTarCD", li_growthAncientTarCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_trollTrollTossCD", li_trollTrollTossCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_greydwarfshamanDubiousHealCD", li_greydwarfshamanDubiousHealCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_dvergrRandomizeCD", li_dvergrRandomizeCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_neckSplashCD", li_neckSplashCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_leechBloodSiphonCD", li_leechBloodSiphonCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_bonemassMassReleaseCD", li_bonemassMassReleaseCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_greydwarfbruteBashCD", li_greydwarfbruteBashCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_fulingLonginusCD", li_fulingLonginusCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_gjallGjallarhornCD", li_gjallGjallarhornCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_greydwarfPebbleCD", li_greydwarfPebbleCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_elderAncientAweCD", li_elderAncientAweCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_blobFumesCD", li_blobFumesCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_skeletonVigilCD", li_skeletonVigilCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneCD", li_abominationBaneCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsCD", li_wraithTwinSoulsCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenCD", li_draugrForgottenCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugreliteFallenHeroCD", li_draugreliteFallenHeroCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_geirrhafaIceAgeCD", li_geirrhafaIceAgeCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_cultistLoneSunCD", li_cultistLoneSunCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFootCD", li_hareLuckyFootCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seaserpentSeaKingCD", li_seaserpentSeaKingCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellCD", li_tickBloodWellCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostCD", li_moderDraconicFrostCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargeCD", li_boarRecklessChargeCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_stonegolemCoreOverdriveCD", li_stonegolemCoreOverdriveCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulminationCD", li_yagluthCulminationCD.Value);
+        
             
             
             // Essence
@@ -883,8 +1034,14 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_skeletonVigilSoulCap", li_skeletonVigilSoulCap.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneArmor", li_abominationBaneArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneHealth", li_abominationBaneHealth.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneAllySpeed", li_abominationBaneAllySpeed.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneAllyHealth", li_abominationBaneAllyHealth.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_abominationBaneAllyAttack", li_abominationBaneAllyAttack.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsArmor", li_wraithTwinSoulsArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsPassive", li_wraithTwinSoulsPassive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsAllySpeed", li_wraithTwinSoulsAllySpeed.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsAllyHealth", li_wraithTwinSoulsAllyHealth.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsAllyAttack", li_wraithTwinSoulsAllyAttack.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenRot", li_draugrForgottenRot.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenPassiveCarry", li_draugrForgottenPassiveCarry.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenActive", li_draugrForgottenActive.Value);
@@ -898,15 +1055,19 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_cultistLoneSunPassive", li_cultistLoneSunPassive.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFoot", li_hareLuckyFoot.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFootArmor", li_hareLuckyFootArmor.Value);
-            LackingImaginationGlobal.ConfigStrings.Add("li_seaSerpentSeaKingProjectile", li_seaSerpentSeaKingProjectile.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seaserpentSeaKingProjectile", li_seaserpentSeaKingProjectile.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellLifeSteal", li_tickBloodWellLifeSteal.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellArmor", li_tickBloodWellArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_tickBloodWellStackCap", li_tickBloodWellStackCap.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostProjectile", li_moderDraconicFrostProjectile.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostPassive", li_moderDraconicFrostPassive.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_moderDraconicFrostDragonBreath", li_moderDraconicFrostDragonBreath.Value);
-            
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessCharge", li_boarRecklessCharge.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargePassive", li_boarRecklessChargePassive.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_stonegolemCoreOverdriveStacks", li_stonegolemCoreOverdriveStacks.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_stonegolemCoreOverdriveArmor", li_stonegolemCoreOverdriveArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulminationStaticCap", li_yagluthCulminationStaticCap.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulmination", li_yagluthCulmination.Value);
             
             
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
@@ -931,6 +1092,42 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_draugrSynergyRot);
 
             
+            
+             _ = ConfigSync.AddConfigEntry(li_eikthyrBlitzCD);
+            _ = ConfigSync.AddConfigEntry(li_deerHorizonHasteCD);
+            _ = ConfigSync.AddConfigEntry(li_fenringMoonlitLeapCD);
+            _ = ConfigSync.AddConfigEntry(li_loxWildTremorCD);
+            _ = ConfigSync.AddConfigEntry(li_wolfRavenousHungerCD);
+            _ = ConfigSync.AddConfigEntry(li_fulingshamanRitualCD);
+            _ = ConfigSync.AddConfigEntry(li_deathsquitoRelentlessCD);
+            _ = ConfigSync.AddConfigEntry(li_surtlingHarbingerCD);
+            _ = ConfigSync.AddConfigEntry(li_fulingberserkerGiantizationCD);
+            _ = ConfigSync.AddConfigEntry(li_drakeThreeFreezeCD);
+            _ = ConfigSync.AddConfigEntry(li_growthAncientTarCD);
+            _ = ConfigSync.AddConfigEntry(li_trollTrollTossCD);
+            _ = ConfigSync.AddConfigEntry(li_greydwarfshamanDubiousHealCD);
+            _ = ConfigSync.AddConfigEntry(li_dvergrRandomizeCD);
+            _ = ConfigSync.AddConfigEntry(li_neckSplashCD);
+            _ = ConfigSync.AddConfigEntry(li_leechBloodSiphonCD);
+            _ = ConfigSync.AddConfigEntry(li_bonemassMassReleaseCD);
+            _ = ConfigSync.AddConfigEntry(li_greydwarfbruteBashCD);
+            _ = ConfigSync.AddConfigEntry(li_fulingLonginusCD);
+            _ = ConfigSync.AddConfigEntry(li_gjallGjallarhornCD);
+            _ = ConfigSync.AddConfigEntry(li_greydwarfPebbleCD);
+            _ = ConfigSync.AddConfigEntry(li_elderAncientAweCD);
+            _ = ConfigSync.AddConfigEntry(li_blobFumesCD);
+            _ = ConfigSync.AddConfigEntry(li_skeletonVigilCD);
+            _ = ConfigSync.AddConfigEntry(li_abominationBaneCD);
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsCD);
+            _ = ConfigSync.AddConfigEntry(li_draugrForgottenCD);
+            _ = ConfigSync.AddConfigEntry(li_draugreliteFallenHeroCD);
+            _ = ConfigSync.AddConfigEntry(li_geirrhafaIceAgeCD);
+            _ = ConfigSync.AddConfigEntry(li_cultistLoneSunCD);
+            _ = ConfigSync.AddConfigEntry(li_hareLuckyFootCD);
+            _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostCD);
+            _ = ConfigSync.AddConfigEntry(li_boarRecklessChargeCD);
+            _ = ConfigSync.AddConfigEntry(li_stonegolemCoreOverdriveCD);
+            _ = ConfigSync.AddConfigEntry(li_yagluthCulminationCD);
             
             
             
@@ -994,8 +1191,14 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_skeletonVigilSoulCap);
             _ = ConfigSync.AddConfigEntry(li_abominationBaneArmor);
             _ = ConfigSync.AddConfigEntry(li_abominationBaneHealth);
+            _ = ConfigSync.AddConfigEntry(li_abominationBaneAllySpeed);
+            _ = ConfigSync.AddConfigEntry(li_abominationBaneAllyHealth);
+            _ = ConfigSync.AddConfigEntry(li_abominationBaneAllyAttack);
             _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsArmor);
             _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsPassive);
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsAllySpeed);
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsAllyHealth);
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsAllyAttack);
             _ = ConfigSync.AddConfigEntry(li_draugrForgottenRot);
             _ = ConfigSync.AddConfigEntry(li_draugrForgottenPassiveCarry);
             _ = ConfigSync.AddConfigEntry(li_draugrForgottenActive);
@@ -1009,15 +1212,19 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_cultistLoneSunPassive);
             _ = ConfigSync.AddConfigEntry(li_hareLuckyFoot);
             _ = ConfigSync.AddConfigEntry(li_hareLuckyFootArmor);
-            _ = ConfigSync.AddConfigEntry(li_seaSerpentSeaKingProjectile);
+            _ = ConfigSync.AddConfigEntry(li_seaserpentSeaKingProjectile);
             _ = ConfigSync.AddConfigEntry(li_tickBloodWellLifeSteal);
             _ = ConfigSync.AddConfigEntry(li_tickBloodWellArmor);
             _ = ConfigSync.AddConfigEntry(li_tickBloodWellStackCap);
             _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostProjectile);
             _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostPassive);
-            _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostDragonBreath);     
-            
-            
+            _ = ConfigSync.AddConfigEntry(li_moderDraconicFrostDragonBreath);
+            _ = ConfigSync.AddConfigEntry(li_boarRecklessCharge);
+            _ = ConfigSync.AddConfigEntry(li_boarRecklessChargePassive);
+            _ = ConfigSync.AddConfigEntry(li_stonegolemCoreOverdriveStacks);
+            _ = ConfigSync.AddConfigEntry(li_stonegolemCoreOverdriveArmor);
+            _ = ConfigSync.AddConfigEntry(li_yagluthCulminationStaticCap);
+            _ = ConfigSync.AddConfigEntry(li_yagluthCulmination);     
             
             
                 

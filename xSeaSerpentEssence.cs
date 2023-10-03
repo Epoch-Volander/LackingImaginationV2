@@ -77,7 +77,7 @@ namespace LackingImaginationV2
             Vector3 target = (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (player_position + player.GetLookDir() * 1000f) : hitInfo.point;
             HitData hitData = new HitData();
             hitData.m_damage.m_blunt = UnityEngine.Random.Range(1f, 2f);
-            hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_seaSerpentSeaKingProjectile));
+            hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage()) * LackingImaginationGlobal.c_seaserpentSeaKingProjectile));
             hitData.m_pushForce = 3f;
             hitData.SetAttacker(player);
             Vector3 a = Vector3.MoveTowards(GO_SeaKingProjectile.transform.position, target, 1f);

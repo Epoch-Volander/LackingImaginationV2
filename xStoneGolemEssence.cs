@@ -122,10 +122,10 @@ namespace LackingImaginationV2
                 }
                 if (__instance.m_seman.HaveStatusEffect("SE_GolemCore") && EssenceItemData.equipedEssence.Contains("$item_stonegolem_essence"))
                 {
-                    if (item.m_shared.m_name == "$item_stone" && int.Parse(StoneGolemStats[0]) != (int)LackingImaginationGlobal.c_stonegolemCoreStacks)
+                    if (item.m_shared.m_name == "$item_stone" && int.Parse(StoneGolemStats[0]) != (int)LackingImaginationGlobal.c_stonegolemCoreOverdriveStacks)
                     {
                         int stone = inventory.CountItems("$item_stone");
-                        int stoneRemain = (int)LackingImaginationGlobal.c_stonegolemCoreStacks - int.Parse(StoneGolemStats[0]);
+                        int stoneRemain = (int)LackingImaginationGlobal.c_stonegolemCoreOverdriveStacks - int.Parse(StoneGolemStats[0]);
 
                         int use = (stone <= stoneRemain)? stone : stoneRemain;
                         if (stoneRemain >= 10 && stone >= 10) use = 10;

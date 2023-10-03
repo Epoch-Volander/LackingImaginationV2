@@ -24,7 +24,7 @@ namespace LackingImaginationV2
             se_cd.m_ttl = LackingImaginationUtilities.xUlvCooldownTime;
             player.GetSEMan().AddStatusEffect(se_cd);
             
-            LackingImaginationV2Plugin.Log($"Wolf Button was pressed");
+            LackingImaginationV2Plugin.Log($"Ulv Button was pressed");
 
             
 
