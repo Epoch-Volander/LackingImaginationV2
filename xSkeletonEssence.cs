@@ -74,7 +74,6 @@ namespace LackingImaginationV2
                     {
                         SummonGhost(player, 15f);
                     }
-                    
                 }
                 else
                 {
@@ -93,10 +92,11 @@ namespace LackingImaginationV2
             GameObject ghost = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Ghost"), randomPosition, Quaternion.identity);
             ghost.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
             ghost.GetComponent<Humanoid>().m_name = "Ghost(Ally)";
-            ghost.GetComponent<Humanoid>().SetMaxHealth(ghost.GetComponent<Humanoid>().GetMaxHealthBase() * 10f);
+            ghost.GetComponent<Humanoid>().SetMaxHealth(ghost.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
             ghost.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
             CharacterDrop characterDrop = ghost.GetComponent<CharacterDrop>();
             if (characterDrop != null)  characterDrop.m_dropsEnabled = false;
+            foreach (CharacterDrop.Drop drop in characterDrop.m_drops) drop.m_chance = 0f;
             
             SE_TimedDeath se_timedeath = (SE_TimedDeath)ScriptableObject.CreateInstance(typeof(SE_TimedDeath));
             se_timedeath.lifeDuration = LackingImaginationGlobal.c_skeletonVigilSummonDuration;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,12 @@ namespace LackingImaginationV2
     public class xUlvEssence
     {
         public static string Ability_Name = "Territorial \nSlumber";
+        
+        public static List<Character> Marked = new List<Character>();
+        
+        public static HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+        
+        private static readonly int collisionMask = LayerMask.GetMask( "character", "character_noenv", "character_net", "character_ghost");
         public static void Process_Input(Player player, int position)
         {
             //Ability Cooldown
@@ -26,16 +33,100 @@ namespace LackingImaginationV2
             
             LackingImaginationV2Plugin.Log($"Ulv Button was pressed");
 
-            UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_TerritorialSlumber, player.transform.position + player.transform.up * 0.5f, Quaternion.identity);
-
+            LackingImaginationV2Plugin.fx_TerritorialSlumber.GetComponent<TimedDestruction>().m_timeout  = (LackingImaginationUtilities.xUlvCooldownTime * LackingImaginationGlobal.c_ulvTerritorialSlumberSED) + ((float)SE_TerritorialSlumber.Comfort * 0.5f);
+            GameObject Ring = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_TerritorialSlumber, player.transform.position + player.transform.up * 0.5f, Quaternion.identity);
             // make circles higher, coroutine while / summon ulv pal on kill in circle/ stats scale with Comfort
-            
+
+            ScheduleRing(player, Ring);
+
+        }
+        private static void ScheduleRing(Player player, GameObject ring)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleRingCoroutine(player,ring));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleRingCoroutine(Player player, GameObject ring)
+        {
+            while (ring != null)
+            {
+                float size = 6f;
+                Collider[] colliders = Physics.OverlapSphere(ring.transform.position, size, collisionMask);
+
+                HashSet<GameObject> hashSet = new HashSet<GameObject>();
+                
+                foreach (Collider collider in colliders)
+                {
+                    Character characterComponent = collider.gameObject.GetComponent<Character>();
+                    // if (characterComponent != null && !hashSet.Contains(collider.gameObject))
+                    if (characterComponent != null)
+                    {
+                        hashSet.Add(collider.gameObject);
+                        detectedObjects.Add(collider.gameObject);
+                        // if (characterComponent.IsDead() || (double)characterComponent.GetHealth() <= 0.0)
+                        // {
+                        //     hashSet.Add(collider.gameObject);
+                        //     LackingImaginationV2Plugin.Log($"{characterComponent.m_name} died");
+                        //     SummonUlv(characterComponent.transform.position);
+                        // }
+                    }
+                }
+                detectedObjects.IntersectWith(hashSet);
+                
+                yield return null;
+            }
         }
     }
 
     [HarmonyPatch]
     public static class xUlvEssencePassive
     {
+        [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
+        public static class Ulv_CustomFixedUpdate_Patch
+        {
+            public static void Postfix(Character __instance)
+            {
+                if (xUlvEssence.detectedObjects.Any() && __instance.IsPlayer() )
+                {
+                     List<GameObject> dead = new List<GameObject>();
+                     foreach (GameObject gameObject in xUlvEssence.detectedObjects)
+                     {
+                         Character ch = gameObject.GetComponent<Character>();
+                         if (ch.IsDead() || (double)ch.GetHealth() <= 0.0)
+                         {
+                             LackingImaginationV2Plugin.Log($"{ch.m_name} died");
+                             SummonUlv(ch.transform.position);
+                             dead.Add(gameObject);
+                         }
+                     }
+                     foreach (GameObject itemToRemove in dead)
+                     {
+                         if(xUlvEssence.detectedObjects.Contains(itemToRemove))
+                         {
+                             xUlvEssence.detectedObjects.Remove(itemToRemove);
+                         }
+                     }
+                     dead.Clear();
+                }
+            }
+            static void SummonUlv(Vector3 position)
+            {
+                GameObject Ulv = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Ulv"), position, Quaternion.identity);
+                Ulv.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
+                Ulv.GetComponent<Humanoid>().m_name = "Ulv(Ally)";
+                Ulv.GetComponent<Humanoid>().SetMaxHealth(Ulv.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
+                Ulv.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
+                CharacterDrop characterDrop = Ulv.GetComponent<CharacterDrop>();
+                if (characterDrop != null)  characterDrop.m_dropsEnabled = false;
+                foreach (CharacterDrop.Drop drop in characterDrop.m_drops) drop.m_chance = 0f;
+            
+                SE_TimedDeath se_timedeath = (SE_TimedDeath)ScriptableObject.CreateInstance(typeof(SE_TimedDeath));
+                se_timedeath.lifeDuration = LackingImaginationGlobal.c_ulvTerritorialSlumberSummonDuration;
+                se_timedeath.m_ttl = LackingImaginationGlobal.c_ulvTerritorialSlumberSummonDuration + 500f;
+            
+                Ulv.GetComponent<Character>().GetSEMan().AddStatusEffect(se_timedeath);
+            }
+        }
+        
         [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
         public static class Ulv_UpdateEnvStatusEffects_Patch
         {

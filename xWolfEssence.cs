@@ -169,10 +169,25 @@ namespace LackingImaginationV2
                         if (BloodHits == 5)
                         {
                             BloodHits = 0;
-                            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetEyePoint(), Quaternion.identity);
+                            try
+                            {
+                                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetEyePoint(), Quaternion.identity);
+                            }
+                            catch 
+                            {
+                                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetCenterPoint(), Quaternion.identity);
+                            }
+                            try
+                            {
+                                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetHeadPoint(), Quaternion.identity);
+                            }
+                            catch 
+                            {
+                                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetCenterPoint(), Quaternion.identity);
+                            }
                             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetCenterPoint(), Quaternion.identity);
-                            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetHeadPoint(), Quaternion.identity);
                             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_hurt"), enemy.transform.position, Quaternion.identity);
+                            UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_RavenousHunger, point, Quaternion.identity);
                             HitData hitData = new HitData();
                             hitData.m_damage.m_slash = (enemy.GetMaxHealth() * LackingImaginationGlobal.c_wolfRavenousHunger);
                             hitData.m_point = point;

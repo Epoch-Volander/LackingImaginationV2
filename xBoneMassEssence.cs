@@ -18,7 +18,7 @@ namespace LackingImaginationV2
 
     public class xBoneMassEssence  // the lob that summons rnadom allies
     {
-        private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
+        private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
 
         public static string Ability_Name = "Mass \nRelease";
         
@@ -141,6 +141,7 @@ namespace LackingImaginationV2
                             ch.GetSEMan().AddStatusEffect(se_timedeath);
                             ch.SetMaxHealth(ch.GetMaxHealthBase() * 10f);
                             ch.GetComponent<CharacterDrop>().m_dropsEnabled = false;
+                            foreach (CharacterDrop.Drop drop in ch.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                             MonsterAI ai = ch.GetBaseAI() as MonsterAI;
                             if (ai != null)
                             {

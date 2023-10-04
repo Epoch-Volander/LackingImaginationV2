@@ -692,7 +692,7 @@ namespace LackingImaginationV2
          {
              get
              {
-                 return 5f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+                 return Math.Max(LackingImaginationGlobal.c_ulvTerritorialSlumberCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;//adjust
              }
          }  
          

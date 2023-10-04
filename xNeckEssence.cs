@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xNeckEssence //make the water dash smoother
     {
-        private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
+        private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
         
         public static string Ability_Name = "Splash";
         public static void Process_Input(Player player, int position)

@@ -1975,6 +1975,34 @@ namespace LackingImaginationV2
         }
         
         //Ulv
+        public static float c_ulvTerritorialSlumberCD
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_ulvTerritorialSlumberCD"];
+                }
+                catch
+                {
+                    return 30f;
+                }
+            }
+        }
+        public static float c_ulvTerritorialSlumberSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_ulvTerritorialSlumberSED"]/100;
+                }
+                catch
+                {
+                    return 0.5f;
+                }
+            }
+        }
         public static float c_ulvTerritorialSlumberComfort
         {
             get
@@ -2003,7 +2031,20 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
+        public static float c_ulvTerritorialSlumberSummonDuration
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_ulvTerritorialSlumberSummonDuration"];
+                }
+                catch
+                {
+                    return 70f;
+                }
+            }
+        }
         
         
         

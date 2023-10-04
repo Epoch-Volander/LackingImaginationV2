@@ -21,7 +21,7 @@ namespace LackingImaginationV2
 
         private bool hasHit;
         private float isRunning;
-        private int collisionMask = LayerMask.GetMask( "character");
+        private readonly int collisionMask = LayerMask.GetMask( "character");
         
         private float Duration = m_baseTTL - 1f;
         private float m_timer = 1f;

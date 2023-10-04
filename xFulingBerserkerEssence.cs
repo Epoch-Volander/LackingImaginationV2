@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xFulingBerserkerEssence // still have to fix bow arrow aim and proj spawn point
     {
-        private static int m_LOSMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "terrain");
+        private static readonly int m_LOSMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "terrain");
         
         public static string Ability_Name = "Giantization"; //all percentage based stat boosts, shield boost
         

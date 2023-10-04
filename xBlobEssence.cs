@@ -116,12 +116,14 @@ namespace LackingImaginationV2
                             Blob1.GetComponent<Humanoid>().SetMaxHealth(Blob1.GetComponent<Humanoid>().GetMaxHealthBase() * 10f);
                             Blob1.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                             Blob1.GetComponent<CharacterDrop>().m_dropsEnabled = false;
+                            foreach (CharacterDrop.Drop drop in Blob1.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                             
                             Blob2.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                             Blob2.GetComponent<Humanoid>().m_name = "AllyBlob2";
                             Blob2.GetComponent<Humanoid>().SetMaxHealth(Blob2.GetComponent<Humanoid>().GetMaxHealthBase() * 10f);
                             Blob2.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                             Blob2.GetComponent<CharacterDrop>().m_dropsEnabled = false;
+                            foreach (CharacterDrop.Drop drop in Blob2.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                         }
                     }
                     if (__instance != null && __instance.IsPlayer())

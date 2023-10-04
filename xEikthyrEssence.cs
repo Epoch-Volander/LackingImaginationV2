@@ -23,7 +23,7 @@ namespace LackingImaginationV2
         
         public static bool EikthyrController = false;
         
-        private static int Script_Lightning_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+        private static readonly int Script_Lightning_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
         private static float lightningDelay = 1f;
 

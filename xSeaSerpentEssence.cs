@@ -18,7 +18,7 @@ namespace LackingImaginationV2
 
     public class xSeaSerpentEssence
     {
-        private static int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
+        private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
 
         public static string Ability_Name = "Sea \nKing"; // Aoe vortex that pulls enemies in, ref fuling berserker for smooth movement
 
@@ -64,7 +64,7 @@ namespace LackingImaginationV2
             P_SeaKingProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
             P_SeaKingProjectile.transform.localScale = Vector3.one;
             
-            LackingImaginationV2Plugin.Log($"Serpent {P_SeaKingProjectile.m_spawnOnHit.name}");
+            // LackingImaginationV2Plugin.Log($"Serpent {P_SeaKingProjectile.m_spawnOnHit.name}");
             P_SeaKingProjectile.m_spawnOnHit.GetComponent<TimedDestruction>().m_timeout += xSeaSerpentEssencePassive.FishQuality;
 
             RaycastHit hitInfo = default(RaycastHit);

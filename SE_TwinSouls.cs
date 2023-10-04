@@ -23,8 +23,8 @@ namespace LackingImaginationV2
         // private float delayTimer = 0.4f; // Delay timer set to 1 second.
         // private bool isDelaying; // Flag to track whether we are in the delay period.
 
-        private int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
-        private int collisionMaskDungeon = LayerMask.GetMask("piece", "piece_nonsolid", "static_solid", "Default_small", "vehicle", "character");
+        private readonly int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
+        private readonly int collisionMaskDungeon = LayerMask.GetMask("piece", "piece_nonsolid", "static_solid", "Default_small", "vehicle", "character");
 
         private float Duration = m_baseTTL - 2f;
         private float m_timer = 1f;

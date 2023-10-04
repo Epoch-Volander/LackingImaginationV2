@@ -25,13 +25,13 @@ namespace LackingImaginationV2
                 LackingImaginationV2Plugin.Log($"Brenna Button was pressed");
 
                 //Ability Cooldown
-                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                // StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 // se_cd.m_ttl = LackingImaginationUtilities.xGeirrhafaCooldownTime;
-                player.GetSEMan().AddStatusEffect(se_cd);
+                // player.GetSEMan().AddStatusEffect(se_cd);
                 
                 //Effects, animations, and sounds
                 
-                
+                LackingImaginationV2Plugin.Log($"Brenna {player.transform.position}");
                 
 
 
