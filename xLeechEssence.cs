@@ -79,37 +79,8 @@ namespace LackingImaginationV2
                         if (!Marked.Contains(ch))
                         {
                             Marked.Add(ch);
-                            GameObject[] chStones = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2.Create(ch.transform.position, Quaternion.identity);
-                            foreach (GameObject effect in chStones)
-                            {
-                                effect.transform.parent = ch.transform;
-                                // Access the ParticleSystem component of the child GameObject
-                                foreach (Transform child in effect.transform)
-                                {
-                                    ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
-                                    if (particleSystem != null)
-                                    {
-                                        // Create a ParticleSystem.MainModule object to access particle system properties
-                                        ParticleSystem.MainModule mainModule = particleSystem.main;
-                                        // mainModule.startSizeMultiplier = 0.1f;
-                                        if(child.name != "smoke")
-                                        {
-                                            // Change the start color of the particles to black
-                                            mainModule.startColor = Color.yellow + Color.red + Color.red;
-                                        }
-                                    }
-                                    Light lighting = child.GetComponent<Light>();
-                                    if(lighting != null)
-                                    {
-                                        lighting.color = Color.black + Color.red + Color.red;
-                                    }
-                                    Transform TransformSystem = child.GetComponent<Transform>();
-                                    if (TransformSystem != null)
-                                    {
-                                        TransformSystem.localScale *= 0.3f;
-                                    }
-                                }
-                            }
+                            GameObject effect = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, ch.transform.position, Quaternion.identity);
+                            effect.transform.parent = ch.transform;
                         }
                     }
                 }

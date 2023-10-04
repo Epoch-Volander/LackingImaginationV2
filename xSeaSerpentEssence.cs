@@ -66,12 +66,7 @@ namespace LackingImaginationV2
             
             LackingImaginationV2Plugin.Log($"Serpent {P_SeaKingProjectile.m_spawnOnHit.name}");
             P_SeaKingProjectile.m_spawnOnHit.GetComponent<TimedDestruction>().m_timeout += xSeaSerpentEssencePassive.FishQuality;
-           
-            ParticleSystem.MainModule mainModule1 = P_SeaKingProjectile.m_spawnOnHit.transform.Find("blue flames").GetComponent<ParticleSystem>().main;
-            mainModule1.startLifetime = xSeaSerpentEssencePassive.FishQuality + 3f;
-            ParticleSystem.MainModule mainModule2 = P_SeaKingProjectile.m_spawnOnHit.transform.Find("Particle System").GetComponent<ParticleSystem>().main;
-            mainModule2.duration = xSeaSerpentEssencePassive.FishQuality + 3f;   
-            
+
             RaycastHit hitInfo = default(RaycastHit);
             Vector3 player_position = player.transform.position;
             Vector3 target = (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (player_position + player.GetLookDir() * 1000f) : hitInfo.point;

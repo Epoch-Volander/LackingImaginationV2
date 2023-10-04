@@ -90,7 +90,7 @@ namespace LackingImaginationV2
                             mainModule1.startColor = Color.red;
                             // ParticleSystem.MainModule mainModule2 = hitEffect.transform.Find("Chunks").GetComponent<ParticleSystem>().main;
                             // mainModule2.startColor = Color.red;
-                            ParticleSystem.MainModule mainModule3 = hitEffect.transform.Find("Chunks").Find("blob_splat").GetComponent<ParticleSystem>().main;
+                            ParticleSystem.MainModule mainModule3 = hitEffect.transform.Find("Chunks").Find("blob_splat (1)").GetComponent<ParticleSystem>().main;
                             mainModule3.startColor = Color.red;
                             ParticleSystem.MainModule mainModule4 = hitEffect.transform.Find("wetsplsh").GetComponent<ParticleSystem>().main;
                             mainModule4.startColor = new Color(1.0f, 0.3893779f, 0.0f, 1.0f);

@@ -26,9 +26,9 @@ namespace LackingImaginationV2
             
             LackingImaginationV2Plugin.Log($"Ulv Button was pressed");
 
-            
+            UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_TerritorialSlumber, player.transform.position + player.transform.up * 0.5f, Quaternion.identity);
 
-            
+            // make circles higher, coroutine while / summon ulv pal on kill in circle/ stats scale with Comfort
             
         }
     }
