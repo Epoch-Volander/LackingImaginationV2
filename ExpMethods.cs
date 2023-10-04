@@ -47,11 +47,30 @@ namespace LackingImaginationV2
             essenceBase.Prefab.AddComponent<EssenceMotion>();
 
             // GameObject essencePiece = new();
-            // essencePiece = PrefabManager.RegisterPrefab("essence_bundle_2", list[5]);
-
-            // essenceBase.Prefab.GetComponent(PiecePrefabManager);
-             // MaterialReplacer.RegisterGameObjectForShaderSwap(essencePiece, MaterialReplacer.ShaderType.CustomCreature);
+            // GameObject essencePiece = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", list[5]);
+            
+            MaterialReplacer.RegisterGameObjectForShaderSwap(essenceBase.Prefab.transform.Find("attach").transform.Find(list[5]).gameObject, MaterialReplacer.ShaderType.CustomCreature);
         }
+
+        
+        public static void LogGameObjectInfo(GameObject go, string indent = "")
+        {
+            // Log information about the current GameObject
+            Debug.Log(indent + "GameObject: " + go.name);
+
+            // Log information about each component on the current GameObject
+            foreach (Component component in go.GetComponents<Component>())
+            {
+                Debug.Log(indent + " - Component: " + component.GetType().Name);
+            }
+
+            // Recursively inspect the children of the current GameObject
+            foreach (Transform child in go.transform)
+            {
+                LogGameObjectInfo(child.gameObject, indent + "   ");
+            }
+        }
+        
 
         public static void ImaginationExpIncrease(int level)
         {
@@ -200,23 +219,7 @@ namespace LackingImaginationV2
         
         
         
-         public static void LogGameObjectInfo(GameObject go, string indent = "")
-         {
-             // Log information about the current GameObject
-             Debug.Log(indent + "GameObject: " + go.name);
-
-             // Log information about each component on the current GameObject
-             foreach (Component component in go.GetComponents<Component>())
-             {
-                 Debug.Log(indent + " - Component: " + component.GetType().Name);
-             }
-
-             // Recursively inspect the children of the current GameObject
-             foreach (Transform child in go.transform)
-             {
-                 LogGameObjectInfo(child.gameObject, indent + "   ");
-             }
-         }
+       
 
          // GameObject bossStonePrefab = ZNetScene.instance.GetPrefab("BossStone_Eikthyr");
          //     if (bossStonePrefab != null)

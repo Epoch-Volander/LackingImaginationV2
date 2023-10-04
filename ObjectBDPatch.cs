@@ -148,6 +148,13 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_Culmination).m_icon = SE_Culmination.AbilityIcon;
                     }
+                    else if (nameHash == "SE_TerritorialSlumber".GetHashCode())
+                    {
+                        (__result as SE_TerritorialSlumber).m_icon = SE_TerritorialSlumber.AbilityIcon;
+                    }
+                    
+                    
+                    
                     
                     
                     
@@ -225,7 +232,7 @@ namespace LackingImaginationV2
                 SE_RecklessCharge.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyBoar").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_GolemCore.AbilityIcon = ZNetScene.instance.GetPrefab("Crystal").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Culmination.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinKing").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                
+                SE_TerritorialSlumber.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyUlv").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 
             }
         }
@@ -371,7 +378,10 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Culmination>());
             } 
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_TerritorialSlumber"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_TerritorialSlumber>());
+            } 
             
             
             

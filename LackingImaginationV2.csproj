@@ -166,6 +166,7 @@
         <Compile Include="SE_Ritual.cs" />
         <Compile Include="SE_Rot.cs" />
         <Compile Include="SE_Satiated.cs" />
+        <Compile Include="SE_TerritorialSlumber.cs" />
         <Compile Include="SE_ThreeFreeze.cs" />
         <Compile Include="SE_TimedDeath.cs" />
         <Compile Include="SE_TwinSouls.cs" />
@@ -223,6 +224,7 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include=".gitignore" />
+        <Content Include="assets\brutebros.unitypackage" />
         <Content Include="assets\DropAssetBundleInThisFolder.txt" />
         <EmbeddedResource Include="assets\essence_bundle_2" />
         <EmbeddedResource Include="assets\sgasset" />

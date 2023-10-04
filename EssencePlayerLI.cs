@@ -58,11 +58,11 @@ namespace LackingImaginationV2
                 var pkg = new ZPackage(essenceSlotData);
                 _isLoading = true;
                 EssenceSlotInventory.Load(pkg);
-
+            
                 if (!LackingImaginationV2Plugin.EssenceSlotsEnabled.Value)
                 {
                     _player.m_inventory.MoveAll(EssenceSlotInventory);
-
+            
                     pkg = new ZPackage(essenceSlotData);
                     EssenceSlotInventory.Save(pkg);
                     SaveValue(_player, nameof(EssenceSlotInventory), pkg.GetBase64());

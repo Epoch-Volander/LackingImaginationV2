@@ -161,7 +161,7 @@ namespace LackingImaginationV2
                         }
                         
                     }
-                    void bleedOut(ref Character enemy,ref Character wolf, Vector3 point)
+                    void bleedOut(ref Character enemy,ref Character player, Vector3 point)
                     {
                         int BloodHits = int.Parse(WolfStats[1]);
                         BloodHits++;
@@ -176,7 +176,7 @@ namespace LackingImaginationV2
                             HitData hitData = new HitData();
                             hitData.m_damage.m_slash = (enemy.GetMaxHealth() * LackingImaginationGlobal.c_wolfRavenousHunger);
                             hitData.m_point = point;
-                            hitData.SetAttacker(wolf);
+                            hitData.SetAttacker(player);
                             enemy.Damage(hitData);
                         }
                         WolfStats[1] = BloodHits.ToString();

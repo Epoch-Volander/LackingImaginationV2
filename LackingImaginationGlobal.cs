@@ -1975,8 +1975,34 @@ namespace LackingImaginationV2
         }
         
         //Ulv
-        
-        
+        public static float c_ulvTerritorialSlumberComfort
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_ulvTerritorialSlumberComfort"];
+                }
+                catch
+                {
+                    return 5f;
+                }
+            }
+        }
+        public static float c_ulvTerritorialSlumberStamina
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_ulvTerritorialSlumberStamina"]/100;
+                }
+                catch
+                {
+                    return 0.05f;
+                }
+            }
+        }
         
         
         
