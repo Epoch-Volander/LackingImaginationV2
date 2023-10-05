@@ -82,17 +82,31 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_deerHorizonHasteSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_deerHorizonHasteSED"]/100;
+                }
+                catch
+                {
+                    return 0.5f;
+                }
+            }
+        }
         public static float c_deerHorizonHaste
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_deerHorizonHaste"]/100f;
+                    return ConfigStrings["li_deerHorizonHaste"];
                 }
                 catch
                 {
-                    return 1f;
+                    return 1.2f;
                 }
             }
         }
@@ -146,11 +160,11 @@ namespace LackingImaginationV2
             {
                 try
                 {
-                    return ConfigStrings["li_eikthyrBlitz"]/100f;
+                    return ConfigStrings["li_eikthyrBlitz"]/100;
                 }
                 catch
                 {
-                    return 1f;
+                    return 0.5f;
                 }
             }
         }
@@ -170,17 +184,31 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_fenringMoonlitLeapSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fenringMoonlitLeapSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
+                }
+            }
+        }
         public static float c_fenringMoonlitLeap
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_fenringMoonlitLeap"]/100f;
+                    return ConfigStrings["li_fenringMoonlitLeap"];
                 }
                 catch
                 {
-                    return 1f;
+                    return 1.5f;
                 }
             }
         }
@@ -220,7 +248,7 @@ namespace LackingImaginationV2
             {
                 try
                 {
-                    return ConfigStrings["li_loxWildTremor"]/100f;
+                    return ConfigStrings["li_loxWildTremor"];
                 }
                 catch
                 {
@@ -258,6 +286,20 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_wolfRavenousHungerSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wolfRavenousHungerSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
+                }
+            }
+        }
         public static float c_wolfRavenousHunger
         {
             get
@@ -292,7 +334,7 @@ namespace LackingImaginationV2
             {
                 try
                 {
-                    return ConfigStrings["li_wolfRavenousHungerPassive"]/100f;
+                    return ConfigStrings["li_wolfRavenousHungerPassive"];
                 }
                 catch
                 {
@@ -402,6 +444,20 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_deathsquitoRelentlessSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_deathsquitoRelentlessSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
+                }
+            }
+        }
         public static float c_deathsquitoRelentlessHoming
         {
             get
@@ -412,7 +468,21 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 100f;
+                    return 50f;
+                }
+            }
+        }
+        public static float c_deathsquitoRelentlessHomingRange
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_deathsquitoRelentlessHomingRange"];
+                }
+                catch
+                {
+                    return 12f;
                 }
             }
         }
@@ -443,6 +513,20 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 60f;
+                }
+            }
+        }
+        public static float c_surtlingHarbingerSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_surtlingHarbingerSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
                 }
             }
         }
@@ -502,6 +586,20 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 60f;
+                }
+            }
+        }
+        public static float c_fulingberserkerGiantizationSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fulingberserkerGiantizationSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
                 }
             }
         }
@@ -1157,6 +1255,20 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_elderAncientAweSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_elderAncientAweSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
+                }
+            }
+        }
         public static float c_elderAncientAwePassive
         {
             get
@@ -1231,7 +1343,6 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
         public static float c_skeletonVigilSummonDuration
         {
             get
@@ -1314,7 +1425,7 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 1f;
+                    return 4f;
                 }
             }
         }
@@ -1328,7 +1439,7 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 1f;
+                    return 3f;
                 }
             }
         }
@@ -1359,6 +1470,20 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 70f;
+                }
+            }
+        }
+        public static float c_wraithTwinSoulsSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_wraithTwinSoulsSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
                 }
             }
         }
@@ -1400,7 +1525,7 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 1f;
+                    return 4f;
                 }
             }
         }
@@ -1414,7 +1539,7 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 1f;
+                    return 2f;
                 }
             }
         }
@@ -1428,7 +1553,7 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 1f;
+                    return 2f;
                 }
             }
         }
@@ -1443,7 +1568,21 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 0f;
+                    return 60f;
+                }
+            }
+        }
+        public static float c_draugrForgottenSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugrForgottenSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
                 }
             }
         }
@@ -1502,6 +1641,20 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 60f;
+                }
+            }
+        }
+        public static float c_draugreliteFallenHeroSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_draugreliteFallenHeroSED"]/100F;
+                }
+                catch
+                {
+                    return 0.9f;
                 }
             }
         }
@@ -1666,17 +1819,31 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_hareLuckyFootSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_hareLuckyFootSED"]/100F;
+                }
+                catch
+                {
+                    return 0.5f;
+                }
+            }
+        }
         public static float c_hareLuckyFoot
         {
             get
             {
                 try
                 {
-                    return ConfigStrings["li_hareLuckyFoot"]/100f;
+                    return ConfigStrings["li_hareLuckyFoot"];
                 }
                 catch
                 {
-                    return 1f;
+                    return 1.5f;
                 }
             }
         }
@@ -1854,6 +2021,20 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 30f;
+                }
+            }
+        }
+        public static float c_boarRecklessChargeSED
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_boarRecklessChargeSED"]/100F;
+                }
+                catch
+                {
+                    return 0.5f;
                 }
             }
         }
@@ -2041,12 +2222,25 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 70f;
+                    return 45f;
                 }
             }
         }
-        
-        
+        public static float c_ulvTerritorialSlumberSummonHealth
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_ulvTerritorialSlumberSummonHealth"];
+                }
+                catch
+                {
+                    return 1f;
+                }
+            }
+        }
+       
         
         
         

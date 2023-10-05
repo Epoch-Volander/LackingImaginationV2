@@ -104,6 +104,7 @@ namespace LackingImaginationV2
                 {
                     RectTransform rectTransform = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
                     rectTransform.gameObject.SetActive(value: true);
+                    rectTransform.gameObject.transform.localScale *= 1.35f;
                     rectTransform.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
                     rectTransform.GetComponentInChildren<Text>().fontSize += 3;
                     // rectTransform.GetComponentInChildren<Text>().resizeTextForBestFit = false;
@@ -710,22 +711,17 @@ namespace LackingImaginationV2
 
 
 
+        
+        
         public static bool Ability1_Input_Down
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability1_Hotkey.Value == "")
+                if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.MainKey == KeyCode.None)
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability1_Hotkey_Combo.Value == "")
-                {
-                    return Input.GetKeyDown(LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToLower()) || Input.GetButtonDown(LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToLower());
-                }
-                else if((Input.GetKeyDown(LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToLower()) && Input.GetKey(LackingImaginationV2Plugin.Ability1_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetKey(LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToLower()) && Input.GetKeyDown(LackingImaginationV2Plugin.Ability1_Hotkey_Combo.Value.ToLower())) || 
-                        (Input.GetButtonDown(LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToLower()) && Input.GetButton(LackingImaginationV2Plugin.Ability1_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetButton(LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToLower()) && Input.GetButtonDown(LackingImaginationV2Plugin.Ability1_Hotkey_Combo.Value.ToLower())))
+                else if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -738,18 +734,11 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability2_Hotkey.Value == "")
+                if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.MainKey == KeyCode.None)
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability2_Hotkey_Combo.Value == "")
-                {
-                    return Input.GetKeyDown(LackingImaginationV2Plugin.Ability2_Hotkey.Value.ToLower()) || Input.GetButtonDown(LackingImaginationV2Plugin.Ability2_Hotkey.Value.ToLower());
-                }
-                else if((Input.GetKeyDown(LackingImaginationV2Plugin.Ability2_Hotkey.Value.ToLower()) && Input.GetKey(LackingImaginationV2Plugin.Ability2_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetKey(LackingImaginationV2Plugin.Ability2_Hotkey.Value.ToLower()) && Input.GetKeyDown(LackingImaginationV2Plugin.Ability2_Hotkey_Combo.Value.ToLower())) || 
-                        (Input.GetButtonDown(LackingImaginationV2Plugin.Ability2_Hotkey.Value.ToLower()) && Input.GetButton(LackingImaginationV2Plugin.Ability2_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetButton(LackingImaginationV2Plugin.Ability2_Hotkey.Value.ToLower()) && Input.GetButtonDown(LackingImaginationV2Plugin.Ability2_Hotkey_Combo.Value.ToLower())))
+                else if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -762,18 +751,11 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability3_Hotkey.Value == "")
+                if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.MainKey == KeyCode.None)
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability3_Hotkey_Combo.Value == "")
-                {
-                    return Input.GetKeyDown(LackingImaginationV2Plugin.Ability3_Hotkey.Value.ToLower()) || Input.GetButtonDown(LackingImaginationV2Plugin.Ability3_Hotkey.Value.ToLower());
-                }
-                else if((Input.GetKeyDown(LackingImaginationV2Plugin.Ability3_Hotkey.Value.ToLower()) && Input.GetKey(LackingImaginationV2Plugin.Ability3_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetKey(LackingImaginationV2Plugin.Ability3_Hotkey.Value.ToLower()) && Input.GetKeyDown(LackingImaginationV2Plugin.Ability3_Hotkey_Combo.Value.ToLower())) || 
-                        (Input.GetButtonDown(LackingImaginationV2Plugin.Ability3_Hotkey.Value.ToLower()) && Input.GetButton(LackingImaginationV2Plugin.Ability3_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetButton(LackingImaginationV2Plugin.Ability3_Hotkey.Value.ToLower()) && Input.GetButtonDown(LackingImaginationV2Plugin.Ability3_Hotkey_Combo.Value.ToLower())))
+                else if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -785,18 +767,11 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability4_Hotkey.Value == "")
+                if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.MainKey == KeyCode.None)
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability4_Hotkey_Combo.Value == "")
-                {
-                    return Input.GetKeyDown(LackingImaginationV2Plugin.Ability4_Hotkey.Value.ToLower()) || Input.GetButtonDown(LackingImaginationV2Plugin.Ability4_Hotkey.Value.ToLower());
-                }
-                else if((Input.GetKeyDown(LackingImaginationV2Plugin.Ability4_Hotkey.Value.ToLower()) && Input.GetKey(LackingImaginationV2Plugin.Ability4_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetKey(LackingImaginationV2Plugin.Ability4_Hotkey.Value.ToLower()) && Input.GetKeyDown(LackingImaginationV2Plugin.Ability4_Hotkey_Combo.Value.ToLower())) || 
-                        (Input.GetButtonDown(LackingImaginationV2Plugin.Ability4_Hotkey.Value.ToLower()) && Input.GetButton(LackingImaginationV2Plugin.Ability4_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetButton(LackingImaginationV2Plugin.Ability4_Hotkey.Value.ToLower()) && Input.GetButtonDown(LackingImaginationV2Plugin.Ability4_Hotkey_Combo.Value.ToLower())))
+                else if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -808,18 +783,11 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability5_Hotkey.Value == "")
+                if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.MainKey == KeyCode.None)
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability5_Hotkey_Combo.Value == "")
-                {
-                    return Input.GetKeyDown(LackingImaginationV2Plugin.Ability5_Hotkey.Value.ToLower()) || Input.GetButtonDown(LackingImaginationV2Plugin.Ability5_Hotkey.Value.ToLower());
-                }
-                else if((Input.GetKeyDown(LackingImaginationV2Plugin.Ability5_Hotkey.Value.ToLower()) && Input.GetKey(LackingImaginationV2Plugin.Ability5_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetKey(LackingImaginationV2Plugin.Ability5_Hotkey.Value.ToLower()) && Input.GetKeyDown(LackingImaginationV2Plugin.Ability5_Hotkey_Combo.Value.ToLower())) || 
-                        (Input.GetButtonDown(LackingImaginationV2Plugin.Ability5_Hotkey.Value.ToLower()) && Input.GetButton(LackingImaginationV2Plugin.Ability5_Hotkey_Combo.Value.ToLower())) ||
-                        (Input.GetButton(LackingImaginationV2Plugin.Ability5_Hotkey.Value.ToLower()) && Input.GetButtonDown(LackingImaginationV2Plugin.Ability5_Hotkey_Combo.Value.ToLower())))
+                else if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsUp())
                 {
                     return true;
                 }

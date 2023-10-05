@@ -15,8 +15,8 @@ namespace LackingImaginationV2
        
         
         [Header("SE_LuckyFoot")]
-        public static float m_baseTTL = LackingImaginationUtilities.xHareCooldownTime * 0.5f;
-        private float speedAmount = 2f;
+        public static float m_baseTTL = LackingImaginationUtilities.xHareCooldownTime * LackingImaginationGlobal.c_hareLuckyFootSED;
+        
 
         public SE_LuckyFoot()
         {
@@ -30,7 +30,7 @@ namespace LackingImaginationV2
         
         public override void ModifySpeed(float baseSpeed, ref float speed)
         {
-            speed *= speedAmount * LackingImaginationGlobal.c_hareLuckyFoot;
+            speed *= LackingImaginationGlobal.c_hareLuckyFoot;
             
             base.ModifySpeed(baseSpeed, ref speed);
         }

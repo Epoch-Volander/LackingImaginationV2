@@ -15,11 +15,11 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
         
         
-        private float giantDuration = LackingImaginationUtilities.xFulingBerserkerCooldownTime -5f; //-30
+        private float giantDuration = LackingImaginationUtilities.xFulingBerserkerCooldownTime * LackingImaginationGlobal.c_fulingberserkerGiantizationSED;
         private float m_timer = 1f;
         
         [Header("SE_Giantization")]
-        public static float m_baseTTL = LackingImaginationUtilities.xFulingBerserkerCooldownTime -5f;
+        public static float m_baseTTL = LackingImaginationUtilities.xFulingBerserkerCooldownTime * LackingImaginationGlobal.c_fulingberserkerGiantizationSED;
 
         public SE_Giantization()
         {

@@ -41,7 +41,6 @@ namespace LackingImaginationV2
 
 
                 Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
-
                 Aura.transform.parent = player.transform;
             }
             else

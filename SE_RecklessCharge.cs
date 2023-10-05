@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         
         [Header("SE_RecklessCharge")]
         
-        public static float m_baseTTL = LackingImaginationUtilities.xBoarCooldownTime - 10f;//
+        public static float m_baseTTL = LackingImaginationUtilities.xBoarCooldownTime * LackingImaginationGlobal.c_boarRecklessChargeSED;//
 
         private  HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
 

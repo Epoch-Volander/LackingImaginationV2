@@ -14,7 +14,7 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_Relentless")]
-        public static float m_baseTTL = LackingImaginationUtilities.xDeathsquitoCooldownTime - 10f;
+        public static float m_baseTTL = LackingImaginationUtilities.xDeathsquitoCooldownTime * LackingImaginationGlobal.c_deathsquitoRelentlessSED;
         
 
         public SE_Relentless()

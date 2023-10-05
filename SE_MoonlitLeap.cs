@@ -16,11 +16,10 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_MoonlitLeap")]
-        public static float m_baseTTL = LackingImaginationUtilities.xFenringCooldownTime;
-        private float JumpDuration = LackingImaginationUtilities.xFenringCooldownTime -5f;
-        private float JumpAmount = 1.5f;
+        public static float m_baseTTL = LackingImaginationUtilities.xFenringCooldownTime * LackingImaginationGlobal.c_fenringMoonlitLeapSED;
+        private float JumpDuration = LackingImaginationUtilities.xFenringCooldownTime * LackingImaginationGlobal.c_fenringMoonlitLeapSED;
         private float m_timer = 1f;
-        private float FallDuration = LackingImaginationUtilities.xFenringCooldownTime;
+        private float FallDuration = LackingImaginationUtilities.xFenringCooldownTime * LackingImaginationGlobal.c_fenringMoonlitLeapSED;
         
         
         public SE_MoonlitLeap()
@@ -37,7 +36,7 @@ namespace LackingImaginationV2
         {
             if(JumpDuration > 0)
             {
-                jump *= JumpAmount * LackingImaginationGlobal.c_fenringMoonlitLeap;
+                jump *= LackingImaginationGlobal.c_fenringMoonlitLeap;
             }
             base.ModifyJump(baseJump, ref jump);
         }

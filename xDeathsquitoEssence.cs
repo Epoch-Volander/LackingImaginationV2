@@ -18,6 +18,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Relentless";
 
+        public static GameObject Aura;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -31,8 +32,9 @@ namespace LackingImaginationV2
 
                 //Effects, animations, and sounds
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
-                // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_deathsquito_death"), player.transform.position, Quaternion.identity);
-
+                Aura = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, player.transform.position + player.transform.up * 2.2f, Quaternion.identity);
+                Aura.transform.parent = player.transform;
+                
                 //Lingering effects
                 SE_Relentless se_relentless = (SE_Relentless)ScriptableObject.CreateInstance(typeof(SE_Relentless));
                 se_relentless.m_ttl = SE_Relentless.m_baseTTL;
@@ -51,6 +53,8 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public static class xDeathsquitoEssencePassive
     {
+        private static List<Projectile> arrows = new List<Projectile>();
+
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.FixedUpdate))]
         public class Deathsquito_FixedUpdate_Patch
         {
@@ -58,9 +62,18 @@ namespace LackingImaginationV2
             {
                 if (__instance.m_owner == Player.m_localPlayer && EssenceItemData.equipedEssence.Contains("$item_deathsquito_essence") && Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Relentless"))
                 {
-                    if (__instance.m_didHit) return; // Skip if the projectile already hit
+                    if (__instance.m_didHit)
+                    {
+                        if (arrows.Contains(__instance)) arrows.Remove(__instance);
+                        return;
+                    }// Skip if the projectile already hit
 
-                    if (__instance.m_owner != null && __instance.m_owner.IsPlayer() && IsTaegetInRange(__instance)) // Make sure the owner is a player
+                    if (!arrows.Contains(__instance))
+                    { 
+                        UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, __instance.transform.position + __instance.transform.up * 0.3f, Quaternion.identity).transform.parent = __instance.transform;
+                    }
+                    
+                    if (__instance.m_owner != null && IsTaegetInRange(__instance)) // Make sure the owner is a player
                     {
                         // homing logic
                         Vector3 targetPosition = GetHomingTargetPosition(__instance); // target logic
@@ -75,7 +88,7 @@ namespace LackingImaginationV2
                     {
                         List<Character> allCharacters = new List<Character>();
                         allCharacters.Clear();
-                        Character.GetCharactersInRange(projectile.transform.position, 12f, allCharacters);
+                        Character.GetCharactersInRange(projectile.transform.position, LackingImaginationGlobal.c_deathsquitoRelentlessHomingRange, allCharacters);
                         foreach (Character ch in allCharacters)
                         {
                             if (ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer) || ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI)
@@ -91,7 +104,7 @@ namespace LackingImaginationV2
                     {
                         List<Character> allCharacters = new List<Character>();
                         allCharacters.Clear();
-                        Character.GetCharactersInRange(projectile.transform.position, 12f, allCharacters);
+                        Character.GetCharactersInRange(projectile.transform.position, LackingImaginationGlobal.c_deathsquitoRelentlessHomingRange, allCharacters);
                         Character closestCharacter = null;
                         float closestDistance = float.MaxValue;
                         foreach (Character ch in allCharacters)
@@ -126,8 +139,7 @@ namespace LackingImaginationV2
                 }
             }
         }
-
-
+        
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.Setup))]
         public class Deathsquito_Setup_Patch
         {
@@ -139,6 +151,19 @@ namespace LackingImaginationV2
                 }
             }
         }
+        
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
+        public static class Deathsquito_UpdateEnvStatusEffects_Patch
+        {
+            public static void Prefix(Player __instance, ref float dt)
+            {
+                if (!__instance.GetSEMan().HaveStatusEffect("SE_Relentless") && xDeathsquitoEssence.Aura != null)
+                {
+                    UnityEngine.GameObject.Destroy(xDeathsquitoEssence.Aura);
+                }
+            }
+        }
+        
         
         //add negative
         

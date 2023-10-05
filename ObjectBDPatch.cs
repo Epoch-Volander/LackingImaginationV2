@@ -207,7 +207,7 @@ namespace LackingImaginationV2
 
                 SE_HorizonHaste.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDeer").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_MoonlitLeap.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyFenring").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                SE_RavenousHunger.AbilityIcon = ZNetScene.instance.GetPrefab("Bloodbag").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_RavenousHunger.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyWolf").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Ritual.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinShaman").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Relentless.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyDeathsquito").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Harbinger.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySurtling").GetComponent<ItemDrop>().m_itemData.GetIcon();

@@ -14,7 +14,7 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_RavenousHunger")]
-        public static float m_baseTTL = LackingImaginationUtilities.xWolfCooldownTime - 20f;
+        public static float m_baseTTL = LackingImaginationUtilities.xWolfCooldownTime * LackingImaginationGlobal.c_wolfRavenousHungerSED;
 
         public SE_RavenousHunger()
         {

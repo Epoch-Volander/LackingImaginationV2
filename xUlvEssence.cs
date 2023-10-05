@@ -49,31 +49,24 @@ namespace LackingImaginationV2
         {
             while (ring != null)
             {
-                float size = 6f;
+                float size = 9f;
                 Collider[] colliders = Physics.OverlapSphere(ring.transform.position, size, collisionMask);
-
                 HashSet<GameObject> hashSet = new HashSet<GameObject>();
                 
                 foreach (Collider collider in colliders)
                 {
                     Character characterComponent = collider.gameObject.GetComponent<Character>();
-                    // if (characterComponent != null && !hashSet.Contains(collider.gameObject))
                     if (characterComponent != null)
                     {
                         hashSet.Add(collider.gameObject);
                         detectedObjects.Add(collider.gameObject);
-                        // if (characterComponent.IsDead() || (double)characterComponent.GetHealth() <= 0.0)
-                        // {
-                        //     hashSet.Add(collider.gameObject);
-                        //     LackingImaginationV2Plugin.Log($"{characterComponent.m_name} died");
-                        //     SummonUlv(characterComponent.transform.position);
-                        // }
                     }
                 }
                 detectedObjects.IntersectWith(hashSet);
                 
                 yield return null;
             }
+            detectedObjects.Clear();
         }
     }
 
@@ -91,9 +84,9 @@ namespace LackingImaginationV2
                      foreach (GameObject gameObject in xUlvEssence.detectedObjects)
                      {
                          Character ch = gameObject.GetComponent<Character>();
-                         if (ch.IsDead() || (double)ch.GetHealth() <= 0.0)
+                         if ((ch.IsDead() || (double)ch.GetHealth() <= 0.0) && ch.m_name != "Ulv(Ally)")
                          {
-                             LackingImaginationV2Plugin.Log($"{ch.m_name} died");
+                             // LackingImaginationV2Plugin.Log($"{ch.m_name} died");
                              SummonUlv(ch.transform.position);
                              dead.Add(gameObject);
                          }
@@ -113,7 +106,8 @@ namespace LackingImaginationV2
                 GameObject Ulv = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Ulv"), position, Quaternion.identity);
                 Ulv.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                 Ulv.GetComponent<Humanoid>().m_name = "Ulv(Ally)";
-                Ulv.GetComponent<Humanoid>().SetMaxHealth(Ulv.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
+                Ulv.GetComponent<Transform>().localScale = 0.8f * Vector3.one;
+                Ulv.GetComponent<Humanoid>().SetMaxHealth(Ulv.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_ulvTerritorialSlumberSummonHealth);
                 Ulv.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                 CharacterDrop characterDrop = Ulv.GetComponent<CharacterDrop>();
                 if (characterDrop != null)  characterDrop.m_dropsEnabled = false;
@@ -174,7 +168,7 @@ namespace LackingImaginationV2
         }
 
         [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
-        public static class Wolf_GetTotalFoodValue_Patch
+        public static class Ulv_GetTotalFoodValue_Patch
         {
             [HarmonyPriority(Priority.High)]
             public static void Postfix(ref float stamina, Player __instance)

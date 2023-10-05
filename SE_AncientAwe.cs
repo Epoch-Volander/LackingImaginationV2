@@ -15,7 +15,7 @@ namespace LackingImaginationV2
        
         
         [Header("SE_AncientAwe")]
-        public static float m_baseTTL = LackingImaginationUtilities.xElderCooldownTime - 5f;
+        public static float m_baseTTL = LackingImaginationUtilities.xElderCooldownTime * LackingImaginationGlobal.c_elderAncientAweSED;
         private float speedAmount = 0f;
         private float speedDuration = 5f;
         private float m_timer = 1f;

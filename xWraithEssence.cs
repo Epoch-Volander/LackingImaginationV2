@@ -61,8 +61,8 @@ namespace LackingImaginationV2
                     GameObject wraith = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Wraith"), randomPosition, Quaternion.identity);
                     wraith.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                     wraith.GetComponent<Humanoid>().m_name = "Second";
-                    wraith.GetComponent<Humanoid>().SetMaxHealth(wraith.GetComponent<Humanoid>().GetMaxHealthBase() * 5f * LackingImaginationGlobal.c_wraithTwinSoulsAllyHealth);
-                    wraith.GetComponent<Humanoid>().m_speed = 4f * LackingImaginationGlobal.c_wraithTwinSoulsAllySpeed;
+                    wraith.GetComponent<Humanoid>().SetMaxHealth(wraith.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_wraithTwinSoulsAllyHealth);
+                    wraith.GetComponent<Humanoid>().m_speed = LackingImaginationGlobal.c_wraithTwinSoulsAllySpeed;
                     wraith.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                     wraith.AddComponent<Tameable>();
                     // baby.GetComponent<Tameable>().m_startsTamed = true;

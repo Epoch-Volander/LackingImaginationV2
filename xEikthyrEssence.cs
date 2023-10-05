@@ -153,7 +153,8 @@ namespace LackingImaginationV2
              foreach (Collider collider in combinedColliders)
             {
                 IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
-                if (destructibleComponent != null)
+                Character characterComponent = collider.gameObject.GetComponent<Character>();
+                if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
                 {
                     // This is a valid target (creature) if it hasn't been detected before.
                     if (!detectedObjects.Contains(collider.gameObject))
@@ -165,9 +166,9 @@ namespace LackingImaginationV2
                         hitData.m_dodgeable = true;
                         hitData.m_blockable = true;
                         hitData.m_ranged = true;
-                        hitData.m_damage.m_lightning = LackingImaginationGlobal.c_moderDraconicFrostDragonBreath;
+                        hitData.m_damage.m_lightning =UnityEngine.Random.Range(2f, 5f);
                         hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
-                        // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                        hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_eikthyrBlitz));
                         hitData.m_pushForce = 10f;
                         hitData.m_backstabBonus = 2f;
                         hitData.m_staggerMultiplier = 2f;
@@ -175,31 +176,6 @@ namespace LackingImaginationV2
                         hitData.SetAttacker(player);
                         hitData.m_hitType = HitData.HitType.PlayerHit;
                         destructibleComponent.Damage(hitData);
-                    }
-                }
-                Character characterComponent = collider.gameObject.GetComponent<Character>();
-                if (characterComponent != null && !characterComponent.IsOwner())
-                {
-                    // This is a valid target (creature) if it hasn't been detected before.
-                    if (!detectedObjects.Contains(collider.gameObject))
-                    {
-                        detectedObjects.Add(collider.gameObject);
-                        
-                        HitData hitData = new HitData();
-                        hitData.m_hitCollider = collider;
-                        hitData.m_dodgeable = true;
-                        hitData.m_blockable = true;
-                        hitData.m_ranged = true;
-                        hitData.m_damage.m_lightning = LackingImaginationGlobal.c_moderDraconicFrostDragonBreath;
-                        hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
-                        // hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
-                        hitData.m_pushForce = 10f;
-                        hitData.m_backstabBonus = 2f;
-                        hitData.m_staggerMultiplier = 2f;
-                        hitData.m_point = collider.gameObject.transform.position;
-                        hitData.SetAttacker(player);
-                        hitData.m_hitType = HitData.HitType.PlayerHit;
-                        characterComponent.Damage(hitData);
                     }
                 }
             }

@@ -217,16 +217,12 @@ namespace LackingImaginationV2
         public static ConfigEntry<bool> EssenceSlotsEnabled;
         public static bool UseGuardianPower = true;
 
-        public static ConfigEntry<string> Ability1_Hotkey;
-        public static ConfigEntry<string> Ability1_Hotkey_Combo;
-        public static ConfigEntry<string> Ability2_Hotkey;
-        public static ConfigEntry<string> Ability2_Hotkey_Combo;
-        public static ConfigEntry<string> Ability3_Hotkey;
-        public static ConfigEntry<string> Ability3_Hotkey_Combo;
-        public static ConfigEntry<string> Ability4_Hotkey;
-        public static ConfigEntry<string> Ability4_Hotkey_Combo;
-        public static ConfigEntry<string> Ability5_Hotkey;
-        public static ConfigEntry<string> Ability5_Hotkey_Combo;
+        // public static ConfigEntry<string> Ability1_Hotkey;
+        public static ConfigEntry<KeyboardShortcut> Ability1_Hotkey { get; set; }
+        public static ConfigEntry<KeyboardShortcut> Ability2_Hotkey { get; set; }
+        public static ConfigEntry<KeyboardShortcut> Ability3_Hotkey { get; set; }
+        public static ConfigEntry<KeyboardShortcut> Ability4_Hotkey { get; set; }
+        public static ConfigEntry<KeyboardShortcut> Ability5_Hotkey { get; set; }
 
         public static ConfigEntry<float> li_cooldownMultiplier;
 
@@ -254,7 +250,7 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_draugrSynergyRot;
         
         
-        
+        //Cooldown
         public static ConfigEntry<float> li_eikthyrBlitzCD;
         public static ConfigEntry<float> li_deerHorizonHasteCD;
         public static ConfigEntry<float> li_fenringMoonlitLeapCD;
@@ -292,8 +288,32 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_boarRecklessChargeCD;
         public static ConfigEntry<float> li_stonegolemCoreOverdriveCD;
         public static ConfigEntry<float> li_yagluthCulminationCD;
+        public static ConfigEntry<float> li_ulvTerritorialSlumberCD;
         
         
+        
+        
+        //Status Duration
+        public static ConfigEntry<float> li_deerHorizonHasteSED;
+        public static ConfigEntry<float> li_fenringMoonlitLeapSED;
+        public static ConfigEntry<float> li_wolfRavenousHungerSED;
+        public static ConfigEntry<float> li_deathsquitoRelentlessSED;
+        public static ConfigEntry<float> li_surtlingHarbingerSED;
+        public static ConfigEntry<float> li_fulingberserkerGiantizationSED;
+        public static ConfigEntry<float> li_elderAncientAweSED;
+        public static ConfigEntry<float> li_wraithTwinSoulsSED;
+        public static ConfigEntry<float> li_draugrForgottenSED;
+        public static ConfigEntry<float> li_draugreliteFallenHeroSED;
+        public static ConfigEntry<float> li_hareLuckyFootSED;
+        public static ConfigEntry<float> li_boarRecklessChargeSED;
+     
+        
+        
+        
+        public static ConfigEntry<float> li_ulvTerritorialSlumberSED;
+        
+        
+        //Essence
         public static ConfigEntry<float> li_deerHorizonHaste;
         public static ConfigEntry<float> li_deerHorizonHastePassive;
         public static ConfigEntry<float> li_eikthyrBlitzPassive;
@@ -311,6 +331,7 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_fulingshamanRitualPassiveEitr;
         public static ConfigEntry<float> li_fulingshamanRitualPassiveCarry;
         public static ConfigEntry<float> li_deathsquitoRelentlessHoming;
+        public static ConfigEntry<float> li_deathsquitoRelentlessHomingRange;
         public static ConfigEntry<float> li_deathsquitoRelentlessPassive;
         public static ConfigEntry<float> li_surtlingHarbingerCharges;
         public static ConfigEntry<float> li_surtlingHarbingerBurn;
@@ -388,7 +409,10 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_stonegolemCoreOverdriveArmor;
         public static ConfigEntry<float> li_yagluthCulminationStaticCap;
         public static ConfigEntry<float> li_yagluthCulmination;
-    
+        public static ConfigEntry<float> li_ulvTerritorialSlumberComfort;
+        public static ConfigEntry<float> li_ulvTerritorialSlumberStamina;
+        public static ConfigEntry<float> li_ulvTerritorialSlumberSummonDuration;
+        public static ConfigEntry<float> li_ulvTerritorialSlumberSummonHealth;
        
         
         // public static List<string> equipedEssence = new();
@@ -406,6 +430,7 @@ namespace LackingImaginationV2
         public static GameObject fx_TerritorialSlumber;
         public static GameObject fx_BloodSiphon;
         public static GameObject fx_RavenousHunger;
+        public static GameObject fx_Relentless;
         //Prefab3 //originals
         public static GameObject p_SeaKing;
         
@@ -679,6 +704,8 @@ namespace LackingImaginationV2
             fx_TerritorialSlumber = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "UlvCircle");
             fx_BloodSiphon = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "LeechDebuff");
             fx_RavenousHunger = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "wolfHit");
+            fx_Relentless = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "DeathEye");
+            
                 
             //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
@@ -709,19 +736,12 @@ namespace LackingImaginationV2
 
             EssenceSlotsEnabled = Config.Bind("Toggles", "Enable Essence Slots", true, "Disabling this while items are in the slots will attempt to move them to your inventory.");
 
-            //Ability1_Hotkey = ConfigManager.RegisterModConfigVariable<string>(ModName, "Ability1_Hotkey", "1", "Keybinds", "Ability 1 Hotkey", true); //\nUse mouse # to bind an ability to a mouse button\nThe # represents the mouse button; mouse 0 is left click, mouse 1 right click, etc", true);
-            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", "1", "Ability 1 Hotkey\nUse mouse # to bind an ability to a mouse button");
-            //Ability1_Hotkey_Combo = ConfigManager.RegisterModConfigVariable<string>(ModName, "Ability1_Hotkey_Combo", "left alt", "Keybinds", "Ability 1 Combination Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed", true); //\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank\nExamples: space, Q, left shift, left ctrl, right alt, right cmd", true);
-            Ability1_Hotkey_Combo = config("Keybinds", "Ability1_Hotkey_Combo", "left alt", "Ability 1 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", "2", "Ability 2 Hotkey\nUse mouse # to bind an ability to a mouse button");
-            Ability2_Hotkey_Combo = config("Keybinds", "Ability2_Hotkey_Combo", "left alt", "Ability 2 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", "3", "Ability 3 Hotkey\nUse mouse # to bind an ability to a mouse button");
-            Ability3_Hotkey_Combo = config("Keybinds", "Ability3_Hotkey_Combo", "left alt", "Ability 3 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", "4", "Ability 4 Hotkey\nUse mouse # to bind an ability to a mouse button");
-            Ability4_Hotkey_Combo = config("Keybinds", "Ability4_Hotkey_Combo", "left alt", "Ability 4 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", "5", "Ability 5 Hotkey\nUse mouse # to bind an ability to a mouse button");
-            Ability5_Hotkey_Combo = config("Keybinds", "Ability5_Hotkey_Combo", "left alt", "Ability 5 Combo Key - entering a value will trigger the ability only when both the Hotkey and Hotkey_Combo buttons are pressed\nAllows input from a combination of keys when a value is entered for the combo key\nIf only one key is used, leave the combo key blank");
-
+            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", new KeyboardShortcut(KeyCode.Alpha1, KeyCode.LeftAlt), "Ability 1 Hotkey");
+            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", new KeyboardShortcut(KeyCode.Alpha2, KeyCode.LeftAlt), "Ability 2 Hotkey");
+            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", new KeyboardShortcut(KeyCode.Alpha3, KeyCode.LeftAlt), "Ability 3 Hotkey");
+            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", new KeyboardShortcut(KeyCode.Alpha4, KeyCode.LeftAlt), "Ability 4 Hotkey");
+            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", new KeyboardShortcut(KeyCode.Alpha5, KeyCode.LeftAlt), "Ability 5 Hotkey");
+           
             //li_cooldownMultiplier = ConfigManager.RegisterModConfigVariable<float>(ModName, "vl_mce_cooldownMultiplier", 1f, "Modifiers", "This value multiplied on overall cooldown time of abilities", false);
             li_cooldownMultiplier = config("Modifiers", "CooldownMultiplier", 100f, "This value multiplied on overall cooldown time of abilities");
             
@@ -737,32 +757,35 @@ namespace LackingImaginationV2
 
             //Synergies
             //Draugr Synergy
-            li_draugrSynergyRot = config("Essence Synergy Modifiers", "li_draugrSynergyRot", 5f, "Modifies % dmg reduction system when all Draugr essences are equipped");
+            li_draugrSynergyRot = config("Essence Synergy Modifiers", "li_draugrSynergyRot", 5f, new ConfigDescription("Modifies % dmg reduction system when all Draugr essences are equipped", new AcceptableValueRange<float>(0f, 100f)));
             
-            
+        
             
             
             //deer
             li_deerHorizonHasteCD = config("Essence Deer Modifiers", "li_deerHorizonHasteCD", 25f, "Cooldown");
-            li_deerHorizonHaste = config("Essence Deer Modifiers", "li_deerHorizonHaste", 100f, "Modifies the movement speed for Horizon Haste");
+            li_deerHorizonHasteSED = config("Essence Deer Modifiers", "li_deerHorizonHasteSED", 50f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_deerHorizonHaste = config("Essence Deer Modifiers", "li_deerHorizonHaste", 1.5f, "Modifies the movement speed for Horizon Haste");
             li_deerHorizonHastePassive = config("Essence Deer Modifiers", "li_deerHorizonHastePassive", 25f, "Bonus Stamina from Horizon Haste");
             // eikthyr
             li_eikthyrBlitzCD = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzCD", 25f, "Cooldown");
-            li_eikthyrBlitzPassive = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzPassive", 10f, "Modifies the lightning damage passive for Weapons");
-            li_eikthyrBlitz = config("Essence Eikthyr Modifiers", "li_eikthyrBlitz", 100f, "Modifies the lightning damage for Blitz");
+            li_eikthyrBlitzPassive = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzPassive", 10f, "Modifies the % lightning damage passive for Weapons");
+            li_eikthyrBlitz = config("Essence Eikthyr Modifiers", "li_eikthyrBlitz", 50f, "Modifies % weapon lightning damage for Blitz");
             // fenring
             li_fenringMoonlitLeapCD = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapCD", 30f, "Cooldown");
-            li_fenringMoonlitLeap = config("Essence Fenring Modifiers", "li_fenringMoonlitLeap", 100f, "Modifies the jump force for Moonlit Leap");
+            li_fenringMoonlitLeapSED = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_fenringMoonlitLeap = config("Essence Fenring Modifiers", "li_fenringMoonlitLeap", 1.5f, "Modifies the jump force for Moonlit Leap");
             li_fenringMoonlitLeapPassive = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapPassive", 10f, "Modifies the % slash damage passive for Fist Weapons");
             // lox
             li_loxWildTremorCD = config("Essence Lox Modifiers", "li_loxWildTremorCD", 25f, "Cooldown");
-            li_loxWildTremor = config("Essence Lox Modifiers", "li_loxWildTremor", 100f, "Modifies the blunt damage for Wild Tremor");
+            li_loxWildTremor = config("Essence Lox Modifiers", "li_loxWildTremor", 1f, "Modifies the blunt damage for Wild Tremor");
             li_loxWildTremorPassive = config("Essence Lox Modifiers", "li_loxWildTremorPassive", 30f, "Bonus Health from Wild Tremor on eat");
             // wolf
             li_wolfRavenousHungerCD = config("Essence Wolf Modifiers", "li_wolfRavenousHungerCD", 120f, "Cooldown");
-            li_wolfRavenousHunger = config("Essence Wolf Modifiers", "li_wolfRavenousHunger", 5f, "Modifies % max HP dmg for Ravenous Hunger");
+            li_wolfRavenousHungerSED = config("Essence Wolf Modifiers", "li_wolfRavenousHungerSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_wolfRavenousHunger = config("Essence Wolf Modifiers", "li_wolfRavenousHunger", 5f, new ConfigDescription("Modifies % max HP dmg for Ravenous Hunger", new AcceptableValueRange<float>(0f, 100f)));
             li_wolfRavenousHungerStaminaPassive = config("Essence Wolf Modifiers", "li_wolfRavenousHungerStaminaPassive", 65f, "Bonus Stamina per stage of Ravenous Hunger");
-            li_wolfRavenousHungerPassive = config("Essence Wolf Modifiers", "li_wolfRavenousHungerPassive", 100f, "Modifies the Damage multiplier of Ravenous Hunger");
+            li_wolfRavenousHungerPassive = config("Essence Wolf Modifiers", "li_wolfRavenousHungerPassive", 1f, "Modifies the Damage multiplier of Ravenous Hunger");
             // fulingshaman
             li_fulingshamanRitualCD = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualCD", 30f, "Cooldown");
             li_fulingshamanRitualShield = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualShield", 200f, "Modifies health of Ritual Shield");
@@ -772,16 +795,20 @@ namespace LackingImaginationV2
             li_fulingshamanRitualPassiveCarry = config("Essence Fuling Shaman Modifiers", "li_fulingshamanRitualPassiveCarry", 100f, "Modifies Carry Weight reduction");
             // deathsquito
             li_deathsquitoRelentlessCD = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessCD", 60f, "Cooldown");
-            li_deathsquitoRelentlessHoming = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessHoming", 100f, "Modifies projectile Homing aggression");
+            li_deathsquitoRelentlessSED = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_deathsquitoRelentlessHoming = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessHoming", 50f, "Modifies projectile Homing aggression");
+            li_deathsquitoRelentlessHomingRange = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessHomingRange", 12f, "Modifies projectile Homing range");
             li_deathsquitoRelentlessPassive = config("Essence Deathsquito Modifiers", "li_deathsquitoRelentlessPassive", 10f, "Modifies % bonus pierce damage on projectiles");
             //surtling
             li_surtlingHarbingerCD = config("Essence Surtling Modifiers", "li_surtlingHarbingerCD", 60f, "Cooldown");
+            li_surtlingHarbingerSED = config("Essence Surtling Modifiers", "li_surtlingHarbingerSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
             li_surtlingHarbingerCharges = config("Essence Surtling Modifiers", "li_surtlingHarbingerCharges", 10f, "Modifies the number of casts per Core");
             li_surtlingHarbingerBurn = config("Essence Surtling Modifiers", "li_surtlingHarbingerBurn", 100f, "Modifies the Aoe Dmg");
             li_surtlingHarbingerMinDistance = config("Essence Surtling Modifiers", "li_surtlingHarbingerMinDistance", 8f, "Modifies the distance a creature has to be from another for a rift to spawn");
             // fuling brute unchangeable? xD
             li_fulingberserkerGiantizationCD = config("Essence Fuling Brute Modifiers", "li_fulingberserkerGiantizationCD", 60f, "Cooldown");
-             // drake
+            li_fulingberserkerGiantizationSED = config("Essence Fuling Brute Modifiers", "li_fulingberserkerGiantizationSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            // drake
             li_drakeThreeFreezeCD = config("Essence Drake Modifiers", "li_drakeThreeFreezeCD", 12f, "Cooldown");
             li_drakeThreeFreezeProjectile = config("Essence Drake Modifiers", "li_drakeThreeFreezeProjectile", 50f, "Modifies the % weapon damage for Three Freeze");
             // growth
@@ -791,7 +818,7 @@ namespace LackingImaginationV2
             // greydwarfshaman
             li_greydwarfshamanDubiousHealCD = config("Essence Greydwarf Modifiers", "li_greydwarfshamanDubiousHealCD", 60f, "Cooldown");
             li_greydwarfshamanDubiousHealPlayer = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealPlayer", 50f, "Modifies the Aoe heal Players receive");
-            li_greydwarfshamanDubiousHealCreature = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealCreature", 20f, "Modifies the % max health Aoe heal ally creatures receive");
+            li_greydwarfshamanDubiousHealCreature = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealCreature", 20f, new ConfigDescription("Modifies the % max health Aoe heal ally creatures receive", new AcceptableValueRange<float>(0f, 100f)));
             li_greydwarfshamanDubiousHealPassive = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealPassive", 2f, "Modifies the Passive regen multiplier ");
             li_greydwarfshamanDubiousHealPassiveEitr = config("Essence Greydwarf Shaman Modifiers", "li_greydwarfshamanDubiousHealPassiveEitr", 20f, "Modifies bonus Eitr passive");
             // troll
@@ -803,7 +830,7 @@ namespace LackingImaginationV2
             li_dvergrRandomizeIceProjectile = config("Essence Dvergr Modifiers", "li_dvergrRandomizeIceProjectile", 5f, "Modifies the % weapon damage of Randomize Ice Projectile");
             li_dvergrRandomizeFireProjectile = config("Essence Dvergr Modifiers", "li_dvergrRandomizeFireProjectile", 50f, "Modifies the % weapon damage of Randomize Fire Projectile");
             li_dvergrRandomizeHealPlayer = config("Essence Dvergr Modifiers", "li_dvergrRandomizeHealPlayer", 110f, "Modifies the Aoe heal Players receive");
-            li_dvergrRandomizeHealCreature = config("Essence Dvergr Modifiers", "li_dvergrRandomizeHealCreature", 50f, "Modifies the % max health Aoe heal ally creatures receive");
+            li_dvergrRandomizeHealCreature = config("Essence Dvergr Modifiers", "li_dvergrRandomizeHealCreature", 50f, new ConfigDescription("Modifies the % max health Aoe heal ally creatures receive", new AcceptableValueRange<float>(0f, 100f)));
             li_dvergrRandomizeCost = config("Essence Dvergr Modifiers", "li_dvergrRandomizeCost", 50f, "Modifies the Eitr cost to cast");
             li_dvergrRandomizePassiveEitr = config("Essence Dvergr Modifiers", "li_dvergrRandomizePassiveEitr", 80f, "Modifies bonus Eitr passive");
             li_dvergrRandomizePassive = config("Essence Dvergr Modifiers", "li_dvergrRandomizePassive", 60f, "Modifies the % pierce damage passive for Crossbow Weapons");
@@ -826,7 +853,7 @@ namespace LackingImaginationV2
             li_fulingLonginusMultiplier = config("Essence Fuling Modifiers", "li_fulingLonginusMultiplier", 3f, "Modifies the Damage multiplier of active spear throw");
             li_fulingLonginusPassiveBlockMultiplier = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveBlockMultiplier", 2f, "Modifies the Block force multiplier passive");
             li_fulingLonginusPassiveMotivated = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveMotivated", 60f, "Modifies the Bonus Stamina when holding gold");
-            li_fulingLonginusPassiveDemotivated = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveDemotivated", 50f, "Percentage Stamina reduction when not holding gold");
+            li_fulingLonginusPassiveDemotivated = config("Essence Fuling Modifiers", "li_fulingLonginusPassiveDemotivated", 50f, "Percentage Stamina reduction when not holding coins");
             // gjall
             li_gjallGjallarhornCD = config("Essence Gjall Modifiers", "li_gjallGjallarhornCD", 25f, "Cooldown");
             li_gjallGjallarhornSummonDuration = config("Essence Gjall Modifiers", "li_gjallGjallarhornSummonDuration", 70f, "Modifies the time before summons die");
@@ -839,6 +866,7 @@ namespace LackingImaginationV2
             li_greydwarfPebbleForestAnger = config("Essence Greydwarf Modifiers", "li_greydwarfPebbleForestAnger", 10f, "Modifies % Bonus Damage Forest creature do to you");
             // elder
             li_elderAncientAweCD = config("Essence Elder Modifiers", "li_elderAncientAweCD", 30f, "Cooldown");
+            li_elderAncientAweSED = config("Essence Elder Modifiers", "li_elderAncientAweSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
             li_elderAncientAwePassive = config("Essence Elder Modifiers", "li_elderAncientAwePassive", 3f, "Modifies the Passive regen multiplier");
             // blob
             li_blobFumesCD = config("Essence Blob Modifiers", "li_blobFumesCD", 10f, "Cooldown");
@@ -851,25 +879,28 @@ namespace LackingImaginationV2
             // abomination
             li_abominationBaneCD = config("Essence Abomination Modifiers", "li_abominationBaneCD", 60f, "Cooldown");
             li_abominationBaneArmor = config("Essence Abomination Modifiers", "li_abominationBaneArmor", 30f, "Modifies bonus armor passive");
-            li_abominationBaneHealth = config("Essence Abomination Modifiers", "li_abominationBaneHealth", 5f, "Modifies % health reduction");
-            li_abominationBaneAllySpeed = config("Essence Abomination Modifiers", "li_abominationBaneAllySpeed", 1f, "Modifies creature speed");
-            li_abominationBaneAllyHealth = config("Essence Abomination Modifiers", "li_abominationBaneAllyHealth", 1f, "Modifies creature health");
+            li_abominationBaneHealth = config("Essence Abomination Modifiers", "li_abominationBaneHealth", 5f, new ConfigDescription("Modifies % health reduction", new AcceptableValueRange<float>(0f, 100f)));
+            li_abominationBaneAllySpeed = config("Essence Abomination Modifiers", "li_abominationBaneAllySpeed", 4f, "Modifies creature speed");
+            li_abominationBaneAllyHealth = config("Essence Abomination Modifiers", "li_abominationBaneAllyHealth", 3f, "Modifies creature health");
             li_abominationBaneAllyAttack = config("Essence Abomination Modifiers", "li_abominationBaneAllyAttack", 1f, "Modifies creature attack");
             //wraith
             li_wraithTwinSoulsCD = config("Essence Wraith Modifiers", "li_wraithTwinSoulsCD", 70f, "Cooldown");
+            li_wraithTwinSoulsSED = config("Essence Wraith Modifiers", "li_wraithTwinSoulsSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
             li_wraithTwinSoulsArmor = config("Essence Wraith Modifiers", "li_wraithTwinSoulsArmor", 10f, "Modifies armor reduction amount");
             li_wraithTwinSoulsPassive = config("Essence Wraith Modifiers", "li_wraithTwinSoulsPassive", 15f, "Modifies the % weapon spirit damage passive");
-            li_wraithTwinSoulsAllySpeed = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllySpeed", 1f, "Modifies creature speed");
-            li_wraithTwinSoulsAllyHealth = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllyHealth", 1f, "Modifies creature health");
-            li_wraithTwinSoulsAllyAttack = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllyAttack", 1f, "Modifies creature attack");
+            li_wraithTwinSoulsAllySpeed = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllySpeed", 4f, "Modifies creature speed");
+            li_wraithTwinSoulsAllyHealth = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllyHealth", 2f, "Modifies creature health");
+            li_wraithTwinSoulsAllyAttack = config("Essence Abomination Modifiers", "li_wraithTwinSoulsAllyAttack", 2f, "Modifies creature attack");
             //draugr
             li_draugrForgottenCD = config("Essence Draugr Modifiers", "li_draugrForgottenCD", 60f, "Cooldown");
-            li_draugrForgottenRot = config("Essence Draugr Modifiers", "li_draugrForgottenRot", 5f, "Modifies % dmg reduction system");
+            li_draugrForgottenSED = config("Essence Draugr Modifiers", "li_draugrForgottenSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_draugrForgottenRot = config("Essence Draugr Modifiers", "li_draugrForgottenRot", 5f, new ConfigDescription("Modifies % dmg reduction system", new AcceptableValueRange<float>(0f, 100f)));
             li_draugrForgottenPassiveCarry = config("Essence Draugr Modifiers", "li_draugrForgottenPassiveCarry", 60f, "Modifies the bonus Carry Weight Passive");
             li_draugrForgottenActive = config("Essence Draugr Modifiers", "li_draugrForgottenActive", 10f, "Modifies % bonus dmg active to Axes and Bows");
             //draugr elite
             li_draugreliteFallenHeroCD = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroCD", 60f, "Cooldown");
-            li_draugreliteFallenHeroRot = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroRot", 10f, "Modifies % dmg reduction system");
+            li_draugreliteFallenHeroSED = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_draugreliteFallenHeroRot = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroRot", 10f, new ConfigDescription("Modifies % dmg reduction system", new AcceptableValueRange<float>(0f, 100f)));
             li_draugreliteFallenHeroPassiveCarry = config("Essence Draugr Elite Modifiers", "li_draugreliteFallenHeroPassiveCarry", 70f, "Modifies the bonus Carry Weight Passive");
             lidraugreliteFallenHeroActive = config("Essence Draugr Elite Modifiers", "lidraugreliteFallenHeroActive", 20f, "Modifies % bonus dmg active to Swords and Polearms");
             //geirrhafa
@@ -883,15 +914,16 @@ namespace LackingImaginationV2
             li_cultistLoneSunPassive = config("Essence Cultist Modifiers", "li_cultistLoneSunPassive", 15f, "Modifies the fire damage passive for Weapons");
             //hare
             li_hareLuckyFootCD = config("Essence Hare Modifiers", "li_hareLuckyFootCD", 40f, "Cooldown");
-            li_hareLuckyFoot = config("Essence Hare Modifiers", "li_hareLuckyFoot", 100f, "Modifies Bonus Speed Active(2x * %)");
-            li_hareLuckyFootArmor = config("Essence Hare Modifiers", "li_hareLuckyFootArmor", 10f, "Modifies % Armor Reduction passive");
+            li_hareLuckyFootSED = config("Essence Hare Modifiers", "li_hareLuckyFootSED", 50f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_hareLuckyFoot = config("Essence Hare Modifiers", "li_hareLuckyFoot", 1.5f, "Modifies Bonus Speed Active");
+            li_hareLuckyFootArmor = config("Essence Hare Modifiers", "li_hareLuckyFootArmor", 10f, new ConfigDescription("Modifies % Armor Reduction passive", new AcceptableValueRange<float>(0f, 100f)));
             //serpent
             li_seaserpentSeaKingCD = config("Essence Sea Serpent Modifiers", "li_seaserpentSeaKingCD", 30f, "Cooldown");
             li_seaserpentSeaKingProjectile = config("Essence Sea Serpent Modifiers", "li_seaserpentSeaKingProjectile", 20f, "Modifies the % weapon Damage of the Sea King Projectile");
             //tick
             li_tickBloodWellCD = config("Essence Tick Modifiers", "li_tickBloodWellCD", 10f, "Cooldown");
             li_tickBloodWellLifeSteal = config("Essence Tick Modifiers", "li_tickBloodWellLifeSteal", 10f, "Modifies % Lifesteal Passive");
-            li_tickBloodWellArmor = config("Essence Tick Modifiers", "li_tickBloodWellArmor", 25f, "Modifies Bonus Armor Reduction passive");
+            li_tickBloodWellArmor = config("Essence Tick Modifiers", "li_tickBloodWellArmor", 25f, "Modifies Armor Reduction passive");
             li_tickBloodWellStackCap = config("Essence Tick Modifiers", "li_tickBloodWellStackCap", 500f, "Modifies the maximum stored damage");
             //moder
             li_moderDraconicFrostCD = config("Essence Moder Modifiers", "li_moderDraconicFrostCD", 30f, "Cooldown");
@@ -900,6 +932,7 @@ namespace LackingImaginationV2
             li_moderDraconicFrostDragonBreath = config("Essence Moder Modifiers", "li_moderDraconicFrostDragonBreath", 200f, "Modifies the damage of Draconic Frost Dragon Breath");
             //boar
             li_boarRecklessChargeCD = config("Essence Boar Modifiers", "li_boarRecklessChargeCD", 30f, "Cooldown");
+            li_boarRecklessChargeSED = config("Essence Boar Modifiers", "li_boarRecklessChargeSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
             li_boarRecklessCharge = config("Essence Boar Modifiers", "li_boarRecklessCharge", 30f, "Modifies Active Damage");
             li_boarRecklessChargePassive = config("Essence Boar Modifiers", "li_boarRecklessChargePassive", 30f, "Modifies bonus stamina passive");
             //stone golem
@@ -910,9 +943,15 @@ namespace LackingImaginationV2
             li_yagluthCulminationCD = config("Essence Yagluth Modifiers", "li_yagluthCulminationCD", 20f, "Cooldown");
             li_yagluthCulminationStaticCap = config("Essence Yagluth Modifiers", "li_yagluthCulminationStaticCap", 100f, "Modifies maximum static build up before punishment");
             li_yagluthCulmination = config("Essence Yagluth Modifiers", "li_yagluthCulmination", 1f, "Modifies active damage multipliers");
+            //ulv
+            li_ulvTerritorialSlumberCD = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberCD", 30f, "Cooldown");
+            li_ulvTerritorialSlumberSED = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_ulvTerritorialSlumberComfort = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberComfort", 5f, "Bonus comfort passive");
+            li_ulvTerritorialSlumberStamina = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberStamina", 5f, new ConfigDescription("Percentage of Comfort that stamina is multiplied by", new AcceptableValueRange<float>(0f, 100f)));
+            li_ulvTerritorialSlumberSummonDuration = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberSummonDuration", 45f, "Modifies the time before summons die");
+            li_ulvTerritorialSlumberSummonHealth = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberSummonHealth", 1f, "Modifies creature health");
 
             
-
 
 
 
@@ -973,7 +1012,23 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargeCD", li_boarRecklessChargeCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_stonegolemCoreOverdriveCD", li_stonegolemCoreOverdriveCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulminationCD", li_yagluthCulminationCD.Value);
-        
+            LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberCD", li_ulvTerritorialSlumberCD.Value);
+            
+            
+            //Status Duration
+            LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHasteSED", li_deerHorizonHasteSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_fenringMoonlitLeapSED", li_fenringMoonlitLeapSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wolfRavenousHungerSED", li_wolfRavenousHungerSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_deathsquitoRelentlessSED", li_deathsquitoRelentlessSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_surtlingHarbingerSED", li_surtlingHarbingerSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_fulingberserkerGiantizationSED", li_fulingberserkerGiantizationSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_elderAncientAweSED", li_elderAncientAweSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_wraithTwinSoulsSED", li_wraithTwinSoulsSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugrForgottenSED", li_draugrForgottenSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_draugreliteFallenHeroSED", li_draugreliteFallenHeroSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFootSED", li_hareLuckyFootSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargeSED", li_boarRecklessChargeSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSED", li_ulvTerritorialSlumberSED.Value);
             
             
             // Essence
@@ -994,6 +1049,7 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_fulingshamanRitualPassiveEitr", li_fulingshamanRitualPassiveEitr.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_fulingshamanRitualPassiveCarry", li_fulingshamanRitualPassiveCarry.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_deathsquitoRelentlessHoming", li_deathsquitoRelentlessHoming.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_deathsquitoRelentlessHomingRange", li_deathsquitoRelentlessHomingRange.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_deathsquitoRelentlessPassive", li_deathsquitoRelentlessPassive.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_surtlingHarbingerCharges", li_surtlingHarbingerCharges.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_surtlingHarbingerBurn", li_surtlingHarbingerBurn.Value);
@@ -1071,19 +1127,21 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_stonegolemCoreOverdriveArmor", li_stonegolemCoreOverdriveArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulminationStaticCap", li_yagluthCulminationStaticCap.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulmination", li_yagluthCulmination.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberComfort", li_ulvTerritorialSlumberComfort.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberStamina", li_ulvTerritorialSlumberStamina.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSummonDuration", li_ulvTerritorialSlumberSummonDuration.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSummonHealth", li_ulvTerritorialSlumberSummonHealth.Value);
+            
+            
+            
             
             
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
-            _ = ConfigSync.AddConfigEntry(Ability1_Hotkey_Combo);
             _ = ConfigSync.AddConfigEntry(Ability2_Hotkey);
-            _ = ConfigSync.AddConfigEntry(Ability2_Hotkey_Combo);
             _ = ConfigSync.AddConfigEntry(Ability3_Hotkey);
-            _ = ConfigSync.AddConfigEntry(Ability3_Hotkey_Combo);
             _ = ConfigSync.AddConfigEntry(Ability4_Hotkey);
-            _ = ConfigSync.AddConfigEntry(Ability4_Hotkey_Combo);
             _ = ConfigSync.AddConfigEntry(Ability5_Hotkey);
-            _ = ConfigSync.AddConfigEntry(Ability5_Hotkey_Combo);
-            
+
             _ = ConfigSync.AddConfigEntry(li_cooldownMultiplier);
             _ = ConfigSync.AddConfigEntry(showAbilityIcons);
             _ = ConfigSync.AddConfigEntry(iconAlignment);
@@ -1095,8 +1153,8 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_draugrSynergyRot);
 
             
-            
-             _ = ConfigSync.AddConfigEntry(li_eikthyrBlitzCD);
+            //Cooldowns
+            _ = ConfigSync.AddConfigEntry(li_eikthyrBlitzCD);
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHasteCD);
             _ = ConfigSync.AddConfigEntry(li_fenringMoonlitLeapCD);
             _ = ConfigSync.AddConfigEntry(li_loxWildTremorCD);
@@ -1131,9 +1189,26 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_boarRecklessChargeCD);
             _ = ConfigSync.AddConfigEntry(li_stonegolemCoreOverdriveCD);
             _ = ConfigSync.AddConfigEntry(li_yagluthCulminationCD);
+            _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberCD);
             
             
+            //Status Duration
+            _ = ConfigSync.AddConfigEntry(li_deerHorizonHasteSED);
+            _ = ConfigSync.AddConfigEntry(li_fenringMoonlitLeapSED);
+            _ = ConfigSync.AddConfigEntry(li_wolfRavenousHungerSED);
+            _ = ConfigSync.AddConfigEntry(li_deathsquitoRelentlessSED);
+            _ = ConfigSync.AddConfigEntry(li_surtlingHarbingerSED);
+            _ = ConfigSync.AddConfigEntry(li_fulingberserkerGiantizationSED);
+            _ = ConfigSync.AddConfigEntry(li_elderAncientAweSED);
+            _ = ConfigSync.AddConfigEntry(li_wraithTwinSoulsSED);
+            _ = ConfigSync.AddConfigEntry(li_draugrForgottenSED);
+            _ = ConfigSync.AddConfigEntry(li_draugreliteFallenHeroSED);
+            _ = ConfigSync.AddConfigEntry(li_hareLuckyFootSED);
+            _ = ConfigSync.AddConfigEntry(li_boarRecklessChargeSED);
+            _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSED);
             
+            
+            // Essence
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHaste);
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHastePassive);
             _ = ConfigSync.AddConfigEntry(li_eikthyrBlitzPassive);
@@ -1151,6 +1226,7 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_fulingshamanRitualPassiveEitr);
             _ = ConfigSync.AddConfigEntry(li_fulingshamanRitualPassiveCarry);
             _ = ConfigSync.AddConfigEntry(li_deathsquitoRelentlessHoming);
+            _ = ConfigSync.AddConfigEntry(li_deathsquitoRelentlessHomingRange);
             _ = ConfigSync.AddConfigEntry(li_deathsquitoRelentlessPassive);
             _ = ConfigSync.AddConfigEntry(li_surtlingHarbingerCharges);
             _ = ConfigSync.AddConfigEntry(li_surtlingHarbingerBurn);
@@ -1228,7 +1304,10 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_stonegolemCoreOverdriveArmor);
             _ = ConfigSync.AddConfigEntry(li_yagluthCulminationStaticCap);
             _ = ConfigSync.AddConfigEntry(li_yagluthCulmination);     
-            
+            _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberComfort);
+            _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberStamina);
+            _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSummonDuration);
+            _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSummonHealth); 
             
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -1624,11 +1703,7 @@ namespace LackingImaginationV2
                                     else
                                     {
                                         component.color = Color.white;
-                                        iconText = Ability1_Hotkey.Value;
-                                        if (LackingImaginationV2Plugin.Ability1_Hotkey_Combo.Value != "")
-                                        {
-                                            iconText += " + " + Ability1_Hotkey_Combo.Value;
-                                        }
+                                        iconText = Ability1_Hotkey.Value.ToString();
                                     }
                                 }
                                 else if (j == 1)
@@ -1645,11 +1720,7 @@ namespace LackingImaginationV2
                                     else
                                     {
                                         component.color = Color.white;
-                                        iconText = Ability2_Hotkey.Value;
-                                        if (LackingImaginationV2Plugin.Ability2_Hotkey_Combo.Value != "")
-                                        {
-                                            iconText += " + " + Ability2_Hotkey_Combo.Value;
-                                        }
+                                        iconText = Ability2_Hotkey.Value.ToString();
                                     }
                                 }
                                 else if (j == 2)
@@ -1665,11 +1736,7 @@ namespace LackingImaginationV2
                                     else
                                     {
                                         component.color = Color.white;
-                                        iconText = Ability3_Hotkey.Value;
-                                        if (LackingImaginationV2Plugin.Ability3_Hotkey_Combo.Value != "")
-                                        {
-                                            iconText += " + " + Ability3_Hotkey_Combo.Value;
-                                        }
+                                        iconText = Ability3_Hotkey.Value.ToString();
                                     }
                                 }
                                 else if (j == 3)
@@ -1685,11 +1752,7 @@ namespace LackingImaginationV2
                                     else
                                     {
                                         component.color = Color.white;
-                                        iconText = Ability4_Hotkey.Value;
-                                        if (LackingImaginationV2Plugin.Ability4_Hotkey_Combo.Value != "")
-                                        {
-                                            iconText += " + " + Ability4_Hotkey_Combo.Value;
-                                        }
+                                        iconText = Ability4_Hotkey.Value.ToString();
                                     }
                                 }
                                 else if (j == 4)
@@ -1705,11 +1768,7 @@ namespace LackingImaginationV2
                                     else
                                     {
                                         component.color = Color.white;
-                                        iconText = Ability5_Hotkey.Value;
-                                        if (LackingImaginationV2Plugin.Ability5_Hotkey_Combo.Value != "")
-                                        {
-                                            iconText += " + " + Ability5_Hotkey_Combo.Value;
-                                        }
+                                        iconText = Ability5_Hotkey.Value.ToString();
                                     }
                                 }
                                 //rectTransform2.GetComponentInChildren<Text>().text = Localization.instance.Localize((Ability1.Name).ToString());

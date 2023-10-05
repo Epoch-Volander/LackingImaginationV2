@@ -187,7 +187,7 @@ namespace LackingImaginationV2
                             }
                             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_BloodHit"), enemy.GetCenterPoint(), Quaternion.identity);
                             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_hurt"), enemy.transform.position, Quaternion.identity);
-                            UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_RavenousHunger, point, Quaternion.identity);
+                            UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_RavenousHunger, player.transform.position + player.transform.up * 2.2f, Quaternion.identity);
                             HitData hitData = new HitData();
                             hitData.m_damage.m_slash = (enemy.GetMaxHealth() * LackingImaginationGlobal.c_wolfRavenousHunger);
                             hitData.m_point = point;

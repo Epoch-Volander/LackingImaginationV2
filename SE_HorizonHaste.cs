@@ -15,9 +15,8 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_HorizonHaste")]
-        public static float m_baseTTL = LackingImaginationUtilities.xDeerCooldownTime -5f;
-        private float speedDuration = LackingImaginationUtilities.xDeerCooldownTime -5f;
-        private float speedAmount = 1.5f;
+        public static float m_baseTTL = LackingImaginationUtilities.xDeerCooldownTime * LackingImaginationGlobal.c_deerHorizonHasteSED;
+        private float speedDuration = LackingImaginationUtilities.xDeerCooldownTime * LackingImaginationGlobal.c_deerHorizonHasteSED;
         private float m_timer = 1f;
         
         public SE_HorizonHaste()
@@ -39,7 +38,7 @@ namespace LackingImaginationV2
             // else 
             if(speedDuration > 0)
             {
-                speed *= speedAmount * LackingImaginationGlobal.c_deerHorizonHaste;
+                speed *= LackingImaginationGlobal.c_deerHorizonHaste;
             }
             base.ModifySpeed(baseSpeed, ref speed);
         }

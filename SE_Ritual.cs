@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_Ritual")]
-        public static float m_baseTTL = 30f;
+        public static float m_baseTTL = 240f;
 
         public SE_Ritual()
         {

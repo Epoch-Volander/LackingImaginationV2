@@ -55,8 +55,8 @@ namespace LackingImaginationV2
                 baby.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                 baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
                 baby.GetComponent<Humanoid>().m_name = "Bane";
-                baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * 5f * LackingImaginationGlobal.c_abominationBaneAllyHealth);
-                baby.GetComponent<Humanoid>().m_speed = 4f * LackingImaginationGlobal.c_abominationBaneAllySpeed;
+                baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_abominationBaneAllyHealth);
+                baby.GetComponent<Humanoid>().m_speed = LackingImaginationGlobal.c_abominationBaneAllySpeed;
                 baby.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                 baby.GetComponent<MonsterAI>().m_consumeItems = new List<ItemDrop>() {ZNetScene.instance.GetPrefab("Wood").GetComponent<ItemDrop>()};
                 baby.GetComponent<MonsterAI>().m_consumeRange = 2f;

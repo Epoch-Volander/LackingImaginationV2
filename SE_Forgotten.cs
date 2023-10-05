@@ -12,7 +12,7 @@ namespace LackingImaginationV2
     {
         
         public static Sprite AbilityIcon;
-        public static float m_baseTTL = LackingImaginationUtilities.xDraugrCooldownTime -15f;
+        public static float m_baseTTL = LackingImaginationUtilities.xDraugrCooldownTime * LackingImaginationGlobal.c_draugrForgottenSED;
         
         [Header("SE_Forgotten")]
         public static float bonusDmg = LackingImaginationGlobal.c_draugrForgottenActive + 1f;
