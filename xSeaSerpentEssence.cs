@@ -9,6 +9,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using System.Threading;
+using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -222,7 +223,7 @@ namespace LackingImaginationV2
                         {
                             string iconText = nameCravings[FishName(statusEffect1.m_icon)];
                             RectTransform statusEffect2 = __instance.m_statusEffects[index];
-                            Text component2 = statusEffect2.Find("TimeText").GetComponent<Text>();
+                            TMP_Text component2 = statusEffect2.Find("TimeText").GetComponent<TMP_Text>();
                             if (!string.IsNullOrEmpty(iconText))
                             {
                                 component2.gameObject.SetActive(value: true);

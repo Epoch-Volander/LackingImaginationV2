@@ -458,7 +458,7 @@ public class Item
 			foreach (Item item in registeredItems.Where(i => i.configurability != Configurability.Disabled))
 			{
 				string nameKey = item.Prefab.GetComponent<ItemDrop>().m_itemData.m_shared.m_name;
-				string englishName = new Regex("""['\["\]]""").Replace(english.Localize(nameKey), "").Trim();
+				string englishName = new Regex(@"[=\n\t\\""\'\[\]]*").Replace(english.Localize(nameKey), "").Trim();
 				string localizedName = Localization.instance.Localize(nameKey).Trim();
 
 				int order = 0;

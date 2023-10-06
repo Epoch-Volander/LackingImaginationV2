@@ -27,6 +27,7 @@ using ItemDataManager;
 using System.Threading;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using UnityEngine.Animations;
@@ -306,10 +307,6 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_draugreliteFallenHeroSED;
         public static ConfigEntry<float> li_hareLuckyFootSED;
         public static ConfigEntry<float> li_boarRecklessChargeSED;
-     
-        
-        
-        
         public static ConfigEntry<float> li_ulvTerritorialSlumberSED;
         
         
@@ -420,6 +417,9 @@ namespace LackingImaginationV2
 
         // Prefabs type 1 //Pulled from in game
         public static GameObject fx_Harbinger;
+        
+        //Weapons
+        public static GameObject GO_VulcanSword;
         
         //Prefabs type 2 //Pulled from assets
         public static GameObject fx_Giantization;
@@ -694,7 +694,14 @@ namespace LackingImaginationV2
             // PrefabManager.RegisterPrefab("essence_bundle_2","TrophyEikthyrEssence");
             // MaterialReplacer.RegisterGameObjectForShaderSwap(ZNetScene.instance.GetPrefab("TrophyEikthyrEssence"), MaterialReplacer.ShaderType.CustomCreature);
         
+            Item VulkanB = new Item("essence_bundle_2", "VulcanBroken");
+            VulkanB.Name.English("Broken Vulcan"); // You can use this to fix the display name in code
+            VulkanB.Description.English("The flame is a mere fraction of Brenna's anguish");
+
             
+            
+
+
             //Prefabs 2
             fx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "RotVariant1");
             fx_Bash = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "FireVariantRed");
@@ -1370,83 +1377,110 @@ namespace LackingImaginationV2
                 {
                     if (transform_harbinger.name == "gas_flame")
                     {
-                         LackingImaginationV2Plugin.fx_Harbinger = transform_harbinger.gameObject;
+                        LackingImaginationV2Plugin.fx_Harbinger = transform_harbinger.gameObject;
                         break;
                     }
+                }
+               
+                //Brenna Sword
+                GO_VulcanSword = ZNetScene.instance.GetPrefab("VulcanBroken");
+                GameObject krom = ZNetScene.instance.GetPrefab("THSwordKrom");
+                ItemDrop.ItemData dataTOReplace = GO_VulcanSword.GetComponent<ItemDrop>().m_itemData;
+                ItemDrop.ItemData newData = krom.GetComponent<ItemDrop>().m_itemData;
+                if (dataTOReplace != null && newData != null)
+                {
+                    dataTOReplace.m_shared.m_useDurability = false;
+                    dataTOReplace.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
+                    dataTOReplace.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
+                    dataTOReplace.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
+                    dataTOReplace.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                }
+                GameObject fire = ZNetScene.instance.GetPrefab("skeleton_sword_hildir");
+                Transform childToReplace = GO_VulcanSword.transform.Find("attach").transform.Find("KromV");
+                Transform newChild = fire.transform.Find("attach").transform.Find("Krom");
+                if (childToReplace != null && newChild != null)
+                {
+                    childToReplace.GetComponent<MeshRenderer>().materials = newChild.GetComponent<MeshRenderer>().materials;
+                    newChild.transform.Find("fx_Torch_Carried").SetParent(childToReplace);
+                }
+                Transform fxTorchCarried = childToReplace.transform.Find("fx_Torch_Carried");
+                fxTorchCarried.localPosition = new Vector3(0f, 1f, 0f); // Example: Move it forward along the local Z-axis
+                
+                
+                
+                
+
+                creatureAnimatorGeirrhafa = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorGeirrhafa.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Frost AoE Spell Attack 3 Burst") // Replace with the actual name of the clip you're looking for.
+                    {
+                        creatureAnimationClipGeirrhafaIceNova = clip;
+                        // break; // Exit the loop once you've found the clip.
+                    }
+                    if (clip.name == "Flame Spell Attack") // Replace with the actual name of the clip you're looking for.
+                    {
+                        creatureAnimationClipCultistSpray = clip;
+                    }
+                    if (creatureAnimationClipGeirrhafaIceNova != null && creatureAnimationClipCultistSpray != null)
+                    {
+                        // LogWarning($"T1.");
+                        break;
+                    }
+                }
+                // if (creatureAnimationClipGeirrhafaIceNova != null)
+                // {
+                //     LogWarning($"T1.");
+                // }
+                creatureAnimatorElder = ZNetScene.instance.GetPrefab("gd_king").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorElder.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Standing 1H Magic Attack 03") 
+                    {
+                        creatureAnimationClipElderSummon = clip;
+                        break; 
+                    }
+                }
+                creatureAnimatorFenring = ZNetScene.instance.GetPrefab("Fenring").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorFenring.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "LeapAttack") 
+                    {
+                        creatureAnimationClipFenringLeapAttack = clip;
+                        break; 
+                    }
+                }
+                creatureAnimatorGreyShaman = ZNetScene.instance.GetPrefab("Greydwarf_Shaman").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorGreyShaman.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Standing 1H Cast Spell 01") 
+                    {
+                        creatureAnimationClipGreyShamanHeal = clip;
+                        break; 
+                    }
+                }
+                creatureAnimatorHaldor = ZNetScene.instance.GetPrefab("Haldor").gameObject.transform.Find("HaldorTheTrader").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorHaldor.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Greet") 
+                    {
+                        creatureAnimationClipHaldorGreet = clip;
+                        break; 
+                    }
+                }
+                creatureAnimatorPlayer = ZNetScene.instance.GetPrefab("Player").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorPlayer.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Cower") creatureAnimationClipPlayerEmoteCower = clip;
                     
-                    creatureAnimatorGeirrhafa = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    foreach (AnimationClip clip in creatureAnimatorGeirrhafa.runtimeAnimatorController.animationClips)
-                    {
-                        if (clip.name == "Frost AoE Spell Attack 3 Burst") // Replace with the actual name of the clip you're looking for.
-                        {
-                            creatureAnimationClipGeirrhafaIceNova = clip;
-                            // break; // Exit the loop once you've found the clip.
-                        }
-                        if (clip.name == "Flame Spell Attack") // Replace with the actual name of the clip you're looking for.
-                        {
-                            creatureAnimationClipCultistSpray = clip;
-                        }
-                        if (creatureAnimationClipGeirrhafaIceNova != null && creatureAnimationClipCultistSpray != null)
-                        {
-                            // LogWarning($"T1.");
-                            break;
-                        }
-                    }
-                    // if (creatureAnimationClipGeirrhafaIceNova != null)
-                    // {
-                    //     LogWarning($"T1.");
-                    // }
-                    creatureAnimatorElder = ZNetScene.instance.GetPrefab("gd_king").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    foreach (AnimationClip clip in creatureAnimatorElder.runtimeAnimatorController.animationClips)
-                    {
-                        if (clip.name == "Standing 1H Magic Attack 03") 
-                        {
-                            creatureAnimationClipElderSummon = clip;
-                            break; 
-                        }
-                    }
-                    creatureAnimatorFenring = ZNetScene.instance.GetPrefab("Fenring").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    foreach (AnimationClip clip in creatureAnimatorFenring.runtimeAnimatorController.animationClips)
-                    {
-                        if (clip.name == "LeapAttack") 
-                        {
-                            creatureAnimationClipFenringLeapAttack = clip;
-                            break; 
-                        }
-                    }
-                    creatureAnimatorGreyShaman = ZNetScene.instance.GetPrefab("Greydwarf_Shaman").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    foreach (AnimationClip clip in creatureAnimatorGreyShaman.runtimeAnimatorController.animationClips)
-                    {
-                        if (clip.name == "Standing 1H Cast Spell 01") 
-                        {
-                            creatureAnimationClipGreyShamanHeal = clip;
-                            break; 
-                        }
-                    }
-                    creatureAnimatorHaldor = ZNetScene.instance.GetPrefab("Haldor").gameObject.transform.Find("HaldorTheTrader").GetComponent<Animator>();
-                    foreach (AnimationClip clip in creatureAnimatorHaldor.runtimeAnimatorController.animationClips)
-                    {
-                        if (clip.name == "Greet") 
-                        {
-                            creatureAnimationClipHaldorGreet = clip;
-                            break; 
-                        }
-                    }
-                    creatureAnimatorPlayer = ZNetScene.instance.GetPrefab("Player").gameObject.transform.Find("Visual").GetComponent<Animator>();
-                    foreach (AnimationClip clip in creatureAnimatorPlayer.runtimeAnimatorController.animationClips)
-                    {
-                        if (clip.name == "Cower") creatureAnimationClipPlayerEmoteCower = clip;
-                        
-                        if (clip.name == "Point") creatureAnimationClipPlayerEmotePoint = clip;
-                        
-                        if (clip.name == "MaceAltAttack") creatureAnimationClipPlayerMace2 = clip;
-                        
-                        if (creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null && creatureAnimationClipPlayerMace2 != null)
-                        {
-                            break;
-                        }
-                    }
+                    if (clip.name == "Point") creatureAnimationClipPlayerEmotePoint = clip;
                     
+                    if (clip.name == "MaceAltAttack") creatureAnimationClipPlayerMace2 = clip;
+                    
+                    if (creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null && creatureAnimationClipPlayerMace2 != null)
+                    {
+                        break;
+                    }
                 }
             }
         }
@@ -1664,7 +1698,7 @@ namespace LackingImaginationV2
         
 
         
-        [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
+        [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
         public static class SkillIcon_Patch
         {
             public static void Postfix(Hud __instance)
@@ -1772,7 +1806,7 @@ namespace LackingImaginationV2
                                     }
                                 }
                                 //rectTransform2.GetComponentInChildren<Text>().text = Localization.instance.Localize((Ability1.Name).ToString());
-                                Text component2 = rectTransform2.Find("TimeText").GetComponent<Text>();
+                                TMP_Text component2 = rectTransform2.Find("TimeText").GetComponent<TMP_Text>();
                                 if (!string.IsNullOrEmpty(iconText))
                                 {
                                     component2.gameObject.SetActive(value: true);
@@ -2839,10 +2873,10 @@ namespace LackingImaginationV2
 
         private class ConfigurationManagerAttributes
         {
-            [UsedImplicitly] public int? Order;
-            [UsedImplicitly] public bool? Browsable;
-            [UsedImplicitly] public string? Category;
-            [UsedImplicitly] public Action<ConfigEntryBase>? CustomDrawer;
+            [UsedImplicitly] public int? Order = null!;
+            [UsedImplicitly] public bool? Browsable = null!;
+            [UsedImplicitly] public string? Category = null!;
+            [UsedImplicitly] public Action<ConfigEntryBase>? CustomDrawer = null!;
         }
 
         class AcceptableShortcuts : AcceptableValueBase
@@ -2855,7 +2889,7 @@ namespace LackingImaginationV2
             public override bool IsValid(object value) => true;
 
             public override string ToDescriptionString() =>
-                "# Acceptable values: " + string.Join(", ", KeyboardShortcut.AllKeyCodes);
+                "# Acceptable values: " + string.Join(", ", UnityInput.Current.SupportedKeyCodes);
         }
 
         #endregion

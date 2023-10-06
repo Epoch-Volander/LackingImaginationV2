@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using HarmonyLib;
 using System.IO;
+using TMPro;
 using UnityEngine.UI;
 
 
@@ -105,9 +106,7 @@ namespace LackingImaginationV2
                     RectTransform rectTransform = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
                     rectTransform.gameObject.SetActive(value: true);
                     rectTransform.gameObject.transform.localScale *= 1.35f;
-                    rectTransform.GetComponentInChildren<Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
-                    rectTransform.GetComponentInChildren<Text>().fontSize += 3;
-                    // rectTransform.GetComponentInChildren<Text>().resizeTextForBestFit = false;
+                    rectTransform.GetComponentInChildren<TMP_Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
                     LackingImaginationV2Plugin.abilitiesStatus[i] = rectTransform;
                 }
                 pos.x += xStep;
@@ -696,7 +695,14 @@ namespace LackingImaginationV2
                  return Math.Max(LackingImaginationGlobal.c_ulvTerritorialSlumberCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;//adjust
              }
          }  
-         
+         public static float xBrennaCooldownTime
+         {
+             get
+             {
+                 // return Math.Max(LackingImaginationGlobal.c_ulvTerritorialSlumberCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
+                 return 3f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+             }
+         }  
         
          
          
@@ -721,7 +727,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp())
+                else if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed())
                 {
                     return true;
                 }
@@ -738,7 +744,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsUp())
+                else if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed())
                 {
                     return true;
                 }
@@ -755,7 +761,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsUp())
+                else if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed())
                 {
                     return true;
                 }
@@ -771,7 +777,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsUp())
+                else if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed())
                 {
                     return true;
                 }
@@ -787,7 +793,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsUp())
+                else if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed())
                 {
                     return true;
                 }

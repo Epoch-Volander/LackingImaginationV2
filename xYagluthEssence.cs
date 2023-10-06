@@ -10,6 +10,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using System.Threading;
+using TMPro;
 using UnityEngine.UI;
 
 
@@ -335,7 +336,7 @@ namespace LackingImaginationV2
                     if (statusEffect1.name == "SE_Culmination")
                     {
                         RectTransform statusEffect2 = __instance.m_statusEffects[index];
-                        Text component2 = statusEffect2.Find("TimeText").GetComponent<Text>();
+                        TMP_Text component2 = statusEffect2.Find("TimeText").GetComponent<TMP_Text>();
                         if (!string.IsNullOrEmpty(iconText))
                         {
                             component2.gameObject.SetActive(value: true);

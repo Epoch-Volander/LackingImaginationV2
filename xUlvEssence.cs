@@ -170,7 +170,7 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Ulv_GetTotalFoodValue_Patch
         {
-            [HarmonyPriority(Priority.High)]
+            [HarmonyPriority(Priority.VeryLow)]
             public static void Postfix(ref float stamina, Player __instance)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_ULV_essence"))

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine.Internal;
 using UnityEngine.Scripting;
@@ -73,7 +74,7 @@ namespace LackingImaginationV2
                 {
                     var element = __instance.m_elements[i];
     
-                    var bindingText = element.m_go.transform.Find("binding").GetComponent<Text>();
+                    var bindingText = element.m_go.transform.Find("binding").GetComponent<TMP_Text>();
                     bindingText.enabled = true;
                     
                     //bindingText.horizontalOverflow = HorizontalWrapMode.Overflow;

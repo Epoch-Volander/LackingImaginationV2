@@ -9,6 +9,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using System.Threading;
+using TMPro;
 using UnityEngine.UI;
 
 
@@ -155,7 +156,7 @@ namespace LackingImaginationV2
                     if (statusEffect1.name == "SE_GolemCore")
                     {
                         RectTransform statusEffect2 = __instance.m_statusEffects[index];
-                        Text component2 = statusEffect2.Find("TimeText").GetComponent<Text>();
+                        TMP_Text component2 = statusEffect2.Find("TimeText").GetComponent<TMP_Text>();
                         if (!string.IsNullOrEmpty(iconText))
                         {
                             component2.gameObject.SetActive(value: true);
@@ -173,7 +174,7 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class StoneGolem_GetBodyArmor_Patch
         {
-            [HarmonyPriority(Priority.High)]
+            [HarmonyPriority(Priority.VeryLow)]
             public static void Postfix(Player __instance, ref float __result)
             {
                 if (__instance.m_seman.HaveStatusEffect("SE_GolemCore"))

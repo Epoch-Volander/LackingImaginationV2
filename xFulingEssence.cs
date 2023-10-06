@@ -175,7 +175,7 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Fuling_GetTotalFoodValue_Patch
         {
-            [HarmonyPriority(Priority.High)]
+            [HarmonyPriority(Priority.VeryLow)]
             public static void Postfix(Player __instance, ref float stamina)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_goblin_essence"))

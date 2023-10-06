@@ -139,7 +139,6 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class GreydwarfBrute_GetTotalFoodValue_Patch
         {
-            [HarmonyPriority(Priority.High)]
             public static void Postfix(Player __instance, ref float hp)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_greydwarfbrute_essence"))

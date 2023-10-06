@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using HarmonyLib;
+
 
 namespace LackingImaginationV2
 {
@@ -11,13 +16,13 @@ namespace LackingImaginationV2
         {
             // Register version check call
             LackingImaginationV2Plugin.LackingImaginationV2Logger.LogDebug("Registering version RPC handler");
-            peer.m_rpc.Register($"{LackingImaginationV2Plugin.ModName}_VersionCheck",
-                new Action<ZRpc, ZPackage>(RpcHandlers.RPC_LackingImaginationV2_Version));
+            peer.m_rpc.Register($"{LackingImaginationV2Plugin.ModName}_VersionCheck", new Action<ZRpc, ZPackage>(RpcHandlers.RPC_LackingImaginationV2_Version));
 
             // Make calls to check versions
             LackingImaginationV2Plugin.LackingImaginationV2Logger.LogDebug("Invoking version check");
             ZPackage zpackage = new();
             zpackage.Write(LackingImaginationV2Plugin.ModVersion);
+            zpackage.Write(RpcHandlers.ComputeHashForMod().Replace("-", ""));
             peer.m_rpc.Invoke($"{LackingImaginationV2Plugin.ModName}_VersionCheck", zpackage);
         }
     }
@@ -29,8 +34,7 @@ namespace LackingImaginationV2
         {
             if (!__instance.IsServer() || RpcHandlers.ValidatedPeers.Contains(rpc)) return true;
             // Disconnect peer if they didn't send mod version at all
-            LackingImaginationV2Plugin.LackingImaginationV2Logger.LogWarning(
-                $"Peer ({rpc.m_socket.GetHostName()}) never sent version or couldn't due to previous disconnect, disconnecting");
+            LackingImaginationV2Plugin.LackingImaginationV2Logger.LogWarning($"Peer ({rpc.m_socket.GetHostName()}) never sent version or couldn't due to previous disconnect, disconnecting");
             rpc.Invoke("Error", 3);
             return false; // Prevent calling underlying method
         }
@@ -49,8 +53,8 @@ namespace LackingImaginationV2
         {
             if (__instance.m_connectionFailedPanel.activeSelf)
             {
-                __instance.m_connectionFailedError.resizeTextMaxSize = 25;
-                __instance.m_connectionFailedError.resizeTextMinSize = 15;
+                __instance.m_connectionFailedError.fontSizeMax = 25;
+                __instance.m_connectionFailedError.fontSizeMin = 15;
                 __instance.m_connectionFailedError.text += "\n" + LackingImaginationV2Plugin.ConnectionError;
             }
         }
@@ -76,17 +80,20 @@ namespace LackingImaginationV2
         public static void RPC_LackingImaginationV2_Version(ZRpc rpc, ZPackage pkg)
         {
             string? version = pkg.ReadString();
+            string? hash = pkg.ReadString();
+
+            var hashForAssembly = ComputeHashForMod().Replace("-", "");
             LackingImaginationV2Plugin.LackingImaginationV2Logger.LogInfo("Version check, local: " +
                                                                           LackingImaginationV2Plugin.ModVersion +
                                                                           ",  remote: " + version);
-            if (version != LackingImaginationV2Plugin.ModVersion)
+            if (hash != hashForAssembly || version != LackingImaginationV2Plugin.ModVersion)
             {
                 LackingImaginationV2Plugin.ConnectionError =
-                    $"{LackingImaginationV2Plugin.ModName} Installed: {LackingImaginationV2Plugin.ModVersion}\n Needed: {version}";
+                    $"{LackingImaginationV2Plugin.ModName} Installed: {LackingImaginationV2Plugin.ModVersion} {hashForAssembly}\n Needed: {version} {hash}";
                 if (!ZNet.instance.IsServer()) return;
                 // Different versions - force disconnect client from server
                 LackingImaginationV2Plugin.LackingImaginationV2Logger.LogWarning(
-                    $"Peer ({rpc.m_socket.GetHostName()}) has incompatible version, disconnecting");
+                    $"Peer ({rpc.m_socket.GetHostName()}) has incompatible version, disconnecting...");
                 rpc.Invoke("Error", 3);
             }
             else
@@ -105,6 +112,20 @@ namespace LackingImaginationV2
                     ValidatedPeers.Add(rpc);
                 }
             }
+        }
+        public static string ComputeHashForMod()
+        {
+            using SHA256 sha256Hash = SHA256.Create();
+            // ComputeHash - returns byte array  
+            byte[] bytes = sha256Hash.ComputeHash(File.ReadAllBytes(Assembly.GetExecutingAssembly().Location));
+            // Convert byte array to a string   
+            StringBuilder builder = new();
+            foreach (byte b in bytes)
+            {
+                builder.Append(b.ToString("X2"));
+            }
+
+            return builder.ToString();
         }
     }
 }

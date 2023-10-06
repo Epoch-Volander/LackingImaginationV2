@@ -261,7 +261,37 @@ namespace LackingImaginationV2
              return null; // Return null if the location is not found.
          }
          
-         
+         public static GameObject DeepCopy(GameObject original)
+         {
+             GameObject copy = GameObject.Instantiate(original);
+             copy.name = original.name;
+             Component[] components = original.GetComponents<Component>();
+             foreach (Component component in components)
+             {
+                 Type type = component.GetType();
+                 Component copyComponent = copy.GetComponent(type);
+                 if (copyComponent == null)
+                 {
+                     copyComponent = copy.AddComponent(type);
+                 }
+                 FieldInfo[] fields = type.GetFields();
+                 foreach (FieldInfo field in fields)
+                 {
+                     field.SetValue(copyComponent, field.GetValue(component));
+                 }
+             }
+             foreach (Transform child in original.transform)
+             {
+                 Transform childCopy = copy.transform.Find(child.name);
+                 if (childCopy == null)
+                 {
+                     childCopy = DeepCopy(child.gameObject).transform;
+                     childCopy.name = child.name;
+                     childCopy.parent = copy.transform;
+                 }
+             }
+             return copy;
+         }
          
          
          
