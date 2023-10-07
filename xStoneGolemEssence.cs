@@ -27,55 +27,61 @@ namespace LackingImaginationV2
         private static bool able = false;
         public static void Process_Input(Player player, int position)
         {
-            //Ability Cooldown
-            StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-            se_cd.m_ttl = LackingImaginationUtilities.xStoneGolemCooldownTime;
-            player.GetSEMan().AddStatusEffect(se_cd);
-            
-            LackingImaginationV2Plugin.Log($"xStoneGolemEssence Button was pressed");
-            
-            // Player.m_localPlayer.m_inventory.AddItem(ZNetScene.instance.GetPrefab("TrophyBoar").GetComponent<ItemDrop>().m_itemData);
-            // GameObject clubs = ZNetScene.instance.GetPrefab("StoneGolem_clubs");
-            // clubs.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-            // ItemDrop.ItemData spikes = clubs.GetComponent<ItemDrop>().m_itemData;
-            // spikes.m_shared.m_name = "$item_spike";
-            // spikes.m_shared.m_description = "$item_spike_description";
-            // spikes.m_shared.m_icons = ZNetScene.instance.GetPrefab("Torch").GetComponent<ItemDrop>().m_itemData.m_shared.m_icons;
-            // spikes.m_shared.m_itemType = ItemDrop.ItemData.ItemType.TwoHandedWeapon;
-            // spikes.m_shared.m_toolTier = 1;
-            // spikes.m_shared.m_damages.m_blunt = 20f;
-            // spikes.m_shared.m_dodgeable = true;
-            // spikes.m_shared.m_blockable = true;
-            // spikes.m_shared.m_attack.m_attackAnimation = "swing_longsword";
-            // spikes.m_shared.m_secondaryAttack.m_attackAnimation = "sword_secondary";
-            // spikes.m_shared.m_useDurability = true;
-            // spikes.m_shared.m_destroyBroken = false;
-            // clubs.GetComponent<ItemDrop>().m_itemData = spikes;
-            //
-            // Player.m_localPlayer.m_inventory.AddItem(clubs.GetComponent<ItemDrop>().m_itemData);
-
-
-
-            if(able)
+            if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
-                Aura.transform.parent = player.transform;
+                //Ability Cooldown
+                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                se_cd.m_ttl = LackingImaginationUtilities.xStoneGolemCooldownTime;
+                player.GetSEMan().AddStatusEffect(se_cd);
+            
+                LackingImaginationV2Plugin.Log($"xStoneGolemEssence Button was pressed");
+            
+                // Player.m_localPlayer.m_inventory.AddItem(ZNetScene.instance.GetPrefab("TrophyBoar").GetComponent<ItemDrop>().m_itemData);
+                // GameObject clubs = ZNetScene.instance.GetPrefab("StoneGolem_clubs");
+                // clubs.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+                // ItemDrop.ItemData spikes = clubs.GetComponent<ItemDrop>().m_itemData;
+                // spikes.m_shared.m_name = "$item_spike";
+                // spikes.m_shared.m_description = "$item_spike_description";
+                // spikes.m_shared.m_icons = ZNetScene.instance.GetPrefab("Torch").GetComponent<ItemDrop>().m_itemData.m_shared.m_icons;
+                // spikes.m_shared.m_itemType = ItemDrop.ItemData.ItemType.TwoHandedWeapon;
+                // spikes.m_shared.m_toolTier = 1;
+                // spikes.m_shared.m_damages.m_blunt = 20f;
+                // spikes.m_shared.m_dodgeable = true;
+                // spikes.m_shared.m_blockable = true;
+                // spikes.m_shared.m_attack.m_attackAnimation = "swing_longsword";
+                // spikes.m_shared.m_secondaryAttack.m_attackAnimation = "sword_secondary";
+                // spikes.m_shared.m_useDurability = true;
+                // spikes.m_shared.m_destroyBroken = false;
+                // clubs.GetComponent<ItemDrop>().m_itemData = spikes;
+                //
+                // Player.m_localPlayer.m_inventory.AddItem(clubs.GetComponent<ItemDrop>().m_itemData);
 
-                prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
-                //
-                // LackingImaginationV2Plugin.Log($"xbefore");
-                //
-                prefabAnimator.SetBool("sleeping", false);
-                //
-                prefabAnimator.SetTrigger("Movement");
-                //
-                // prefabAnimator.SetTrigger("attack3");
-                //
-                // LackingImaginationV2Plugin.Log($"xafterd");
+
+
+                if(able)
+                {
+                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+                    Aura.transform.parent = player.transform;
+
+                    prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
+                    //
+                    // LackingImaginationV2Plugin.Log($"xbefore");
+                    //
+                    prefabAnimator.SetBool("sleeping", false);
+                    //
+                    prefabAnimator.SetTrigger("Movement");
+                    //
+                    // prefabAnimator.SetTrigger("attack3");
+                    //
+                    // LackingImaginationV2Plugin.Log($"xafterd");
+                }
+            
+            
             }
-            
-            
-            
+            else
+            {
+                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            }
         }
         
         //vfx_stonegolem_hurt

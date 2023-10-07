@@ -59,34 +59,47 @@ namespace LackingImaginationV2
         // private SpriteRenderer sr;
 
 
-        public static Dictionary<string, Heightmap.Biome> biomeDictionary = new Dictionary<string, Heightmap.Biome>
+        public static Dictionary<Heightmap.Biome, List<string>> biomeDictionary = new Dictionary<Heightmap.Biome, List<string>>
         {
-            { "BlackForest_Exp", Heightmap.Biome.BlackForest },
-            { "Meadows_Exp", Heightmap.Biome.Meadows },
-            { "Mistlands_Exp", Heightmap.Biome.Mistlands },
-            { "Mountain_Exp", Heightmap.Biome.Mountain },
-            { "Ocean_Exp", Heightmap.Biome.Ocean },
-            { "Plains_Exp", Heightmap.Biome.Plains },
-            { "Swamp_Exp", Heightmap.Biome.Swamp },
-            { "AshLands_Exp", Heightmap.Biome.AshLands },
-            { "DeepNorth_Exp", Heightmap.Biome.DeepNorth }
+            { Heightmap.Biome.Meadows, new List<string> {"Meadows_Exp", "2"} },
+            { Heightmap.Biome.BlackForest, new List<string> {"BlackForest_Exp", "2"} },
+            { Heightmap.Biome.Swamp, new List<string> {"Swamp_Exp", "2"} },
+            { Heightmap.Biome.Ocean, new List<string> {"Ocean_Exp", "2"} },
+            { Heightmap.Biome.Mountain, new List<string> {"Mountain_Exp", "2"} },
+            { Heightmap.Biome.Plains, new List<string> {"Plains_Exp", "2"} },
+            { Heightmap.Biome.Mistlands, new List<string> {"Mistlands_Exp", "2"} },
+            { Heightmap.Biome.AshLands, new List<string> {"AshLands_Exp", "2"} },
+            { Heightmap.Biome.DeepNorth, new List<string> {"DeepNorth_Exp", "2"} }
         };
         
-        public static Dictionary<string, string> dungeonDictionary = new Dictionary<string, string>
+        public static Dictionary<string, List<string>> locationDictionary = new Dictionary<string,List<string>>
         {
-            { "InfectedMine", "InfectedMine_Exp" },
-            { "Caves", "FrostCave_Exp" },
-            { "Crypt", "BurialChambers_TrollCave_Exp" },
-            { "SunkenCrypt", "SunkenCrypt_Exp" },
+            { "Crypt2(Clone)",  new List<string> {"BurialChambers_Exp", "2"} },
+            { "Crypt3(Clone)", new List<string> {"BurialChambers_Exp", "2"} },
+            { "Crypt4(Clone)", new List<string> {"BurialChambers_Exp", "2"} },
+            { "TrollCave02(Clone)", new List<string> {"TrollCave_Exp", "2"} },
+            { "SunkenCrypt4(Clone)", new List<string> {"SunkenCrypt_Exp", "2"} },
+            { "MountainCave02(Clone)", new List<string> {"FrostCave_Exp", "2"} },
+            { "GoblinCamp2(Clone)", new List<string> {"GoblinCamp_Exp", "2"} },
+            { "Mistlands_DvergrTownEntrance1(Clone)", new List<string> {"InfectedMine_Exp", "2"} },
+            { "Mistlands_DvergrTownEntrance2(Clone)", new List<string> {"InfectedMine_Exp", "2"} },
+            
+            { "Hildir_crypt(Clone)", new List<string> {"ForestCryptHildir_Exp", "2"} },
+            { "Hildir_cave(Clone)", new List<string> {"CaveHildir_Exp", "2"} },
+            { "Hildir_plainsfortress(Clone)", new List<string> {"PlainsFortHildir_Exp", "2"} },
+            
+           //Eikthyrnir(Clone)//GDKing(Clone)//Bonemass(Clone)//Dragonqueen(Clone)//GoblinKing//Mistlands_DvergrBossEntrance1
+            
+            
         };
         
-        public static Dictionary<string, string> dungeonMusicDictionary = new Dictionary<string, string>
-        {
-            { "GoblinCamp", "GoblinCamp_Exp" },
-            { "ForestCryptHildir", "ForestCryptHildir_Exp" },
-            { "CaveHildir", "CaveHildir_Exp" },
-            { "PlainsFortHildir", "PlainsFortHildir_Exp" },
-        };
+        // public static Dictionary<string, string> dungeonMusicDictionary = new Dictionary<string, string>
+        // {
+        //     // { "GoblinCamp", "GoblinCamp_Exp" },
+        //     // { "ForestCryptHildir", "ForestCryptHildir_Exp" },
+        //     // // { "frostcaveshildir", "CaveHildir_Exp" }, // Setting forced environment CavesHildir //  Starting music frostcaveshildir
+        //     // { "PlainsFortHildir", "PlainsFortHildir_Exp" },
+        // };
 
         public static Dictionary<string, List<string>> trophyDictionary = new Dictionary<string, List<string>>
         {
@@ -419,6 +432,7 @@ namespace LackingImaginationV2
         public static GameObject fx_Harbinger;
         
         //Weapons
+        public static GameObject GO_VulcanSwordBroken;
         public static GameObject GO_VulcanSword;
         
         //Prefabs type 2 //Pulled from assets
@@ -695,8 +709,12 @@ namespace LackingImaginationV2
             // MaterialReplacer.RegisterGameObjectForShaderSwap(ZNetScene.instance.GetPrefab("TrophyEikthyrEssence"), MaterialReplacer.ShaderType.CustomCreature);
         
             Item VulkanB = new Item("essence_bundle_2", "VulcanBroken");
-            VulkanB.Name.English("Broken Vulcan"); // You can use this to fix the display name in code
+            VulkanB.Name.English("Broken Vulcan"); 
             VulkanB.Description.English("The flame is a mere fraction of Brenna's anguish");
+            Item Vulkan = new Item("essence_bundle_2", "Vulcan");
+            Vulkan.Name.English("Vulcan"); 
+            Vulkan.Description.English("The flame overflows with Brenna's anguish");
+            
 
             
             
@@ -1383,29 +1401,42 @@ namespace LackingImaginationV2
                 }
                
                 //Brenna Sword
-                GO_VulcanSword = ZNetScene.instance.GetPrefab("VulcanBroken");
+                GO_VulcanSword = ZNetScene.instance.GetPrefab("Vulcan");
+                GO_VulcanSwordBroken = ZNetScene.instance.GetPrefab("VulcanBroken");
                 GameObject krom = ZNetScene.instance.GetPrefab("THSwordKrom");
                 ItemDrop.ItemData dataTOReplace = GO_VulcanSword.GetComponent<ItemDrop>().m_itemData;
+                ItemDrop.ItemData dataTOReplaceB = GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData;
                 ItemDrop.ItemData newData = krom.GetComponent<ItemDrop>().m_itemData;
-                if (dataTOReplace != null && newData != null)
+                if (dataTOReplaceB != null && newData != null && dataTOReplace != null)
                 {
-                    dataTOReplace.m_shared.m_useDurability = false;
                     dataTOReplace.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
                     dataTOReplace.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
                     dataTOReplace.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
                     dataTOReplace.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                    dataTOReplaceB.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
+                    dataTOReplaceB.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
+                    dataTOReplaceB.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
+                    dataTOReplaceB.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
                 }
                 GameObject fire = ZNetScene.instance.GetPrefab("skeleton_sword_hildir");
                 Transform childToReplace = GO_VulcanSword.transform.Find("attach").transform.Find("KromV");
-                Transform newChild = fire.transform.Find("attach").transform.Find("Krom");
-                if (childToReplace != null && newChild != null)
+                Transform childToReplaceB = GO_VulcanSwordBroken.transform.Find("attach").transform.Find("KromV");
+                GameObject newChild = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
+                GameObject newChildB = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
+
+                if (childToReplaceB != null && newChildB != null && newChild != null && childToReplace != null)
                 {
                     childToReplace.GetComponent<MeshRenderer>().materials = newChild.GetComponent<MeshRenderer>().materials;
+                    childToReplaceB.GetComponent<MeshRenderer>().materials = newChildB.GetComponent<MeshRenderer>().materials;
                     newChild.transform.Find("fx_Torch_Carried").SetParent(childToReplace);
+                    newChildB.transform.Find("fx_Torch_Carried").SetParent(childToReplaceB);
                 }
+                Transform fxTorchCarriedB = childToReplaceB.transform.Find("fx_Torch_Carried");
+                fxTorchCarriedB.localPosition = new Vector3(0f, 1.25f, 0f); // Example: Move it forward along the local Z-axis
                 Transform fxTorchCarried = childToReplace.transform.Find("fx_Torch_Carried");
-                fxTorchCarried.localPosition = new Vector3(0f, 1f, 0f); // Example: Move it forward along the local Z-axis
-                
+                fxTorchCarried.localScale = new Vector3(1f, 1f, 1.4f);
+                fxTorchCarried.transform.Find("Local Flames").localScale = new Vector3(1f, 1f, 1.4f);
+                fxTorchCarried.localPosition = new Vector3(0f, 1.45f, 0f);
                 
                 
                 
@@ -1931,12 +1962,30 @@ namespace LackingImaginationV2
         
         // biomeDictionary
         //Biome Exp
+        public static float m_biomeTimer;
         [HarmonyPatch(typeof(Player), nameof(Player.UpdateBiome))]
         public class BiomeExp
         {
-            public static void Prefix()
+            public static void Prefix(Player __instance, ref float dt)
             {
-                foreach (KeyValuePair<string, Heightmap.Biome> kvp in biomeDictionary)
+                if (__instance.InIntro())
+                    return;
+                if ((double) LackingImaginationV2Plugin.m_biomeTimer == 0.0)
+                {
+                    Location location = Location.GetLocation(__instance.transform.position);
+                    if(location != null && !string.IsNullOrEmpty(location.name))
+                    {
+                        if (locationDictionary.ContainsKey(location.name))
+                        {
+                            
+                        }
+                    }
+                }
+                LackingImaginationV2Plugin.m_biomeTimer += dt;
+                if ((double) LackingImaginationV2Plugin.m_biomeTimer <= 1.0)
+                    return;
+                LackingImaginationV2Plugin.m_biomeTimer = 0.0f;
+                foreach (KeyValuePair<Heightmap.Biome, List<string>> kvp in biomeDictionary)
                 {
                     ExpMethods.BiomeExpMethod(kvp.Key, kvp.Value);
                     // Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value}");
@@ -1944,30 +1993,30 @@ namespace LackingImaginationV2
             }
         }
         
-        // dungeonDictionary
+        // locationDictionary
         //Dungeon Exp
-        [HarmonyPatch(typeof(EnvMan), nameof(EnvMan.SetForceEnvironment))]
-        public  class DungeonEnterDetection
-        {
-            public static void Postfix(string env)
-            {
-                if(dungeonDictionary.ContainsKey(env))
-                {
-                    ExpMethods.dungeonExpMethod(dungeonDictionary[env]);
-                }
-            }
-        }
-        [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.HandleLocationMusic))]
-        public class DungeonMusicDetection
-        {
-            public static void Postfix(ref string currentMusic)
-            {
-                if(dungeonMusicDictionary.ContainsKey(currentMusic))
-                {
-                    ExpMethods.dungeonExpMethod(dungeonMusicDictionary[currentMusic]);
-                }
-            }
-        }
+        // [HarmonyPatch(typeof(EnvMan), nameof(EnvMan.SetForceEnvironment))]
+        // public  class DungeonEnterDetection
+        // {
+        //     public static void Postfix(string env)
+        //     {
+        //         if(locationDictionary.ContainsKey(env))
+        //         {
+        //             ExpMethods.dungeonExpMethod(locationDictionary[env]);
+        //         }
+        //     }
+        // }
+        // [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.HandleLocationMusic))]
+        // public class DungeonMusicDetection
+        // {
+        //     public static void Postfix(ref string currentMusic)
+        //     {
+        //         if(dungeonMusicDictionary.ContainsKey(currentMusic))
+        //         {
+        //             ExpMethods.dungeonExpMethod(dungeonMusicDictionary[currentMusic]);
+        //         }
+        //     }
+        // }
         
         // [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
         [HarmonyPatch(typeof(Player), "OnSpawned")]
@@ -2681,7 +2730,7 @@ namespace LackingImaginationV2
                 Tutorial.TutorialText _frostCaveExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label = "xFrost Cave Mine",
+                    m_label = "xFrost Cave",
                     m_name = "FrostCave_Exp",
                     m_text = " ",
                      
@@ -2707,16 +2756,30 @@ namespace LackingImaginationV2
                 Tutorial.TutorialText _burialChambersTrollCaveExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label = "xBurial Chambers & Troll Cave",
-                    m_name = "BurialChambers_TrollCave_Exp",
+                    m_label = "xBurial Chambers",
+                    m_name = "BurialChambers_Exp",
                     m_text = " ",
                      
-                    m_topic = "Burial Chambers & Troll Cave"
+                    m_topic = "Burial Chambers"
                 };
                 if (!Tutorial.instance.m_texts.Contains(_burialChambersTrollCaveExp))
                 {
                     Tutorial.instance.m_texts.Add(_burialChambersTrollCaveExp);
                 }
+                Tutorial.TutorialText _trollCaveExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xTroll Cave",
+                    m_name = "TrollCave_Exp",
+                    m_text = " ",
+                     
+                    m_topic = "Troll Cave"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_trollCaveExp))
+                {
+                    Tutorial.instance.m_texts.Add(_trollCaveExp);
+                }
+
                 //Open Dungeons
                 Tutorial.TutorialText _goblinCampExp = new Tutorial.TutorialText
                 {
@@ -2747,11 +2810,11 @@ namespace LackingImaginationV2
                 Tutorial.TutorialText _caveHildirExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label = "xHildir Cave",
+                    m_label = "xHowling Cavern",
                     m_name = "CaveHildir_Exp",
                     m_text = " ",
-                     
-                    m_topic = "Hildir Cave"
+                    
+                    m_topic = "Howling Cavern"
                 };
                 if (!Tutorial.instance.m_texts.Contains(_caveHildirExp))
                 {
@@ -2760,11 +2823,11 @@ namespace LackingImaginationV2
                 Tutorial.TutorialText _plainsFortHildirExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label = "xHildir Plains Fort",
+                    m_label = "xSealed Tower",
                     m_name = "PlainsFortHildir_Exp",
                     m_text = " ",
                      
-                    m_topic = "Hildir Plains Fort"
+                    m_topic = "Sealed Tower"
                 };
                 if (!Tutorial.instance.m_texts.Contains(_plainsFortHildirExp))
                 {

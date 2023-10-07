@@ -727,7 +727,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed())
+                else if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -744,7 +744,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed())
+                else if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -761,7 +761,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed())
+                else if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -777,7 +777,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed())
+                else if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsUp())
                 {
                     return true;
                 }
@@ -793,7 +793,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed())
+                else if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsUp())
                 {
                     return true;
                 }

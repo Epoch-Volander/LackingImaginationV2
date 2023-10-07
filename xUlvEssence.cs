@@ -26,19 +26,25 @@ namespace LackingImaginationV2
         private static readonly int collisionMask = LayerMask.GetMask( "character", "character_noenv", "character_net", "character_ghost");
         public static void Process_Input(Player player, int position)
         {
-            //Ability Cooldown
-            StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-            se_cd.m_ttl = LackingImaginationUtilities.xUlvCooldownTime;
-            player.GetSEMan().AddStatusEffect(se_cd);
+            if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
+            {
+                //Ability Cooldown
+                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                se_cd.m_ttl = LackingImaginationUtilities.xUlvCooldownTime;
+                player.GetSEMan().AddStatusEffect(se_cd);
             
-            LackingImaginationV2Plugin.Log($"Ulv Button was pressed");
+                LackingImaginationV2Plugin.Log($"Ulv Button was pressed");
 
-            LackingImaginationV2Plugin.fx_TerritorialSlumber.GetComponent<TimedDestruction>().m_timeout  = (LackingImaginationUtilities.xUlvCooldownTime * LackingImaginationGlobal.c_ulvTerritorialSlumberSED) + ((float)SE_TerritorialSlumber.Comfort * 0.5f);
-            GameObject Ring = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_TerritorialSlumber, player.transform.position + player.transform.up * 0.5f, Quaternion.identity);
-            // make circles higher, coroutine while / summon ulv pal on kill in circle/ stats scale with Comfort
+                LackingImaginationV2Plugin.fx_TerritorialSlumber.GetComponent<TimedDestruction>().m_timeout  = (LackingImaginationUtilities.xUlvCooldownTime * LackingImaginationGlobal.c_ulvTerritorialSlumberSED) + ((float)SE_TerritorialSlumber.Comfort * 0.5f);
+                GameObject Ring = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_TerritorialSlumber, player.transform.position + player.transform.up * 0.5f, Quaternion.identity);
+                // make circles higher, coroutine while / summon ulv pal on kill in circle/ stats scale with Comfort
 
-            ScheduleRing(player, Ring);
-
+                ScheduleRing(player, Ring);
+            }
+            else
+            {
+                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            }
         }
         private static void ScheduleRing(Player player, GameObject ring)
         {

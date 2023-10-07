@@ -31,57 +31,61 @@ namespace LackingImaginationV2
         
         public static void Process_Input(Player player, int position)
         {
-            //Ability Cooldown
-            StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-            se_cd.m_ttl = LackingImaginationUtilities.xYagluthCooldownTime;
-            player.GetSEMan().AddStatusEffect(se_cd);
-            
-            LackingImaginationV2Plugin.Log($"Yag Button was pressed");
-            
-            
-            //projectile_meteor
-            //projectile_beam
-            int staticCharge;
-
-            if (player.IsBlocking())
+            if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.UseGuardianPower = false;
-                YagluthController1 = true;
-                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                YagluthController1 = false;
-
-                ScheduleMeteor(player);
-                staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
-                staticCharge += 20;
-                xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
-            }
-            else if (player.IsCrouching())
-            {
-                LackingImaginationV2Plugin.UseGuardianPower = false;
-                YagluthController2 = true;
-                ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                YagluthController2 = false;
-
-                ScheduleNova(player);
-                staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
-                staticCharge -= 10;
-                if (staticCharge < 0) staticCharge = 0;
-                xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
+                //Ability Cooldown
+                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                se_cd.m_ttl = LackingImaginationUtilities.xYagluthCooldownTime;
+                player.GetSEMan().AddStatusEffect(se_cd);
+            
+                LackingImaginationV2Plugin.Log($"Yag Button was pressed");
                 
-                HitData hitData = new HitData();
-                hitData.m_damage.m_lightning = 100f;
-                hitData.m_hitType = HitData.HitType.EnemyHit;
-                player.Damage(hitData);
+                //projectile_meteor
+                //projectile_beam
+                int staticCharge;
+
+                if (player.IsBlocking())
+                {
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                    YagluthController1 = true;
+                    ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                    YagluthController1 = false;
+
+                    ScheduleMeteor(player);
+                    staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
+                    staticCharge += 20;
+                    xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
+                }
+                else if (player.IsCrouching())
+                {
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                    YagluthController2 = true;
+                    ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                    YagluthController2 = false;
+
+                    ScheduleNova(player);
+                    staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
+                    staticCharge -= 10;
+                    if (staticCharge < 0) staticCharge = 0;
+                    xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
+                
+                    HitData hitData = new HitData();
+                    hitData.m_damage.m_lightning = player.m_health * 0.2f;
+                    hitData.m_hitType = HitData.HitType.EnemyHit;
+                    player.Damage(hitData);
+                }
+                else
+                {
+                    ScheduleBeam(player);
+                    staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
+                    staticCharge += 20;
+                    xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
+                }
             }
             else
             {
-                ScheduleBeam(player);
-                staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
-                staticCharge += 20;
-                xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
+                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
             }
-
-
         }
         
          private static void ScheduleBeam(Player player)

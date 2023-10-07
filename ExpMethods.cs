@@ -81,10 +81,10 @@ namespace LackingImaginationV2
         }
 
 
-        public static void BiomeExpMethod(string biomeKey, Heightmap.Biome mapBiome)
+        public static void BiomeExpMethod(Heightmap.Biome mapBiome, List<string> biomeKey)
         {
             Tutorial.TutorialText tutorialText =
-                Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == biomeKey));
+                Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == biomeKey[0]));
             if (tutorialText != null)
             {
                 if (mapBiome == Player.m_localPlayer.m_currentBiome && !Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
@@ -92,13 +92,12 @@ namespace LackingImaginationV2
 
                     MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft,
                         $"{Player.m_localPlayer.m_currentBiome.ToString().ToLower()} exp gained");
-                    Debug.Log($"Current Biome: {Player.m_localPlayer.m_currentBiome.ToString().ToLower()}");
-
+                    // Debug.Log($"Current Biome: {Player.m_localPlayer.m_currentBiome.ToString().ToLower()}");
                     
-                    Player.m_localPlayer.ShowTutorial(biomeKey);
+                    Player.m_localPlayer.ShowTutorial(biomeKey[0]);
                     // Tutorial.instance.ShowText(biomeKey, true);
                     // Player.m_localPlayer.SetSeenTutorial(biomeKey);
-                    ImaginationExpIncrease(2);
+                    ImaginationExpIncrease(int.Parse(biomeKey[1]));
                     Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
                     
                 }
@@ -106,20 +105,19 @@ namespace LackingImaginationV2
         }
         
         
-        public static void dungeonExpMethod(string tutorialValue)
+        public static void dungeonExpMethod(List<string> tutorialValue)
         {
-            Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == tutorialValue));
+            Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == tutorialValue[0]));
             if (tutorialText != null)
             {
-                // ZLog.Log((object) ("Detected environment change"+env));
                 if (!Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
                 {
                     MessageHud.instance.ShowMessage(MessageHud.MessageType.TopLeft, $"{tutorialText.m_topic} exp gained");
                     
-                    Player.m_localPlayer.ShowTutorial(tutorialValue);
+                    Player.m_localPlayer.ShowTutorial(tutorialValue[0]);
                     // Tutorial.instance.ShowText("InfectedMine_Exp", true);
                     // Player.m_localPlayer.SetSeenTutorial("InfectedMine_Exp");
-                    ImaginationExpIncrease(2);
+                    ImaginationExpIncrease(int.Parse(tutorialValue[1]));
                     Player.m_localPlayer.AddKnownText(tutorialText.m_label, tutorialText.m_text);
                 }
             }
@@ -153,23 +151,32 @@ namespace LackingImaginationV2
             
             if (Player.m_localPlayer != null && Tutorial.instance != null)
             {
-                foreach (KeyValuePair<string, Heightmap.Biome> kvp in LackingImaginationV2Plugin.biomeDictionary)
+                foreach (KeyValuePair< Heightmap.Biome, List<string>> kvp in LackingImaginationV2Plugin.biomeDictionary)
                 {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Key));
-                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) biome += 2;
+                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
+                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) biome += int.Parse(kvp.Value[1]);
+                }
+                
+                HashSet<string> uniqueValues = new HashSet<string>();
+                foreach (KeyValuePair<string, List<string>> kvp in LackingImaginationV2Plugin.locationDictionary)
+                {
+                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
+                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
+                    {
+                        string valueToAdd = kvp.Value[0];
+                        if (!uniqueValues.Contains(valueToAdd))
+                        {
+                            uniqueValues.Add(valueToAdd);
+                            dungeon += int.Parse(valueToAdd);
+                        }
+                    }
                 }
 
-                foreach (KeyValuePair<string, string> kvp in LackingImaginationV2Plugin.dungeonDictionary)
-                {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value));
-                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) dungeon += 2;
-                }
-
-                foreach (KeyValuePair<string, string> kvp in LackingImaginationV2Plugin.dungeonMusicDictionary)
-                {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value));
-                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) dungeon += 2;
-                }
+                // foreach (KeyValuePair<string, string> kvp in LackingImaginationV2Plugin.dungeonMusicDictionary)
+                // {
+                //     Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value));
+                //     if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) dungeon += 2;
+                // }
 
                 foreach (KeyValuePair<string, List<string>> kvp in LackingImaginationV2Plugin.trophyDictionary)
                 {
