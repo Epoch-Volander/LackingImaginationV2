@@ -727,7 +727,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp())
+                else if(/*LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown ||*/ LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp()*/)
                 {
                     return true;
                 }

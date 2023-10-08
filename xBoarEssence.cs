@@ -15,7 +15,7 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xBoarEssence
+    public class xBoarEssence//charging effect, shield
     {
         public static string Ability_Name = "Reckless \nCharge";
 

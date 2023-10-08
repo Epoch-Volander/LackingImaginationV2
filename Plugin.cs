@@ -88,9 +88,12 @@ namespace LackingImaginationV2
             { "Hildir_cave(Clone)", new List<string> {"CaveHildir_Exp", "2"} },
             { "Hildir_plainsfortress(Clone)", new List<string> {"PlainsFortHildir_Exp", "2"} },
             
-           //Eikthyrnir(Clone)//GDKing(Clone)//Bonemass(Clone)//Dragonqueen(Clone)//GoblinKing//Mistlands_DvergrBossEntrance1
-            
-            
+            { "Eikthyrnir(Clone)",  new List<string> {"EikthyrSacrifice_Exp", "2"} },
+            { "GDKing(Clone)", new List<string> {"TheElderSacrifice_Exp", "2"} },
+            { "Bonemass(Clone)", new List<string> {"BoneMassSacrifice_Exp", "2"} },
+            { "Dragonqueen(Clone)", new List<string> {"ModerSacrifice_Exp", "2"} },
+            { "GoblinKing(Clone)", new List<string> {"YagluthSacrifice_Exp", "2"} },
+            { "Mistlands_DvergrBossEntrance1(Clone)", new List<string> {"SeekerQueenSeal_Exp", "2"} },
         };
         
         // public static Dictionary<string, string> dungeonMusicDictionary = new Dictionary<string, string>
@@ -580,6 +583,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xTickEssencePassive.TickStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xStoneGolemEssencePassive.StoneGolemStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xYagluthEssencePassive.YagluthStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xBrennaEssencePassive.BrennaStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
@@ -761,11 +765,11 @@ namespace LackingImaginationV2
 
             EssenceSlotsEnabled = Config.Bind("Toggles", "Enable Essence Slots", true, "Disabling this while items are in the slots will attempt to move them to your inventory.");
 
-            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", new KeyboardShortcut(KeyCode.Alpha1, KeyCode.LeftAlt), "Ability 1 Hotkey");
-            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", new KeyboardShortcut(KeyCode.Alpha2, KeyCode.LeftAlt), "Ability 2 Hotkey");
-            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", new KeyboardShortcut(KeyCode.Alpha3, KeyCode.LeftAlt), "Ability 3 Hotkey");
-            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", new KeyboardShortcut(KeyCode.Alpha4, KeyCode.LeftAlt), "Ability 4 Hotkey");
-            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", new KeyboardShortcut(KeyCode.Alpha5, KeyCode.LeftAlt), "Ability 5 Hotkey");
+            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha1), "Ability 1 Hotkey");
+            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha2), "Ability 2 Hotkey");
+            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha3), "Ability 3 Hotkey");
+            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha4), "Ability 4 Hotkey");
+            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha5), "Ability 5 Hotkey");
            
             //li_cooldownMultiplier = ConfigManager.RegisterModConfigVariable<float>(ModName, "vl_mce_cooldownMultiplier", 1f, "Modifiers", "This value multiplied on overall cooldown time of abilities", false);
             li_cooldownMultiplier = config("Modifiers", "CooldownMultiplier", 100f, "This value multiplied on overall cooldown time of abilities");
@@ -1401,9 +1405,9 @@ namespace LackingImaginationV2
                 }
                
                 //Brenna Sword
-                GO_VulcanSword = ZNetScene.instance.GetPrefab("Vulcan");
-                GO_VulcanSwordBroken = ZNetScene.instance.GetPrefab("VulcanBroken");
-                GameObject krom = ZNetScene.instance.GetPrefab("THSwordKrom");
+                GO_VulcanSword = ObjectDB.instance?.GetItemPrefab("Vulcan");
+                GO_VulcanSwordBroken = ObjectDB.instance?.GetItemPrefab("VulcanBroken");
+                GameObject krom = ObjectDB.instance?.GetItemPrefab("THSwordKrom");
                 ItemDrop.ItemData dataTOReplace = GO_VulcanSword.GetComponent<ItemDrop>().m_itemData;
                 ItemDrop.ItemData dataTOReplaceB = GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData;
                 ItemDrop.ItemData newData = krom.GetComponent<ItemDrop>().m_itemData;
@@ -1418,7 +1422,7 @@ namespace LackingImaginationV2
                     dataTOReplaceB.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
                     dataTOReplaceB.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
                 }
-                GameObject fire = ZNetScene.instance.GetPrefab("skeleton_sword_hildir");
+                GameObject fire = ObjectDB.instance?.GetItemPrefab("skeleton_sword_hildir");
                 Transform childToReplace = GO_VulcanSword.transform.Find("attach").transform.Find("KromV");
                 Transform childToReplaceB = GO_VulcanSwordBroken.transform.Find("attach").transform.Find("KromV");
                 GameObject newChild = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
@@ -1960,8 +1964,8 @@ namespace LackingImaginationV2
             }
         }
         
-        // biomeDictionary
-        //Biome Exp
+        // biomeDictionary //locationDictionary
+        //Biome Exp //All exp now
         public static float m_biomeTimer;
         [HarmonyPatch(typeof(Player), nameof(Player.UpdateBiome))]
         public class BiomeExp
@@ -1977,7 +1981,7 @@ namespace LackingImaginationV2
                     {
                         if (locationDictionary.ContainsKey(location.name))
                         {
-                            
+                            ExpMethods.dungeonExpMethod(locationDictionary[location.name]);
                         }
                     }
                 }
@@ -2753,7 +2757,7 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_sunkenCryptExp);
                 }
-                Tutorial.TutorialText _burialChambersTrollCaveExp = new Tutorial.TutorialText
+                Tutorial.TutorialText _burialChambersExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
                     m_label = "xBurial Chambers",
@@ -2762,9 +2766,9 @@ namespace LackingImaginationV2
                      
                     m_topic = "Burial Chambers"
                 };
-                if (!Tutorial.instance.m_texts.Contains(_burialChambersTrollCaveExp))
+                if (!Tutorial.instance.m_texts.Contains(_burialChambersExp))
                 {
-                    Tutorial.instance.m_texts.Add(_burialChambersTrollCaveExp);
+                    Tutorial.instance.m_texts.Add(_burialChambersExp);
                 }
                 Tutorial.TutorialText _trollCaveExp = new Tutorial.TutorialText
                 {
@@ -2794,14 +2798,16 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_goblinCampExp);
                 }
+                
+                //Hildir Dungeons
                 Tutorial.TutorialText _forestCryptHildirExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label = "xHildir Forest Crypt",
+                    m_label = "xSmouldering Tomb",
                     m_name = "ForestCryptHildir_Exp",
                     m_text = " ",
                      
-                    m_topic = "Hildir Forest Crypt"
+                    m_topic = "Smouldering Tomb"
                 };
                 if (!Tutorial.instance.m_texts.Contains(_forestCryptHildirExp))
                 {
@@ -2832,6 +2838,86 @@ namespace LackingImaginationV2
                 if (!Tutorial.instance.m_texts.Contains(_plainsFortHildirExp))
                 {
                     Tutorial.instance.m_texts.Add(_plainsFortHildirExp);
+                }
+                
+                //Boss Arenas
+                Tutorial.TutorialText _eikthyrSacrificeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xEikthyr Altar",
+                    m_name = "EikthyrSacrifice_Exp",
+                    m_text = " ",
+                    
+                    m_topic = "Eikthyr Altar"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_eikthyrSacrificeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_eikthyrSacrificeExp);
+                }
+                Tutorial.TutorialText _theElderSacrificeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xThe Elder Altar",
+                    m_name = "TheElderSacrifice_Exp",
+                    m_text = " ",
+                    
+                    m_topic = "The Elder Altar"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_theElderSacrificeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_theElderSacrificeExp);
+                }
+                Tutorial.TutorialText _boneMassSacrificeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xBoneMass Altar",
+                    m_name = "BoneMassSacrifice_Exp",
+                    m_text = " ",
+                    
+                    m_topic = "BoneMass Altar"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_boneMassSacrificeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_boneMassSacrificeExp);
+                }
+                Tutorial.TutorialText _moderSacrificeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xModer Altar",
+                    m_name = "ModerSacrifice_Exp",
+                    m_text = " ",
+                    
+                    m_topic = "Moder Altar"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_moderSacrificeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_moderSacrificeExp);
+                }
+                Tutorial.TutorialText _yagluthSacrificeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xYagluth Altar",
+                    m_name = "YagluthSacrifice_Exp",
+                    m_text = " ",
+                    
+                    m_topic = "Yagluth Altar"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_yagluthSacrificeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_yagluthSacrificeExp);
+                }
+                Tutorial.TutorialText _seekerQueenSealExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xSeeker Queen Seal",
+                    m_name = "SeekerQueenSeal_Exp",
+                    m_text = " ",
+                    
+                    m_topic = "Seeker Queen Seal"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_seekerQueenSealExp))
+                {
+                    Tutorial.instance.m_texts.Add(_seekerQueenSealExp);
                 }
             }
         }

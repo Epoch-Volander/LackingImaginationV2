@@ -52,7 +52,7 @@ namespace LackingImaginationV2
     }
 
     [HarmonyPatch]
-    public class xFulingEssencePassive
+    public class xFulingEssencePassive// retreval effect
     {
         private static float equipDelay = 0.5f;
 
@@ -61,23 +61,50 @@ namespace LackingImaginationV2
         {
             public static void Prefix(Projectile __instance)
             {
-                if (__instance.m_owner == Player.m_localPlayer && EssenceItemData.equipedEssence.Contains("$item_goblin_essence") &&  __instance.m_spawnItem?.m_shared.m_skillType == Skills.SkillType.Spears)
+                if (__instance.m_owner == Player.m_localPlayer && EssenceItemData.equipedEssence.Contains("$item_goblin_essence") && __instance.m_spawnItem?.m_shared.m_skillType == Skills.SkillType.Spears)
                 {
                     if (__instance.m_spawnItem != null)
                     {
-                        if (Player.m_localPlayer.m_inventory.CanAddItem(__instance.m_spawnItem)) //.m_dropPrefab.GetComponent<ItemDrop>().m_itemData
+                        if (Player.m_localPlayer.m_inventory.CanAddItem(__instance.m_spawnItem)) 
                         {
                             Player.m_localPlayer.m_inventory.AddItem(__instance.m_spawnItem);
-                            // Player.m_localPlayer.EquipItem(__instance.m_spawnItem);
                             ScheduleEquip(ref __instance.m_spawnItem);
                         }
                         else
                         {
                             ItemDrop.DropItem(__instance.m_spawnItem, 0, Player.m_localPlayer.transform.position, Quaternion.identity);
                         }
-
                         __instance.m_spawnItem = null;
-                        // LackingImaginationV2Plugin.Log($"Fuling {__instance.m_spawnItem.m_dropPrefab.GetComponent<ItemDrop>().m_itemData.m_shared.m_skillType}");d
+                    }
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(Projectile), nameof(Projectile.FixedUpdate))]
+        public static class Fuling_FixedUpdate_Patch
+        {
+            public static void Prefix(Projectile __instance)
+            {
+                if (__instance.m_owner == Player.m_localPlayer && EssenceItemData.equipedEssence.Contains("$item_goblin_essence") && __instance.m_spawnItem?.m_shared.m_skillType == Skills.SkillType.Spears)
+                {
+                    if (__instance.m_spawnItem != null)
+                    {
+                        float ttl = __instance.m_ttl;
+                        
+                        ttl -= Time.fixedDeltaTime;
+                        if ((double) ttl > 0.0)
+                            return;
+                        
+                        if (Player.m_localPlayer.m_inventory.CanAddItem(__instance.m_spawnItem)) 
+                        {
+                            Player.m_localPlayer.m_inventory.AddItem(__instance.m_spawnItem);
+                            ScheduleEquip(ref __instance.m_spawnItem);
+                        }
+                        else
+                        {
+                            ItemDrop.DropItem(__instance.m_spawnItem, 0, Player.m_localPlayer.transform.position, Quaternion.identity);
+                        }
+                        __instance.m_spawnItem = null;
                     }
                 }
             }
@@ -86,13 +113,15 @@ namespace LackingImaginationV2
         {
             CoroutineRunner.Instance.StartCoroutine(ScheduleEquipCoroutine(spear));
         }
+
         // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator ScheduleEquipCoroutine(ItemDrop.ItemData spear)
         {
             yield return new WaitForSeconds(equipDelay);
-            
+
             Player.m_localPlayer.EquipItem(spear);
         }
+        
 
         [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
         class Fuling_RPC_Damage_Patch

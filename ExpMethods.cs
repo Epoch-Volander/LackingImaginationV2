@@ -146,7 +146,7 @@ namespace LackingImaginationV2
         public static int SkillLevelCalculator()
         {
             int biome = 0;
-            int dungeon = 0;
+            int location = 0;
             int trophy = 0;
             
             if (Player.m_localPlayer != null && Tutorial.instance != null)
@@ -167,7 +167,7 @@ namespace LackingImaginationV2
                         if (!uniqueValues.Contains(valueToAdd))
                         {
                             uniqueValues.Add(valueToAdd);
-                            dungeon += int.Parse(valueToAdd);
+                            location += int.Parse(valueToAdd);
                         }
                     }
                 }
@@ -187,7 +187,7 @@ namespace LackingImaginationV2
             // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={biome}");
             // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={dungeon}");
             // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={trophy}");
-            int total =  biome + dungeon + trophy;
+            int total =  biome + location + trophy;
             int slots;
             if (total >= 80) slots = 5;
             else if (total >= 60 && total < 80) slots = 4;
