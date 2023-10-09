@@ -124,71 +124,90 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="CooldownStatusEffectsLI.cs" />
-        <Compile Include="CoroutineRunner.cs" />
         <Compile Include="EssenceInventoryGridLI.cs" />
         <Compile Include="EssenceInventoryGuiLI.cs" />
         <Compile Include="EssenceHumanoidLI.cs" />
         <Compile Include="EssenceItemData.cs" />
-        <Compile Include="EssenceMotion.cs" />
+        <Compile Include="Essence\Blobs &amp; Jump\Hare\SE_LuckyFoot.cs" />
+        <Compile Include="Essence\Blobs &amp; Jump\Hare\xHareEssence.cs" />
+        <Compile Include="Essence\Blobs &amp; Jump\SE_FumesSplit.cs" />
+        <Compile Include="Essence\Blobs &amp; Jump\xBlobEssence.cs" />
+        <Compile Include="Essence\Blobs &amp; Jump\xGrowthEssence.cs" />
+        <Compile Include="Essence\Boar\SE_Courage.cs" />
+        <Compile Include="Essence\Boar\SE_RecklessCharge.cs" />
+        <Compile Include="Essence\Boar\xBoarEssence.cs" />
+        <Compile Include="Essence\Deathsquito\SE_Relentless.cs" />
+        <Compile Include="Essence\Deathsquito\xDeathsquitoEssence.cs" />
+        <Compile Include="Essence\Deer\SE_HorizonHaste.cs" />
+        <Compile Include="Essence\Deer\xDeerEssence.cs" />
         <Compile Include="Essence\Drake\SE_ThreeFreeze.cs" />
         <Compile Include="Essence\Drake\xDrakeEssence.cs" />
         <Compile Include="Essence\Draugr\SE_FallenHero.cs" />
         <Compile Include="Essence\Draugr\SE_Forgotten.cs" />
+        <Compile Include="Essence\Draugr\SE_Rot.cs" />
         <Compile Include="Essence\Draugr\xDraugrEliteEssence.cs" />
         <Compile Include="Essence\Draugr\xDraugrEssence.cs" />
         <Compile Include="Essence\Draugr\xDraugrRot.cs" />
         <Compile Include="Essence\Elder\SE_AncientAwe.cs" />
         <Compile Include="Essence\Elder\xElderEssence.cs" />
+        <Compile Include="Essence\Fenring\SE_MoonlitLeap.cs" />
+        <Compile Include="Essence\Fenring\xFenringEssence.cs" />
+        <Compile Include="Essence\Fulings\FBerserker\SE_Giantization.cs" />
+        <Compile Include="Essence\Fulings\FBerserker\xFulingBerserkerEssence.cs" />
+        <Compile Include="Essence\Fulings\FShaman\SE_Ritual.cs" />
+        <Compile Include="Essence\Fulings\FShaman\xFulingShamanEssence.cs" />
+        <Compile Include="Essence\Fulings\Fuling\SE_Longinus.cs" />
+        <Compile Include="Essence\Fulings\Fuling\xFulingEssence.cs" />
         <Compile Include="Essence\GreyBrute\SE_Bash.cs" />
         <Compile Include="Essence\GreyBrute\xGreydwarfBruteEssence.cs" />
         <Compile Include="Essence\Leech\SE_BloodSiphon.cs" />
         <Compile Include="Essence\Leech\xLeechEssence.cs" />
+        <Compile Include="Essence\Moder\SE_Calm.cs" />
+        <Compile Include="Essence\Moder\xModerEssence.cs" />
+        <Compile Include="Essence\Serpent\SE_Craving.cs" />
+        <Compile Include="Essence\Serpent\SE_Satiated.cs" />
+        <Compile Include="Essence\Serpent\xSeaSerpentEssence.cs" />
+        <Compile Include="Essence\SGolem\SE_GolemCore.cs" />
+        <Compile Include="Essence\SGolem\xStoneGolemEssence.cs" />
         <Compile Include="Essence\Skeleton\SE_Vigil.cs" />
         <Compile Include="Essence\Skeleton\xBrennaEssence.cs" />
         <Compile Include="Essence\Skeleton\xRancidRemainsEssence.cs" />
         <Compile Include="Essence\Skeleton\xSkeletonEssence.cs" />
         <Compile Include="Essence\Skeleton\xSkeletonSynergy.cs" />
+        <Compile Include="Essence\Surtling\SE_Harbinger.cs" />
+        <Compile Include="Essence\Surtling\xSurtlingEssence.cs" />
         <Compile Include="Essence\Tick\SE_BloodWell.cs" />
         <Compile Include="Essence\Tick\xTickEssence.cs" />
+        <Compile Include="Essence\Ulv\SE_TerritorialSlumber.cs" />
+        <Compile Include="Essence\Ulv\xUlvEssence.cs" />
+        <Compile Include="Essence\Wolf\SE_RavenousHunger.cs" />
+        <Compile Include="Essence\Wolf\xWolfEssence.cs" />
         <Compile Include="Essence\Wraith\SE_TwinSouls.cs" />
         <Compile Include="Essence\Wraith\xWraithEssence.cs" />
         <Compile Include="Essence\xAbominationEssence.cs" />
-        <Compile Include="Essence\xBlobEssence.cs" />
-        <Compile Include="Essence\xBoarEssence.cs" />
         <Compile Include="Essence\xBoneMassEssence.cs" />
         <Compile Include="Essence\xCultistEssence.cs" />
-        <Compile Include="Essence\xDeathsquitoEssence.cs" />
-        <Compile Include="Essence\xDeerEssence.cs" />
         <Compile Include="Essence\xDvergrEssence.cs" />
         <Compile Include="Essence\xEikthyrEssence.cs" />
-        <Compile Include="Essence\xFenringEssence.cs" />
-        <Compile Include="Essence\xFulingBerserkerEssence.cs" />
-        <Compile Include="Essence\xFulingEssence.cs" />
-        <Compile Include="Essence\xFulingShamanEssence.cs" />
         <Compile Include="Essence\xGeirrhafaEssence.cs" />
         <Compile Include="Essence\xGjallEssence.cs" />
         <Compile Include="Essence\xGreydwarfEssence.cs" />
         <Compile Include="Essence\xGreydwarfShamanEssence.cs" />
-        <Compile Include="Essence\xGrowthEssence.cs" />
-        <Compile Include="Essence\xHareEssence.cs" />
         <Compile Include="Essence\xLoxEssence.cs" />
-        <Compile Include="Essence\xModerEssence.cs" />
         <Compile Include="Essence\xNeckEssence.cs" />
-        <Compile Include="Essence\xSeaSerpentEssence.cs" />
         <Compile Include="Essence\xSeekerEssence.cs" />
         <Compile Include="Essence\xSeekerQueenEssence.cs" />
         <Compile Include="Essence\xSeekerSoldierEssence.cs" />
-        <Compile Include="Essence\xStoneGolemEssence.cs" />
-        <Compile Include="Essence\xSurtlingEssence.cs" />
         <Compile Include="Essence\xThungrEssence.cs" />
         <Compile Include="Essence\xTrollEssence.cs" />
-        <Compile Include="Essence\xUlvEssence.cs" />
-        <Compile Include="Essence\xWolfEssence.cs" />
         <Compile Include="Essence\xZilEssence.cs" />
         <Compile Include="Essence\Yagluth\SE_Culmination.cs" />
         <Compile Include="Essence\Yagluth\xYagluthEssence.cs" />
         <Compile Include="ExpMethods.cs" />
+        <Compile Include="Extra and Status Effects\CooldownStatusEffectsLI.cs" />
+        <Compile Include="Extra and Status Effects\CoroutineRunner.cs" />
+        <Compile Include="Extra and Status Effects\EssenceMotion.cs" />
+        <Compile Include="Extra and Status Effects\SE_TimedDeath.cs" />
         <Compile Include="LackingImaginationGlobal.cs" />
         <Compile Include="LackingImaginationUtilities.cs" />
         <Compile Include="Managers\CreatureManager.cs" />
@@ -205,25 +224,6 @@
         <Compile Include="ObjectBDPatch.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="SE_Calm.cs" />
-        <Compile Include="SE_Courage.cs" />
-        <Compile Include="SE_Craving.cs" />
-        <Compile Include="SE_FumesSplit.cs" />
-        <Compile Include="SE_Giantization.cs" />
-        <Compile Include="SE_GolemCore.cs" />
-        <Compile Include="SE_Harbinger.cs" />
-        <Compile Include="SE_HorizonHaste.cs" />
-        <Compile Include="SE_Longinus.cs" />
-        <Compile Include="SE_LuckyFoot.cs" />
-        <Compile Include="SE_MoonlitLeap.cs" />
-        <Compile Include="SE_RavenousHunger.cs" />
-        <Compile Include="SE_RecklessCharge.cs" />
-        <Compile Include="SE_Relentless.cs" />
-        <Compile Include="SE_Ritual.cs" />
-        <Compile Include="SE_Rot.cs" />
-        <Compile Include="SE_Satiated.cs" />
-        <Compile Include="SE_TerritorialSlumber.cs" />
-        <Compile Include="SE_TimedDeath.cs" />
         <Compile Include="VersionHandshake.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -270,9 +270,6 @@
     <ItemGroup>
         <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2" />
         <PackageReference Include="YamlDotNet" Version="13.1.0" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Essence\Wolf\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
