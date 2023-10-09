@@ -20,6 +20,8 @@ namespace LackingImaginationV2
     public class xYagluthEssence
     {
         private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
+        private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+
         
         public static string Ability_Name = "Culmination";
         
@@ -168,26 +170,45 @@ namespace LackingImaginationV2
             GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("aoe_nova"), player.transform.position, Quaternion.identity);
             Aoe.GetComponent<Aoe>().m_owner = player;
             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_goblinking_nova"), player.transform.position, Quaternion.identity);
+            
+             // Create a HashSet to keep track of detected objects.
+            HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
 
-            List<Character> allCharacters = new List<Character>();
-            allCharacters.Clear();
-            Character.GetCharactersInRange(player.transform.position, 5f, allCharacters);
-            foreach (Character ch in allCharacters)
+            Vector3 capsuleCenter = player.transform.position;
+            float capsuleRadius = 5f; // Radius of the capsule
+
+            // Perform the capsule overlap check with the specified layer mask
+            Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Breath_Layermask);
+
+            foreach (Collider collider in colliders)
             {
-                if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer)) 
-                    && !ch.m_tamed ||ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI)
+                IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                Character characterComponent = collider.gameObject.GetComponent<Character>();
+                if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
                 {
-                    HitData hitData = new HitData();
-                    hitData.m_damage.m_fire = 65f;
-                    hitData.m_damage.m_blunt = 65f;
-                    hitData.m_dir = ch.transform.position - player.transform.position;
-                    hitData.ApplyModifier(LackingImaginationGlobal.c_yagluthCulmination);
-                    hitData.m_pushForce = 10f;
-                    hitData.m_point = ch.transform.position;
-                    hitData.SetAttacker(player);
-                    ch.Damage(hitData);
+                    // This is a valid target (creature) if it hasn't been detected before.
+                    if (!detectedObjects.Contains(collider.gameObject))
+                    {
+                        detectedObjects.Add(collider.gameObject);
+                        
+                        HitData hitData = new HitData();
+                        hitData.m_damage.m_fire = 65f;
+                        hitData.m_damage.m_blunt = 65f;
+                        hitData.m_dir = collider.transform.position - player.transform.position;
+                        hitData.ApplyModifier(LackingImaginationGlobal.c_yagluthCulmination);
+                        hitData.m_pushForce = 10f;
+                        hitData.m_hitCollider = collider;
+                        hitData.m_dodgeable = true;
+                        hitData.m_blockable = true;
+                        hitData.m_point = collider.gameObject.transform.position;
+                        hitData.SetAttacker(player);
+                        hitData.m_hitType = HitData.HitType.PlayerHit;
+                        destructibleComponent.Damage(hitData);
+                    }
                 }
             }
+            
+            
             
             ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("Crouch");
             // player.SetCrouch(false);

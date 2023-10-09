@@ -33,8 +33,18 @@ namespace LackingImaginationV2
 {
     public class ExpMethods
     {
-        
-        
+        public class Flip : MonoBehaviour
+        {
+            private const float RotationSpeed = 720;
+            public void Awake()
+            {
+                transform.Rotate(-90, 270, 0);
+            }
+            public void Update()
+            {
+                transform.Rotate(0, -RotationSpeed * Time.deltaTime, 0);
+            }
+        }
         
         public static void CreateEssenceBase(List<string> list)
         {
@@ -167,7 +177,7 @@ namespace LackingImaginationV2
                         if (!uniqueValues.Contains(valueToAdd))
                         {
                             uniqueValues.Add(valueToAdd);
-                            location += int.Parse(valueToAdd);
+                            location += int.Parse(kvp.Value[1]);
                         }
                     }
                 }
@@ -198,56 +208,6 @@ namespace LackingImaginationV2
             return slots;
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       
-
-         // GameObject bossStonePrefab = ZNetScene.instance.GetPrefab("BossStone_Eikthyr");
-         //     if (bossStonePrefab != null)
-         // {
-         //     // Try to find the BossStone component on the prefab
-         //     BossStone bossStoneComponent = bossStonePrefab.GetComponent<BossStone>();
-         //
-         //     if (bossStoneComponent != null)
-         //     {
-         //         // Now you can access m_activateStep2
-         //         EffectList activateStep2 = bossStoneComponent.m_activateStep2;
-         //
-         //         // Use activateStep2 as needed
-         //         Debug.Log("m_activateStep2 contains: " + activateStep2);
-         //     }
-         //     else
-         //     {
-         //         Debug.LogError("BossStone component not found on BossStone_Eikthyr prefab.");
-         //     }
-         // }
-         
          
          public static GameObject GetLocationFromZoneSystem(ZoneSystem __instance, string LocationName)
          {

@@ -131,13 +131,13 @@ namespace LackingImaginationV2
                         && pos.x < ExpMethods.SkillLevelCalculator())
                     {
                         inventoryGui.OnSelectedItem(inventoryGrid, item, pos, mod);
-                        LackingImaginationV2Plugin.Log($"OnSelected: pos={pos.x}");
+                        // LackingImaginationV2Plugin.Log($"OnSelected: pos={pos.x}");
                         if (Player.m_localPlayer.m_inventory.CanAddItem(item) && item != null)
                         {
                             EssencePlayerData.EssenceSlotInventory.m_inventory.Remove(item);
                             if(LackingImaginationV2Plugin.abilitiesStatus == null)
                             {
-                                LackingImaginationV2Plugin.Log("== null 1");
+                                // LackingImaginationV2Plugin.Log("== null 1");
                                 LackingImaginationV2Plugin.abilitiesStatus = new List<RectTransform>();
                                 LackingImaginationV2Plugin.abilitiesStatus.Clear();    
                                 for (int i = 0; i < 5; i++) 
@@ -162,7 +162,7 @@ namespace LackingImaginationV2
                             Player.m_localPlayer.m_inventory.AddItem(item);
                             if(LackingImaginationV2Plugin.abilitiesStatus == null)
                             {
-                                LackingImaginationV2Plugin.Log("== null 2");
+                                // LackingImaginationV2Plugin.Log("== null 2");
                                 LackingImaginationV2Plugin.abilitiesStatus = new List<RectTransform>();
                                 LackingImaginationV2Plugin.abilitiesStatus.Clear();  
                                 for (int i = 0; i < 5; i++) 
