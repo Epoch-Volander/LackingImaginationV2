@@ -114,7 +114,7 @@ namespace LackingImaginationV2
                 }
                 if (xWraithEssence.Aura != null && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_TwinSouls"))
                 {
-                    UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
+                    if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
                 }
             }
         }

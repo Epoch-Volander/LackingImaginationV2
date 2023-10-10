@@ -160,7 +160,7 @@ namespace LackingImaginationV2
                             
                             Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
 
-                            UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                            if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
                         }
                     }
 
@@ -222,7 +222,7 @@ namespace LackingImaginationV2
                 {
                     Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
 
-                    UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                    if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
                 }
             }
         }

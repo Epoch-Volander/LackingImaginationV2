@@ -101,7 +101,7 @@ namespace LackingImaginationV2
                             TickStats[0] = "0";
 
                             xTickEssence.Activated = false;
-                            UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                            if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                         }
                         attacker.Heal(hit.GetTotalDamage() * LackingImaginationGlobal.c_tickBloodWellLifeSteal);
                         float blood = float.Parse(TickStats[0]) + (hit.GetTotalDamage() * LackingImaginationGlobal.c_tickBloodWellLifeSteal);
@@ -144,7 +144,7 @@ namespace LackingImaginationV2
                     if (xTickEssence.Activated)
                     {
                         xTickEssence.Activated = false;
-                        UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                        if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                     }
                 }
             }

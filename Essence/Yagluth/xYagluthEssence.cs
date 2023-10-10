@@ -320,7 +320,7 @@ namespace LackingImaginationV2
                     }
                     if (int.Parse(YagluthStats[0]) < (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap - 19 && boolAura)
                     {
-                        UnityEngine.GameObject.Destroy(Aura);
+                        if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
                         boolAura = false;
                     }
                     if (int.Parse(YagluthStats[0]) > (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap)

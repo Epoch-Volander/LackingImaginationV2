@@ -73,7 +73,7 @@ namespace LackingImaginationV2
 
                     Throwable = false;
                     
-                    UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
                 }
                 
                 //Effects, animations, and sounds
@@ -90,16 +90,10 @@ namespace LackingImaginationV2
                 
                 // broken base form, sacrifice fully upgraded krom, to unlock true version, just a stats list to say yes or no to the version of the sword summoned
                 
-                // synergy, add element ot the vigil spirts, give them the fire head
+                //X synergy, add element ot the vigil spirts, give them the fire head
                 
-                
-
-
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+           
         }
         private static void ScheduleEquip(Player player, ref ItemDrop.ItemData item)
         {
@@ -126,8 +120,7 @@ namespace LackingImaginationV2
                 if(player.IsItemEquiped(item)) player.UnequipItem(item);
                 player.m_inventory.RemoveItem(item);
             }
-        }    
-        
+        }
     }
 
     

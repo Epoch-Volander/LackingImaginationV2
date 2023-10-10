@@ -124,7 +124,7 @@ namespace LackingImaginationV2
                             
                             Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
                             
-                            UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                            if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                             
                         }
                         if (hit.m_ranged)
@@ -149,7 +149,7 @@ namespace LackingImaginationV2
                 {
                     Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
 
-                    UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                    if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                 }
             }
         }

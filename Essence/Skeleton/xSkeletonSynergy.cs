@@ -26,12 +26,73 @@ namespace LackingImaginationV2
             LackingImaginationV2Plugin.GO_VulcanSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name,
             LackingImaginationV2Plugin.GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData.m_shared.m_name
         };
-        private static List<string> boundList = new List<string>()
+        private static List<string> boundRancorousList = new List<string>()
         {
-            
+            LackingImaginationV2Plugin.GO_RancorousMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name,
+            LackingImaginationV2Plugin.GO_RancorousMaceBroken.GetComponent<ItemDrop>().m_itemData.m_shared.m_name
         };
         
-        [HarmonyPatch(typeof(Menu), "OnLogout", null)]
+        
+        private static bool sword;
+        private static bool mace;
+        
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
+        public static class Skele_UpdateEnvStatusEffects_Patch
+        {
+            public static void Prefix(Player __instance, ref float dt)
+            {
+
+                if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence")) sword = true;
+                if (!EssenceItemData.equipedEssence.Contains("$item_brenna_essence") && sword == true)
+                {
+                    foreach (string bound in boundVulkanList)
+                    {
+                        if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                        {
+                            Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        }
+                    }
+                    sword = false;
+                }
+
+                if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence")) mace = true;
+                if (!EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence") && mace == true)
+                {
+                    foreach (string bound in boundRancorousList)
+                    {
+                        if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                        {
+                            Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        }
+                    }
+                }
+            }
+        }
+        
+        [HarmonyPatch(typeof(Inventory), nameof(Inventory.MoveInventoryToGrave))]
+        public class Skele_Remove_MoveInventoryToGrave_Patch
+        {
+            public static bool Prefix(Inventory __instance)
+            {
+                foreach (string bound in boundVulkanList)
+                {
+                    if (__instance.ContainsItemByName(bound))
+                    {
+                        __instance.RemoveItem(bound, 1);
+                    }
+                }
+                foreach (string bound in boundRancorousList)
+                {
+                    if (__instance.ContainsItemByName(bound))
+                    {
+                        __instance.RemoveItem(bound, 1);
+                    }
+                }
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(Menu), nameof(Menu.OnLogout), null)]
         public class Skele_Remove_OnLogout_Patch
         {
             public static bool Prefix()
@@ -43,7 +104,7 @@ namespace LackingImaginationV2
                         Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
                     }
                 }
-                foreach (string bound in boundList)
+                foreach (string bound in boundRancorousList)
                 {
                     if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
                     {
@@ -54,7 +115,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Menu), "OnQuit", null)]
+        [HarmonyPatch(typeof(Menu),  nameof(Menu.OnQuit), null)]
         public class Skele_Remove_QuitYes_Patch
         {
             public static bool Prefix()
@@ -66,7 +127,7 @@ namespace LackingImaginationV2
                         Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
                     }
                 }
-                foreach (string bound in boundList)
+                foreach (string bound in boundRancorousList)
                 {
                     if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
                     {
@@ -97,9 +158,15 @@ namespace LackingImaginationV2
                     return false;
                 }
 
-                if (boundList.Contains(item.m_shared.m_name))
+                if (boundRancorousList.Contains(item.m_shared.m_name))
                 {
-
+                    if(__instance.IsItemEquiped(item)) __instance.UnequipItem(item);
+                    inventory.RemoveItem(item);
+                    if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                    xRancidRemainsEssence.Throwable = false;
+                    InventoryGui.instance.SetupDragItem((ItemDrop.ItemData) null, (Inventory) null, 1);
+                    inventory.Changed();
+                    return false;
                 }
 
                 return true;
@@ -125,11 +192,18 @@ namespace LackingImaginationV2
                     return false;
                 }
 
-                if (__instance != fromInventory && boundList.Contains(item.m_shared.m_name))
+                if (__instance != fromInventory && boundRancorousList.Contains(item.m_shared.m_name))
                 {
+                    if(Player.m_localPlayer.IsItemEquiped(item)) Player.m_localPlayer.UnequipItem(item);
+                    fromInventory.RemoveItem(item);
+                    InventoryGui.instance.SetupDragItem((ItemDrop.ItemData) null, (Inventory) null, 1);
+                    // __instacne.RemoveItem(item);
+                    if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    xRancidRemainsEssence.Throwable = false;
                     
-                    
-                    
+                    __instance.Changed();
+                    fromInventory.Changed();
+                    return false;
                 }
 
                 return true;
@@ -151,9 +225,14 @@ namespace LackingImaginationV2
                     __instance.Changed();
                 }
 
-                if (__instance != fromInventory && boundList.Contains(item.m_shared.m_name))
+                if (__instance != fromInventory && boundRancorousList.Contains(item.m_shared.m_name))
                 {
+                    __instance.RemoveItem(__instance.GetItemAt(x, y));
 
+                    if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                    xRancidRemainsEssence.Throwable = false;
+                    
+                    __instance.Changed();
                 }
 
             }
@@ -178,7 +257,7 @@ namespace LackingImaginationV2
                     return true;
                 }
 
-                if (!boundVulkanList.Contains(currentWeapon.m_shared.m_name) && !boundList.Contains(currentWeapon.m_shared.m_name))
+                if (!boundVulkanList.Contains(currentWeapon.m_shared.m_name) && !boundRancorousList.Contains(currentWeapon.m_shared.m_name))
                 {
                     return true;
                 }
@@ -189,12 +268,16 @@ namespace LackingImaginationV2
                     if(!xBrennaEssence.Throwable) return true;
                 }
 
-                GameObject PoisonMace;
+                GameObject PoisonMace = xRancidRemainsEssence.Awakened ? LackingImaginationV2Plugin.GO_RancorousMace : LackingImaginationV2Plugin.GO_RancorousMaceBroken;
+                if (currentWeapon.m_shared.m_name == PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name )
+                {
+                    if(!xRancidRemainsEssence.Throwable) return true;
+                }
 
                 string weapon = "";
 
                 if (boundVulkanList.Contains(currentWeapon.m_shared.m_name)) weapon = "fire";
-                if (boundList.Contains(currentWeapon.m_shared.m_name)) weapon = "poison";
+                if (boundRancorousList.Contains(currentWeapon.m_shared.m_name)) weapon = "poison";
                 
                 var spearPrefab = ObjectDB.instance?.GetItemPrefab("SpearWolfFang");
                 if (spearPrefab == null)
@@ -226,7 +309,8 @@ namespace LackingImaginationV2
                 }
                 else if (weapon == "poison")
                 {
-                    
+                    xRancidRemainsEssence.Throwable = false;
+                    ScheduleDelete(xRancidRemainsEssence.Aura);
                 }
                 
                 
@@ -241,7 +325,7 @@ namespace LackingImaginationV2
             {
                 yield return new WaitForSeconds(2f);
             
-                UnityEngine.GameObject.Destroy(aura);
+                if(aura != null) UnityEngine.GameObject.Destroy(aura);
             }    
         }
         
@@ -250,7 +334,7 @@ namespace LackingImaginationV2
         {
             public static void Prefix(Attack __instance, ref EffectList __state)
             {
-                if(boundVulkanList.Contains(__instance.m_weapon.m_shared.m_name) || boundList.Contains(__instance.m_weapon.m_shared.m_name))
+                if(boundVulkanList.Contains(__instance.m_weapon.m_shared.m_name) || boundRancorousList.Contains(__instance.m_weapon.m_shared.m_name))
                 {
                     __state = __instance.m_weapon.m_shared.m_triggerEffect;
                     __instance.m_weapon.m_shared.m_triggerEffect = new EffectList();
@@ -259,7 +343,7 @@ namespace LackingImaginationV2
 		      
             public static void Postfix(Attack __instance, EffectList __state)
             {
-                if(boundVulkanList.Contains(__instance.m_weapon.m_shared.m_name) || boundList.Contains(__instance.m_weapon.m_shared.m_name))
+                if(boundVulkanList.Contains(__instance.m_weapon.m_shared.m_name) || boundRancorousList.Contains(__instance.m_weapon.m_shared.m_name))
                 {
                     if (__instance.m_weapon.m_lastProjectile.GetComponent<Projectile>() is Projectile projectile)
                     {
@@ -276,7 +360,7 @@ namespace LackingImaginationV2
         {
             public static void Postfix(Attack __instance)
             {
-                if (__instance.m_weapon.m_lastProjectile != null && (boundVulkanList.Contains(__instance.m_weapon.m_shared.m_name) || boundList.Contains(__instance.m_weapon.m_shared.m_name)))
+                if (__instance.m_weapon.m_lastProjectile != null && (boundVulkanList.Contains(__instance.m_weapon.m_shared.m_name) || boundRancorousList.Contains(__instance.m_weapon.m_shared.m_name)))
                 {
                     var existingMesh = __instance.m_weapon.m_lastProjectile.transform.Find("fangspear");
                     if (existingMesh != null)
@@ -294,7 +378,33 @@ namespace LackingImaginationV2
             }
         }
         
-        
+        [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
+        public static class Skele_RPC_Damage_Patch
+        {
+            static void Prefix(Character __instance, ref HitData hit)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_skeleton_essence") && hit.GetAttacker() != null)
+                {
+                    if (__instance.IsDebugFlying())
+                        return;
+                    if ((UnityEngine.Object) hit.GetAttacker() == (UnityEngine.Object) Player.m_localPlayer)
+                    {
+                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
+                        __instance.m_localPlayerHasHit = true;
+                    }
+                    if (!__instance.m_nview.IsOwner() || (double) __instance.GetHealth() <= 0.0 || __instance.IsDead() || __instance.IsTeleporting() || __instance.InCutscene() || hit.m_dodgeable && __instance.IsDodgeInvincible())
+                        return;
+                    Character attacker = hit.GetAttacker();
+                    if (hit.HaveAttacker() && (UnityEngine.Object)attacker == (UnityEngine.Object)null || __instance.IsPlayer() && !__instance.IsPVPEnabled() && (UnityEngine.Object)attacker != (UnityEngine.Object)null && attacker.IsPlayer() && !hit.m_ignorePVP)
+                        return;
+                    if ((UnityEngine.Object) attacker.m_baseAI != (UnityEngine.Object) null && attacker.m_name == "Ghost(Ally)")
+                    {
+                        if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence")) hit.m_damage.m_fire += LackingImaginationGlobal.c_skeletonSynergyBrenna;
+                        if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence")) hit.m_damage.m_poison += LackingImaginationGlobal.c_skeletonSynergyRancid;
+                    }
+                }
+            }
+        }
         
         
         

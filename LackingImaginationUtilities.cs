@@ -218,7 +218,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_skeletonpoison_essence")
             {
-                xRancidRemainsEssence.Process_Input(Player.m_localPlayer);
+                xRancidRemainsEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_growth_essence")
@@ -703,7 +703,14 @@ namespace LackingImaginationV2
                  return 3f * LackingImaginationGlobal.g_CooldownModifer;//adjust
              }
          }  
-        
+         public static float xRancidRemainsCooldownTime
+         {
+             get
+             {
+                 // return Math.Max(LackingImaginationGlobal.c_ulvTerritorialSlumberCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
+                 return 3f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+             }
+         }  
          
          
          
@@ -744,7 +751,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsUp())
+                else if(/*LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() ||*/ LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsUp()*/)
                 {
                     return true;
                 }
@@ -761,7 +768,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsUp())
+                else if(/*LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || */LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsUp()*/)
                 {
                     return true;
                 }
@@ -777,7 +784,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsUp())
+                else if(/*LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() ||*/ LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsUp()*/)
                 {
                     return true;
                 }
@@ -793,7 +800,7 @@ namespace LackingImaginationV2
                 {
                     return false;
                 }
-                else if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed() || LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsUp())
+                else if(/*LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || */LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsUp()*/)
                 {
                     return true;
                 }

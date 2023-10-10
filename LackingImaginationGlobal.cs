@@ -49,8 +49,34 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
-        
+        public static float c_skeletonSynergyBrenna
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_skeletonSynergyBrenna"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
+        public static float c_skeletonSynergyRancid
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_skeletonSynergyRancid"];
+                }
+                catch
+                {
+                    return 25f;
+                }
+            }
+        }
         
         
         

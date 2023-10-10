@@ -150,63 +150,88 @@ namespace LackingImaginationV2
              }
          }
 
-
-
-
         public static int SkillLevelCalculator()
         {
-            int biome = 0;
-            int location = 0;
-            int trophy = 0;
+            int total = (int)Player.m_localPlayer.GetSkillLevel(Skill.fromName("Imagination"));
             
-            if (Player.m_localPlayer != null && Tutorial.instance != null)
-            {
-                foreach (KeyValuePair< Heightmap.Biome, List<string>> kvp in LackingImaginationV2Plugin.biomeDictionary)
-                {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
-                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) biome += int.Parse(kvp.Value[1]);
-                }
-                
-                HashSet<string> uniqueValues = new HashSet<string>();
-                foreach (KeyValuePair<string, List<string>> kvp in LackingImaginationV2Plugin.locationDictionary)
-                {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
-                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
-                    {
-                        string valueToAdd = kvp.Value[0];
-                        if (!uniqueValues.Contains(valueToAdd))
-                        {
-                            uniqueValues.Add(valueToAdd);
-                            location += int.Parse(kvp.Value[1]);
-                        }
-                    }
-                }
-
-                // foreach (KeyValuePair<string, string> kvp in LackingImaginationV2Plugin.dungeonMusicDictionary)
-                // {
-                //     Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value));
-                //     if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) dungeon += 2;
-                // }
-
-                foreach (KeyValuePair<string, List<string>> kvp in LackingImaginationV2Plugin.trophyDictionary)
-                {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
-                    if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) trophy += int.Parse(kvp.Value[1]);
-                }
-            }
-            // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={biome}");
-            // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={dungeon}");
-            // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={trophy}");
-            int total =  biome + location + trophy;
             int slots;
             if (total >= 80) slots = 5;
             else if (total >= 60 && total < 80) slots = 4;
             else if (total >= 40 && total < 60) slots = 3;
             else if (total >= 20 && total < 40) slots = 2;
             else slots = 1;
-
+            
             return slots;
         }
+
+        // [HarmonyPostfix]
+        // public static void Postfix(SkillsDialog __instance, Player player)
+        // {
+        //     // Check if this is the skill you want to modify
+        //     if (__instance.m_elements.Count > 0)
+        //     {
+        //         // Find the skill you want to modify within the skillList
+        //         Skills.Skill skillToModify = player.GetSkills().GetSkillList().Find(skill => skill.m_info.m_skill == SkillType.Swords);
+        //
+        //         if (skillToModify != null)
+        //         {
+        //             // Increase the skill level cap here
+        //             skillToModify.m_info.m_maxLevel = NewSkillLevelCap;
+        //         }
+        //     }
+        // }
+        
+        
+        
+        
+        // public static int SkillLevelCalculator()
+        // {
+        //     int biome = 0;
+        //     int location = 0;
+        //     int trophy = 0;
+        //     
+        //     if (Player.m_localPlayer != null && Tutorial.instance != null)
+        //     {
+        //         foreach (KeyValuePair< Heightmap.Biome, List<string>> kvp in LackingImaginationV2Plugin.biomeDictionary)
+        //         {
+        //             Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
+        //             if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) biome += int.Parse(kvp.Value[1]);
+        //         }
+        //         
+        //         HashSet<string> uniqueValues = new HashSet<string>();
+        //         foreach (KeyValuePair<string, List<string>> kvp in LackingImaginationV2Plugin.locationDictionary)
+        //         {
+        //             Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
+        //             if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label))
+        //             {
+        //                 string valueToAdd = kvp.Value[0];
+        //                 if (!uniqueValues.Contains(valueToAdd))
+        //                 {
+        //                     uniqueValues.Add(valueToAdd);
+        //                     location += int.Parse(kvp.Value[1]);
+        //                 }
+        //             }
+        //         }
+        //
+        //         foreach (KeyValuePair<string, List<string>> kvp in LackingImaginationV2Plugin.trophyDictionary)
+        //         {
+        //             Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == kvp.Value[0]));
+        //             if (Player.m_localPlayer.m_knownTexts.ContainsKey(tutorialText.m_label)) trophy += int.Parse(kvp.Value[1]);
+        //         }
+        //     }
+        //     // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={biome}");
+        //     // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={dungeon}");
+        //     // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={trophy}");
+        //     int total =  biome + location + trophy;
+        //     int slots;
+        //     if (total >= 80) slots = 5;
+        //     else if (total >= 60 && total < 80) slots = 4;
+        //     else if (total >= 40 && total < 60) slots = 3;
+        //     else if (total >= 20 && total < 40) slots = 2;
+        //     else slots = 1;
+        //
+        //     return slots;
+        // }
         
          
          public static GameObject GetLocationFromZoneSystem(ZoneSystem __instance, string LocationName)

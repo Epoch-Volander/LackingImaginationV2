@@ -159,7 +159,7 @@ namespace LackingImaginationV2
             {
                 if (!__instance.GetSEMan().HaveStatusEffect("SE_Relentless") && xDeathsquitoEssence.Aura != null)
                 {
-                    UnityEngine.GameObject.Destroy(xDeathsquitoEssence.Aura);
+                    if(xDeathsquitoEssence.Aura != null) UnityEngine.GameObject.Destroy(xDeathsquitoEssence.Aura);
                 }
             }
         }

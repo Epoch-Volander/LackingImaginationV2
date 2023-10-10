@@ -437,6 +437,8 @@ namespace LackingImaginationV2
         //Weapons
         public static GameObject GO_VulcanSwordBroken;
         public static GameObject GO_VulcanSword;
+        public static GameObject GO_RancorousMaceBroken;
+        public static GameObject GO_RancorousMace;
         
         //Prefabs type 2 //Pulled from assets
         public static GameObject fx_Giantization;
@@ -478,11 +480,13 @@ namespace LackingImaginationV2
         public static AnimationClip creatureAnimationClipPlayerEmoteCower; 
         public static AnimationClip creatureAnimationClipPlayerMace2; 
         public static AnimationClip creatureAnimationClipPlayerEmotePoint; 
+        public static Animator creatureAnimatorBrenna;
+        public static AnimationClip creatureAnimationClipBrennaGroundStab;
         
         
         // Animation Clip swappers
-        public static readonly Dictionary<string, AnimationClip> ExternalAnimations = new();
-        public static readonly Dictionary<string, RuntimeAnimatorController> CustomRuntimeControllers = new();
+        public static readonly Dictionary<string, AnimationClip> OutsideAnimations = new();
+        public static readonly Dictionary<string, RuntimeAnimatorController> CustomizedRuntimeControllers = new();
         private static readonly Dictionary<string, Dictionary<string, string>> replacementMap = new();
 
 
@@ -714,11 +718,16 @@ namespace LackingImaginationV2
         
             Item VulkanB = new Item("essence_bundle_2", "VulcanBroken");
             VulkanB.Name.English("Broken Vulcan"); 
-            VulkanB.Description.English("The flame is a mere fraction of Brenna's anguish");
+            VulkanB.Description.English("The flame is a mere fraction of Brenna's anguish.");
             Item Vulkan = new Item("essence_bundle_2", "Vulcan");
             Vulkan.Name.English("Vulcan"); 
-            Vulkan.Description.English("The flame overflows with Brenna's anguish");
-            
+            Vulkan.Description.English("The flame overflows with Brenna's anguish.");
+            Item RancorousB = new Item("essence_bundle_2", "RancorousBroken");
+            RancorousB.Name.English("Broken Rancorous"); 
+            RancorousB.Description.English("The malice of a nameless sinner coats the weapon.");
+            Item Rancorous = new Item("essence_bundle_2", "Rancorous");
+            Rancorous.Name.English("Rancorous"); 
+            Rancorous.Description.English("The malice of a nameless sinner permeates the weapon.");
 
             
             
@@ -1351,7 +1360,6 @@ namespace LackingImaginationV2
             replacementMap["IceNova"] = new Dictionary<string, string>
             {
                 ["GuardianPower"] = "IceNova",
-                // [original] = "ExternalAnimations",
             };
             replacementMap["RootSummon"] = new Dictionary<string, string>
             {
@@ -1405,45 +1413,96 @@ namespace LackingImaginationV2
                 }
                
                 //Brenna Sword
-                GO_VulcanSword = ObjectDB.instance?.GetItemPrefab("Vulcan");
-                GO_VulcanSwordBroken = ObjectDB.instance?.GetItemPrefab("VulcanBroken");
-                GameObject krom = ObjectDB.instance?.GetItemPrefab("THSwordKrom");
-                ItemDrop.ItemData dataTOReplace = GO_VulcanSword.GetComponent<ItemDrop>().m_itemData;
-                ItemDrop.ItemData dataTOReplaceB = GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData;
-                ItemDrop.ItemData newData = krom.GetComponent<ItemDrop>().m_itemData;
-                if (dataTOReplaceB != null && newData != null && dataTOReplace != null)
                 {
-                    dataTOReplace.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
-                    dataTOReplace.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
-                    dataTOReplace.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
-                    dataTOReplace.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
-                    dataTOReplaceB.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
-                    dataTOReplaceB.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
-                    dataTOReplaceB.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
-                    dataTOReplaceB.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                    GO_VulcanSword = ObjectDB.instance?.GetItemPrefab("Vulcan");
+                    GO_VulcanSwordBroken = ObjectDB.instance?.GetItemPrefab("VulcanBroken");
+                    GameObject krom = ObjectDB.instance?.GetItemPrefab("THSwordKrom");
+                    ItemDrop.ItemData dataTOReplace = GO_VulcanSword.GetComponent<ItemDrop>().m_itemData;
+                    ItemDrop.ItemData dataTOReplaceB = GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData;
+                    ItemDrop.ItemData newData = krom.GetComponent<ItemDrop>().m_itemData;
+                    if (dataTOReplaceB != null && newData != null && dataTOReplace != null)
+                    {
+                        dataTOReplace.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
+                        dataTOReplace.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
+                        dataTOReplace.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
+                        dataTOReplace.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                        dataTOReplaceB.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
+                        dataTOReplaceB.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
+                        dataTOReplaceB.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
+                        dataTOReplaceB.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                    }
+                    GameObject fire = ObjectDB.instance?.GetItemPrefab("skeleton_sword_hildir");
+                    Transform childToReplace = GO_VulcanSword.transform.Find("attach").transform.Find("KromV");
+                    Transform childToReplaceB = GO_VulcanSwordBroken.transform.Find("attach").transform.Find("KromV");
+                    GameObject newChild = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
+                    GameObject newChildB = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
+                    if (childToReplaceB != null && newChildB != null && newChild != null && childToReplace != null)
+                    {
+                        childToReplace.GetComponent<MeshRenderer>().materials = newChild.GetComponent<MeshRenderer>().materials;
+                        childToReplaceB.GetComponent<MeshRenderer>().materials = newChildB.GetComponent<MeshRenderer>().materials;
+                        newChild.transform.Find("fx_Torch_Carried").SetParent(childToReplace);
+                        newChildB.transform.Find("fx_Torch_Carried").SetParent(childToReplaceB);
+                    }
+                    Transform fxTorchCarriedB = childToReplaceB.transform.Find("fx_Torch_Carried");
+                    fxTorchCarriedB.localPosition = new Vector3(0f, 1.25f, 0f); // Example: Move it forward along the local Z-axis
+                    Transform fxTorchCarried = childToReplace.transform.Find("fx_Torch_Carried");
+                    fxTorchCarried.localScale = new Vector3(1f, 1f, 1.4f);
+                    fxTorchCarried.transform.Find("Local Flames").localScale = new Vector3(1f, 1f, 1.4f);
+                    fxTorchCarried.localPosition = new Vector3(0f, 1.45f, 0f);
                 }
-                GameObject fire = ObjectDB.instance?.GetItemPrefab("skeleton_sword_hildir");
-                Transform childToReplace = GO_VulcanSword.transform.Find("attach").transform.Find("KromV");
-                Transform childToReplaceB = GO_VulcanSwordBroken.transform.Find("attach").transform.Find("KromV");
-                GameObject newChild = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
-                GameObject newChildB = ExpMethods.DeepCopy(fire.transform.Find("attach").transform.Find("Krom").gameObject);
 
-                if (childToReplaceB != null && newChildB != null && newChild != null && childToReplace != null)
+
+                //Rancorous Mace
                 {
-                    childToReplace.GetComponent<MeshRenderer>().materials = newChild.GetComponent<MeshRenderer>().materials;
-                    childToReplaceB.GetComponent<MeshRenderer>().materials = newChildB.GetComponent<MeshRenderer>().materials;
-                    newChild.transform.Find("fx_Torch_Carried").SetParent(childToReplace);
-                    newChildB.transform.Find("fx_Torch_Carried").SetParent(childToReplaceB);
+                    GO_RancorousMace = ObjectDB.instance?.GetItemPrefab("Rancorous");
+                    GO_RancorousMaceBroken = ObjectDB.instance?.GetItemPrefab("RancorousBroken");
+                    GameObject iron = ObjectDB.instance?.GetItemPrefab("MaceIron");
+                    ItemDrop.ItemData dataTOReplace = GO_RancorousMace.GetComponent<ItemDrop>().m_itemData;
+                    ItemDrop.ItemData dataTOReplaceB = GO_RancorousMaceBroken.GetComponent<ItemDrop>().m_itemData;
+                    ItemDrop.ItemData newData = iron.GetComponent<ItemDrop>().m_itemData;
+                    if (dataTOReplaceB != null && newData != null && dataTOReplace != null)
+                    {
+                        dataTOReplace.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
+                        dataTOReplace.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
+                        dataTOReplace.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
+                        dataTOReplace.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                        dataTOReplaceB.m_shared.m_hitEffect = newData.m_shared.m_hitEffect;
+                        dataTOReplaceB.m_shared.m_blockEffect = newData.m_shared.m_blockEffect;
+                        dataTOReplaceB.m_shared.m_triggerEffect = newData.m_shared.m_triggerEffect;
+                        dataTOReplaceB.m_shared.m_trailStartEffect = newData.m_shared.m_trailStartEffect;
+                    }
+                    GameObject poison = ObjectDB.instance?.GetItemPrefab("skeleton_mace");
+                    Transform childToReplace = GO_RancorousMace.transform.Find("attach").transform.Find("iron_mace_CubeR");
+                    Transform childToReplaceB = GO_RancorousMaceBroken.transform.Find("attach").transform.Find("iron_mace_CubeR");
+                    GameObject newChild = ExpMethods.DeepCopy(poison.transform.Find("attach").transform.Find("mace").gameObject);
+                    GameObject newChildB = ExpMethods.DeepCopy(poison.transform.Find("attach").transform.Find("mace").gameObject);
+                    if (childToReplaceB != null && newChildB != null && newChild != null && childToReplace != null)
+                    {
+                        childToReplace.GetComponent<MeshRenderer>().materials = newChild.GetComponent<MeshRenderer>().materials;
+                        childToReplaceB.GetComponent<MeshRenderer>().materials = newChildB.GetComponent<MeshRenderer>().materials;
+                        newChild.transform.Find("Particle System").SetParent(childToReplace);
+                        newChildB.transform.Find("Particle System").SetParent(childToReplaceB);
+                        newChild.transform.Find("vfx_drippingwater").SetParent(childToReplace);
+                        newChildB.transform.Find("vfx_drippingwater").SetParent(childToReplaceB);
+                        newChild.transform.Find("Point light").SetParent(childToReplace);
+                        newChildB.transform.Find("Point light").SetParent(childToReplaceB);
+                        newChild.transform.Find("Particle System (1)").SetParent(childToReplace);
+                        newChildB.transform.Find("Particle System (1)").SetParent(childToReplaceB);
+                    }
+                    foreach (Transform child in childToReplaceB)
+                    {
+                        child.localPosition = new Vector3(0f, 2.5f, 0f);
+                        child.localScale *= 0.5f;
+                    }
+                    foreach (Transform child in childToReplace)
+                    {
+                        child.localPosition = new Vector3(0f, 2.5f, 0f);
+                    }
+                    
+                    
                 }
-                Transform fxTorchCarriedB = childToReplaceB.transform.Find("fx_Torch_Carried");
-                fxTorchCarriedB.localPosition = new Vector3(0f, 1.25f, 0f); // Example: Move it forward along the local Z-axis
-                Transform fxTorchCarried = childToReplace.transform.Find("fx_Torch_Carried");
-                fxTorchCarried.localScale = new Vector3(1f, 1f, 1.4f);
-                fxTorchCarried.transform.Find("Local Flames").localScale = new Vector3(1f, 1f, 1.4f);
-                fxTorchCarried.localPosition = new Vector3(0f, 1.45f, 0f);
-                
-                
-                
+
+
 
                 creatureAnimatorGeirrhafa = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
                 foreach (AnimationClip clip in creatureAnimatorGeirrhafa.runtimeAnimatorController.animationClips)
@@ -1526,82 +1585,71 @@ namespace LackingImaginationV2
             private static void Postfix(Player __instance)
             {
                 
-                if (creatureAnimationClipGeirrhafaIceNova !=null && creatureAnimationClipElderSummon !=null) //ZNetScene.instance
+                if (creatureAnimationClipGeirrhafaIceNova !=null && creatureAnimationClipElderSummon !=null) 
                 {
                     LogWarning($"animations good");
                     AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
-                    ExternalAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
+                    OutsideAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
                     AnimationClip copyOfcreatureAnimationClipElderSummon = Instantiate(creatureAnimationClipElderSummon);
-                    ExternalAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
+                    OutsideAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
                     AnimationClip copyOfcreatureAnimationClipCultistSpray = Instantiate(creatureAnimationClipCultistSpray);
-                    ExternalAnimations["AttackSpray"] = copyOfcreatureAnimationClipCultistSpray;
+                    OutsideAnimations["AttackSpray"] = copyOfcreatureAnimationClipCultistSpray;
                     AnimationClip copyOfcreatureAnimationClipFenringLeapAttack = Instantiate(creatureAnimationClipFenringLeapAttack);
-                    ExternalAnimations["FenringLeap"] = copyOfcreatureAnimationClipFenringLeapAttack;
+                    OutsideAnimations["FenringLeap"] = copyOfcreatureAnimationClipFenringLeapAttack;
                     AnimationClip copyOfcreatureAnimationClipGreyShamanHeal = Instantiate(creatureAnimationClipGreyShamanHeal);
-                    ExternalAnimations["GreyShamanHeal"] = copyOfcreatureAnimationClipGreyShamanHeal;
+                    OutsideAnimations["GreyShamanHeal"] = copyOfcreatureAnimationClipGreyShamanHeal;
                     AnimationClip copyOfcreatureAnimationClipHaldorGreet = Instantiate(creatureAnimationClipHaldorGreet);
-                    ExternalAnimations["HaldorGreet"] = copyOfcreatureAnimationClipHaldorGreet;
+                    OutsideAnimations["HaldorGreet"] = copyOfcreatureAnimationClipHaldorGreet;
                     AnimationClip copyOfcreatureAnimationClipPlayerEmoteCower = Instantiate(creatureAnimationClipPlayerEmoteCower);
-                    ExternalAnimations["PlayerCower"] = copyOfcreatureAnimationClipPlayerEmoteCower;
+                    OutsideAnimations["PlayerCower"] = copyOfcreatureAnimationClipPlayerEmoteCower;
                     AnimationClip copyOfcreatureAnimationClipPlayerEmotePoint = Instantiate(creatureAnimationClipPlayerEmotePoint);
-                    ExternalAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
+                    OutsideAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
                     AnimationClip copyOfcreatureAnimationClipPlayerMace2 = Instantiate(creatureAnimationClipPlayerMace2);
-                    ExternalAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
-                    
+                    OutsideAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
                     
                     
                     LackingImaginationV2Plugin.InitAnimation();
 
-                    if (CustomRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
+                    if (CustomizedRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
                     {
-                        CustomRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["AttackSprayControl"] = MakeAOC(replacementMap["AttackSpray"], __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);//
-                        CustomRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);//
-                        CustomRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
-                        CustomRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["AttackSprayControl"] = MakeAOC(replacementMap["AttackSpray"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);//
+                        CustomizedRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);//
+                        CustomizedRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
 
                         
                     }
                 }
             }
         }
-        private static RuntimeAnimatorController MakeAOC(Dictionary<string, string> replacement, RuntimeAnimatorController ORIGINAL)
+        private static RuntimeAnimatorController MakeAOC(Dictionary<string, string> replacement, RuntimeAnimatorController original)
         {
-            AnimatorOverrideController aoc = new(ORIGINAL);
-            List<KeyValuePair<AnimationClip, AnimationClip>> anims = new();
+            AnimatorOverrideController aoc = new(original);
+            List<KeyValuePair<AnimationClip, AnimationClip>> animations = new();
             foreach (AnimationClip animation in aoc.animationClips)
             {
                 string name = animation.name;
                 if (replacement.TryGetValue(name, out string value))
                 {
-                    AnimationClip newClip = Instantiate(ExternalAnimations[value]);
+                    AnimationClip newClip = Instantiate(OutsideAnimations[value]);
                     newClip.name = name;
-                    anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, newClip));
+                    animations.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, newClip));
                 }
                 else
                 {
-                    anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, animation));
+                    animations.Add(new KeyValuePair<AnimationClip, AnimationClip>(animation, animation));
                 }
             }
-            aoc.ApplyOverrides(anims);
+            aoc.ApplyOverrides(animations);
             return aoc;
         }
-        
-        public static void FastReplaceRAC(Player player, RuntimeAnimatorController replace)
-        {
-            if (player.m_animator.runtimeAnimatorController == replace)
-            {
-                return;
-            }
-            player.m_animator.runtimeAnimatorController = replace;
-            player.m_animator.Update(Time.deltaTime);
-        }
-        
+
         [HarmonyPatch(typeof(ZSyncAnimation), nameof(ZSyncAnimation.RPC_SetTrigger))]
         private static class Patch_ZSyncAnimation_RPC_SetTrigger
         {
@@ -1640,15 +1688,23 @@ namespace LackingImaginationV2
                     }
                    
                     // in case this is called before the first Player.Start
-                    if (CustomRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
+                    if (CustomizedRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
                     {
-                        FastReplaceRAC(player, controller);
+                        ReplaceAnim(player, controller);
                     }
                 }
             }
         }
         
-        
+        public static void ReplaceAnim(Player player, RuntimeAnimatorController replace)
+        {
+            if (player.m_animator.runtimeAnimatorController == replace)
+            {
+                return;
+            }
+            player.m_animator.runtimeAnimatorController = replace;
+            player.m_animator.Update(Time.deltaTime);
+        }
         
         
         
