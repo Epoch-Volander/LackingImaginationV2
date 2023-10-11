@@ -485,6 +485,7 @@ namespace LackingImaginationV2
         public static AnimationClip creatureAnimationClipPlayerEmoteCower; 
         public static AnimationClip creatureAnimationClipPlayerMace2; 
         public static AnimationClip creatureAnimationClipPlayerEmotePoint; 
+        public static AnimationClip creatureAnimationClipPlayerEmoteDespair; 
         public static Animator creatureAnimatorBrenna;
         public static AnimationClip creatureAnimationClipBrennaGroundStab;
         public static Animator creatureAnimatorDvergr;
@@ -1421,6 +1422,10 @@ namespace LackingImaginationV2
             {
                 ["GuardianPower"] = "PlayerMace2",
             };
+            replacementMap["PlayerDespair"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "PlayerDespair",
+            };
             replacementMap["GroundStab"] = new Dictionary<string, string>
             {
                 ["GuardianPower"] = "GroundStab",
@@ -1532,6 +1537,7 @@ namespace LackingImaginationV2
                     foreach (Transform child in childToReplace)
                     {
                         child.localPosition = new Vector3(0f, 2.5f, 0f);
+                        child.localScale *= 0.75f;
                     }
                     
                     
@@ -1605,8 +1611,13 @@ namespace LackingImaginationV2
                     if (clip.name == "Point") creatureAnimationClipPlayerEmotePoint = clip;
                     
                     if (clip.name == "MaceAltAttack") creatureAnimationClipPlayerMace2 = clip;
+
+                    if (clip.name == "Despair") creatureAnimationClipPlayerEmoteDespair = clip;
                     
-                    if (creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null && creatureAnimationClipPlayerMace2 != null)
+                    if (creatureAnimationClipPlayerEmoteCower != null 
+                        && creatureAnimationClipPlayerEmotePoint != null
+                        && creatureAnimationClipPlayerMace2 != null 
+                        && creatureAnimationClipPlayerEmoteDespair != null)
                     {
                         break;
                     }
@@ -1643,7 +1654,7 @@ namespace LackingImaginationV2
                     creatureAnimationClipGreyShamanHeal != null && creatureAnimationClipHaldorGreet != null &&
                     creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null &&
                     creatureAnimationClipPlayerMace2 != null && creatureAnimationClipBrennaGroundStab != null &&
-                    creatureAnimationClipDvergrStaffRaise != null) // ADD REST
+                    creatureAnimationClipDvergrStaffRaise != null && creatureAnimationClipPlayerEmoteDespair != null) // ADD REST
                 {
                     LogWarning($"animations good");
                     AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
@@ -1664,10 +1675,13 @@ namespace LackingImaginationV2
                     OutsideAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
                     AnimationClip copyOfcreatureAnimationClipPlayerMace2 = Instantiate(creatureAnimationClipPlayerMace2);
                     OutsideAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
+                    AnimationClip copyOfcreatureAnimationClipPlayerEmoteDespair = Instantiate(creatureAnimationClipPlayerEmoteDespair);
+                    OutsideAnimations["PlayerDespair"] = copyOfcreatureAnimationClipPlayerEmoteDespair;
                     AnimationClip copyOfcreatureAnimationClipBrennaGroundStab = Instantiate(creatureAnimationClipBrennaGroundStab);
                     OutsideAnimations["GroundStab"] = copyOfcreatureAnimationClipBrennaGroundStab;
                     AnimationClip copyOfcreatureAnimationClipDvergrStaffRaise = Instantiate(creatureAnimationClipDvergrStaffRaise);
                     OutsideAnimations["RaiseStaff"] = copyOfcreatureAnimationClipDvergrStaffRaise;
+                    
                     
                     LackingImaginationV2Plugin.InitAnimation();
 
@@ -1683,6 +1697,7 @@ namespace LackingImaginationV2
                         CustomizedRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["PlayerDespairControl"] = MakeAOC(replacementMap["PlayerDespair"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["SkeletonGroundStabControl"] = MakeAOC(replacementMap["GroundStab"], __instance.m_animator.runtimeAnimatorController);// upgrade anim, equip first
                         CustomizedRuntimeControllers["DvergrRaiseStaffControl"] = MakeAOC(replacementMap["RaiseStaff"], __instance.m_animator.runtimeAnimatorController);// upgrade anim, equip first
 
@@ -1748,6 +1763,10 @@ namespace LackingImaginationV2
                     if (xCultistEssence.CultistController)
                     {
                         controllerName = "PlayerMace2Control";
+                    }
+                    if (xSurtlingEssence.SurtlingController)
+                    {
+                        controllerName = "PlayerDespairControl";
                     }
                     if (xSkeletonSynergy.SkeletonSynergyBrennaController)
                     {

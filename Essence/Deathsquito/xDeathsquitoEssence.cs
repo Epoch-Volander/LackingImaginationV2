@@ -179,7 +179,18 @@ namespace LackingImaginationV2
         //     }
         // }
         
-        
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
+        public static class Deathsquito_GetTotalFoodValue_Patch
+        {
+            [HarmonyPriority(Priority.Low)]
+            public static void Postfix( ref float hp, ref float stamina, ref float eitr)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_deathsquito_essence"))
+                {
+                    hp -= hp * 0.5f; // hp ruduced by half
+                }
+            }
+        }
         
         
         

@@ -80,6 +80,7 @@ namespace LackingImaginationV2
                     ch.Heal(ch.GetMaxHealth() * LackingImaginationGlobal.c_greydwarfshamanDubiousHealCreature);
                 }
             }
+            player.SetCrouch(true);
         }
     }
 

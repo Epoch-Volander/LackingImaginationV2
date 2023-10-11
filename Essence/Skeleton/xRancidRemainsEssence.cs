@@ -111,14 +111,14 @@ namespace LackingImaginationV2
                     {
                         UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), vector3, rotation);
                         GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), vector3, rotation);
-                        Aoe.transform.Find("wetsplsh").GetComponent<Transform>().localScale *= 8f;
+                        Aoe.transform.Find("wetsplsh").GetComponent<Transform>().localScale *= 6f;
                         StartAoe(Player.m_localPlayer, vector3, 8f);
                     }
-                    else
+                    else if(!xRancidRemainsEssence.Awakened)
                     {
-                        UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), vector3, rotation);
-                        GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), vector3, rotation);
-                        Aoe.transform.Find("wetsplsh").GetComponent<Transform>().localScale *= 4f;
+                        UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), vector3, rotation);
+                        GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), vector3, rotation);
+                        Aoe.transform.Find("wetsplsh").GetComponent<Transform>().localScale *= 3f;
                         StartAoe(Player.m_localPlayer, vector3, 4f);
                     }
                     

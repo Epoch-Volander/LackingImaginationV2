@@ -20,6 +20,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Harbinger";
         public static int Charges;
+        public static bool SurtlingController;
         
         private static float minDistanceBetweenCharacters = LackingImaginationGlobal.c_surtlingHarbingerMinDistance; // Set the minimum distance between characters
         
@@ -57,6 +58,11 @@ namespace LackingImaginationV2
                         UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_imp_death"), player.transform.position, Quaternion.identity);
                         // UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Harbinger, player.transform.position, Quaternion.identity);
                     
+                        LackingImaginationV2Plugin.UseGuardianPower = false;
+                        SurtlingController = true;
+                        ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
+                        SurtlingController = false;
+                        
                         //Lingering effects
                         SE_Harbinger se_harbinger = (SE_Harbinger)ScriptableObject.CreateInstance(typeof(SE_Harbinger));
                         se_harbinger.m_ttl = SE_Harbinger.m_baseTTL;
