@@ -265,7 +265,8 @@ namespace LackingImaginationV2
         
         
         public static ConfigEntry<float> li_draugrSynergyRot;
-        
+        public static ConfigEntry<float> li_skeletonSynergyBrenna;
+        public static ConfigEntry<float> li_skeletonSynergyRancid;
         
         //Cooldown
         public static ConfigEntry<float> li_eikthyrBlitzCD;
@@ -306,7 +307,8 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_stonegolemCoreOverdriveCD;
         public static ConfigEntry<float> li_yagluthCulminationCD;
         public static ConfigEntry<float> li_ulvTerritorialSlumberCD;
-        
+        public static ConfigEntry<float> li_brennaVulcanCD;
+        public static ConfigEntry<float> li_rancidremainsRancorousCD;
         
         
         
@@ -426,6 +428,9 @@ namespace LackingImaginationV2
         public static ConfigEntry<float> li_ulvTerritorialSlumberStamina;
         public static ConfigEntry<float> li_ulvTerritorialSlumberSummonDuration;
         public static ConfigEntry<float> li_ulvTerritorialSlumberSummonHealth;
+        public static ConfigEntry<float> li_brennaVulcanArmor;
+        public static ConfigEntry<float> li_rancidremainsRancorousArmor;
+        
        
         
         // public static List<string> equipedEssence = new();
@@ -482,6 +487,8 @@ namespace LackingImaginationV2
         public static AnimationClip creatureAnimationClipPlayerEmotePoint; 
         public static Animator creatureAnimatorBrenna;
         public static AnimationClip creatureAnimationClipBrennaGroundStab;
+        public static Animator creatureAnimatorDvergr;
+        public static AnimationClip creatureAnimationClipDvergrStaffRaise;
         
         
         // Animation Clip swappers
@@ -588,6 +595,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xStoneGolemEssencePassive.StoneGolemStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xYagluthEssencePassive.YagluthStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xBrennaEssencePassive.BrennaStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xRancidRemainsEssencePassive.RancidRemainsStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
@@ -796,7 +804,9 @@ namespace LackingImaginationV2
             //Synergies
             //Draugr Synergy
             li_draugrSynergyRot = config("Essence Synergy Modifiers", "li_draugrSynergyRot", 5f, new ConfigDescription("Modifies % dmg reduction system when all Draugr essences are equipped", new AcceptableValueRange<float>(0f, 100f)));
-            
+            li_skeletonSynergyBrenna = config("Essence Synergy Modifiers", "li_skeletonSynergyBrenna", 25f, "Bonus fire damage Vigil Ghost do if Brenna essence equipped");
+            li_skeletonSynergyRancid = config("Essence Synergy Modifiers", "li_skeletonSynergyRancid", 25f, "Bonus poison damage Vigil Ghost do if Rancid Remains essence equipped");
+
         
             
             
@@ -988,8 +998,12 @@ namespace LackingImaginationV2
             li_ulvTerritorialSlumberStamina = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberStamina", 5f, new ConfigDescription("Percentage of Comfort that stamina is multiplied by", new AcceptableValueRange<float>(0f, 100f)));
             li_ulvTerritorialSlumberSummonDuration = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberSummonDuration", 45f, "Modifies the time before summons die");
             li_ulvTerritorialSlumberSummonHealth = config("Essence Ulv Modifiers", "li_ulvTerritorialSlumberSummonHealth", 1f, "Modifies creature health");
-
-            
+            //brenna
+            li_brennaVulcanCD = config("Essence Brenna Modifiers", "li_brennaVulcanCD", 10f, "Cooldown");
+            li_brennaVulcanArmor = config("Essence Brenna Modifiers", "li_brennaVulcanArmor", 25f, "Modifies armor reduction amount");
+            //rancidremains
+            li_rancidremainsRancorousCD = config("Essence Rancid Remains Modifiers", "li_rancidremainsRancorousCD", 10f, "Cooldown");
+            li_rancidremainsRancorousArmor = config("Essence Rancid Remains Modifiers", "li_rancidremainsRancorousArmor", 15f, "Modifies armor reduction amount");
 
 
 
@@ -1007,8 +1021,8 @@ namespace LackingImaginationV2
             
             //Synergies
             LackingImaginationGlobal.ConfigStrings.Add("li_draugrSynergyRot", li_draugrSynergyRot.Value);
-            
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_skeletonSynergyBrenna", li_skeletonSynergyBrenna.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_skeletonSynergyRancid", li_skeletonSynergyRancid.Value);
             
             
             
@@ -1051,6 +1065,9 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_stonegolemCoreOverdriveCD", li_stonegolemCoreOverdriveCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_yagluthCulminationCD", li_yagluthCulminationCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberCD", li_ulvTerritorialSlumberCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_brennaVulcanCD", li_brennaVulcanCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousCD", li_rancidremainsRancorousCD.Value);
+            
             
             
             //Status Duration
@@ -1169,7 +1186,8 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberStamina", li_ulvTerritorialSlumberStamina.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSummonDuration", li_ulvTerritorialSlumberSummonDuration.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSummonHealth", li_ulvTerritorialSlumberSummonHealth.Value);
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_brennaVulcanArmor", li_brennaVulcanArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousArmor", li_rancidremainsRancorousArmor.Value);
             
             
             
@@ -1189,7 +1207,11 @@ namespace LackingImaginationV2
             
             
             _ = ConfigSync.AddConfigEntry(li_draugrSynergyRot);
-
+            _ = ConfigSync.AddConfigEntry(li_skeletonSynergyBrenna);
+            _ = ConfigSync.AddConfigEntry(li_skeletonSynergyRancid);
+            
+            
+            
             
             //Cooldowns
             _ = ConfigSync.AddConfigEntry(li_eikthyrBlitzCD);
@@ -1228,6 +1250,9 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_stonegolemCoreOverdriveCD);
             _ = ConfigSync.AddConfigEntry(li_yagluthCulminationCD);
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberCD);
+            _ = ConfigSync.AddConfigEntry(li_brennaVulcanCD);
+            _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousCD);
+            
             
             
             //Status Duration
@@ -1346,6 +1371,9 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberStamina);
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSummonDuration);
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSummonHealth); 
+            _ = ConfigSync.AddConfigEntry(li_brennaVulcanArmor);
+            _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousArmor); 
+            
             
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -1392,6 +1420,14 @@ namespace LackingImaginationV2
             replacementMap["PlayerMace2"] = new Dictionary<string, string>
             {
                 ["GuardianPower"] = "PlayerMace2",
+            };
+            replacementMap["GroundStab"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "GroundStab",
+            };
+            replacementMap["RaiseStaff"] = new Dictionary<string, string>
+            {
+                ["GuardianPower"] = "RaiseStaff",
             };
             
         }
@@ -1450,8 +1486,7 @@ namespace LackingImaginationV2
                     fxTorchCarried.transform.Find("Local Flames").localScale = new Vector3(1f, 1f, 1.4f);
                     fxTorchCarried.localPosition = new Vector3(0f, 1.45f, 0f);
                 }
-
-
+                
                 //Rancorous Mace
                 {
                     GO_RancorousMace = ObjectDB.instance?.GetItemPrefab("Rancorous");
@@ -1576,6 +1611,24 @@ namespace LackingImaginationV2
                         break;
                     }
                 }
+                creatureAnimatorBrenna = ZNetScene.instance.GetPrefab("Skeleton_Hildir").gameObject.transform.Find("Visual").transform.Find("_skeleton_base").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorBrenna.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Skeleton Fire Attack") 
+                    {
+                        creatureAnimationClipBrennaGroundStab = clip;
+                        break; 
+                    }
+                }
+                creatureAnimatorDvergr = ZNetScene.instance.GetPrefab("DvergerMage").gameObject.transform.Find("Visual").GetComponent<Animator>();
+                foreach (AnimationClip clip in creatureAnimatorDvergr.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == "Staff Magic Heal") 
+                    {
+                        creatureAnimationClipDvergrStaffRaise = clip;
+                        break; 
+                    }
+                }
             }
         }
          
@@ -1585,7 +1638,12 @@ namespace LackingImaginationV2
             private static void Postfix(Player __instance)
             {
                 
-                if (creatureAnimationClipGeirrhafaIceNova !=null && creatureAnimationClipElderSummon !=null) 
+                if (creatureAnimationClipGeirrhafaIceNova != null && creatureAnimationClipElderSummon != null &&
+                    creatureAnimationClipCultistSpray != null && creatureAnimationClipFenringLeapAttack != null &&
+                    creatureAnimationClipGreyShamanHeal != null && creatureAnimationClipHaldorGreet != null &&
+                    creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null &&
+                    creatureAnimationClipPlayerMace2 != null && creatureAnimationClipBrennaGroundStab != null &&
+                    creatureAnimationClipDvergrStaffRaise != null) // ADD REST
                 {
                     LogWarning($"animations good");
                     AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
@@ -1606,7 +1664,10 @@ namespace LackingImaginationV2
                     OutsideAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
                     AnimationClip copyOfcreatureAnimationClipPlayerMace2 = Instantiate(creatureAnimationClipPlayerMace2);
                     OutsideAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
-                    
+                    AnimationClip copyOfcreatureAnimationClipBrennaGroundStab = Instantiate(creatureAnimationClipBrennaGroundStab);
+                    OutsideAnimations["GroundStab"] = copyOfcreatureAnimationClipBrennaGroundStab;
+                    AnimationClip copyOfcreatureAnimationClipDvergrStaffRaise = Instantiate(creatureAnimationClipDvergrStaffRaise);
+                    OutsideAnimations["RaiseStaff"] = copyOfcreatureAnimationClipDvergrStaffRaise;
                     
                     LackingImaginationV2Plugin.InitAnimation();
 
@@ -1616,14 +1677,15 @@ namespace LackingImaginationV2
                         CustomizedRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["AttackSprayControl"] = MakeAOC(replacementMap["AttackSpray"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);//
+                        CustomizedRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);// unused, use it
                         CustomizedRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);//
+                        CustomizedRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);// unused
                         CustomizedRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
                         CustomizedRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
+                        CustomizedRuntimeControllers["SkeletonGroundStabControl"] = MakeAOC(replacementMap["GroundStab"], __instance.m_animator.runtimeAnimatorController);// upgrade anim, equip first
+                        CustomizedRuntimeControllers["DvergrRaiseStaffControl"] = MakeAOC(replacementMap["RaiseStaff"], __instance.m_animator.runtimeAnimatorController);// upgrade anim, equip first
 
-                        
                     }
                 }
             }
@@ -1653,6 +1715,7 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(ZSyncAnimation), nameof(ZSyncAnimation.RPC_SetTrigger))]
         private static class Patch_ZSyncAnimation_RPC_SetTrigger
         {
+            [HarmonyPriority(Priority.VeryLow)]
             private static void Prefix(ZSyncAnimation __instance, string name)
             {
                 if (__instance.GetComponent<Player>() is { } player)
@@ -1686,8 +1749,18 @@ namespace LackingImaginationV2
                     {
                         controllerName = "PlayerMace2Control";
                     }
-                   
-                    // in case this is called before the first Player.Start
+                    if (xSkeletonSynergy.SkeletonSynergyBrennaController)
+                    {
+                        controllerName = "SkeletonGroundStabControl";
+                    }
+                    if (xSkeletonSynergy.SkeletonSynergyRancidController)
+                    {
+                        controllerName = "DvergrRaiseStaffControl";
+                    }
+                    
+                    
+                    
+                    // if called before the first Player Start
                     if (CustomizedRuntimeControllers.TryGetValue(controllerName, out RuntimeAnimatorController controller))
                     {
                         ReplaceAnim(player, controller);

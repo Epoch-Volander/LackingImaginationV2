@@ -158,7 +158,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_seekerqueen_essence")
             {
-                xSeekerQueenEssence.Process_Input(Player.m_localPlayer);
+                xSeekerQueenEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_wolf_essence")
@@ -699,16 +699,14 @@ namespace LackingImaginationV2
          {
              get
              {
-                 // return Math.Max(LackingImaginationGlobal.c_ulvTerritorialSlumberCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
-                 return 3f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+                 return Math.Max(LackingImaginationGlobal.c_brennaVulcanCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }  
          public static float xRancidRemainsCooldownTime
          {
              get
              {
-                 // return Math.Max(LackingImaginationGlobal.c_ulvTerritorialSlumberCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
-                 return 3f * LackingImaginationGlobal.g_CooldownModifer;//adjust
+                 return Math.Max(LackingImaginationGlobal.c_rancidremainsRancorousCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }  
          

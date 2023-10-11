@@ -2266,6 +2266,67 @@ namespace LackingImaginationV2
                 }
             }
         }
+       //Brenna
+       public static float c_brennaVulcanCD
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_brennaVulcanCD"];
+               }
+               catch
+               {
+                   return 10f;
+               }
+           }
+       }
+       public static float c_brennaVulcanArmor
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_brennaVulcanArmor"];
+               }
+               catch
+               {
+                   return 25f;
+               }
+           }
+       }
+       //Rancid
+       public static float c_rancidremainsRancorousCD
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_rancidremainsRancorousCD"];
+               }
+               catch
+               {
+                   return 10f;
+               }
+           }
+       }
+       public static float c_rancidremainsRancorousArmor
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_rancidremainsRancorousArmor"];
+               }
+               catch
+               {
+                   return 15f;
+               }
+           }
+       }
+       
+       
+       
        
         
         

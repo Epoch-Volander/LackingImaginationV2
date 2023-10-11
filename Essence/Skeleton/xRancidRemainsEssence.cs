@@ -19,7 +19,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Rancorous";
         
-        public static bool Awakened = Boolean.Parse(xRancidRemainsEssencePassive.RancidRemainsStats[0]);
+        public static bool Awakened;
         private static float equipDelay = 0.5f;
         private static float deleteDelay = 3600f;
         public static bool Throwable;
@@ -29,6 +29,7 @@ namespace LackingImaginationV2
         {
               if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
               {
+                  Awakened = Boolean.Parse(xRancidRemainsEssencePassive.RancidRemainsStats[0]);
                   GameObject PoisonMace = Awakened ? LackingImaginationV2Plugin.GO_RancorousMace : LackingImaginationV2Plugin.GO_RancorousMaceBroken;
                   
                   //Ability Cooldown
@@ -47,8 +48,8 @@ namespace LackingImaginationV2
                     
                       player.m_inventory.AddItem(PoisonMace, 1);
                       ItemDrop.ItemData mace = player.m_inventory.GetItem(PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
-                      ScheduleEquip(player, ref mace);
-                      ScheduleDelete(player, ref mace);
+                      xSkeletonSynergy.ScheduleEquip(player, ref mace, equipDelay);
+                      xSkeletonSynergy.ScheduleDelete(player, ref mace, deleteDelay);
                   }
                   else if(!Throwable)
                   {
@@ -79,32 +80,7 @@ namespace LackingImaginationV2
                   // LackingImaginationV2Plugin.Log($"Brenna {player.transform.position}");
               }
         }
-        private static void ScheduleEquip(Player player, ref ItemDrop.ItemData item)
-        {
-            CoroutineRunner.Instance.StartCoroutine(ScheduleEquipCoroutine(player, item));
-        }
-        // ReSharper disable Unity.PerformanceAnalysis
-        private static IEnumerator ScheduleEquipCoroutine(Player player, ItemDrop.ItemData item)
-        {
-            yield return new WaitForSeconds(equipDelay);
-            
-            player.EquipItem(item);
-        }
-        private static void ScheduleDelete(Player player, ref ItemDrop.ItemData item)
-        {
-            CoroutineRunner.Instance.StartCoroutine(ScheduleDeleteCoroutine(player, item));
-        }
-        // ReSharper disable Unity.PerformanceAnalysis
-        private static IEnumerator ScheduleDeleteCoroutine(Player player, ItemDrop.ItemData item)
-        {
-            yield return new WaitForSeconds(deleteDelay);
-            
-            if (player.m_inventory.ContainsItem(item))
-            {
-                if(player.IsItemEquiped(item)) player.UnequipItem(item);
-                player.m_inventory.RemoveItem(item);
-            }
-        }
+      
     }
 
      [HarmonyPatch]
@@ -116,10 +92,11 @@ namespace LackingImaginationV2
         
 
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
-        public static class Brenna_SpawnOnHit_Patch
+        public static class RancidRemains_SpawnOnHit_Patch
         {
             public static void Prefix(Projectile __instance)
             {
+                xRancidRemainsEssence.Awakened = Boolean.Parse(xRancidRemainsEssencePassive.RancidRemainsStats[0]);
                 GameObject PoisonMace = xRancidRemainsEssence.Awakened ? LackingImaginationV2Plugin.GO_RancorousMace : LackingImaginationV2Plugin.GO_RancorousMaceBroken;
                 if (__instance.m_owner == Player.m_localPlayer && __instance.m_spawnItem?.m_shared.m_name == PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name)
                 {
@@ -134,14 +111,15 @@ namespace LackingImaginationV2
                     {
                         UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), vector3, rotation);
                         GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), vector3, rotation);
-                        Aoe.GetComponent<Transform>().localScale *= 2f;
-                        StartAoe(Player.m_localPlayer, vector3, 9.5f);
+                        Aoe.transform.Find("wetsplsh").GetComponent<Transform>().localScale *= 8f;
+                        StartAoe(Player.m_localPlayer, vector3, 8f);
                     }
                     else
                     {
                         UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), vector3, rotation);
-                        UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), vector3, rotation);
-                        StartAoe(Player.m_localPlayer, vector3, 4.75f);
+                        GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), vector3, rotation);
+                        Aoe.transform.Find("wetsplsh").GetComponent<Transform>().localScale *= 4f;
+                        StartAoe(Player.m_localPlayer, vector3, 4f);
                     }
                     
                     __instance.m_spawnItem = null;
@@ -169,6 +147,7 @@ namespace LackingImaginationV2
                         {
                             detectedObjects.Add(collider.gameObject);
                         
+                            xRancidRemainsEssence.Awakened = Boolean.Parse(xRancidRemainsEssencePassive.RancidRemainsStats[0]);
                             HitData hitData = new HitData();
                             hitData.m_damage.m_poison =  xRancidRemainsEssence.Awakened ? LackingImaginationV2Plugin.GO_RancorousMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_poison : LackingImaginationV2Plugin.GO_RancorousMaceBroken.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_poison;
                             hitData.m_damage.m_blunt = xRancidRemainsEssence.Awakened ? LackingImaginationV2Plugin.GO_RancorousMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_blunt : LackingImaginationV2Plugin.GO_RancorousMaceBroken.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_blunt;
@@ -188,14 +167,21 @@ namespace LackingImaginationV2
             }
         }
 
-        
-        
-        
-        
-        
-        
-        
-        
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
+        public static class RancidRemains_GetBodyArmor_Patch
+        {
+            public static void Postfix(ref float __result)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence"))
+                {
+                    __result -= LackingImaginationGlobal.c_rancidremainsRancorousArmor;
+                    if (__result < 0)
+                    {
+                        __result = 0;
+                    }
+                }
+            }
+        }
 
     }
     

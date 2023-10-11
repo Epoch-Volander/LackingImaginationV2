@@ -158,8 +158,10 @@
         <Compile Include="Essence\Fulings\FShaman\xFulingShamanEssence.cs" />
         <Compile Include="Essence\Fulings\Fuling\SE_Longinus.cs" />
         <Compile Include="Essence\Fulings\Fuling\xFulingEssence.cs" />
-        <Compile Include="Essence\GreyBrute\SE_Bash.cs" />
-        <Compile Include="Essence\GreyBrute\xGreydwarfBruteEssence.cs" />
+        <Compile Include="Essence\Grey\GreyBrute\SE_Bash.cs" />
+        <Compile Include="Essence\Grey\GreyBrute\xGreydwarfBruteEssence.cs" />
+        <Compile Include="Essence\Grey\xGreydwarfEssence.cs" />
+        <Compile Include="Essence\Grey\xGreydwarfShamanEssence.cs" />
         <Compile Include="Essence\Leech\SE_BloodSiphon.cs" />
         <Compile Include="Essence\Leech\xLeechEssence.cs" />
         <Compile Include="Essence\Moder\SE_Calm.cs" />
@@ -191,8 +193,6 @@
         <Compile Include="Essence\xEikthyrEssence.cs" />
         <Compile Include="Essence\xGeirrhafaEssence.cs" />
         <Compile Include="Essence\xGjallEssence.cs" />
-        <Compile Include="Essence\xGreydwarfEssence.cs" />
-        <Compile Include="Essence\xGreydwarfShamanEssence.cs" />
         <Compile Include="Essence\xLoxEssence.cs" />
         <Compile Include="Essence\xNeckEssence.cs" />
         <Compile Include="Essence\xSeekerEssence.cs" />

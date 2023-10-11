@@ -10,6 +10,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using System.Threading;
+using ItemManager;
 using TMPro;
 using UnityEngine.UI;
 
@@ -20,7 +21,10 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xSkeletonSynergy
     {
-        
+        public static bool SkeletonSynergyBrennaController = false;
+        public static bool SkeletonSynergyRancidController = false;
+        private static float equipDelay;
+
         private static List<string> boundVulkanList = new List<string>()
         {
             LackingImaginationV2Plugin.GO_VulcanSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name,
@@ -65,6 +69,7 @@ namespace LackingImaginationV2
                             Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
                         }
                     }
+                    mace = false;
                 }
             }
         }
@@ -262,12 +267,14 @@ namespace LackingImaginationV2
                     return true;
                 }
                 
+                xBrennaEssence.Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
                 GameObject FireSword = xBrennaEssence.Awakened ? LackingImaginationV2Plugin.GO_VulcanSword : LackingImaginationV2Plugin.GO_VulcanSwordBroken;
                 if (currentWeapon.m_shared.m_name == FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name )
                 {
                     if(!xBrennaEssence.Throwable) return true;
                 }
 
+                xRancidRemainsEssence.Awakened = Boolean.Parse(xRancidRemainsEssencePassive.RancidRemainsStats[0]);
                 GameObject PoisonMace = xRancidRemainsEssence.Awakened ? LackingImaginationV2Plugin.GO_RancorousMace : LackingImaginationV2Plugin.GO_RancorousMaceBroken;
                 if (currentWeapon.m_shared.m_name == PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name )
                 {
@@ -406,13 +413,102 @@ namespace LackingImaginationV2
             }
         }
         
-        
-        
-        
-        
-        
-        
-        
-
+        [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UseItem))]
+        public static class Skele_UseItem_Patch
+        {
+            public static bool Prefix(Humanoid __instance, ref Inventory inventory, ref ItemDrop.ItemData item, ref bool fromInventoryGui)
+            {
+                if (inventory == null)
+                    inventory = __instance.m_inventory;
+                if (!inventory.ContainsItem(item))
+                    return true;
+                if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence") && (xBrennaEssencePassive.BrennaStats[0] == "false" && item.m_shared.m_name == "$item_sword_krom" && item.m_shared.m_maxQuality == item.m_quality))
+                {
+                    __instance.EquipItem(item);
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                    SkeletonSynergyBrennaController = true;
+                    ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                    SkeletonSynergyBrennaController = false;
+                    
+                    inventory.RemoveItem("$item_sword_krom", 1);
+                    xBrennaEssencePassive.BrennaStats[0] = "true";
+                    foreach (string bound in boundVulkanList)
+                    {
+                        if (inventory.ContainsItemByName(bound))
+                        {
+                            inventory.RemoveItem(bound, 1);
+                        }
+                    }
+                    ScheduleDelay(__instance, 0.5f, true);
+                    return false;
+                }
+                if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence") && (xRancidRemainsEssencePassive.RancidRemainsStats[0] == "false" && item.m_shared.m_name == "$item_mace_iron" && item.m_shared.m_maxQuality == item.m_quality))
+                {
+                    __instance.EquipItem(item);
+                    LackingImaginationV2Plugin.UseGuardianPower = false;
+                    SkeletonSynergyRancidController = true;
+                    ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                    SkeletonSynergyRancidController = false;
+                    
+                    inventory.RemoveItem("$item_mace_iron", 1);
+                    xRancidRemainsEssencePassive.RancidRemainsStats[0] = "true";
+                    foreach (string bound in boundRancorousList)
+                    {
+                        if (inventory.ContainsItemByName(bound))
+                        {
+                            inventory.RemoveItem(bound, 1);
+                        }
+                    }
+                    ScheduleDelay(__instance, 1.5f, false);
+                    return false;
+                }
+                return true;
+            }
+        }
+        public static void ScheduleDelay(Humanoid human, float equipDelay, bool swordmace)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleDelayCoroutine(human, equipDelay, swordmace));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleDelayCoroutine(Humanoid human, float equipDelay, bool swordmace)
+        {
+            if(swordmace)
+            {
+                yield return new WaitForSeconds(equipDelay);
+                xBrennaEssence.Process_Input(Player.m_localPlayer, EssenceItemData.equipedEssence.IndexOf("$item_brenna_essence"));
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_fireskeleton_nova"), human.transform.position + human.transform.up * 0.6f, Quaternion.identity);
+            }
+            else
+            {
+                yield return new WaitForSeconds(equipDelay);
+                xRancidRemainsEssence.Process_Input(Player.m_localPlayer, EssenceItemData.equipedEssence.IndexOf("$item_skeletonpoison_essence"));
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+            }
+        }
+        public static void ScheduleEquip(Player player, ref ItemDrop.ItemData item, float equipDelay)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleEquipCoroutine(player, item, equipDelay));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleEquipCoroutine(Player player, ItemDrop.ItemData item, float equipDelay)
+        {
+            yield return new WaitForSeconds(equipDelay);
+            player.EquipItem(item);
+        }
+        public static void ScheduleDelete(Player player, ref ItemDrop.ItemData item, float deleteDelay)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleDeleteCoroutine(player, item, deleteDelay));
+        }
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleDeleteCoroutine(Player player, ItemDrop.ItemData item, float deleteDelay)
+        {
+            yield return new WaitForSeconds(deleteDelay);
+            if (player.m_inventory.ContainsItem(item))
+            {
+                if(player.IsItemEquiped(item)) player.UnequipItem(item);
+                player.m_inventory.RemoveItem(item);
+            }
+        }
     }
 }

@@ -17,10 +17,10 @@ namespace LackingImaginationV2
     public class xSeekerQueenEssence
     {
         public static string Ability_Name = "PH";
-        public static void Process_Input(Player player)
+        public static void Process_Input(Player player, int position)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
+            xBrennaEssencePassive.BrennaStats[0] = "false";
+            xRancidRemainsEssencePassive.RancidRemainsStats[0] = "false";
             
                 LackingImaginationV2Plugin.Log($"SeekerQueen Button was pressed");
             

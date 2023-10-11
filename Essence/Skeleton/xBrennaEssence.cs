@@ -20,18 +20,19 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Vulcan";
 
-        public static bool Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
+        public static bool Awakened;
         private static float equipDelay = 0.5f;
         private static float deleteDelay = 3600f;
         public static bool Throwable;
 
         public static GameObject Aura;
-        // public static  GameObject FireSword = Awakened ? LackingImaginationV2Plugin.GO_VulcanSword : LackingImaginationV2Plugin.GO_VulcanSwordBroken;
+        
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
-            {
-                 GameObject FireSword = Awakened ? LackingImaginationV2Plugin.GO_VulcanSword : LackingImaginationV2Plugin.GO_VulcanSwordBroken;
+            { 
+                Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
+                GameObject FireSword = Awakened ? LackingImaginationV2Plugin.GO_VulcanSword : LackingImaginationV2Plugin.GO_VulcanSwordBroken;
                 
                 // LackingImaginationV2Plugin.Log($"Brenna Button was pressed");
                 //Ability Cooldown
@@ -50,8 +51,8 @@ namespace LackingImaginationV2
                     
                     player.m_inventory.AddItem(FireSword, 1);
                     ItemDrop.ItemData sword = player.m_inventory.GetItem(FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
-                    ScheduleEquip(player, ref sword);
-                    ScheduleDelete(player, ref sword);
+                    xSkeletonSynergy.ScheduleEquip(player, ref sword, equipDelay);
+                    xSkeletonSynergy.ScheduleDelete(player, ref sword, deleteDelay);
                 }
                 else if(!Throwable)
                 {
@@ -78,48 +79,19 @@ namespace LackingImaginationV2
                 
                 //Effects, animations, and sounds
                 // LackingImaginationV2Plugin.Log($"Brenna {player.transform.position}");
-                
-             
-              
-                   
+                 
                 //x brenna swords fall from the sky and do the Aoe, on kill spawn a brenna 
 
                 //xsummon brenna sword, last for a set duration, you can use it like a sword or throw it with recast, spawns the aoe around hit spot and in random spots nearby and summons a brenna ally at the location, can only have one
 
-                //destroy if dropped, destroy if essence removed, destroy on death// destroy on logout
+                //xdestroy if dropped, destroy if essence removed, destroy on death// destroy on logout
                 
-                // broken base form, sacrifice fully upgraded krom, to unlock true version, just a stats list to say yes or no to the version of the sword summoned
+                // xbroken base form, sacrifice fully upgraded krom, to unlock true version, just a stats list to say yes or no to the version of the sword summoned
                 
                 //X synergy, add element ot the vigil spirts, give them the fire head
                 
             }
            
-        }
-        private static void ScheduleEquip(Player player, ref ItemDrop.ItemData item)
-        {
-            CoroutineRunner.Instance.StartCoroutine(ScheduleEquipCoroutine(player, item));
-        }
-        // ReSharper disable Unity.PerformanceAnalysis
-        private static IEnumerator ScheduleEquipCoroutine(Player player, ItemDrop.ItemData item)
-        {
-            yield return new WaitForSeconds(equipDelay);
-            
-            player.EquipItem(item);
-        }
-        private static void ScheduleDelete(Player player, ref ItemDrop.ItemData item)
-        {
-            CoroutineRunner.Instance.StartCoroutine(ScheduleDeleteCoroutine(player, item));
-        }
-        // ReSharper disable Unity.PerformanceAnalysis
-        private static IEnumerator ScheduleDeleteCoroutine(Player player, ItemDrop.ItemData item)
-        {
-            yield return new WaitForSeconds(deleteDelay);
-            
-            if (player.m_inventory.ContainsItem(item))
-            {
-                if(player.IsItemEquiped(item)) player.UnequipItem(item);
-                player.m_inventory.RemoveItem(item);
-            }
         }
     }
 
@@ -139,6 +111,7 @@ namespace LackingImaginationV2
         {
             public static void Prefix(Projectile __instance)
             {
+                xBrennaEssence.Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
                 GameObject FireSword = xBrennaEssence.Awakened ? LackingImaginationV2Plugin.GO_VulcanSword : LackingImaginationV2Plugin.GO_VulcanSwordBroken;
                 if (__instance.m_owner == Player.m_localPlayer && __instance.m_spawnItem?.m_shared.m_name == FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name)
                 {
@@ -151,8 +124,9 @@ namespace LackingImaginationV2
                     GameObject Aoe = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_fireskeleton_nova"), vector3, rotation);
                     DelayRemoval(Aoe);
                     StartAoe(Player.m_localPlayer, vector3);
-                    ScheduleNova(Player.m_localPlayer, vector3, 10f, 6);
-                    if(xBrennaEssence.Awakened) ScheduleNova(Player.m_localPlayer, vector3, 20f, 12);
+                    ScheduleNova(Player.m_localPlayer, vector3, 10f, 6, 1f);
+                    xBrennaEssence.Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
+                    if(xBrennaEssence.Awakened) ScheduleNova(Player.m_localPlayer, vector3, 20f, 12, 2f);
                     __instance.m_spawnItem = null;
                 }
             }
@@ -194,6 +168,7 @@ namespace LackingImaginationV2
                         {
                             detectedObjects.Add(collider.gameObject);
                         
+                            xBrennaEssence.Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
                             HitData hitData = new HitData();
                             hitData.m_damage.m_fire = xBrennaEssence.Awakened ? LackingImaginationV2Plugin.GO_VulcanSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_fire : LackingImaginationV2Plugin.GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_fire;
                             hitData.m_damage.m_slash = xBrennaEssence.Awakened ? LackingImaginationV2Plugin.GO_VulcanSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_slash : LackingImaginationV2Plugin.GO_VulcanSwordBroken.GetComponent<ItemDrop>().m_itemData.m_shared.m_damages.m_slash;
@@ -213,14 +188,14 @@ namespace LackingImaginationV2
             }
             
             
-            private static void ScheduleNova(Player player, Vector3 vector3, float radius, int num)
+            private static void ScheduleNova(Player player, Vector3 vector3, float radius, int num, float delay)
             {
-                CoroutineRunner.Instance.StartCoroutine(ScheduleNovaCoroutine(player, vector3, radius, num));
+                CoroutineRunner.Instance.StartCoroutine(ScheduleNovaCoroutine(player, vector3, radius, num, delay));
             }
             // ReSharper disable Unity.PerformanceAnalysis
-            private static IEnumerator ScheduleNovaCoroutine(Player player, Vector3 vector3, float radius, int num)
+            private static IEnumerator ScheduleNovaCoroutine(Player player, Vector3 vector3, float radius, int num, float delay)
             {
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(delay);
                 
                 float circleRadius = radius; // Radius of the circle
                 int numberOfAoEToSpawn = num; // Number of AoE objects to spawn
@@ -240,15 +215,22 @@ namespace LackingImaginationV2
                 }
             }
         }
-
         
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
+        public static class Brenna_GetBodyArmor_Patch
+        {
+            public static void Postfix(ref float __result)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence"))
+                {
+                    __result -= LackingImaginationGlobal.c_brennaVulcanArmor;
+                    if (__result < 0)
+                    {
+                        __result = 0;
+                    }
+                }
+            }
+        }
         
-        
-        
-        
-        
-        
-        
-
     }
 }
