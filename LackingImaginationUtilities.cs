@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using HarmonyLib;
 using System.IO;
+using BepInEx.Configuration;
 using TMPro;
 using UnityEngine.UI;
 
@@ -708,31 +709,46 @@ namespace LackingImaginationV2
              {
                  return Math.Max(LackingImaginationGlobal.c_rancidremainsRancorousCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
-         }  
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
+         }
 
 
 
-        
-        
+
+
+
+
+
+
+
+
+
+
+         public static List<KeyCode> movement = new List<KeyCode>()
+         {
+             KeyCode.W,
+             KeyCode.A,
+             KeyCode.S,
+             KeyCode.D,
+             KeyCode.LeftShift,
+         };
+
+         // public static bool AbilityCast(KeyboardShortcut config)
+         // {
+         //     
+         // }
+         
+
         public static bool Ability1_Input_Down
         {
             get
             {
+                LackingImaginationV2Plugin.Ability1_Hotkey.Value.Modifiers.AddItem(KeyCode.W);
+                KeyboardShortcut test = LackingImaginationV2Plugin.Ability1_Hotkey.Value;
                 if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.MainKey == KeyCode.None)
                 {
                     return false;
                 }
-                else if(/*LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown ||*/ LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp()*/)
+                else if(/*LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown ||*/test.IsPressed() /*LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed()*/ /*|| LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp()*/)
                 {
                     return true;
                 }

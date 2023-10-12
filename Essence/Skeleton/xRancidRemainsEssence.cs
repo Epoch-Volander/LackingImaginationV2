@@ -48,6 +48,7 @@ namespace LackingImaginationV2
                     
                       player.m_inventory.AddItem(PoisonMace, 1);
                       ItemDrop.ItemData mace = player.m_inventory.GetItem(PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
+                      UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Rancorous, player.transform.position + player.transform.up * 0.2f, Quaternion.identity);
                       xSkeletonSynergy.ScheduleEquip(player, ref mace, equipDelay);
                       xSkeletonSynergy.ScheduleDelete(player, ref mace, deleteDelay);
                   }
@@ -58,12 +59,14 @@ namespace LackingImaginationV2
                       player.GetSEMan().AddStatusEffect(se_cd);
 
                       Throwable = true;
-                      //add aura, maybe brenna head flames
+                      ItemDrop.ItemData mace = player.m_inventory.GetItem(PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
+                      xSkeletonSynergy.ScheduleEquip(player, ref mace, equipDelay);
                       GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Poison").transform.Find("Visual").transform.Find("vfx_drippingwater").gameObject);
                       Aura = UnityEngine.GameObject.Instantiate(prefab, player.GetHeadPoint(), Quaternion.identity);
                       Aura.transform.parent = player.transform;
-                     //fix this
-                     
+                      //fix this
+                      UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Rancorous, player.transform.position + player.transform.up * 0.2f, Quaternion.identity);
+
                   }
                   else
                   {

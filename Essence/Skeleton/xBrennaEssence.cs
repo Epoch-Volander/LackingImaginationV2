@@ -51,6 +51,7 @@ namespace LackingImaginationV2
                     
                     player.m_inventory.AddItem(FireSword, 1);
                     ItemDrop.ItemData sword = player.m_inventory.GetItem(FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
+                    UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Vulcan, player.transform.position + player.transform.up * 0.2f, Quaternion.identity);
                     xSkeletonSynergy.ScheduleEquip(player, ref sword, equipDelay);
                     xSkeletonSynergy.ScheduleDelete(player, ref sword, deleteDelay);
                 }
@@ -62,9 +63,12 @@ namespace LackingImaginationV2
 
                     Throwable = true;
                     //add aura, maybe brenna head flames
+                    ItemDrop.ItemData sword = player.m_inventory.GetItem(FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
+                    xSkeletonSynergy.ScheduleEquip(player, ref sword, equipDelay);
                     GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject);
                     Aura = UnityEngine.GameObject.Instantiate(prefab, player.GetHeadPoint(), Quaternion.identity);
                     Aura.transform.parent = player.transform;
+                    UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Vulcan, player.transform.position + player.transform.up * 0.2f, Quaternion.identity);
                 }
                 else
                 {
@@ -82,11 +86,11 @@ namespace LackingImaginationV2
                  
                 //x brenna swords fall from the sky and do the Aoe, on kill spawn a brenna 
 
-                //xsummon brenna sword, last for a set duration, you can use it like a sword or throw it with recast, spawns the aoe around hit spot and in random spots nearby and summons a brenna ally at the location, can only have one
+                //x summon brenna sword, last for a set duration, you can use it like a sword or throw it with recast, spawns the aoe around hit spot and in random spots nearby and summons a brenna ally at the location, can only have one
 
-                //xdestroy if dropped, destroy if essence removed, destroy on death// destroy on logout
+                //x destroy if dropped, destroy if essence removed, destroy on death// destroy on logout
                 
-                // xbroken base form, sacrifice fully upgraded krom, to unlock true version, just a stats list to say yes or no to the version of the sword summoned
+                //x broken base form, sacrifice fully upgraded krom, to unlock true version, just a stats list to say yes or no to the version of the sword summoned
                 
                 //X synergy, add element ot the vigil spirts, give them the fire head
                 

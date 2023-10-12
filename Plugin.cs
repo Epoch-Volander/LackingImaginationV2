@@ -233,8 +233,7 @@ namespace LackingImaginationV2
 
         public static ConfigEntry<bool> EssenceSlotsEnabled;
         public static bool UseGuardianPower = true;
-
-        // public static ConfigEntry<string> Ability1_Hotkey;
+        
         public static ConfigEntry<KeyboardShortcut> Ability1_Hotkey { get; set; }
         public static ConfigEntry<KeyboardShortcut> Ability2_Hotkey { get; set; }
         public static ConfigEntry<KeyboardShortcut> Ability3_Hotkey { get; set; }
@@ -442,8 +441,10 @@ namespace LackingImaginationV2
         //Weapons
         public static GameObject GO_VulcanSwordBroken;
         public static GameObject GO_VulcanSword;
+        public static GameObject fx_Vulcan;
         public static GameObject GO_RancorousMaceBroken;
         public static GameObject GO_RancorousMace;
+        public static GameObject fx_Rancorous;
         
         //Prefabs type 2 //Pulled from assets
         public static GameObject fx_Giantization;
@@ -457,6 +458,8 @@ namespace LackingImaginationV2
         public static GameObject fx_Relentless;
         //Prefab3 //originals
         public static GameObject p_SeaKing;
+        public static GameObject fx_RecklessCharge;
+        public static GameObject fx_RecklessChargeHit;
         
         
         //Sounds
@@ -712,8 +715,6 @@ namespace LackingImaginationV2
                 Skill imagination = new("Imagination", "YagluthDrop_icon.png"); // Skill name along with the skill icon. By default the icon is found in the icons folder. Put it there if you wish to load one.
                 imagination.Description.English("Records Player Achievements.");
                 imagination.Configurable = true;
-                
-                
             }
             
             //Uploads item prefabs
@@ -752,6 +753,10 @@ namespace LackingImaginationV2
             fx_BloodSiphon = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "LeechDebuff");
             fx_RavenousHunger = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "wolfHit");
             fx_Relentless = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "DeathEye");
+            fx_Vulcan = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "VulkanFloor");
+            fx_Rancorous = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "RancorousFloor");
+            fx_RecklessCharge = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarGuard");
+            fx_RecklessChargeHit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarHit");
             
                 
             //Prefab 3
@@ -768,9 +773,10 @@ namespace LackingImaginationV2
             ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack_doublesmash_Player");
             
             
-            
             //Sound Prefabs
             sfx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "sfx_goblinbrute_rage");
+            
+            
             
             abilitiesStatus.Clear();
             for (int i = 0; i < 5; i++)
@@ -800,8 +806,7 @@ namespace LackingImaginationV2
             icon_X_Offset = config("Display", "icon_X_Offset", 0f, "Offsets the icon bar horizontally. The icon bar is anchored to the Guardian power icon.");
             //icon_Y_Offset = ConfigManager.RegisterModConfigVariable<float>(ModName, "icon_Y_Offset", 0f, "Display", "Offsets the icon bar vertically. The icon bar is anchored to the Guardian power icon.", true);
             icon_Y_Offset = config("Display", "icon_Y_Offset", 0f, "Offsets the icon bar vertically. The icon bar is anchored to the Guardian power icon.");
-
-
+            
             //Synergies
             //Draugr Synergy
             li_draugrSynergyRot = config("Essence Synergy Modifiers", "li_draugrSynergyRot", 5f, new ConfigDescription("Modifies % dmg reduction system when all Draugr essences are equipped", new AcceptableValueRange<float>(0f, 100f)));
@@ -1016,16 +1021,11 @@ namespace LackingImaginationV2
 
             //Global
             LackingImaginationGlobal.ConfigStrings.Add("li_cooldownMultiplier", li_cooldownMultiplier.Value);
-
-            
-            
             
             //Synergies
             LackingImaginationGlobal.ConfigStrings.Add("li_draugrSynergyRot", li_draugrSynergyRot.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_skeletonSynergyBrenna", li_skeletonSynergyBrenna.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_skeletonSynergyRancid", li_skeletonSynergyRancid.Value);
-            
-            
             
             //Cooldowns
              LackingImaginationGlobal.ConfigStrings.Add("li_eikthyrBlitzCD", li_eikthyrBlitzCD.Value);
@@ -1069,8 +1069,6 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_brennaVulcanCD", li_brennaVulcanCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousCD", li_rancidremainsRancorousCD.Value);
             
-            
-            
             //Status Duration
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHasteSED", li_deerHorizonHasteSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_fenringMoonlitLeapSED", li_fenringMoonlitLeapSED.Value);
@@ -1085,7 +1083,6 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFootSED", li_hareLuckyFootSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargeSED", li_boarRecklessChargeSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSED", li_ulvTerritorialSlumberSED.Value);
-            
             
             // Essence
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHaste", li_deerHorizonHaste.Value);
@@ -1191,8 +1188,6 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousArmor", li_rancidremainsRancorousArmor.Value);
             
             
-            
-            
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
             _ = ConfigSync.AddConfigEntry(Ability2_Hotkey);
             _ = ConfigSync.AddConfigEntry(Ability3_Hotkey);
@@ -1254,8 +1249,6 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_brennaVulcanCD);
             _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousCD);
             
-            
-            
             //Status Duration
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHasteSED);
             _ = ConfigSync.AddConfigEntry(li_fenringMoonlitLeapSED);
@@ -1270,7 +1263,6 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_hareLuckyFootSED);
             _ = ConfigSync.AddConfigEntry(li_boarRecklessChargeSED);
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSED);
-            
             
             // Essence
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHaste);

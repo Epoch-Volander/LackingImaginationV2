@@ -502,7 +502,7 @@ namespace LackingImaginationV2
         private static IEnumerator ScheduleEquipCoroutine(Player player, ItemDrop.ItemData item, float equipDelay)
         {
             yield return new WaitForSeconds(equipDelay);
-            player.EquipItem(item);
+            if(player.GetCurrentWeapon() != item)player.EquipItem(item);
         }
         public static void ScheduleDelete(Player player, ref ItemDrop.ItemData item, float deleteDelay)
         {

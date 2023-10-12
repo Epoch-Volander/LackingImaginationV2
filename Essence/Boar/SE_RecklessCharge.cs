@@ -25,6 +25,7 @@ namespace LackingImaginationV2
         
         private float Duration = m_baseTTL - 1f;
         private float m_timer = 1f;
+        private GameObject Aura;
 
         public SE_RecklessCharge()
         {
@@ -58,11 +59,18 @@ namespace LackingImaginationV2
                 if (!Player.m_localPlayer.IsRunning())
                 {
                     isRunning = 0f;
+                    if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
                     detectedObjects.Clear();
                 }
                     
                 if (isRunning > 3f)
                 {
+                    if(Aura == null)
+                    {
+                        Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_RecklessCharge, Player.m_localPlayer.GetCenterPoint() + Player.m_localPlayer.transform.forward * 0.5f, Quaternion.identity);
+                        Aura.transform.parent = Player.m_localPlayer.transform;
+                        Aura.transform.rotation = Player.m_localPlayer.transform.rotation;
+                    }
                     Vector3 sizeScan = Vector3.one * 0.5f;
                     Vector3 size = Vector3.one * 1.2f; 
                     Collider[] colliderScan = Physics.OverlapBox(Player.m_localPlayer.transform.position + Player.m_localPlayer.transform.up  * 1.4f, sizeScan , Quaternion.identity, collisionMask);
@@ -71,7 +79,7 @@ namespace LackingImaginationV2
                     if (colliderScan.Length > 1)
                     {
                         hasHit = true;
-                            
+
                         foreach (Collider collider in colliders)
                         {
                             Character characterComponent = collider.gameObject.GetComponent<Character>();
@@ -101,10 +109,12 @@ namespace LackingImaginationV2
                                     UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_boar_hit"), hitData.m_point, Quaternion.identity);
                                     try
                                     {
+                                        UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_RecklessChargeHit, characterComponent.GetCenterPoint(), Quaternion.identity);
                                         UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_boar_hit"), characterComponent.GetCenterPoint(), Quaternion.identity);
                                     }
                                     catch 
                                     {
+                                        UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_RecklessChargeHit, characterComponent.GetCenterPoint(), Quaternion.identity);
                                         UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_boar_hit"), hitData.m_point, Quaternion.identity);
                                     }
                                 }
@@ -115,9 +125,14 @@ namespace LackingImaginationV2
                     {
                         hasHit = false;
                         isRunning = 0f;
+                        if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
                         detectedObjects.Clear();
                     }
                 }
+            }
+            else
+            {
+                if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
             }
         }
 
