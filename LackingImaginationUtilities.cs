@@ -723,7 +723,7 @@ namespace LackingImaginationV2
 
 
 
-         public static List<KeyCode> movement = new List<KeyCode>()
+         public static List<KeyCode> movements = new List<KeyCode>()
          {
              KeyCode.W,
              KeyCode.A,
