@@ -2256,7 +2256,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xSwamp",
                     m_name = "Swamp_Exp",
-                    m_text = "",
+                    m_text = "A poisoned land, rife with filth and the sobering truth of mortality, discovered all too late. \n Will you be the same?",
                      
                     m_topic = "Swamp"
                 };
