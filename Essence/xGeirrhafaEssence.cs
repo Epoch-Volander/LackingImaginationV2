@@ -25,6 +25,8 @@ namespace LackingImaginationV2
 
         private static float AoeDelay = 1.46f;
         private static float minDistanceBetweenCharacters = 2f;
+        
+        private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
         public static void Process_Input(Player player, int position)
         {
@@ -149,8 +151,41 @@ namespace LackingImaginationV2
                          hitData.SetAttacker(player);
                          ch.Damage(hitData);
                      }
-                 }
-                 AoeCast++;
+                 } 
+                 HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+
+                Vector3 capsuleCenter = player.transform.position;
+                float capsuleRadius = 7f; // Radius of the capsule
+
+                // Perform the capsule overlap check with the specified layer mask
+                Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Breath_Layermask);
+
+                foreach (Collider collider in colliders)
+                {
+                    IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                    Character characterComponent = collider.gameObject.GetComponent<Character>();
+                    if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
+                    {
+                        // This is a valid target (creature) if it hasn't been detected before.
+                        if (!detectedObjects.Contains(collider.gameObject))
+                        {
+                            detectedObjects.Add(collider.gameObject);
+                            
+                            HitData hitData = new HitData();
+                            hitData.m_damage.m_frost = UnityEngine.Random.Range(3f, 5f);
+                            hitData.m_damage.m_blunt = 3f;
+                            hitData.m_dodgeable = true;
+                            hitData.m_blockable = true;
+                            hitData.m_hitCollider = collider;
+                            hitData.m_dir = collider.transform.position - player.transform.position;
+                            hitData.ApplyModifier( LackingImaginationGlobal.c_geirrhafaIceAgeAoe);
+                            hitData.m_point = collider.transform.position;
+                            hitData.SetAttacker(player);
+                            destructibleComponent.Damage(hitData);
+                        }
+                    }
+                }
+                AoeCast++;
                  
                  yield return new WaitForSeconds(AoeDelay);
              }

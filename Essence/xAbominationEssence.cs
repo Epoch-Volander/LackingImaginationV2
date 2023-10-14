@@ -36,9 +36,6 @@ namespace LackingImaginationV2
                 }
                 Abom = null;
                 
-                LackingImaginationV2Plugin.Log($"xAbominationEssence Button was pressed");
-
-
                 GameObject effect = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_firetreecut_dead_abomination"), player.transform.position, Quaternion.identity);
                 foreach (Transform child in effect.transform)
                 {
@@ -87,10 +84,10 @@ namespace LackingImaginationV2
 
                
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
     }

@@ -29,8 +29,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"xTrollEssence Button was pressed");
-
+                
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xTrollCooldownTime;
@@ -50,10 +49,10 @@ namespace LackingImaginationV2
                 ScheduleProjectiles(player, vector, prefab);
                 
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         //passive heavy, throw rock that does dmg based on hp and/or armor
 

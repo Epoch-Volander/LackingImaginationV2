@@ -18,43 +18,61 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Fumes";
         
+        private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"xBlobEssence Button was pressed");
-            
+               
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xBlobCooldownTime;
                 player.GetSEMan().AddStatusEffect(se_cd);
 
                 //Effects, animations, and sounds
-                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_blob_attack"), player.transform.position, Quaternion.identity);
-                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_blob_attack"), player.transform.position, Quaternion.identity);
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_blob_attack"), player.transform.position, Quaternion.identity);
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_blob_attack"), player.transform.position, Quaternion.identity);
                  
-                 List<Character> allCharacters = new List<Character>();
-                 allCharacters.Clear();
-                 Character.GetCharactersInRange(player.transform.position, 6f, allCharacters);
-                 foreach (Character ch in allCharacters)
-                 {
-                     if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer)) 
-                         && !ch.m_tamed ||ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI)
-                     {
-                         HitData hitData = new HitData();
-                         hitData.m_damage.m_poison = UnityEngine.Random.Range(1f, 1f);
-                         hitData.m_dir = ch.transform.position - player.transform.position;
-                         hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_blobFumes));
-                         hitData.m_point = ch.transform.position;
-                         hitData.SetAttacker(player);
-                         ch.Damage(hitData);
-                     }
-                 }
+                HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+
+                Vector3 capsuleCenter = player.transform.position;
+                float capsuleRadius = 6f; // Radius of the capsule
+
+                // Perform the capsule overlap check with the specified layer mask
+                Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Breath_Layermask);
+
+                foreach (Collider collider in colliders)
+                {
+                    IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                    Character characterComponent = collider.gameObject.GetComponent<Character>();
+                    if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
+                    {
+                        // This is a valid target (creature) if it hasn't been detected before.
+                        if (!detectedObjects.Contains(collider.gameObject))
+                        {
+                            detectedObjects.Add(collider.gameObject);
+                        
+                            HitData hitData = new HitData();
+                            hitData.m_damage.m_poison = UnityEngine.Random.Range(5f, 10f);
+                            hitData.m_dodgeable = true;
+                            hitData.m_blockable = true;
+                            hitData.m_hitCollider = collider;
+                            hitData.m_dir = collider.transform.position - player.transform.position;
+                            hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_blobFumes));
+                            hitData.m_point = collider.transform.position;
+                            hitData.SetAttacker(player);
+                            destructibleComponent.Damage(hitData);
+                            
+                        }
+                    }
+                }
+                 
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
     }
 

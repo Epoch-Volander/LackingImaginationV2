@@ -17,6 +17,9 @@ namespace LackingImaginationV2
     public class xLoxEssence
     {
         public static string Ability_Name = "Wild \nTremor ";
+        
+        private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
+
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -50,6 +53,41 @@ namespace LackingImaginationV2
                         hitData.m_point = ch.transform.position;
                         hitData.SetAttacker(player);
                         ch.Damage(hitData);
+                    }
+                }
+                
+                HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+
+                Vector3 capsuleCenter = player.transform.position;
+                float capsuleRadius = 10f; // Radius of the capsule
+
+                // Perform the capsule overlap check with the specified layer mask
+                Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Breath_Layermask);
+
+                foreach (Collider collider in colliders)
+                {
+                    IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                    Character characterComponent = collider.gameObject.GetComponent<Character>();
+                    if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
+                    {
+                        // This is a valid target (creature) if it hasn't been detected before.
+                        if (!detectedObjects.Contains(collider.gameObject))
+                        {
+                            detectedObjects.Add(collider.gameObject);
+                            
+                            HitData hitData = new HitData();
+                            hitData.m_damage.m_blunt = UnityEngine.Random.Range(10f, 15f);
+                            hitData.m_dir = collider.transform.position - player.transform.position;
+                            hitData.m_dodgeable = true;
+                            hitData.m_blockable = true;
+                            hitData.m_hitCollider = collider;
+                            hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                            hitData.m_pushForce = 100f;
+                            hitData.m_point = collider.transform.position;
+                            hitData.SetAttacker(player);
+                            
+                            destructibleComponent.Damage(hitData);
+                        }
                     }
                 }
                 

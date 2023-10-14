@@ -39,8 +39,6 @@ namespace LackingImaginationV2
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xYagluthCooldownTime;
                 player.GetSEMan().AddStatusEffect(se_cd);
-            
-                LackingImaginationV2Plugin.Log($"Yag Button was pressed");
                 
                 //projectile_meteor
                 //projectile_beam
@@ -84,10 +82,10 @@ namespace LackingImaginationV2
                     xYagluthEssencePassive.YagluthStats[0] = staticCharge.ToString();
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
          private static void ScheduleBeam(Player player)

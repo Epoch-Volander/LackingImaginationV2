@@ -433,7 +433,7 @@ namespace LackingImaginationV2
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
                         SkeletonSynergyBrennaController = false;
 
-                        inventory.RemoveItem("$item_sword_krom", 1);
+                        inventory.RemoveItem(item);
                         xBrennaEssencePassive.BrennaStats[0] = "true";
                         foreach (string bound in boundVulkanList)
                         {
@@ -457,7 +457,7 @@ namespace LackingImaginationV2
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
                         SkeletonSynergyRancidController = false;
 
-                        inventory.RemoveItem("$item_mace_iron", 1);
+                        inventory.RemoveItem(item);
                         xRancidRemainsEssencePassive.RancidRemainsStats[0] = "true";
                         foreach (string bound in boundRancorousList)
                         {

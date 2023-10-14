@@ -824,7 +824,7 @@ namespace LackingImaginationV2
             // eikthyr
             li_eikthyrBlitzCD = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzCD", 25f, "Cooldown");
             li_eikthyrBlitzPassive = config("Essence Eikthyr Modifiers", "li_eikthyrBlitzPassive", 10f, "Modifies the % lightning damage passive for Weapons");
-            li_eikthyrBlitz = config("Essence Eikthyr Modifiers", "li_eikthyrBlitz", 50f, "Modifies % weapon lightning damage for Blitz");
+            li_eikthyrBlitz = config("Essence Eikthyr Modifiers", "li_eikthyrBlitz", 20f, "Modifies % weapon lightning damage for Blitz");
             // fenring
             li_fenringMoonlitLeapCD = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapCD", 30f, "Cooldown");
             li_fenringMoonlitLeapSED = config("Essence Fenring Modifiers", "li_fenringMoonlitLeapSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
@@ -924,7 +924,7 @@ namespace LackingImaginationV2
             li_elderAncientAwePassive = config("Essence Elder Modifiers", "li_elderAncientAwePassive", 3f, "Modifies the Passive regen multiplier");
             // blob
             li_blobFumesCD = config("Essence Blob Modifiers", "li_blobFumesCD", 10f, "Cooldown");
-            li_blobFumes = config("Essence Blob Modifiers", "li_blobFumes", 50f, "Modifies the % weapon damage added to Fumes");
+            li_blobFumes = config("Essence Blob Modifiers", "li_blobFumes", 10f, "Modifies the % weapon damage added to Fumes");
             // skeleton
             li_skeletonVigilCD = config("Essence Skeleton Modifiers", "li_skeletonVigilCD", 50f, "Cooldown");
             li_skeletonVigilSummons = config("Essence Skeleton Modifiers", "li_skeletonVigilSummons", 10f, "Modifies the number of ghosts summoned");
@@ -2269,7 +2269,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xMistlands",
                     m_name = "Mistlands_Exp",
-                    m_text = "",
+                    m_text = "The fallen land, struggling to regrow while despite the darkness coiled aroun its neck",
                      
                     m_topic = "Mistlands"
                 };
@@ -2309,7 +2309,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xEikthyr",
                     m_name = "Eikthyr_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Blitz \n " +
+                             "Active: Shoot a lightning cone forward(Weapon scaling). \n " +
+                             "Positive Passive: All attacks do added lightning damage. \n" +
+                             "Negative Passive: When wet, you take added lightning damage. ",
                      
                     m_topic = "Eikthyr"
                 };
@@ -2321,7 +2324,12 @@ namespace LackingImaginationV2
                 {
                     m_label = "xBoneMass",
                     m_name = "BoneMass_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Mass Release \n" +
+                             "Active: Lob a projectile that summons ally skeletons and blobs on impact. \n " +
+                             "Positive Passive: When hit you have a 20% chance to release a poison cloud. \n" +
+                             "Positive Passive: You become resistant to pierce. \n" +
+                             "Negative Passive: You become very weak to blunt. \n" +
+                             "Negative Passive: You become very weak to spirit.",
                      
                     m_topic = "BoneMass"
                 };
@@ -2333,7 +2341,12 @@ namespace LackingImaginationV2
                 {
                     m_label = "xModer",
                     m_name = "Moder_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Draconic Frost \n" +
+                             "Active: You fire a cone of projectiles that spawn ice on the ground(Weapon scaling). \n " +
+                             "Active(Block): You shoot an ice dragon breath. \n " +
+                             "Positive Passive: All attacks do added frost damage. \n" +
+                             "Negative Passive: The draconic essence makes you always feel cold. \n" +
+                             "Consume freeze glands to calm & suppress the cold.",
                      
                     m_topic = "Moder"
                 };
@@ -2357,8 +2370,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xThe Elder",
                     m_name = "TheElder_Exp",
-                    m_text = "Essence Power: ",
-                     
+                    m_text = "Essence Power: Ancient Awe \n" +
+                             "Active: Briefly root targets in place & grow the roots from under them. \n " +
+                             "Positive Passive: Multiplied regen. \n" +
+                             "Negative Passive: You become very weak to frost. \n",
+                    
                     m_topic = "The Elder"
                 };
                 if (!Tutorial.instance.m_texts.Contains(_theElderExp))
@@ -2369,7 +2385,13 @@ namespace LackingImaginationV2
                 {
                     m_label = "xYagluth",
                     m_name = "Yagluth_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Culmination \n" +
+                             "Active: Shoot a line of lightningfire.(Builds Static) \n" +
+                             "Active(Block): Call a rain of meteors.(Builds Static) \n" +
+                             "Active(Crouch): At the cost of some health, create a nova(Reduces Static) \n" +
+                             "Positive Passive: Static decreases over time. \n" +
+                             "Positive Passive: Immune to burning.(Builds Static) \n" +
+                             "Negative Passive: If Static becomes full you will be struck by a Lightning bolt.(Resets Static)",
                      
                     m_topic = "Yagluth"
                 };
@@ -2383,7 +2405,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xAbomination",
                     m_name = "Abomination_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Bane \n" +
+                             "Active: Summons an ally Abomination.(Eats Wood) \n" +
+                             "Positive Passive: Increased armor. \n" +
+                             "Negative Passive: Reduced health during the day.",
+                    
                      
                     m_topic = "Abomination"
                 };
@@ -2407,7 +2433,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xTroll",
                     m_name = "Troll_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Troll Toss \n" +
+                             "Active: Lob a boulder(Max Health scaling). \n" +
+                             "Positive Passive: Bonus health. \n" +
+                             "Negative Passive: You become very weak to pierce.",
                      
                     m_topic = "Troll"
                 };
@@ -2421,7 +2450,12 @@ namespace LackingImaginationV2
                 {
                     m_label = "xBlob",
                     m_name = "Blob_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Fumes \n" +
+                             "Active: Release a cloud of poison. \n" +
+                             "Positive Passive: 1 extra jump.\n" +
+                             "Positive Passive: At 50% hp, spawn 2 ally blobs to aid you.\n" +
+                             "Negative Passive: You become weak to blunt. \n" +
+                             "Negative Passive: You become weak to lightning.",
                      
                     m_topic = "Blob"
                 };
@@ -2433,7 +2467,8 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDeathsquito",
                     m_name = "Deathsquito_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Relentless \n" +
+                             "Active: .\n",
                      
                     m_topic = "Deathsquito"
                 };

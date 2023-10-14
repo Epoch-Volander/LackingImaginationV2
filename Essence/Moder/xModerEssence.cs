@@ -31,8 +31,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Moder Button was pressed");
-                // LackingImaginationV2Plugin.Log($"Moder {player.transform.position}");
                 
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
@@ -71,10 +69,10 @@ namespace LackingImaginationV2
                     ScheduleProjectiles(player, 6, 6, 45f);
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         private static void ScheduleBreath(Player player)
         {

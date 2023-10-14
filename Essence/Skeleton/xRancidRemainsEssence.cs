@@ -92,7 +92,6 @@ namespace LackingImaginationV2
         public static List<string> RancidRemainsStats = new List<string>() { "false" };
         
         private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
-        
 
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
         public static class RancidRemains_SpawnOnHit_Patch

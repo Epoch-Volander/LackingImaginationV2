@@ -32,8 +32,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Eikthyr Button was pressed");
-
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xEikthyrCooldownTime;
@@ -121,10 +119,10 @@ namespace LackingImaginationV2
                 //     return rayDirections;
                 // }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         private static void ScheduleLightning(Player player)
         {
@@ -166,7 +164,7 @@ namespace LackingImaginationV2
                         hitData.m_dodgeable = true;
                         hitData.m_blockable = true;
                         hitData.m_ranged = true;
-                        hitData.m_damage.m_lightning =UnityEngine.Random.Range(2f, 5f);
+                        hitData.m_damage.m_lightning =UnityEngine.Random.Range(10f, 15f);
                         hitData.m_dir = collider.gameObject.transform.position - player.transform.position;
                         hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_eikthyrBlitz));
                         hitData.m_pushForce = 10f;

@@ -26,9 +26,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Elder Button was pressed");
-                
-                
+
                 List<Character> allch = new List<Character>();
                 allch.Clear();
                 Character.GetCharactersInRange(player.GetCenterPoint(), 15f, allch);
@@ -134,10 +132,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Has No Targets");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
         static void SummonRoots(Character currentCharacter, float range)
