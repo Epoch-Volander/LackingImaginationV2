@@ -28,8 +28,7 @@ namespace LackingImaginationV2
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
                 //in the day you do bonus spirit dmg, at night a wraith companion spawns and follows you
-                LackingImaginationV2Plugin.Log($"Wraith Button was pressed");
-                    
+                 
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xWriathCooldownTime;
@@ -87,10 +86,10 @@ namespace LackingImaginationV2
                     Wraith = (wraith.GetComponent<Character>());
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
         

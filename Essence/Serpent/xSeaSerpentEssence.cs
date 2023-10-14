@@ -35,17 +35,16 @@ namespace LackingImaginationV2
                 se_cd.m_ttl = LackingImaginationUtilities.xSeaSerpentCooldownTime;
                 player.GetSEMan().AddStatusEffect(se_cd);
 
-                LackingImaginationV2Plugin.Log($"Serpent Button was pressed");
-
+                
                 Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f;
                 GameObject prefab = LackingImaginationV2Plugin.p_SeaKing;
                 ScheduleFireProjectile(player, vector, prefab);
                 // LackingImaginationV2Plugin.Log($"Serpent {xSeaSerpentEssencePassive.FishQuality}");
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
 
         private static void ScheduleFireProjectile(Player player, Vector3 vector, GameObject prefab)

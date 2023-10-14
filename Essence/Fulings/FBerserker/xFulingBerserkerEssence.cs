@@ -40,7 +40,8 @@ namespace LackingImaginationV2
                     float distanceToHit = hit.distance;
                     noRoof = false;
                     // Now you can use the distanceToHit for whatever you need
-                    Debug.Log("Distance to the nearest solid object: " + distanceToHit);
+                    
+                    // Debug.Log("Distance to the nearest solid object: " + distanceToHit);
                 }
                 else
                 {
@@ -49,7 +50,6 @@ namespace LackingImaginationV2
                 
                 if (noRoof)
                 {
-                    LackingImaginationV2Plugin.Log($"FB Button was pressed");
                 
                     //Ability Cooldown
                     StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
@@ -78,10 +78,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Can't Cast Here");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
     }
 
@@ -297,7 +297,7 @@ namespace LackingImaginationV2
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_goblinbrute_essence"))
                 {
-                    hp += 50f;
+                    hp += LackingImaginationGlobal.c_fulingberserkerGiantizationHealth;
                     eitr -= (eitr * 0.75f);
 
                 }

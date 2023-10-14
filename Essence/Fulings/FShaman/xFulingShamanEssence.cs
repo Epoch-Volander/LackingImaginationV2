@@ -29,7 +29,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"FS Button was pressed");
                 
                 Shield_Pay = RitualPay(5);
                 if (Shield_Pay)
@@ -116,10 +115,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Strike Gathering Power");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
 
         static bool RitualPay(int cost)

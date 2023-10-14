@@ -28,9 +28,7 @@ namespace LackingImaginationV2
                 // spear boy
                 // return spear passive 
                 // 
-
-                LackingImaginationV2Plugin.Log($"Fuling Button was pressed");
-
+                
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xFulingCooldownTime;
@@ -43,10 +41,10 @@ namespace LackingImaginationV2
                 Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
                 Aura.transform.parent = player.transform;
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
 
     }
@@ -166,7 +164,7 @@ namespace LackingImaginationV2
 
                     if (__instance.IsPlayer() && (UnityEngine.Object)attacker.m_baseAI != (UnityEngine.Object)null && hit.m_blockable && __instance.IsBlocking())
                     {
-                        LackingImaginationV2Plugin.Log($"You blocked");
+                        // LackingImaginationV2Plugin.Log($"You blocked");
                         Player.m_localPlayer.GetCurrentBlocker().m_shared.m_blockPower *= LackingImaginationGlobal.c_fulingLonginusPassiveBlockMultiplier;
                         Player.m_localPlayer.GetCurrentBlocker().m_shared.m_blockPowerPerLevel *= LackingImaginationGlobal.c_fulingLonginusPassiveBlockMultiplier;
                     }
@@ -191,7 +189,7 @@ namespace LackingImaginationV2
                         return;
                     if (__instance.IsPlayer() && (UnityEngine.Object)attacker.m_baseAI != (UnityEngine.Object)null && hit.m_blockable && __instance.IsBlocking())
                     {
-                        LackingImaginationV2Plugin.Log($"You blocked2");
+                        // LackingImaginationV2Plugin.Log($"You blocked2");
                         Player.m_localPlayer.GetCurrentBlocker().m_shared.m_blockPower /= LackingImaginationGlobal.c_fulingLonginusPassiveBlockMultiplier;
                         Player.m_localPlayer.GetCurrentBlocker().m_shared.m_blockPowerPerLevel /= LackingImaginationGlobal.c_fulingLonginusPassiveBlockMultiplier;
                     }

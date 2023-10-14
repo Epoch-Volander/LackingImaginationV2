@@ -27,8 +27,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"xGreydwarfShamanEssence Button was pressed");
-            
+               
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xGreydwarfShamanCooldownTime;
@@ -39,10 +38,10 @@ namespace LackingImaginationV2
                 
                 ScheduleHeal(player);
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         private static void ScheduleHeal(Player player)
         {
@@ -80,7 +79,7 @@ namespace LackingImaginationV2
                     ch.Heal(ch.GetMaxHealth() * LackingImaginationGlobal.c_greydwarfshamanDubiousHealCreature);
                 }
             }
-            player.SetCrouch(true);
+            player.SetCrouch(false);
         }
     }
 
@@ -144,7 +143,7 @@ namespace LackingImaginationV2
                         int Dubious = UnityEngine.Random.Range(1, 21); // 1-20 inclusive
                         if (Dubious == 1)
                         {
-                            hit.m_damage.m_poison += hit.GetTotalDamage() * 0.05f;
+                            hit.m_damage.m_poison += hit.GetTotalDamage() * 0.1f;
                         }
                     }
                 }

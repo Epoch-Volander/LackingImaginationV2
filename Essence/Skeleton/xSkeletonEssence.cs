@@ -26,8 +26,7 @@ namespace LackingImaginationV2
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
                 Charges = int.Parse(xSkeletonEssencePassive.SkeletonStats[0]);
-                LackingImaginationV2Plugin.Log($"Skeleton Button was pressed");
-                
+
                 if (Charges > 0)
                 {
                     Charges--;
@@ -81,10 +80,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Has no one to Honour");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         static void SummonGhost(Player player, float range)
         {
@@ -133,7 +132,7 @@ namespace LackingImaginationV2
                         return;
                     if ((UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())
                     {
-                        if ((__instance.IsDead() || (double) __instance.GetHealth() <= 0.0 ) && __instance.name == "Skeleton(Clone)")
+                        if ((__instance.IsDead() || (double) __instance.GetHealth() <= 0.0 ) && (__instance.name == "Skeleton(Clone)" || __instance.name == "Skeleton_Hildir(Clone)" || __instance.name == "Skeleton_Poison(Clone)"))
                         {
                             xSkeletonEssence.Charges = int.Parse(xSkeletonEssencePassive.SkeletonStats[0]);
                             xSkeletonEssence.Charges++;

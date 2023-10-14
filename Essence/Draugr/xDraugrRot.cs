@@ -129,7 +129,7 @@ namespace LackingImaginationV2
                             multi -= SynergyRot;
                         }
                         
-                        hit.ApplyModifier(multi);
+                        hit.ApplyModifier(Math.Max(multi, 0.0f));
                     }
                 }
             }

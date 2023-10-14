@@ -108,6 +108,8 @@ namespace LackingImaginationV2
                     rectTransform.gameObject.SetActive(value: true);
                     rectTransform.gameObject.transform.localScale *= 1.35f;
                     rectTransform.GetComponentInChildren<TMP_Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
+                    rectTransform.GetComponentInChildren<TMP_Text>().enableAutoSizing = false;
+                    rectTransform.GetComponentInChildren<TMP_Text>().fontSize = 12f;
                     LackingImaginationV2Plugin.abilitiesStatus[i] = rectTransform;
                 }
                 pos.x += xStep;

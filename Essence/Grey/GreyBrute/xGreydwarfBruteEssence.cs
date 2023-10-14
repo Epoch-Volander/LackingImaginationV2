@@ -24,9 +24,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-
-                LackingImaginationV2Plugin.Log($"GreydwarfBrute Button was pressed");
-
+                
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xGreydwarfBruteCooldownTime;
@@ -70,10 +68,10 @@ namespace LackingImaginationV2
                 // status effect no timer, empowered attack, double effect for clubs, racid remains on hit cloud effect, grey and crit effect
 
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
     }
 
@@ -143,7 +141,7 @@ namespace LackingImaginationV2
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_greydwarfbrute_essence"))
                 {
-                    hp += 25f;
+                    hp += LackingImaginationGlobal.c_greydwarfbruteHealthPassive;
                 }
                 if (!EssenceItemData.equipedEssence.Contains("$item_greydwarfbrute_essence") && __instance.GetSEMan().HaveStatusEffect("SE_Bash"))
                 {

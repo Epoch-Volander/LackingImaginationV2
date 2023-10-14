@@ -32,8 +32,6 @@ namespace LackingImaginationV2
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xUlvCooldownTime;
                 player.GetSEMan().AddStatusEffect(se_cd);
-            
-                LackingImaginationV2Plugin.Log($"Ulv Button was pressed");
 
                 LackingImaginationV2Plugin.fx_TerritorialSlumber.GetComponent<TimedDestruction>().m_timeout  = (LackingImaginationUtilities.xUlvCooldownTime * LackingImaginationGlobal.c_ulvTerritorialSlumberSED) + ((float)SE_TerritorialSlumber.Comfort * 0.5f);
                 GameObject Ring = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_TerritorialSlumber, player.transform.position + player.transform.up * 0.5f, Quaternion.identity);
@@ -41,10 +39,10 @@ namespace LackingImaginationV2
 
                 ScheduleRing(player, Ring);
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         private static void ScheduleRing(Player player, GameObject ring)
         {

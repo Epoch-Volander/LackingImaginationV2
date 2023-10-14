@@ -21,9 +21,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-
-                LackingImaginationV2Plugin.Log($"Deer Button was pressed");
-
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xDeerCooldownTime;
@@ -60,10 +57,10 @@ namespace LackingImaginationV2
                     }
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
     }
 
@@ -79,7 +76,7 @@ namespace LackingImaginationV2
                 if (EssenceItemData.equipedEssence.Contains("$item_deer_essence"))
                 {
                     stamina += LackingImaginationGlobal.c_deerHorizonHastePassive;
-                    hp *= 0.9f;
+                    hp -= (hp * 0.05f);
                 }
             }
         }

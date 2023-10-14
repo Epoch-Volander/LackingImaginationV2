@@ -31,8 +31,6 @@ namespace LackingImaginationV2
 
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"xDrakeEssence Button was pressed");
-
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xDrakeCooldownTime;
@@ -47,10 +45,10 @@ namespace LackingImaginationV2
                 // Schedule the first projectile
                 ScheduleProjectiles(player, prefab);
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
 
         private static void ScheduleProjectiles(Player player, GameObject prefab)
@@ -150,7 +148,7 @@ namespace LackingImaginationV2
                     if (DrakeStats[0] == "off")
                     {
                         // __instance.m_seman.RemoveStatusEffect(Player.s_statusEffectFreezing);
-                        List<HitData.DamageModPair> DrakeRes = new List<HitData.DamageModPair>() { new HitData.DamageModPair() { m_type = HitData.DamageType.Frost, m_modifier = HitData.DamageModifier.Resistant } };
+                        List<HitData.DamageModPair> DrakeRes = new List<HitData.DamageModPair>() { new HitData.DamageModPair() { m_type = HitData.DamageType.Frost, m_modifier = HitData.DamageModifier.VeryResistant } };
                         __instance.m_damageModifiers.Apply(DrakeRes);
                         DrakeStats[0] = "on";
                     }

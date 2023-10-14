@@ -32,8 +32,7 @@ namespace LackingImaginationV2
                     StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                     se_cd.m_ttl = LackingImaginationUtilities.xTickCooldownTime;
                     player.GetSEMan().AddStatusEffect(se_cd);
-
-                    LackingImaginationV2Plugin.Log($"Tick Button was pressed");
+                    
                     
                     Activated = true;// needs its own aura effect
                     Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_BloodWell, player.GetCenterPoint(), Quaternion.identity);
@@ -44,10 +43,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Is Empty");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
 

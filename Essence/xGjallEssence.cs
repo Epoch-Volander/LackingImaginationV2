@@ -34,8 +34,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-
-                LackingImaginationV2Plugin.Log($"xGjallEssence Button was pressed");
+                
                 //projectile that explodes and spawns ally ticks
 
                 //Ability Cooldown
@@ -49,10 +48,10 @@ namespace LackingImaginationV2
                 ScheduleProjectiles(player);
 
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
         private static void ScheduleProjectiles(Player player)

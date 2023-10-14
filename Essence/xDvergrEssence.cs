@@ -36,8 +36,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Dvergr Button was pressed");
-
                 Eitr_Pay = RandomizePay();
                 if (Eitr_Pay)
                 {
@@ -112,10 +110,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Requires More Eitr");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
         static bool RandomizePay()
@@ -219,11 +217,12 @@ namespace LackingImaginationV2
         [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
         public static class Dvergr_GetTotalFoodValue_Patch
         {
-            public static void Postfix( ref float eitr)
+            public static void Postfix(ref float hp, ref float eitr)
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_dvergr_essence"))
                 {
                     eitr += LackingImaginationGlobal.c_dvergrRandomizePassiveEitr;
+                    hp -= (hp * 0.1f);
                 }
             }
         }

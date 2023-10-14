@@ -29,8 +29,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Cultist Button was pressed");
-                
+               
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xCultistCooldownTime;
@@ -66,18 +65,17 @@ namespace LackingImaginationV2
 
                 ScheduleAoes(player, prefab);
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
 
         private static void ScheduleAoes(Player player, GameObject prefab)
         {
             CoroutineRunner.Instance.StartCoroutine(ScheduleAoe(player, prefab));
         }
-        
-        
+
         // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator ScheduleAoe(Player player, GameObject prefab)
         {
@@ -137,7 +135,7 @@ namespace LackingImaginationV2
                         int Dubious = UnityEngine.Random.Range(1, 21); // 1-20 inclusive
                         if (Dubious == 1)
                         {
-                            hit.m_damage.m_fire = hit.GetTotalDamage() * 0.05f;
+                            hit.m_damage.m_fire = hit.GetTotalDamage() * 0.1f;
                         }
                     }
                     if ((UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())

@@ -629,6 +629,20 @@ namespace LackingImaginationV2
                 }
             }
         }
+        public static float c_fulingberserkerGiantizationHealth
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_fulingberserkerGiantizationHealth"];
+                }
+                catch
+                {
+                    return 50f;
+                }
+            }
+        }
         //Drake
         public static float c_drakeThreeFreezeCD
         {
@@ -1074,6 +1088,20 @@ namespace LackingImaginationV2
                 catch
                 {
                     return 0.9f;
+                }
+            }
+        }
+        public static float c_greydwarfbruteHealthPassive
+        {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_greydwarfbruteHealthPassive"];
+                }
+                catch
+                {
+                    return 25f;
                 }
             }
         }

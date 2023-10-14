@@ -21,8 +21,7 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"xDraugrEliteEssence Button was pressed");
-            
+                
                 if (float.Parse(xDraugrRot.RotStats[0]) <= 94f)
                 {
                     //Ability Cooldown
@@ -49,10 +48,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Will Break This One's Limit");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            } 
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // } 
         }
         
 
