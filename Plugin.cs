@@ -163,52 +163,52 @@ namespace LackingImaginationV2
         {
             // { "Essence_Drop", new List<string> { "Essence", "An erie glow.", "Greydwarf", "0.5" } }
             //bosses
-            { "$item_eikthyr_essence", new List<string> { "Eikthyr_Essence_Drop","Eikthyr Essence", "Eikthyr", "0.5", "An erie glow.", "TrophyEikthyrEssence"} },
-            { "$item_elder_essence", new List<string> { "TheElder_Essence_Drop", "The Elder Essence", "gd_king", "0.5", "An erie glow.", "EssenceTrophyTheElder" } },
-            { "$item_bonemass_essence", new List<string> { "BoneMass_Essence_Drop", "Bone Mass Essence", "Bonemass", "0.5", "An erie glow.", "EssenceTrophyBonemass" } },
-            { "$item_dragonqueen_essence", new List<string> { "Moder_Essence_Drop", "Moder Essence", "Dragon", "0.5", "An erie glow.", "EssenceTrophyDragonQueen" } },
-            { "$item_yagluth_essence", new List<string> { "Yagluth_Essence_Drop", "Yagluth Essence", "GoblinKing", "0.5", "An erie glow.", "EssenceTrophyGoblinKing" } },
+            { "$item_eikthyr_essence", new List<string> { "Eikthyr_Essence_Drop","Eikthyr Essence", "Eikthyr", "0.5", "Blitz", "TrophyEikthyrEssence"} },
+            { "$item_elder_essence", new List<string> { "TheElder_Essence_Drop", "The Elder Essence", "gd_king", "0.5", "Ancient Awe", "EssenceTrophyTheElder" } },
+            { "$item_bonemass_essence", new List<string> { "BoneMass_Essence_Drop", "Bone Mass Essence", "Bonemass", "0.5", "Mass Release", "EssenceTrophyBonemass" } },
+            { "$item_dragonqueen_essence", new List<string> { "Moder_Essence_Drop", "Moder Essence", "Dragon", "0.5", "Draconic Frost", "EssenceTrophyDragonQueen" } },
+            { "$item_yagluth_essence", new List<string> { "Yagluth_Essence_Drop", "Yagluth Essence", "GoblinKing", "0.5", "Culmination", "EssenceTrophyGoblinKing" } },
             { "$item_seekerqueen_essence", new List<string> { "SeekerQueen_Essence_Drop", "Seeker Queen Essence", "SeekerQueen", "0.5", "An erie glow.", "EssenceTrophySeekerQueen" } },
             
-            { "$item_abomination_essence", new List<string> { "Abomination_Essence_Drop", "Abomination Essence", "Abomination", "0.5", "An erie glow.", "EssenceTrophyAbomination" } },
-            { "$item_stonegolem_essence", new List<string> { "StoneGolem_Essence_Drop", "Stone Golem Essence", "StoneGolem", "0.5", "An erie glow.", "EssenceTrophySGolem" } },
-            { "$item_troll_essence", new List<string> { "Troll_Essence_Drop", "Troll Essence", "Troll", "0.5", "An erie glow.", "EssenceTrophyFrostTroll" } },
+            { "$item_abomination_essence", new List<string> { "Abomination_Essence_Drop", "Abomination Essence", "Abomination", "0.5", "Bane", "EssenceTrophyAbomination" } },
+            { "$item_stonegolem_essence", new List<string> { "StoneGolem_Essence_Drop", "Stone Golem Essence", "StoneGolem", "0.5", "Core Overdrive", "EssenceTrophySGolem" } },
+            { "$item_troll_essence", new List<string> { "Troll_Essence_Drop", "Troll Essence", "Troll", "0.5", "Troll Toss", "EssenceTrophyFrostTroll" } },
             
-            { "$item_blob_essence", new List<string> { "Blob_Essence_Drop", "Blob Essence", "Blob", "0.5", "An erie glow.", "EssenceTrophyBlob" } },
-            { "$item_boar_essence", new List<string> { "Boar_Essence_Drop", "Boar Essence", "Boar", "0.5", "An erie glow.", "TrophyBoarEssence" } },
-            { "$item_cultist_essence", new List<string> { "Cultist_Essence_Drop", "Cultist Essence", "Fenring_Cultist", "0.5", "An erie glow.", "EssenceTrophyCultist" } },
-            { "$item_deathsquito_essence", new List<string> { "Deathsquito_Essence_Drop", "Deathsquito Essence", "Deathsquito", "0.5", "An erie glow.", "EssenceTrophyDeathsquito" } },
-            { "$item_deer_essence", new List<string> { "Deer_Essence_Drop", "Deer Essence", "Deer", "0.5", "An erie glow.", "EssenceTrophyDeer" } },
-            { "$item_draugrelite_essence", new List<string> { "DraugrElite_Essence_Drop", "Draugr Elite Essence", "Draugr_Elite", "0.5", "An erie glow.", "EssenceTrophyDraugrElite" } },
-            { "$item_draugr_essence", new List<string> { "Draugr_Essence_Drop", "Draugr Essence", "Draugr", "0.5", "An erie glow.", "EssenceTrophyDraugr" } },
-            { "$item_dvergr_essence", new List<string> { "Dvergr_Essence_Drop", "Dvergr Essence", "Dverger", "0.5", "An erie glow.", "EssenceTrophyDvergr"} },
-            { "$item_fenring_essence", new List<string> { "Fenring_Essence_Drop", "Fenring Essence", "Fenring", "0.5", "An erie glow.", "EssenceTrophyFenring" } },
-            { "$item_gjall_essence", new List<string> { "Gjall_Essence_Drop", "Gjall Essence", "Gjall", "0.5", "An erie glow.", "EssenceTrophyGjall" } },
-            { "$item_goblin_essence", new List<string> { "Goblin_Essence_Drop", "Fuling Essence", "Goblin", "0.5", "An erie glow.", "EssenceTrophyGoblin" } },
-            { "$item_goblinbrute_essence", new List<string> { "GoblinBrute_Essence_Drop", "Fuling Berserker Essence", "GoblinBrute", "0.5", "An erie glow.", "TrophyGoblinBruteEssence" } },
-            { "$item_goblinshaman_essence", new List<string> { "GoblinShaman_Essence_Drop", "Fuling Shaman Essence", "GoblinShaman", "0.5", "An erie glow.", "EssenceTrophyGoblinShaman" } },
-            { "$item_greydwarf_essence", new List<string> { "Greydwarf_Essence_Drop", "Greydwarf Essence", "Greydwarf", "0.5", "An erie glow.", "EssenceTrophyGreydwarf" } },
-            { "$item_greydwarfbrute_essence", new List<string> { "GreydwarfBrute_Essence_Drop", "Greydwarf Brute Essence", "Greydwarf_Elite", "0.5", "An erie glow.", "EssenceTrophyGreydwarfBrute" } },
-            { "$item_greydwarfshaman_essence", new List<string> { "GreydwarfShaman_Essence_Drop", "Greydwarf Shaman Essence", "Greydwarf_Shaman", "0.5", "An erie glow.", "EssenceTrophyGreydwarfShaman" } },
-            { "$item_growth_essence", new List<string> { "Growth_Essence_Drop", "Growth Essence", "BlobTar", "0.5", "An erie glow.", "EssenceTrophyGrowth" } },
-            { "$item_hare_essence", new List<string> { "Hare_Essence_Drop", "Hare Essence", "Hare", "0.5", "An erie glow.", "EssenceTrophyHare" } },
-            { "$item_hatchling_essence", new List<string> { "Drake_Essence_Drop", "Drake Essence", "Hatchling", "0.5", "An erie glow.", "EssenceTrophyHatchling" } },
-            { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.5", "An erie glow.", "EssenceTrophyLeech" } },
-            { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.5", "An erie glow.", "TrophyLoxEssence" } },
-            { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.5", "An erie glow.", "TrophyNeckEssence" } },
+            { "$item_blob_essence", new List<string> { "Blob_Essence_Drop", "Blob Essence", "Blob", "0.5", "Fumes", "EssenceTrophyBlob" } },
+            { "$item_boar_essence", new List<string> { "Boar_Essence_Drop", "Boar Essence", "Boar", "0.5", "Reckless Charge", "TrophyBoarEssence" } },
+            { "$item_cultist_essence", new List<string> { "Cultist_Essence_Drop", "Cultist Essence", "Fenring_Cultist", "0.5", "Lone Sun", "EssenceTrophyCultist" } },
+            { "$item_deathsquito_essence", new List<string> { "Deathsquito_Essence_Drop", "Deathsquito Essence", "Deathsquito", "0.5", "Relentless", "EssenceTrophyDeathsquito" } },
+            { "$item_deer_essence", new List<string> { "Deer_Essence_Drop", "Deer Essence", "Deer", "0.5", "Horizon Haste", "EssenceTrophyDeer" } },
+            { "$item_draugrelite_essence", new List<string> { "DraugrElite_Essence_Drop", "Draugr Elite Essence", "Draugr_Elite", "0.5", "Fallen Hero", "EssenceTrophyDraugrElite" } },
+            { "$item_draugr_essence", new List<string> { "Draugr_Essence_Drop", "Draugr Essence", "Draugr", "0.5", "Forgotten", "EssenceTrophyDraugr" } },
+            { "$item_dvergr_essence", new List<string> { "Dvergr_Essence_Drop", "Dvergr Essence", "Dverger", "0.5", "Randomize", "EssenceTrophyDvergr"} },
+            { "$item_fenring_essence", new List<string> { "Fenring_Essence_Drop", "Fenring Essence", "Fenring", "0.5", "Moonlit Leap", "EssenceTrophyFenring" } },
+            { "$item_gjall_essence", new List<string> { "Gjall_Essence_Drop", "Gjall Essence", "Gjall", "0.5", "Gjallarhorn", "EssenceTrophyGjall" } },
+            { "$item_goblin_essence", new List<string> { "Goblin_Essence_Drop", "Fuling Essence", "Goblin", "0.5", "Longinus", "EssenceTrophyGoblin" } },
+            { "$item_goblinbrute_essence", new List<string> { "GoblinBrute_Essence_Drop", "Fuling Berserker Essence", "GoblinBrute", "0.5", "Giantization", "TrophyGoblinBruteEssence" } },
+            { "$item_goblinshaman_essence", new List<string> { "GoblinShaman_Essence_Drop", "Fuling Shaman Essence", "GoblinShaman", "0.5", "Ritual", "EssenceTrophyGoblinShaman" } },
+            { "$item_greydwarf_essence", new List<string> { "Greydwarf_Essence_Drop", "Greydwarf Essence", "Greydwarf", "0.5", "Pebble", "EssenceTrophyGreydwarf" } },
+            { "$item_greydwarfbrute_essence", new List<string> { "GreydwarfBrute_Essence_Drop", "Greydwarf Brute Essence", "Greydwarf_Elite", "0.5", "Bash", "EssenceTrophyGreydwarfBrute" } },
+            { "$item_greydwarfshaman_essence", new List<string> { "GreydwarfShaman_Essence_Drop", "Greydwarf Shaman Essence", "Greydwarf_Shaman", "0.5", "Dubious Heal", "EssenceTrophyGreydwarfShaman" } },
+            { "$item_growth_essence", new List<string> { "Growth_Essence_Drop", "Growth Essence", "BlobTar", "0.5", "Ancient Tar", "EssenceTrophyGrowth" } },
+            { "$item_hare_essence", new List<string> { "Hare_Essence_Drop", "Hare Essence", "Hare", "0.5", "Lucky Foot", "EssenceTrophyHare" } },
+            { "$item_hatchling_essence", new List<string> { "Drake_Essence_Drop", "Drake Essence", "Hatchling", "0.5", "Three Freeze", "EssenceTrophyHatchling" } },
+            { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.5", "Blood Siphon", "EssenceTrophyLeech" } },
+            { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.5", "Wild Tremor", "TrophyLoxEssence" } },
+            { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.5", "Splash", "TrophyNeckEssence" } },
             { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "Seeker", "0.5", "An erie glow.", "EssenceTrophySeeker" } },
             { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.5", "An erie glow.", "EsenceTrophySeekerBrute" } },
-            { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.5", "An erie glow.", "EssenceTrophySerpent" } },
-            { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.5", "An erie glow.", "EssenceTrophySkeleton" } },
-            { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.5", "An erie glow.", "EssenceTrophySkeletonPoison" } },
-            { "$item_surtling_essence", new List<string> { "Surtling_Essence_Drop", "Surtling Essence", "Surtling", "0.5", "An erie glow.", "EssenceTrophySurtling" } },
-            { "$item_tick_essence", new List<string> { "Tick_Essence_Drop", "Tick Essence", "Tick", "0.5", "An erie glow.", "EssenceTrophyTick" } },
-            { "$item_ulv_essence", new List<string> { "Ulv_Essence_Drop", "Ulv Essence", "Ulv", "0.5", "An erie glow.", "EssenceTrophyUlv" } },
-            { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.5", "An erie glow.", "TrophyWolfEssence" } },
-            { "$item_wraith_essence", new List<string> { "Wraith_Essence_Drop", "Wraith Essence", "Wraith", "0.5", "An erie glow.", "EssenceTrophyWraith" } },
+            { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.5", "Sea King", "EssenceTrophySerpent" } },
+            { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.5", "Vigil", "EssenceTrophySkeleton" } },
+            { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.5", "Rancorous", "EssenceTrophySkeletonPoison" } },
+            { "$item_surtling_essence", new List<string> { "Surtling_Essence_Drop", "Surtling Essence", "Surtling", "0.5", "Harbinger", "EssenceTrophySurtling" } },
+            { "$item_tick_essence", new List<string> { "Tick_Essence_Drop", "Tick Essence", "Tick", "0.5", "Blood Well", "EssenceTrophyTick" } },
+            { "$item_ulv_essence", new List<string> { "Ulv_Essence_Drop", "Ulv Essence", "Ulv", "0.5", "Territorial Slumber", "EssenceTrophyUlv" } },
+            { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.5", "Ravenous Hunger", "TrophyWolfEssence" } },
+            { "$item_wraith_essence", new List<string> { "Wraith_Essence_Drop", "Wraith Essence", "Wraith", "0.5", "Twin Souls", "EssenceTrophyWraith" } },
             
-            { "$item_brenna_essence", new List<string> { "Brenna_Essence_Drop", "Brenna Essence", "Skeleton_Hildir", "0.5", "An erie glow.", "EssenceTrophySkeletonHildir" } },
-            { "$item_geirrhafa_essence", new List<string> { "Geirrhafa_Essence_Drop", "Geirrhafa Essence", "Fenring_Cultist_Hildir", "0.5", "An erie glow.", "EssenceTrophyCultist_Hildir" } },
+            { "$item_brenna_essence", new List<string> { "Brenna_Essence_Drop", "Brenna Essence", "Skeleton_Hildir", "0.5", "Vulcan", "EssenceTrophySkeletonHildir" } },
+            { "$item_geirrhafa_essence", new List<string> { "Geirrhafa_Essence_Drop", "Geirrhafa Essence", "Fenring_Cultist_Hildir", "0.5", "Ice Age.", "EssenceTrophyCultist_Hildir" } },
             { "$item_zil_essence", new List<string> { "Zil_Essence_Drop", "Zil Essence", "GoblinShaman_Hildir", "0.5", "An erie glow.", "EssenceTrophyGoblinBruteBrosShaman" } },
             { "$item_thungr_essence", new List<string> { "Thungr_Essence_Drop", "Thungr Essence", "GoblinBrute_Hildir", "0.5", "An erie glow.", "EssenceTrophyGoblinBruteBrosBrute" } },
         };
@@ -234,7 +234,9 @@ namespace LackingImaginationV2
         public static ConfigEntry<bool> EssenceSlotsEnabled;
         public static bool UseGuardianPower = true;
         
-        public static ConfigEntry<KeyboardShortcut> Ability1_Hotkey { get; set; }
+        // public static ConfigEntry<KeyboardShortcut> Ability1_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability1_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability1_Combokey { get; set; }
         public static ConfigEntry<KeyboardShortcut> Ability2_Hotkey { get; set; }
         public static ConfigEntry<KeyboardShortcut> Ability3_Hotkey { get; set; }
         public static ConfigEntry<KeyboardShortcut> Ability4_Hotkey { get; set; }
@@ -791,7 +793,9 @@ namespace LackingImaginationV2
 
             EssenceSlotsEnabled = Config.Bind("Toggles", "Enable Essence Slots", true, "Disabling this while items are in the slots will attempt to move them to your inventory.");
 
-            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha1), "Ability 1 Hotkey");
+            Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", KeyCode.LeftAlt, "Ability 1 Hotkey");
+            Ability1_Combokey = config("Keybinds", "Ability1_Combokey", KeyCode.Alpha1, "Ability 1 Combokey");
+
             Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha2), "Ability 2 Hotkey");
             Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha3), "Ability 3 Hotkey");
             Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha4), "Ability 4 Hotkey");
@@ -1195,6 +1199,8 @@ namespace LackingImaginationV2
             
             
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
+            _ = ConfigSync.AddConfigEntry(Ability1_Combokey);
+            
             _ = ConfigSync.AddConfigEntry(Ability2_Hotkey);
             _ = ConfigSync.AddConfigEntry(Ability3_Hotkey);
             _ = ConfigSync.AddConfigEntry(Ability4_Hotkey);
@@ -2927,7 +2933,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xLox",
                     m_name = "Lox_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Wild Tremor\n" +
+                             "Active: Stomp the ground causing an Aoe.\n" +
+                             "Positive Passive: Food eaten will gave bonus health.\n" +
+                             "Negative Passive: Duration of food reduced by 25%.\n",
                      
                     m_topic = "Lox"
                 };
@@ -2939,7 +2948,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xNeck",
                     m_name = "Neck_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Splash(Effect in progress)\n" + 
+                             "Active: Dash forward while swimming.(Weapon scaling)\n" +
+                             "Positive Passive: Swim speed doubled.\n" +
+                             "Positive Passive: You become weak to fire while wet.\n" +
+                             "Negative Passive: You become resistant to poison while wet.\n",
                      
                     m_topic = "Neck"
                 };
@@ -2951,7 +2964,14 @@ namespace LackingImaginationV2
                 {
                     m_label = "xWolf",
                     m_name = "Wolf_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Ravenous Hunger\n" +
+                             "Active: For a duration, every 5th hit will deal a % of max health in slash damage.\n" +
+                             "Passive: Different effects based on number of foods eaten.\n" +
+                             "         3 foods: damage reduced by 25%.\n" +
+                             "         2 foods: damage increased by 25% & x bonus stamina.\n" +
+                             "         1 foods: damage increased by 50% & 2x bonus stamina.\n" +
+                             "         0 foods: damage increased by 100% & 3x bonus stamina.\n" +
+                             "         Below 3 foods run, sneak, dodge & jump stamina drain reduced by half." ,
                      
                     m_topic = "Wolf"
                 };
@@ -2982,7 +3002,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xGeirrhafa",
                     m_name = "Geirrhafa_Exp",
-                    m_text = "Essence Power: ",
+                    m_text = "Essence Power: Ice Age\n" +
+                             "Active: Case 3 ice waves & then summon icicles above enemies in range.\n" +
+                             "Positive Passive: Gain bonus eitr.\n" +
+                             "Positive Passive: All attacks do bonus frost damage.\n" +
+                             "Negative Passive:  When hit you have a 1 in 20 chance to take 10% bonus frost damage.\n",
                      
                     m_topic = "Geirrhafa"
                 };
@@ -3021,7 +3045,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xInfected Mine",
                     m_name = "InfectedMine_Exp",
-                    m_text = " ",
+                    m_text = "An echo of prosperity, now a den of malice.",
                      
                     m_topic = "Infected Mine"
                 };
@@ -3034,7 +3058,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xFrost Cave",
                     m_name = "FrostCave_Exp",
-                    m_text = " ",
+                    m_text = "To resist the madness of the frost, flame itself was deified in this place.",
                      
                     m_topic = "Frost Cave"
                 };
@@ -3047,7 +3071,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xSunken Crypt",
                     m_name = "SunkenCrypt_Exp",
-                    m_text = " ",
+                    m_text = "The treasures within gather warriors far and wide to their demise.",
                      
                     m_topic = "Sunken Crypt"
                 };
@@ -3060,7 +3084,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xBurial Chambers",
                     m_name = "BurialChambers_Exp",
-                    m_text = " ",
+                    m_text = "A resting place for the fallen, though they seem rather restless.",
                      
                     m_topic = "Burial Chambers"
                 };
@@ -3073,7 +3097,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xTroll Cave",
                     m_name = "TrollCave_Exp",
-                    m_text = " ",
+                    m_text = "Large eyes peer out from the darkness.",
                      
                     m_topic = "Troll Cave"
                 };
@@ -3086,11 +3110,11 @@ namespace LackingImaginationV2
                 Tutorial.TutorialText _goblinCampExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label = "xGoblin Camp",
+                    m_label = "xFuling Camp",
                     m_name = "GoblinCamp_Exp",
-                    m_text = " ",
+                    m_text = "The kin gather in worship of their king.",
                      
-                    m_topic = "Goblin Camp"
+                    m_topic = "Fuling Camp"
                 };
                 if (!Tutorial.instance.m_texts.Contains(_goblinCampExp))
                 {
@@ -3103,7 +3127,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xSmouldering Tomb",
                     m_name = "ForestCryptHildir_Exp",
-                    m_text = " ",
+                    m_text = "The wails of suffering and hellfire can be heard even from here.",
                      
                     m_topic = "Smouldering Tomb"
                 };
@@ -3116,7 +3140,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xHowling Cavern",
                     m_name = "CaveHildir_Exp",
-                    m_text = " ",
+                    m_text = "Madness within madness, forsaken by the flame, this place embraced the frost.",
                     
                     m_topic = "Howling Cavern"
                 };
@@ -3129,7 +3153,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xSealed Tower",
                     m_name = "PlainsFortHildir_Exp",
-                    m_text = " ",
+                    m_text = "A fortress of brotherhood, it's residents seek to overthrow their king.",
                      
                     m_topic = "Sealed Tower"
                 };
@@ -3144,7 +3168,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xEikthyr Altar",
                     m_name = "EikthyrSacrifice_Exp",
-                    m_text = " ",
+                    m_text = "The air around the altar sparks with electricity.",
                     
                     m_topic = "Eikthyr Altar"
                 };
@@ -3157,7 +3181,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xThe Elder Altar",
                     m_name = "TheElderSacrifice_Exp",
-                    m_text = " ",
+                    m_text = "The roots seem to shift below your feet.",
                     
                     m_topic = "The Elder Altar"
                 };
@@ -3170,7 +3194,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xBoneMass Altar",
                     m_name = "BoneMassSacrifice_Exp",
-                    m_text = " ",
+                    m_text = "A powerful mage must have made this, but to do or create what?",
                     
                     m_topic = "BoneMass Altar"
                 };
@@ -3183,7 +3207,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xModer Altar",
                     m_name = "ModerSacrifice_Exp",
-                    m_text = " ",
+                    m_text = "Something massive roosts here.",
                     
                     m_topic = "Moder Altar"
                 };
@@ -3196,7 +3220,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xYagluth Altar",
                     m_name = "YagluthSacrifice_Exp",
-                    m_text = " ",
+                    m_text = "Not content with mastery of fire, here the king sought to take mastery of lightning.",
                     
                     m_topic = "Yagluth Altar"
                 };
@@ -3209,7 +3233,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xSeeker Queen Seal",
                     m_name = "SeekerQueenSeal_Exp",
-                    m_text = " ",
+                    m_text = "The epitome of pestilence is sealed within these walls.",
                     
                     m_topic = "Seeker Queen Seal"
                 };

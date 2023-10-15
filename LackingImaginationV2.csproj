@@ -208,6 +208,7 @@
         <Compile Include="Extra and Status Effects\CoroutineRunner.cs" />
         <Compile Include="Extra and Status Effects\EssenceMotion.cs" />
         <Compile Include="Extra and Status Effects\SE_TimedDeath.cs" />
+        <Compile Include="KeyboardShortcutHandler.cs" />
         <Compile Include="LackingImaginationGlobal.cs" />
         <Compile Include="LackingImaginationUtilities.cs" />
         <Compile Include="Managers\CreatureManager.cs" />

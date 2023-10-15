@@ -41,10 +41,10 @@ namespace LackingImaginationV2
                     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Can only be cast while Swimming");
                 }
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
         
@@ -97,7 +97,6 @@ namespace LackingImaginationV2
                 {
                     HitData hitData = new HitData();                    
                     hitData.m_damage = player.GetCurrentWeapon().GetDamage();
-                    hitData.ApplyModifier(player.GetCurrentWeapon().m_shared.m_attack.m_speedFactor); 
                     hitData.m_point = ch.GetCenterPoint();
                     hitData.m_dir = (ch.transform.position - moveVec);
                     float num = Vector3.Distance(ch.transform.position, moveVec);

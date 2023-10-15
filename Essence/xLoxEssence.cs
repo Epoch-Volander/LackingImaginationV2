@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xLoxEssence
     {
-        public static string Ability_Name = "Wild \nTremor ";
+        public static string Ability_Name = "Wild \nTremor";
         
         private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
@@ -24,8 +24,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Lox Button was pressed");
-                
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                 se_cd.m_ttl = LackingImaginationUtilities.xLoxCooldownTime;
@@ -92,10 +90,10 @@ namespace LackingImaginationV2
                 }
                 
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
         
     }

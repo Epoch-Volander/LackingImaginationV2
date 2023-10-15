@@ -32,8 +32,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Geirrhafa Button was pressed");
-
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
                  se_cd.m_ttl = LackingImaginationUtilities.xGeirrhafaCooldownTime;
@@ -95,10 +93,10 @@ namespace LackingImaginationV2
                     (_ => { ScheduleAoe(player); }, null, (int)(AoeDelay * 1000), System.Threading.Timeout.Infinite);
                 
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
 
         
@@ -278,7 +276,7 @@ namespace LackingImaginationV2
                         int Dubious = UnityEngine.Random.Range(1, 21); // 1-20 inclusive
                         if (Dubious == 1)
                         {
-                            hit.m_damage.m_frost = hit.GetTotalDamage() * 0.05f;
+                            hit.m_damage.m_frost = hit.GetTotalDamage() * 0.1f;
                         }
                     }
                     if ((UnityEngine.Object) __instance.m_baseAI != (UnityEngine.Object) null && (bool) (UnityEngine.Object) attacker && attacker.IsPlayer())

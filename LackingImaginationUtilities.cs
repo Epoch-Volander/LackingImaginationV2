@@ -723,36 +723,33 @@ namespace LackingImaginationV2
 
 
 
-
-
-         public static List<KeyCode> movements = new List<KeyCode>()
-         {
-             KeyCode.W,
-             KeyCode.A,
-             KeyCode.S,
-             KeyCode.D,
-             KeyCode.LeftShift,
-         };
-
-         // public static bool AbilityCast(KeyboardShortcut config)
-         // {
-         //     
-         // }
          
-
         public static bool Ability1_Input_Down
         {
             get
             {
-                LackingImaginationV2Plugin.Ability1_Hotkey.Value.Modifiers.AddItem(KeyCode.W);
-                KeyboardShortcut test = LackingImaginationV2Plugin.Ability1_Hotkey.Value;
-                if(LackingImaginationV2Plugin.Ability1_Hotkey.Value.MainKey == KeyCode.None)
+                switch (LackingImaginationV2Plugin.Ability1_Hotkey.Value)
                 {
-                    return false;
-                }
-                else if(/*LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsDown ||*/test.IsPressed() /*LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsPressed()*/ /*|| LackingImaginationV2Plugin.Ability1_Hotkey.Value.IsUp()*/)
-                {
-                    return true;
+                    case KeyCode.None:
+                        return false;
+                    default:
+                    {
+                        if(LackingImaginationV2Plugin.Ability1_Combokey.Value == KeyCode.None)
+                        {
+                            if(KeyboardShortcutHandler.InputWithoutCombo(LackingImaginationV2Plugin.Ability1_Hotkey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        else 
+                        {
+                            if(KeyboardShortcutHandler.InputWithCombo(LackingImaginationV2Plugin.Ability1_Hotkey.Value, LackingImaginationV2Plugin.Ability1_Combokey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
                 }
                 return false;
             }
@@ -825,11 +822,6 @@ namespace LackingImaginationV2
         }
         
         
-        
-        
-        
     }
-
-
-
+    
 }

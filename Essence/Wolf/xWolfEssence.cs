@@ -21,7 +21,6 @@ namespace LackingImaginationV2
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-                LackingImaginationV2Plugin.Log($"Wolf Button was pressed");
                 // status effect that lets you build up bleed (3 hit passive?) then does x% hp dmg to enemy hit and resets counter
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
@@ -41,10 +40,10 @@ namespace LackingImaginationV2
                 // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_wolf_haul"), player.transform.position, Quaternion.identity);
                 //why is this not working?
             }
-            else
-            {
-                player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
-            }
+            // else
+            // {
+            //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
+            // }
         }
     }
 
