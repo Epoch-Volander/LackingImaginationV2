@@ -203,11 +203,16 @@ namespace LackingImaginationV2
         {
             static void Prefix(Attack __instance)
             {
-                if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Giantization"))
+                if (ZNetScene.instance)
                 {
-                    __instance.m_attackRange *= 2f;
-                    __instance.m_attackHeight *= 1.25f;
-                    
+                    if (__instance != null)
+                    {
+                        if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("SE_Giantization"))
+                        {
+                            __instance.m_attackRange *= 2f;
+                            __instance.m_attackHeight *= 1.25f;
+                        }
+                    }
                 }
             }
         }

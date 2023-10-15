@@ -235,12 +235,17 @@ namespace LackingImaginationV2
         public static bool UseGuardianPower = true;
         
         // public static ConfigEntry<KeyboardShortcut> Ability1_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Sprintkey { get; set; }
         public static ConfigEntry<KeyCode> Ability1_Hotkey { get; set; }
         public static ConfigEntry<KeyCode> Ability1_Combokey { get; set; }
-        public static ConfigEntry<KeyboardShortcut> Ability2_Hotkey { get; set; }
-        public static ConfigEntry<KeyboardShortcut> Ability3_Hotkey { get; set; }
-        public static ConfigEntry<KeyboardShortcut> Ability4_Hotkey { get; set; }
-        public static ConfigEntry<KeyboardShortcut> Ability5_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability2_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability2_Combokey { get; set; }
+        public static ConfigEntry<KeyCode> Ability3_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability3_Combokey { get; set; }
+        public static ConfigEntry<KeyCode> Ability4_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability4_Combokey { get; set; }
+        public static ConfigEntry<KeyCode> Ability5_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode> Ability5_Combokey { get; set; }
 
         public static ConfigEntry<float> li_cooldownMultiplier;
 
@@ -793,14 +798,18 @@ namespace LackingImaginationV2
 
             EssenceSlotsEnabled = Config.Bind("Toggles", "Enable Essence Slots", true, "Disabling this while items are in the slots will attempt to move them to your inventory.");
 
+            Sprintkey = config("Keybinds", "Sprintkey", KeyCode.LeftShift, "This does not change the sprint key, \nit is to let me know what yours is for better casting.");
             Ability1_Hotkey = config("Keybinds", "Ability1_Hotkey", KeyCode.LeftAlt, "Ability 1 Hotkey");
             Ability1_Combokey = config("Keybinds", "Ability1_Combokey", KeyCode.Alpha1, "Ability 1 Combokey");
+            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", KeyCode.LeftAlt, "Ability 2 Hotkey");
+            Ability2_Combokey = config("Keybinds", "Ability2_Combokey", KeyCode.Alpha2, "Ability 2 Combokey");
+            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", KeyCode.LeftAlt, "Ability 3 Hotkey");
+            Ability3_Combokey = config("Keybinds", "Ability3_Combokey", KeyCode.Alpha3, "Ability 3 Combokey");
+            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", KeyCode.LeftAlt, "Ability 4 Hotkey");
+            Ability4_Combokey = config("Keybinds", "Ability4_Combokey", KeyCode.Alpha4, "Ability 4 Combokey");
+            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", KeyCode.LeftAlt, "Ability 5 Hotkey");
+            Ability5_Combokey = config("Keybinds", "Ability5_Combokey", KeyCode.Alpha5, "Ability 5 Combokey");
 
-            Ability2_Hotkey = config("Keybinds", "Ability2_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha2), "Ability 2 Hotkey");
-            Ability3_Hotkey = config("Keybinds", "Ability3_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha3), "Ability 3 Hotkey");
-            Ability4_Hotkey = config("Keybinds", "Ability4_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha4), "Ability 4 Hotkey");
-            Ability5_Hotkey = config("Keybinds", "Ability5_Hotkey", new KeyboardShortcut(KeyCode.LeftAlt, KeyCode.Alpha5), "Ability 5 Hotkey");
-           
             //li_cooldownMultiplier = ConfigManager.RegisterModConfigVariable<float>(ModName, "vl_mce_cooldownMultiplier", 1f, "Modifiers", "This value multiplied on overall cooldown time of abilities", false);
             li_cooldownMultiplier = config("Modifiers", "CooldownMultiplier", 100f, "This value multiplied on overall cooldown time of abilities");
             
@@ -1198,13 +1207,18 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousArmor", li_rancidremainsRancorousArmor.Value);
             
             
+            
+            _ = ConfigSync.AddConfigEntry(Sprintkey);
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
             _ = ConfigSync.AddConfigEntry(Ability1_Combokey);
-            
             _ = ConfigSync.AddConfigEntry(Ability2_Hotkey);
+            _ = ConfigSync.AddConfigEntry(Ability2_Combokey);
             _ = ConfigSync.AddConfigEntry(Ability3_Hotkey);
+            _ = ConfigSync.AddConfigEntry(Ability3_Combokey);
             _ = ConfigSync.AddConfigEntry(Ability4_Hotkey);
+            _ = ConfigSync.AddConfigEntry(Ability4_Combokey);
             _ = ConfigSync.AddConfigEntry(Ability5_Hotkey);
+            _ = ConfigSync.AddConfigEntry(Ability5_Combokey);
 
             _ = ConfigSync.AddConfigEntry(li_cooldownMultiplier);
             _ = ConfigSync.AddConfigEntry(showAbilityIcons);
@@ -1888,7 +1902,7 @@ namespace LackingImaginationV2
 
         
         [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
-        public static class SkillIcon_Patch
+        public static class Skill_Icon_Patch
         {
             public static void Postfix(Hud __instance)
             {
@@ -1927,6 +1941,10 @@ namespace LackingImaginationV2
                                     {
                                         component.color = Color.white;
                                         iconText = Ability1_Hotkey.Value.ToString();
+                                        if (Ability1_Combokey.Value != KeyCode.None)
+                                        {
+                                            iconText += " + " + Ability1_Combokey.Value.ToString();
+                                        }
                                     }
                                 }
                                 else if (j == 1)
@@ -1944,6 +1962,10 @@ namespace LackingImaginationV2
                                     {
                                         component.color = Color.white;
                                         iconText = Ability2_Hotkey.Value.ToString();
+                                        if (Ability2_Combokey.Value != KeyCode.None)
+                                        {
+                                            iconText += " + " + Ability2_Combokey.Value.ToString();
+                                        }
                                     }
                                 }
                                 else if (j == 2)
@@ -1960,6 +1982,10 @@ namespace LackingImaginationV2
                                     {
                                         component.color = Color.white;
                                         iconText = Ability3_Hotkey.Value.ToString();
+                                        if (Ability3_Combokey.Value != KeyCode.None)
+                                        {
+                                            iconText += " + " + Ability3_Combokey.Value.ToString();
+                                        }
                                     }
                                 }
                                 else if (j == 3)
@@ -1976,6 +2002,10 @@ namespace LackingImaginationV2
                                     {
                                         component.color = Color.white;
                                         iconText = Ability4_Hotkey.Value.ToString();
+                                        if (Ability4_Combokey.Value != KeyCode.None)
+                                        {
+                                            iconText += " + " + Ability4_Combokey.Value.ToString();
+                                        }
                                     }
                                 }
                                 else if (j == 4)
@@ -1992,6 +2022,10 @@ namespace LackingImaginationV2
                                     {
                                         component.color = Color.white;
                                         iconText = Ability5_Hotkey.Value.ToString();
+                                        if (Ability5_Combokey.Value != KeyCode.None)
+                                        {
+                                            iconText += " + " + Ability5_Combokey.Value.ToString();
+                                        }
                                     }
                                 }
                                 //rectTransform2.GetComponentInChildren<Text>().text = Localization.instance.Localize((Ability1.Name).ToString());

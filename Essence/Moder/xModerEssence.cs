@@ -84,14 +84,14 @@ namespace LackingImaginationV2
             yield return new WaitForSeconds(breathDelay);
             
             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldbreath_start"), player.transform.position, Quaternion.identity);
-            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint() +player.transform.forward * 0.5f, player.transform.rotation, player.transform);
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint() +player.transform.forward * 2f, player.transform.rotation, player.transform);
             
             // Create a HashSet to keep track of detected objects.
             HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
 
             Vector3 capsuleCenter = player.GetCenterPoint() + player.transform.forward * 0.5f;
             float capsuleRadius = 2f; // Radius of the capsule
-            float capsuleHeight = 37f; // Height of the capsule (equals the ray length)
+            float capsuleHeight = 38f; // Height of the capsule (equals the ray length)
 
             // Perform the capsule overlap check with the specified layer mask
             Collider[] colliders = Physics.OverlapCapsule(capsuleCenter, capsuleCenter + player.transform.forward * capsuleHeight, capsuleRadius, Script_Breath_Layermask);

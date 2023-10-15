@@ -45,7 +45,6 @@ namespace LackingImaginationV2
              KeyCode.A,
              KeyCode.S,
              KeyCode.D,
-             KeyCode.LeftShift,
          };
 
 
@@ -53,10 +52,14 @@ namespace LackingImaginationV2
          {
              bool atLeastOneCombinationIsTrue = false;
              
+             KeyCode[] movementsCopy = new KeyCode[movements.Length + 1];
+             Array.Copy(movements, movementsCopy, movements.Length);
+             movementsCopy[movements.Length] = LackingImaginationV2Plugin.Sprintkey.Value;
+             
              for (int numAdditionalKeys = 0; numAdditionalKeys <= 3; numAdditionalKeys++)
              {
                  // Generate combinations of additional keys
-                 IEnumerable<IEnumerable<KeyCode>> combinations = CombinationGenerator.GetCombinations(movements, numAdditionalKeys);
+                 IEnumerable<IEnumerable<KeyCode>> combinations = CombinationGenerator.GetCombinations(movementsCopy, numAdditionalKeys);
 
                  // Iterate through the generated combinations
                  foreach (IEnumerable<KeyCode> combination in combinations)
@@ -93,10 +96,14 @@ namespace LackingImaginationV2
          {
              bool atLeastOneCombinationIsTrue = false;
              
+             KeyCode[] movementsCopy = new KeyCode[movements.Length + 1];
+             Array.Copy(movements, movementsCopy, movements.Length);
+             movementsCopy[movements.Length] = LackingImaginationV2Plugin.Sprintkey.Value;
+             
              for (int numAdditionalKeys = 0; numAdditionalKeys <= 3; numAdditionalKeys++)
              {
                  // Generate combinations of additional keys
-                 IEnumerable<IEnumerable<KeyCode>> combinations = CombinationGenerator.GetCombinations(movements, numAdditionalKeys);
+                 IEnumerable<IEnumerable<KeyCode>> combinations = CombinationGenerator.GetCombinations(movementsCopy, numAdditionalKeys);
 
                  // Iterate through the generated combinations
                  foreach (IEnumerable<KeyCode> combination in combinations)

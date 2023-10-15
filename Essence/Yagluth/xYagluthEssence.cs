@@ -112,7 +112,7 @@ namespace LackingImaginationV2
                 Vector3 forwardDirection = player.GetLookDir();
                 Vector3 upDirection = player.transform.up;
                 
-                Vector3 spawnPosition = playerPosition + upDirection * 1.4f + forwardDirection * 0.5f;
+                Vector3 spawnPosition = playerPosition + upDirection * 1.4f + forwardDirection * 2f;
                 GameObject GO_CulminationBeamProjectile = UnityEngine.Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
 
                 Projectile P_CulminationBeamProjectile = GO_CulminationBeamProjectile.GetComponent<Projectile>();

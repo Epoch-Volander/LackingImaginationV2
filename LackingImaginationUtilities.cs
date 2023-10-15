@@ -109,7 +109,7 @@ namespace LackingImaginationV2
                     rectTransform.gameObject.transform.localScale *= 1.35f;
                     rectTransform.GetComponentInChildren<TMP_Text>().text = Localization.instance.Localize((LackingImaginationV2Plugin.AbilityNames[i]).ToString());
                     rectTransform.GetComponentInChildren<TMP_Text>().enableAutoSizing = false;
-                    rectTransform.GetComponentInChildren<TMP_Text>().fontSize = 12f;
+                    rectTransform.GetComponentInChildren<TMP_Text>().fontSize = 10f;
                     LackingImaginationV2Plugin.abilitiesStatus[i] = rectTransform;
                 }
                 pos.x += xStep;
@@ -760,13 +760,28 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability2_Hotkey.Value.MainKey == KeyCode.None)
+                switch (LackingImaginationV2Plugin.Ability2_Hotkey.Value)
                 {
-                    return false;
-                }
-                else if(/*LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsDown() ||*/ LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability2_Hotkey.Value.IsUp()*/)
-                {
-                    return true;
+                    case KeyCode.None:
+                        return false;
+                    default:
+                    {
+                        if(LackingImaginationV2Plugin.Ability2_Combokey.Value == KeyCode.None)
+                        {
+                            if(KeyboardShortcutHandler.InputWithoutCombo(LackingImaginationV2Plugin.Ability2_Hotkey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        else 
+                        {
+                            if(KeyboardShortcutHandler.InputWithCombo(LackingImaginationV2Plugin.Ability2_Hotkey.Value, LackingImaginationV2Plugin.Ability2_Combokey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
                 }
                 return false;
             }
@@ -777,13 +792,28 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability3_Hotkey.Value.MainKey == KeyCode.None)
+                switch (LackingImaginationV2Plugin.Ability3_Hotkey.Value)
                 {
-                    return false;
-                }
-                else if(/*LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsDown() || */LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability3_Hotkey.Value.IsUp()*/)
-                {
-                    return true;
+                    case KeyCode.None:
+                        return false;
+                    default:
+                    {
+                        if(LackingImaginationV2Plugin.Ability3_Combokey.Value == KeyCode.None)
+                        {
+                            if(KeyboardShortcutHandler.InputWithoutCombo(LackingImaginationV2Plugin.Ability3_Hotkey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        else 
+                        {
+                            if(KeyboardShortcutHandler.InputWithCombo(LackingImaginationV2Plugin.Ability3_Hotkey.Value, LackingImaginationV2Plugin.Ability3_Combokey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
                 }
                 return false;
             }
@@ -793,13 +823,28 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability4_Hotkey.Value.MainKey == KeyCode.None)
+                switch (LackingImaginationV2Plugin.Ability4_Hotkey.Value)
                 {
-                    return false;
-                }
-                else if(/*LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsDown() ||*/ LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability4_Hotkey.Value.IsUp()*/)
-                {
-                    return true;
+                    case KeyCode.None:
+                        return false;
+                    default:
+                    {
+                        if(LackingImaginationV2Plugin.Ability4_Combokey.Value == KeyCode.None)
+                        {
+                            if(KeyboardShortcutHandler.InputWithoutCombo(LackingImaginationV2Plugin.Ability4_Hotkey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        else 
+                        {
+                            if(KeyboardShortcutHandler.InputWithCombo(LackingImaginationV2Plugin.Ability4_Hotkey.Value, LackingImaginationV2Plugin.Ability4_Combokey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
                 }
                 return false;
             }
@@ -809,13 +854,28 @@ namespace LackingImaginationV2
         {
             get
             {
-                if(LackingImaginationV2Plugin.Ability5_Hotkey.Value.MainKey == KeyCode.None)
+                switch (LackingImaginationV2Plugin.Ability5_Hotkey.Value)
                 {
-                    return false;
-                }
-                else if(/*LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsDown() || */LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsPressed() /*|| LackingImaginationV2Plugin.Ability5_Hotkey.Value.IsUp()*/)
-                {
-                    return true;
+                    case KeyCode.None:
+                        return false;
+                    default:
+                    {
+                        if(LackingImaginationV2Plugin.Ability5_Combokey.Value == KeyCode.None)
+                        {
+                            if(KeyboardShortcutHandler.InputWithoutCombo(LackingImaginationV2Plugin.Ability5_Hotkey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        else 
+                        {
+                            if(KeyboardShortcutHandler.InputWithCombo(LackingImaginationV2Plugin.Ability5_Hotkey.Value, LackingImaginationV2Plugin.Ability5_Combokey.Value))
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
                 }
                 return false;
             }
