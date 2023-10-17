@@ -102,18 +102,22 @@ namespace LackingImaginationV2
         {
             public static bool Prefix()
             {
-                foreach (string bound in boundVulkanList)
+                if(Player.m_localPlayer != null && Player.m_localPlayer.m_nview.IsOwner() && (double) Player.m_localPlayer.GetHealth() > 0.0 && !Player.m_localPlayer.IsDead() )
                 {
-                    if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                    foreach (string bound in boundVulkanList)
                     {
-                        Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                        {
+                            Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        }
                     }
-                }
-                foreach (string bound in boundRancorousList)
-                {
-                    if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+
+                    foreach (string bound in boundRancorousList)
                     {
-                        Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                        {
+                            Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        }
                     }
                 }
                 return true;
@@ -125,18 +129,22 @@ namespace LackingImaginationV2
         {
             public static bool Prefix()
             {
-                foreach (string bound in boundVulkanList)
+                if(Player.m_localPlayer != null && Player.m_localPlayer.m_nview.IsOwner() && (double) Player.m_localPlayer.GetHealth() > 0.0 && !Player.m_localPlayer.IsDead() )
                 {
-                    if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                    foreach (string bound in boundVulkanList)
                     {
-                        Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                        {
+                            Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        }
                     }
-                }
-                foreach (string bound in boundRancorousList)
-                {
-                    if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+
+                    foreach (string bound in boundRancorousList)
                     {
-                        Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        if (Player.m_localPlayer.m_inventory.ContainsItemByName(bound))
+                        {
+                            Player.m_localPlayer.m_inventory.RemoveItem(bound, 1);
+                        }
                     }
                 }
                 return true;

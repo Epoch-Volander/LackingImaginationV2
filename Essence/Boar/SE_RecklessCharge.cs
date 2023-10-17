@@ -134,6 +134,7 @@ namespace LackingImaginationV2
             {
                 if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
             }
+            if(Player.m_localPlayer.IsDead()) if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
         }
 
         public override bool CanAdd(Character character)

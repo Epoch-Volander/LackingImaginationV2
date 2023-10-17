@@ -61,102 +61,128 @@ namespace LackingImaginationV2
 
         public static Dictionary<Heightmap.Biome, List<string>> biomeDictionary = new Dictionary<Heightmap.Biome, List<string>>
         {
-            { Heightmap.Biome.Meadows, new List<string> {"Meadows_Exp", "2"} },
+            { Heightmap.Biome.Meadows, new List<string> {"Meadows_Exp", "1"} },
             { Heightmap.Biome.BlackForest, new List<string> {"BlackForest_Exp", "2"} },
-            { Heightmap.Biome.Swamp, new List<string> {"Swamp_Exp", "2"} },
-            { Heightmap.Biome.Ocean, new List<string> {"Ocean_Exp", "2"} },
-            { Heightmap.Biome.Mountain, new List<string> {"Mountain_Exp", "2"} },
-            { Heightmap.Biome.Plains, new List<string> {"Plains_Exp", "2"} },
-            { Heightmap.Biome.Mistlands, new List<string> {"Mistlands_Exp", "2"} },
-            { Heightmap.Biome.AshLands, new List<string> {"AshLands_Exp", "2"} },
-            { Heightmap.Biome.DeepNorth, new List<string> {"DeepNorth_Exp", "2"} }
+            { Heightmap.Biome.Swamp, new List<string> {"Swamp_Exp", "3"} },
+            { Heightmap.Biome.Ocean, new List<string> {"Ocean_Exp", "4"} },
+            { Heightmap.Biome.Mountain, new List<string> {"Mountain_Exp", "4"} },
+            { Heightmap.Biome.Plains, new List<string> {"Plains_Exp", "5"} },
+            { Heightmap.Biome.Mistlands, new List<string> {"Mistlands_Exp", "6"} },
+            { Heightmap.Biome.AshLands, new List<string> {"AshLands_Exp", "7"} },
+            { Heightmap.Biome.DeepNorth, new List<string> {"DeepNorth_Exp", "8"} }
         };
         
         public static Dictionary<string, List<string>> locationDictionary = new Dictionary<string,List<string>>
         {
-            { "Crypt2(Clone)",  new List<string> {"BurialChambers_Exp", "2"} },
-            { "Crypt3(Clone)", new List<string> {"BurialChambers_Exp", "2"} },
-            { "Crypt4(Clone)", new List<string> {"BurialChambers_Exp", "2"} },
-            { "TrollCave02(Clone)", new List<string> {"TrollCave_Exp", "2"} },
-            { "SunkenCrypt4(Clone)", new List<string> {"SunkenCrypt_Exp", "2"} },
-            { "MountainCave02(Clone)", new List<string> {"FrostCave_Exp", "2"} },
-            { "GoblinCamp2(Clone)", new List<string> {"GoblinCamp_Exp", "2"} },
-            { "Mistlands_DvergrTownEntrance1(Clone)", new List<string> {"InfectedMine_Exp", "2"} },
-            { "Mistlands_DvergrTownEntrance2(Clone)", new List<string> {"InfectedMine_Exp", "2"} },
-            
-            { "Hildir_crypt(Clone)", new List<string> {"ForestCryptHildir_Exp", "2"} },
-            { "Hildir_cave(Clone)", new List<string> {"CaveHildir_Exp", "2"} },
-            { "Hildir_plainsfortress(Clone)", new List<string> {"PlainsFortHildir_Exp", "2"} },
-            
-            { "Eikthyrnir(Clone)",  new List<string> {"EikthyrSacrifice_Exp", "2"} },
-            { "GDKing(Clone)", new List<string> {"TheElderSacrifice_Exp", "2"} },
-            { "Bonemass(Clone)", new List<string> {"BoneMassSacrifice_Exp", "2"} },
-            { "Dragonqueen(Clone)", new List<string> {"ModerSacrifice_Exp", "2"} },
-            { "GoblinKing(Clone)", new List<string> {"YagluthSacrifice_Exp", "2"} },
-            { "Mistlands_DvergrBossEntrance1(Clone)", new List<string> {"SeekerQueenSeal_Exp", "2"} },
+            // dungeaonx2
+            { "Crypt2(Clone)",  new List<string> {"BurialChambers_Exp", "4"} },
+            { "Crypt3(Clone)", new List<string> {"BurialChambers_Exp", "4"} },
+            { "Crypt4(Clone)", new List<string> {"BurialChambers_Exp", "4"} },
+            { "TrollCave02(Clone)", new List<string> {"TrollCave_Exp", "4"} },
+            { "SunkenCrypt4(Clone)", new List<string> {"SunkenCrypt_Exp", "6"} },
+            { "MountainCave02(Clone)", new List<string> {"FrostCave_Exp", "8"} },
+            { "GoblinCamp2(Clone)", new List<string> {"GoblinCamp_Exp", "10"} },
+            { "Mistlands_DvergrTownEntrance1(Clone)", new List<string> {"InfectedMine_Exp", "12"} },
+            { "Mistlands_DvergrTownEntrance2(Clone)", new List<string> {"InfectedMine_Exp", "12"} },
+            //Vendors x2
+            { "Vendor_BlackForest(Clone)", new List<string> {"Haldor_Exp", "4"} },
+            // { "Vendor_BlackForest(Clone)", new List<string> {"Hildir_Exp", "4"} },
+            //special x1
+            { "InfestedTree01(Clone)", new List<string> {"InfestedTree_Exp", "3"} }, //swamp
+            { "DrakeNest01(Clone)", new List<string> {"DrakeNest_Exp", "4"} }, // mountain
+            { "TarPit1(Clone)", new List<string> {"TarPit_Exp", "5"} }, // plains
+            { "TarPit2(Clone)", new List<string> {"TarPit_Exp", "5"} }, // plains
+            { "TarPit3(Clone)", new List<string> {"TarPit_Exp", "5"} }, // plains
+            { "Mistlands_Harbour1(Clone)", new List<string> {"DvergrHarbour_Exp", "6"} }, // mist
+            // Runestones x1
+            { "Runestone_Meadows(Clone)",  new List<string> {"MeadowRune_Exp", "1"} }, //meadow
+            { "Runestone_Boars(Clone)", new List<string> {"BoarRune_Exp", "1"} }, //meadow
+            { "Runestone_BlackForest(Clone)", new List<string> {"BlackForestRune_Exp", "2"} }, //black
+            { "Runestone_Greydwarfs(Clone)", new List<string> {"GreydwarfRune_Exp", "2"} }, //black
+            { "Runestone_Swamps(Clone)", new List<string> {"SwampRune_Exp", "3"} }, //swamp
+            { "Runestone_Draugr(Clone)", new List<string> {"DraugrRune_Exp", "3"} }, //swamp
+            { "Runestone_Mountains(Clone)", new List<string> {"MountainRune_Exp", "4"} }, // mountain
+            { "DrakeLorestone(Clone)", new List<string> {"DrakeRune_Exp", "4"} }, // mountain
+            { "Runestone_Plains(Clone)", new List<string> {"PlainsRune_Exp", "5"} }, // plains
+            { "Runestone_Mistlands(Clone)",  new List<string> {"MistRune_Exp", "6"} }, // mist
+            //mini boss locationsx3
+            { "Hildir_crypt(Clone)", new List<string> {"ForestCryptHildir_Exp", "6"} },
+            { "Hildir_cave(Clone)", new List<string> {"CaveHildir_Exp", "12"} },
+            { "Hildir_plainsfortress(Clone)", new List<string> {"PlainsFortHildir_Exp", "15"} },
+            { "Mistlands_GuardTower1_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
+            { "Mistlands_GuardTower2_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
+            { "Mistlands_GuardTower3_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
+            //Altar x3
+            { "Eikthyrnir(Clone)",  new List<string> {"EikthyrSacrifice_Exp", "3"} },
+            { "GDKing(Clone)", new List<string> {"TheElderSacrifice_Exp", "6"} },
+            { "Bonemass(Clone)", new List<string> {"BoneMassSacrifice_Exp", "9"} },
+            { "Dragonqueen(Clone)", new List<string> {"ModerSacrifice_Exp", "12"} },
+            { "GoblinKing(Clone)", new List<string> {"YagluthSacrifice_Exp", "15"} },
+            { "Mistlands_DvergrBossEntrance1(Clone)", new List<string> {"SeekerQueenSeal_Exp", "18"} },
         };
         
-        // public static Dictionary<string, string> dungeonMusicDictionary = new Dictionary<string, string>
-        // {
-        //     // { "GoblinCamp", "GoblinCamp_Exp" },
-        //     // { "ForestCryptHildir", "ForestCryptHildir_Exp" },
-        //     // // { "frostcaveshildir", "CaveHildir_Exp" }, // Setting forced environment CavesHildir //  Starting music frostcaveshildir
-        //     // { "PlainsFortHildir", "PlainsFortHildir_Exp" },
-        // };
-
         public static Dictionary<string, List<string>> trophyDictionary = new Dictionary<string, List<string>>
         {
             //  item name                                 tutorial name, level gain
-            { "$item_trophy_eikthyr", new List<string> { "Eikthyr_Exp", "3" } },
-            { "$item_trophy_elder", new List<string> { "TheElder_Exp", "3" } },
-            { "$item_trophy_bonemass", new List<string> { "BoneMass_Exp", "3" } },
-            { "$item_trophy_dragonqueen", new List<string> { "Moder_Exp", "3" } },
-            { "$item_trophy_goblinking", new List<string> { "Yagluth_Exp", "3" } },
-            { "$item_trophy_seekerqueen", new List<string> { "SeekerQueen_Exp", "3" } },
-
-            { "$item_trophy_abomination", new List<string> { "Abomination_Exp", "2" } },
-            { "$item_trophy_sgolem", new List<string> { "StoneGolem_Exp", "2" } },
-            { "$item_trophy_troll", new List<string> { "Troll_Exp", "2" } },
-
-            { "$item_trophy_blob", new List<string> { "Blob_Exp", "1" } },
-            { "$item_trophy_deathsquito", new List<string> { "Deathsquito_Exp", "1" } },
-            { "$item_trophy_draugrelite", new List<string> { "DraugrElite_Exp", "1" } },
-            { "$item_trophy_draugr", new List<string> { "Draugr_Exp", "1" } },
-            { "$item_trophy_fenring", new List<string> { "Fenring_Exp", "1" } },
-            { "$item_trophy_gjall", new List<string> { "Gjall_Exp", "1" } },
-            { "$item_trophy_goblin", new List<string> { "Fuling_Exp", "1" } },
-            { "$item_trophy_greydwarf", new List<string> { "Greydwarf_Exp", "1" } },
-            { "$item_trophy_greydwarfbrute", new List<string> { "GreydwarfBrute_Exp", "1" } },
-            { "$item_trophy_greydwarfshaman", new List<string> { "GreydwarfShaman_Exp", "1" } },
-            { "$item_trophy_growth", new List<string> { "Growth_Exp", "1" } },
-            { "$item_trophy_hatchling", new List<string> { "Drake_Exp", "1" } },
-            { "$item_trophy_leech", new List<string> { "Leech_Exp", "1" } },
-            { "$item_trophy_seeker", new List<string> { "Seeker_Exp", "1" } },
-            { "$item_trophy_seeker_brute", new List<string> { "SeekerSoldier_Exp", "1" } },
-            { "$item_trophy_skeleton", new List<string> { "Skeleton_Exp", "1" } },
-            { "$item_trophy_surtling", new List<string> { "Surtling_Exp", "1" } },
-            { "$item_trophy_tick", new List<string> { "Tick_Exp", "1" } },
-
-            { "$item_trophy_goblinbrute", new List<string> { "FulingBerserker_Exp", "1" } },
-            { "$item_trophy_goblinshaman", new List<string> { "FulingShaman_Exp", "1" } },
-            { "$item_trophy_cultist", new List<string> { "Cultist_Exp", "1" } },
-            { "$item_trophy_dvergr", new List<string> { "Dvergr_Exp", "1" } },
-            { "$item_trophy_serpent", new List<string> { "Serpent_Exp", "1" } },
-            { "$item_trophy_skeletonpoison", new List<string> { "RancidRemains_Exp", "1" } },
-            { "$item_trophy_ulv", new List<string> { "Ulv_Exp", "1" } },
-            { "$item_trophy_wraith", new List<string> { "Wraith_Exp", "1" } },
-
-            { "$item_trophy_boar", new List<string> { "Boar_Exp", "1" } },
+            //BOSS x5
+            { "$item_trophy_eikthyr", new List<string> { "Eikthyr_Exp", "5" } },
+            { "$item_trophy_elder", new List<string> { "TheElder_Exp", "10" } },
+            { "$item_trophy_bonemass", new List<string> { "BoneMass_Exp", "15" } },
+            { "$item_trophy_dragonqueen", new List<string> { "Moder_Exp", "20" } },
+            { "$item_trophy_goblinking", new List<string> { "Yagluth_Exp", "25" } },
+            { "$item_trophy_seekerqueen", new List<string> { "SeekerQueen_Exp", "30" } },
+            //Meadow
+            { "$item_trophy_boar", new List<string> { "Boar_Exp", "1" } }, 
             { "$item_trophy_deer", new List<string> { "Deer_Exp", "1" } },
-            { "$item_trophy_hare", new List<string> { "Hare_Exp", "1" } },
-            { "$item_trophy_lox", new List<string> { "Lox_Exp", "1" } },
+            { "$item_trophy_greydwarf", new List<string> { "Greydwarf_Exp", "1" } },
             { "$item_trophy_neck", new List<string> { "Neck_Exp", "1" } },
-            { "$item_trophy_wolf", new List<string> { "Wolf_Exp", "1" } },
-            
-            { "$item_trophy_cultist_hildir", new List<string> { "Geirrhafa_Exp", "2" } },
-            { "$item_trophy_skeleton_hildir", new List<string> { "Brenna_Exp", "2" } },
-            { "$item_trophy_shamanbro", new List<string> { "Zil_Exp", "2" } },
-            { "$item_trophy_brutebro", new List<string> { "Thungr_Exp", "2" } },
+            //Black
+            { "$item_trophy_greydwarfbrute", new List<string> { "GreydwarfBrute_Exp", "2" } },
+            { "$item_trophy_greydwarfshaman", new List<string> { "GreydwarfShaman_Exp", "2" } },
+            { "$item_trophy_skeleton", new List<string> { "Skeleton_Exp", "2" } },
+            //Area Black x2
+            { "$item_trophy_troll", new List<string> { "Troll_Exp", "4" } },
+            { "$item_trophy_skeletonpoison", new List<string> { "RancidRemains_Exp", "4" } },
+            //Swamp
+            { "$item_trophy_blob", new List<string> { "Blob_Exp", "3" } },
+            { "$item_trophy_draugrelite", new List<string> { "DraugrElite_Exp", "3" } },
+            { "$item_trophy_draugr", new List<string> { "Draugr_Exp", "3" } },
+            { "$item_trophy_leech", new List<string> { "Leech_Exp", "3" } },
+            { "$item_trophy_surtling", new List<string> { "Surtling_Exp", "3" } },
+            //Area Swamp x2
+            { "$item_trophy_abomination", new List<string> { "Abomination_Exp", "6" } },
+            { "$item_trophy_wraith", new List<string> { "Wraith_Exp", "6" } },
+            //Mountain
+            { "$item_trophy_fenring", new List<string> { "Fenring_Exp", "4" } },
+            { "$item_trophy_hatchling", new List<string> { "Drake_Exp", "4" } },
+            { "$item_trophy_ulv", new List<string> { "Ulv_Exp", "4" } },
+            { "$item_trophy_wolf", new List<string> { "Wolf_Exp", "4" } },
+            //Area Mountain x2
+            { "$item_trophy_sgolem", new List<string> { "StoneGolem_Exp", "8" } },
+            { "$item_trophy_cultist", new List<string> { "Cultist_Exp", "8" } },
+            //Ocean x2
+            { "$item_trophy_serpent", new List<string> { "Serpent_Exp", "8" } },
+            //Plains
+            { "$item_trophy_deathsquito", new List<string> { "Deathsquito_Exp", "5" } },
+            { "$item_trophy_goblin", new List<string> { "Fuling_Exp", "5" } },
+            { "$item_trophy_growth", new List<string> { "Growth_Exp", "5" } },
+            { "$item_trophy_lox", new List<string> { "Lox_Exp", "5" } },
+            //Area Plains x2
+            { "$item_trophy_goblinbrute", new List<string> { "FulingBerserker_Exp", "10" } }, 
+            { "$item_trophy_goblinshaman", new List<string> { "FulingShaman_Exp", "10" } },
+            //Mist
+            { "$item_trophy_gjall", new List<string> { "Gjall_Exp", "6" } },
+            { "$item_trophy_hare", new List<string> { "Hare_Exp", "6" } },
+            { "$item_trophy_seeker", new List<string> { "Seeker_Exp", "6" } },
+            { "$item_trophy_tick", new List<string> { "Tick_Exp", "6" } },
+            //Area Mist x2
+            { "$item_trophy_dvergr", new List<string> { "Dvergr_Exp", "12" } },
+            { "$item_trophy_seeker_brute", new List<string> { "SeekerSoldier_Exp", "12" } },
+            //Mini Boss x4
+            { "$item_trophy_cultist_hildir", new List<string> { "Geirrhafa_Exp", "16" } },
+            { "$item_trophy_skeleton_hildir", new List<string> { "Brenna_Exp", "8" } },
+            { "$item_trophy_shamanbro", new List<string> { "Zil_Exp", "20" } },
+            { "$item_trophy_brutebro", new List<string> { "Thungr_Exp", "20" } },
         };
         
         public static Dictionary<string, List<string>> ItemBundleUnwrapDict = new Dictionary<string, List<string>>()
@@ -231,29 +257,29 @@ namespace LackingImaginationV2
         
         public static bool playerEnabled = true;
 
-        public static ConfigEntry<bool> EssenceSlotsEnabled;
+        public static ConfigEntry<bool>? EssenceSlotsEnabled;
         public static bool UseGuardianPower = true;
         
         // public static ConfigEntry<KeyboardShortcut> Ability1_Hotkey { get; set; }
-        public static ConfigEntry<KeyCode> Sprintkey { get; set; }
-        public static ConfigEntry<KeyCode> Ability1_Hotkey { get; set; }
-        public static ConfigEntry<KeyCode> Ability1_Combokey { get; set; }
-        public static ConfigEntry<KeyCode> Ability2_Hotkey { get; set; }
-        public static ConfigEntry<KeyCode> Ability2_Combokey { get; set; }
-        public static ConfigEntry<KeyCode> Ability3_Hotkey { get; set; }
-        public static ConfigEntry<KeyCode> Ability3_Combokey { get; set; }
-        public static ConfigEntry<KeyCode> Ability4_Hotkey { get; set; }
-        public static ConfigEntry<KeyCode> Ability4_Combokey { get; set; }
-        public static ConfigEntry<KeyCode> Ability5_Hotkey { get; set; }
-        public static ConfigEntry<KeyCode> Ability5_Combokey { get; set; }
+        public static ConfigEntry<KeyCode>? Sprintkey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability1_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability1_Combokey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability2_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability2_Combokey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability3_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability3_Combokey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability4_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability4_Combokey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability5_Hotkey { get; set; }
+        public static ConfigEntry<KeyCode>? Ability5_Combokey { get; set; }
 
-        public static ConfigEntry<float> li_cooldownMultiplier;
+        public static ConfigEntry<float>? li_cooldownMultiplier;
 
-        public static ConfigEntry<float> icon_X_Offset;
-        public static ConfigEntry<float> icon_Y_Offset;
+        public static ConfigEntry<float>? icon_X_Offset;
+        public static ConfigEntry<float>? icon_Y_Offset;
 
-        public static ConfigEntry<bool> showAbilityIcons;
-        public static ConfigEntry<string> iconAlignment;
+        public static ConfigEntry<bool>? showAbilityIcons;
+        public static ConfigEntry<string>? iconAlignment;
 
         public static readonly Color abilityCooldownColor = new Color(1f, .3f, .3f, .5f);
 
@@ -268,176 +294,176 @@ namespace LackingImaginationV2
         };
 
         public static List<RectTransform> abilitiesStatus = new List<RectTransform> { };
-        
-        
-        public static ConfigEntry<float> li_draugrSynergyRot;
-        public static ConfigEntry<float> li_skeletonSynergyBrenna;
-        public static ConfigEntry<float> li_skeletonSynergyRancid;
+
+
+        private static ConfigEntry<float>? li_draugrSynergyRot;
+        private static ConfigEntry<float>? li_skeletonSynergyBrenna;
+        private static ConfigEntry<float>? li_skeletonSynergyRancid;
         
         //Cooldown
-        public static ConfigEntry<float> li_eikthyrBlitzCD;
-        public static ConfigEntry<float> li_deerHorizonHasteCD;
-        public static ConfigEntry<float> li_fenringMoonlitLeapCD;
-        public static ConfigEntry<float> li_loxWildTremorCD;
-        public static ConfigEntry<float> li_wolfRavenousHungerCD;
-        public static ConfigEntry<float> li_fulingshamanRitualCD;
-        public static ConfigEntry<float> li_deathsquitoRelentlessCD;
-        public static ConfigEntry<float> li_surtlingHarbingerCD;
-        public static ConfigEntry<float> li_fulingberserkerGiantizationCD;
-        public static ConfigEntry<float> li_drakeThreeFreezeCD;
-        public static ConfigEntry<float> li_growthAncientTarCD;
-        public static ConfigEntry<float> li_trollTrollTossCD;
-        public static ConfigEntry<float> li_greydwarfshamanDubiousHealCD;
-        public static ConfigEntry<float> li_dvergrRandomizeCD;
-        public static ConfigEntry<float> li_neckSplashCD;
-        public static ConfigEntry<float> li_leechBloodSiphonCD;
-        public static ConfigEntry<float> li_bonemassMassReleaseCD;
-        public static ConfigEntry<float> li_greydwarfbruteBashCD;
-        public static ConfigEntry<float> li_fulingLonginusCD;
-        public static ConfigEntry<float> li_gjallGjallarhornCD;
-        public static ConfigEntry<float> li_greydwarfPebbleCD;
-        public static ConfigEntry<float> li_elderAncientAweCD;
-        public static ConfigEntry<float> li_blobFumesCD;
-        public static ConfigEntry<float> li_skeletonVigilCD;
-        public static ConfigEntry<float> li_abominationBaneCD;
-        public static ConfigEntry<float> li_wraithTwinSoulsCD;
-        public static ConfigEntry<float> li_draugrForgottenCD;
-        public static ConfigEntry<float> li_draugreliteFallenHeroCD;
-        public static ConfigEntry<float> li_geirrhafaIceAgeCD;
-        public static ConfigEntry<float> li_cultistLoneSunCD;
-        public static ConfigEntry<float> li_hareLuckyFootCD;
-        public static ConfigEntry<float> li_seaserpentSeaKingCD;
-        public static ConfigEntry<float> li_tickBloodWellCD;
-        public static ConfigEntry<float> li_moderDraconicFrostCD;
-        public static ConfigEntry<float> li_boarRecklessChargeCD;
-        public static ConfigEntry<float> li_stonegolemCoreOverdriveCD;
-        public static ConfigEntry<float> li_yagluthCulminationCD;
-        public static ConfigEntry<float> li_ulvTerritorialSlumberCD;
-        public static ConfigEntry<float> li_brennaVulcanCD;
-        public static ConfigEntry<float> li_rancidremainsRancorousCD;
+        private static ConfigEntry<float>? li_eikthyrBlitzCD;
+        private static ConfigEntry<float>? li_deerHorizonHasteCD;
+        private static ConfigEntry<float>? li_fenringMoonlitLeapCD;
+        private static ConfigEntry<float>? li_loxWildTremorCD;
+        private static ConfigEntry<float>? li_wolfRavenousHungerCD;
+        private static ConfigEntry<float>? li_fulingshamanRitualCD;
+        private static ConfigEntry<float>? li_deathsquitoRelentlessCD;
+        private static ConfigEntry<float>? li_surtlingHarbingerCD;
+        private static ConfigEntry<float>? li_fulingberserkerGiantizationCD;
+        private static ConfigEntry<float>? li_drakeThreeFreezeCD;
+        private static ConfigEntry<float>? li_growthAncientTarCD;
+        private static ConfigEntry<float>? li_trollTrollTossCD;
+        private static ConfigEntry<float>? li_greydwarfshamanDubiousHealCD;
+        private static ConfigEntry<float>? li_dvergrRandomizeCD;
+        private static ConfigEntry<float>? li_neckSplashCD;
+        private static ConfigEntry<float>? li_leechBloodSiphonCD;
+        private static ConfigEntry<float>? li_bonemassMassReleaseCD;
+        private static ConfigEntry<float>? li_greydwarfbruteBashCD;
+        private static ConfigEntry<float>? li_fulingLonginusCD;
+        private static ConfigEntry<float>? li_gjallGjallarhornCD;
+        private static ConfigEntry<float>? li_greydwarfPebbleCD;
+        private static ConfigEntry<float>? li_elderAncientAweCD;
+        private static ConfigEntry<float>? li_blobFumesCD;
+        private static ConfigEntry<float>? li_skeletonVigilCD;
+        private static ConfigEntry<float>? li_abominationBaneCD;
+        private static ConfigEntry<float>? li_wraithTwinSoulsCD;
+        private static ConfigEntry<float>? li_draugrForgottenCD;
+        private static ConfigEntry<float>? li_draugreliteFallenHeroCD;
+        private static ConfigEntry<float>? li_geirrhafaIceAgeCD;
+        private static ConfigEntry<float>? li_cultistLoneSunCD;
+        private static ConfigEntry<float>? li_hareLuckyFootCD;
+        private static ConfigEntry<float>? li_seaserpentSeaKingCD;
+        private static ConfigEntry<float>? li_tickBloodWellCD;
+        private static ConfigEntry<float>? li_moderDraconicFrostCD;
+        private static ConfigEntry<float>? li_boarRecklessChargeCD;
+        private static ConfigEntry<float>? li_stonegolemCoreOverdriveCD;
+        private static ConfigEntry<float>? li_yagluthCulminationCD;
+        private static ConfigEntry<float>? li_ulvTerritorialSlumberCD;
+        private static ConfigEntry<float>? li_brennaVulcanCD;
+        private static ConfigEntry<float>? li_rancidremainsRancorousCD;
         
         
         
         //Status Duration
-        public static ConfigEntry<float> li_deerHorizonHasteSED;
-        public static ConfigEntry<float> li_fenringMoonlitLeapSED;
-        public static ConfigEntry<float> li_wolfRavenousHungerSED;
-        public static ConfigEntry<float> li_deathsquitoRelentlessSED;
-        public static ConfigEntry<float> li_surtlingHarbingerSED;
-        public static ConfigEntry<float> li_fulingberserkerGiantizationSED;
-        public static ConfigEntry<float> li_elderAncientAweSED;
-        public static ConfigEntry<float> li_wraithTwinSoulsSED;
-        public static ConfigEntry<float> li_draugrForgottenSED;
-        public static ConfigEntry<float> li_draugreliteFallenHeroSED;
-        public static ConfigEntry<float> li_hareLuckyFootSED;
-        public static ConfigEntry<float> li_boarRecklessChargeSED;
-        public static ConfigEntry<float> li_ulvTerritorialSlumberSED;
+        private static ConfigEntry<float>? li_deerHorizonHasteSED;
+        private static ConfigEntry<float>? li_fenringMoonlitLeapSED;
+        private static ConfigEntry<float>? li_wolfRavenousHungerSED;
+        private static ConfigEntry<float>? li_deathsquitoRelentlessSED;
+        private static ConfigEntry<float>? li_surtlingHarbingerSED;
+        private static ConfigEntry<float>? li_fulingberserkerGiantizationSED;
+        private static ConfigEntry<float>? li_elderAncientAweSED;
+        private static ConfigEntry<float>? li_wraithTwinSoulsSED;
+        private static ConfigEntry<float>? li_draugrForgottenSED;
+        private static ConfigEntry<float>? li_draugreliteFallenHeroSED;
+        private static ConfigEntry<float>? li_hareLuckyFootSED;
+        private static ConfigEntry<float>? li_boarRecklessChargeSED;
+        private static ConfigEntry<float>? li_ulvTerritorialSlumberSED;
         
         
         //Essence
-        public static ConfigEntry<float> li_deerHorizonHaste;
-        public static ConfigEntry<float> li_deerHorizonHastePassive;
-        public static ConfigEntry<float> li_eikthyrBlitzPassive;
-        public static ConfigEntry<float> li_eikthyrBlitz;
-        public static ConfigEntry<float> li_fenringMoonlitLeap;
-        public static ConfigEntry<float> li_fenringMoonlitLeapPassive;
-        public static ConfigEntry<float> li_loxWildTremor;
-        public static ConfigEntry<float> li_loxWildTremorPassive;
-        public static ConfigEntry<float> li_wolfRavenousHunger;
-        public static ConfigEntry<float> li_wolfRavenousHungerStaminaPassive;
-        public static ConfigEntry<float> li_wolfRavenousHungerPassive;
-        public static ConfigEntry<float> li_fulingshamanRitualShield;
-        public static ConfigEntry<float> li_fulingshamanRitualShieldGrowthCap;
-        public static ConfigEntry<float> li_fulingshamanRitualProjectile;
-        public static ConfigEntry<float> li_fulingshamanRitualPassiveEitr;
-        public static ConfigEntry<float> li_fulingshamanRitualPassiveCarry;
-        public static ConfigEntry<float> li_deathsquitoRelentlessHoming;
-        public static ConfigEntry<float> li_deathsquitoRelentlessHomingRange;
-        public static ConfigEntry<float> li_deathsquitoRelentlessPassive;
-        public static ConfigEntry<float> li_surtlingHarbingerCharges;
-        public static ConfigEntry<float> li_surtlingHarbingerBurn;
-        public static ConfigEntry<float> li_surtlingHarbingerMinDistance;
-        public static ConfigEntry<float> li_fulingberserkerGiantizationHealth;
-        public static ConfigEntry<float> li_drakeThreeFreezeProjectile;
-        public static ConfigEntry<float> li_growthAncientTarProjectile;
-        public static ConfigEntry<float> li_growthAncientTarPassive;
-        public static ConfigEntry<float> li_greydwarfshamanDubiousHealPlayer;
-        public static ConfigEntry<float> li_greydwarfshamanDubiousHealCreature;
-        public static ConfigEntry<float> li_greydwarfshamanDubiousHealPassive;
-        public static ConfigEntry<float> li_greydwarfshamanDubiousHealPassiveEitr;
-        public static ConfigEntry<float> li_trollTrollTossProjectile;
-        public static ConfigEntry<float> li_trollTrollTossPassive;
-        public static ConfigEntry<float> li_dvergrRandomizeIceProjectile;
-        public static ConfigEntry<float> li_dvergrRandomizeFireProjectile;
-        public static ConfigEntry<float> li_dvergrRandomizeHealPlayer;
-        public static ConfigEntry<float> li_dvergrRandomizeHealCreature;
-        public static ConfigEntry<float> li_dvergrRandomizeCost;
-        public static ConfigEntry<float> li_dvergrRandomizePassiveEitr;
-        public static ConfigEntry<float> li_dvergrRandomizePassive;
-        public static ConfigEntry<float> li_leechBloodSiphonStack;
-        public static ConfigEntry<float> li_leechBloodSiphonStackCap;
-        public static ConfigEntry<float> li_bonemassMassReleaseSummonDuration;
-        public static ConfigEntry<float> li_bonemassMassReleaseProjectile;
-        public static ConfigEntry<float> li_greydwarfbruteBashMultiplier;
-        public static ConfigEntry<float> li_greydwarfbruteRangedReductionPassive;
-        public static ConfigEntry<float> li_greydwarfbruteHealthPassive;
-        public static ConfigEntry<float> li_fulingLonginusMultiplier;
-        public static ConfigEntry<float> li_fulingLonginusPassiveBlockMultiplier;
-        public static ConfigEntry<float> li_fulingLonginusPassiveMotivated;
-        public static ConfigEntry<float> li_fulingLonginusPassiveDemotivated;
-        public static ConfigEntry<float> li_gjallGjallarhornSummonDuration;
-        public static ConfigEntry<float> li_gjallGjallarhornProjectile;
-        public static ConfigEntry<float> li_gjallGjallarhornArmor;
-        public static ConfigEntry<float> li_greydwarfPebbleProjectile;
-        public static ConfigEntry<float> li_greydwarfPebblePassiveCarry;
-        public static ConfigEntry<float> li_greydwarfPebbleForestAnger;
-        public static ConfigEntry<float> li_elderAncientAwePassive;
-        public static ConfigEntry<float> li_blobFumes;
-        public static ConfigEntry<float> li_skeletonVigilSummons;
-        public static ConfigEntry<float> li_skeletonVigilSummonDuration;
-        public static ConfigEntry<float> li_skeletonVigilSoulCap;
-        public static ConfigEntry<float> li_abominationBaneArmor;
-        public static ConfigEntry<float> li_abominationBaneHealth;
-        public static ConfigEntry<float> li_abominationBaneAllySpeed;
-        public static ConfigEntry<float> li_abominationBaneAllyHealth;
-        public static ConfigEntry<float> li_abominationBaneAllyAttack;
-        public static ConfigEntry<float> li_wraithTwinSoulsArmor;
-        public static ConfigEntry<float> li_wraithTwinSoulsPassive;
-        public static ConfigEntry<float> li_wraithTwinSoulsAllySpeed;
-        public static ConfigEntry<float> li_wraithTwinSoulsAllyHealth;
-        public static ConfigEntry<float> li_wraithTwinSoulsAllyAttack;
-        public static ConfigEntry<float> li_draugrForgottenRot;
-        public static ConfigEntry<float> li_draugrForgottenPassiveCarry;
-        public static ConfigEntry<float> li_draugrForgottenActive;
-        public static ConfigEntry<float> li_draugreliteFallenHeroRot;
-        public static ConfigEntry<float> li_draugreliteFallenHeroPassiveCarry;
-        public static ConfigEntry<float> lidraugreliteFallenHeroActive;
-        public static ConfigEntry<float> li_geirrhafaIceAgeAoe;
-        public static ConfigEntry<float> li_geirrhafaIceAgePassiveEitr;
-        public static ConfigEntry<float> li_geirrhafaIceAgePassive;
-        public static ConfigEntry<float> li_cultistLoneSunAoe;
-        public static ConfigEntry<float> li_cultistLoneSunPassive;
-        public static ConfigEntry<float> li_hareLuckyFoot;
-        public static ConfigEntry<float> li_hareLuckyFootArmor;
-        public static ConfigEntry<float> li_seaserpentSeaKingProjectile;
-        public static ConfigEntry<float> li_tickBloodWellLifeSteal;
-        public static ConfigEntry<float> li_tickBloodWellArmor;
-        public static ConfigEntry<float> li_tickBloodWellStackCap;
-        public static ConfigEntry<float> li_moderDraconicFrostProjectile;
-        public static ConfigEntry<float> li_moderDraconicFrostPassive;
-        public static ConfigEntry<float> li_moderDraconicFrostDragonBreath;
-        public static ConfigEntry<float> li_boarRecklessCharge;
-        public static ConfigEntry<float> li_boarRecklessChargePassive;
-        public static ConfigEntry<float> li_stonegolemCoreOverdriveStacks;
-        public static ConfigEntry<float> li_stonegolemCoreOverdriveArmor;
-        public static ConfigEntry<float> li_yagluthCulminationStaticCap;
-        public static ConfigEntry<float> li_yagluthCulmination;
-        public static ConfigEntry<float> li_ulvTerritorialSlumberComfort;
-        public static ConfigEntry<float> li_ulvTerritorialSlumberStamina;
-        public static ConfigEntry<float> li_ulvTerritorialSlumberSummonDuration;
-        public static ConfigEntry<float> li_ulvTerritorialSlumberSummonHealth;
-        public static ConfigEntry<float> li_brennaVulcanArmor;
-        public static ConfigEntry<float> li_rancidremainsRancorousArmor;
+        private static ConfigEntry<float>? li_deerHorizonHaste;
+        private static ConfigEntry<float>? li_deerHorizonHastePassive;
+        private static ConfigEntry<float>? li_eikthyrBlitzPassive;
+        private static ConfigEntry<float>? li_eikthyrBlitz;
+        private static ConfigEntry<float>? li_fenringMoonlitLeap;
+        private static ConfigEntry<float>? li_fenringMoonlitLeapPassive;
+        private static ConfigEntry<float>? li_loxWildTremor;
+        private static ConfigEntry<float>? li_loxWildTremorPassive;
+        private static ConfigEntry<float>? li_wolfRavenousHunger;
+        private static ConfigEntry<float>? li_wolfRavenousHungerStaminaPassive;
+        private static ConfigEntry<float>? li_wolfRavenousHungerPassive;
+        private static ConfigEntry<float>? li_fulingshamanRitualShield;
+        private static ConfigEntry<float>? li_fulingshamanRitualShieldGrowthCap;
+        private static ConfigEntry<float>? li_fulingshamanRitualProjectile;
+        private static ConfigEntry<float>? li_fulingshamanRitualPassiveEitr;
+        private static ConfigEntry<float>? li_fulingshamanRitualPassiveCarry;
+        private static ConfigEntry<float>? li_deathsquitoRelentlessHoming;
+        private static ConfigEntry<float>? li_deathsquitoRelentlessHomingRange;
+        private static ConfigEntry<float>? li_deathsquitoRelentlessPassive;
+        private static ConfigEntry<float>? li_surtlingHarbingerCharges;
+        private static ConfigEntry<float>? li_surtlingHarbingerBurn;
+        private static ConfigEntry<float>? li_surtlingHarbingerMinDistance;
+        private static ConfigEntry<float>? li_fulingberserkerGiantizationHealth;
+        private static ConfigEntry<float>? li_drakeThreeFreezeProjectile;
+        private static ConfigEntry<float>? li_growthAncientTarProjectile;
+        private static ConfigEntry<float>? li_growthAncientTarPassive;
+        private static ConfigEntry<float>? li_greydwarfshamanDubiousHealPlayer;
+        private static ConfigEntry<float>? li_greydwarfshamanDubiousHealCreature;
+        private static ConfigEntry<float>? li_greydwarfshamanDubiousHealPassive;
+        private static ConfigEntry<float>? li_greydwarfshamanDubiousHealPassiveEitr;
+        private static ConfigEntry<float>? li_trollTrollTossProjectile;
+        private static ConfigEntry<float>? li_trollTrollTossPassive;
+        private static ConfigEntry<float>? li_dvergrRandomizeIceProjectile;
+        private static ConfigEntry<float>? li_dvergrRandomizeFireProjectile;
+        private static ConfigEntry<float>? li_dvergrRandomizeHealPlayer;
+        private static ConfigEntry<float>? li_dvergrRandomizeHealCreature;
+        private static ConfigEntry<float>? li_dvergrRandomizeCost;
+        private static ConfigEntry<float>? li_dvergrRandomizePassiveEitr;
+        private static ConfigEntry<float>? li_dvergrRandomizePassive;
+        private static ConfigEntry<float>? li_leechBloodSiphonStack;
+        private static ConfigEntry<float>? li_leechBloodSiphonStackCap;
+        private static ConfigEntry<float>? li_bonemassMassReleaseSummonDuration;
+        private static ConfigEntry<float>? li_bonemassMassReleaseProjectile;
+        private static ConfigEntry<float>? li_greydwarfbruteBashMultiplier;
+        private static ConfigEntry<float>? li_greydwarfbruteRangedReductionPassive;
+        private static ConfigEntry<float>? li_greydwarfbruteHealthPassive;
+        private static ConfigEntry<float>? li_fulingLonginusMultiplier;
+        private static ConfigEntry<float>? li_fulingLonginusPassiveBlockMultiplier;
+        private static ConfigEntry<float>? li_fulingLonginusPassiveMotivated;
+        private static ConfigEntry<float>? li_fulingLonginusPassiveDemotivated;
+        private static ConfigEntry<float>? li_gjallGjallarhornSummonDuration;
+        private static ConfigEntry<float>? li_gjallGjallarhornProjectile;
+        private static ConfigEntry<float>? li_gjallGjallarhornArmor;
+        private static ConfigEntry<float>? li_greydwarfPebbleProjectile;
+        private static ConfigEntry<float>? li_greydwarfPebblePassiveCarry;
+        private static ConfigEntry<float>? li_greydwarfPebbleForestAnger;
+        private static ConfigEntry<float>? li_elderAncientAwePassive;
+        private static ConfigEntry<float>? li_blobFumes;
+        private static ConfigEntry<float>? li_skeletonVigilSummons;
+        private static ConfigEntry<float>? li_skeletonVigilSummonDuration;
+        private static ConfigEntry<float>? li_skeletonVigilSoulCap;
+        private static ConfigEntry<float>? li_abominationBaneArmor;
+        private static ConfigEntry<float>? li_abominationBaneHealth;
+        private static ConfigEntry<float>? li_abominationBaneAllySpeed;
+        private static ConfigEntry<float>? li_abominationBaneAllyHealth;
+        private static ConfigEntry<float>? li_abominationBaneAllyAttack;
+        private static ConfigEntry<float>? li_wraithTwinSoulsArmor;
+        private static ConfigEntry<float>? li_wraithTwinSoulsPassive;
+        private static ConfigEntry<float>? li_wraithTwinSoulsAllySpeed;
+        private static ConfigEntry<float>? li_wraithTwinSoulsAllyHealth;
+        private static ConfigEntry<float>? li_wraithTwinSoulsAllyAttack;
+        private static ConfigEntry<float>? li_draugrForgottenRot;
+        private static ConfigEntry<float>? li_draugrForgottenPassiveCarry;
+        private static ConfigEntry<float>? li_draugrForgottenActive;
+        private static ConfigEntry<float>? li_draugreliteFallenHeroRot;
+        private static ConfigEntry<float>? li_draugreliteFallenHeroPassiveCarry;
+        private static ConfigEntry<float>? lidraugreliteFallenHeroActive;
+        private static ConfigEntry<float>? li_geirrhafaIceAgeAoe;
+        private static ConfigEntry<float>? li_geirrhafaIceAgePassiveEitr;
+        private static ConfigEntry<float>? li_geirrhafaIceAgePassive;
+        private static ConfigEntry<float>? li_cultistLoneSunAoe;
+        private static ConfigEntry<float>? li_cultistLoneSunPassive;
+        private static ConfigEntry<float>? li_hareLuckyFoot;
+        private static ConfigEntry<float>? li_hareLuckyFootArmor;
+        private static ConfigEntry<float>? li_seaserpentSeaKingProjectile;
+        private static ConfigEntry<float>? li_tickBloodWellLifeSteal;
+        private static ConfigEntry<float>? li_tickBloodWellArmor;
+        private static ConfigEntry<float>? li_tickBloodWellStackCap;
+        private static ConfigEntry<float>? li_moderDraconicFrostProjectile;
+        private static ConfigEntry<float>? li_moderDraconicFrostPassive;
+        private static ConfigEntry<float>? li_moderDraconicFrostDragonBreath;
+        private static ConfigEntry<float>? li_boarRecklessCharge;
+        private static ConfigEntry<float>? li_boarRecklessChargePassive;
+        private static ConfigEntry<float>? li_stonegolemCoreOverdriveStacks;
+        private static ConfigEntry<float>? li_stonegolemCoreOverdriveArmor;
+        private static ConfigEntry<float>? li_yagluthCulminationStaticCap;
+        private static ConfigEntry<float>? li_yagluthCulmination;
+        private static ConfigEntry<float>? li_ulvTerritorialSlumberComfort;
+        private static ConfigEntry<float>? li_ulvTerritorialSlumberStamina;
+        private static ConfigEntry<float>? li_ulvTerritorialSlumberSummonDuration;
+        private static ConfigEntry<float>? li_ulvTerritorialSlumberSummonHealth;
+        private static ConfigEntry<float>? li_brennaVulcanArmor;
+        private static ConfigEntry<float>? li_rancidremainsRancorousArmor;
         
        
         
@@ -448,31 +474,31 @@ namespace LackingImaginationV2
         public static GameObject fx_Harbinger;
         
         //Weapons
-        public static GameObject GO_VulcanSwordBroken;
-        public static GameObject GO_VulcanSword;
-        public static GameObject fx_Vulcan;
-        public static GameObject GO_RancorousMaceBroken;
-        public static GameObject GO_RancorousMace;
-        public static GameObject fx_Rancorous;
+        public static GameObject? GO_VulcanSwordBroken;
+        public static GameObject? GO_VulcanSword;
+        public static GameObject? fx_Vulcan;
+        public static GameObject? GO_RancorousMaceBroken;
+        public static GameObject? GO_RancorousMace;
+        public static GameObject? fx_Rancorous;
         
         //Prefabs type 2 //Pulled from assets
-        public static GameObject fx_Giantization;
-        public static GameObject fx_Bash;
-        public static GameObject fx_Longinus;
-        public static GameObject fx_TwinSouls;
-        public static GameObject fx_BloodWell;
-        public static GameObject fx_TerritorialSlumber;
-        public static GameObject fx_BloodSiphon;
-        public static GameObject fx_RavenousHunger;
-        public static GameObject fx_Relentless;
+        public static GameObject? fx_Giantization;
+        public static GameObject? fx_Bash;
+        public static GameObject? fx_Longinus;
+        public static GameObject? fx_TwinSouls;
+        public static GameObject? fx_BloodWell;
+        public static GameObject? fx_TerritorialSlumber;
+        public static GameObject? fx_BloodSiphon;
+        public static GameObject? fx_RavenousHunger;
+        public static GameObject? fx_Relentless;
         //Prefab3 //originals
-        public static GameObject p_SeaKing;
-        public static GameObject fx_RecklessCharge;
-        public static GameObject fx_RecklessChargeHit;
+        public static GameObject? p_SeaKing;
+        public static GameObject? fx_RecklessCharge;
+        public static GameObject? fx_RecklessChargeHit;
         
         
         //Sounds
-        public static GameObject sfx_Giantization;
+        public static GameObject? sfx_Giantization;
         
         //Prefab4 new bundle
         public static GameObject SG_Spiked_Arms;
@@ -482,31 +508,31 @@ namespace LackingImaginationV2
         
         
         // Animation Clips // Pulled from in game
-        public static Animator creatureAnimatorGeirrhafa;
-        public static AnimationClip creatureAnimationClipGeirrhafaIceNova;
-        public static AnimationClip creatureAnimationClipCultistSpray; // Flame Spell Attack
-        public static Animator creatureAnimatorElder;
-        public static AnimationClip creatureAnimationClipElderSummon;
-        public static Animator creatureAnimatorFenring;
-        public static AnimationClip creatureAnimationClipFenringLeapAttack; //Leap Attack//
-        public static Animator creatureAnimatorGreyShaman;
-        public static AnimationClip creatureAnimationClipGreyShamanHeal; //Standing 1H Cast Spell 01 
-        public static Animator creatureAnimatorHaldor;
-        public static AnimationClip creatureAnimationClipHaldorGreet; //Greet//
-        public static Animator creatureAnimatorPlayer;
-        public static AnimationClip creatureAnimationClipPlayerEmoteCower; 
-        public static AnimationClip creatureAnimationClipPlayerMace2; 
-        public static AnimationClip creatureAnimationClipPlayerEmotePoint; 
-        public static AnimationClip creatureAnimationClipPlayerEmoteDespair; 
-        public static Animator creatureAnimatorBrenna;
-        public static AnimationClip creatureAnimationClipBrennaGroundStab;
-        public static Animator creatureAnimatorDvergr;
-        public static AnimationClip creatureAnimationClipDvergrStaffRaise;
+        private static Animator? creatureAnimatorGeirrhafa;
+        private static AnimationClip? creatureAnimationClipGeirrhafaIceNova;
+        private static AnimationClip? creatureAnimationClipCultistSpray; // Flame Spell Attack
+        private static Animator? creatureAnimatorElder;
+        private static AnimationClip? creatureAnimationClipElderSummon;
+        private static Animator? creatureAnimatorFenring;
+        private static AnimationClip? creatureAnimationClipFenringLeapAttack; //Leap Attack//
+        private static Animator? creatureAnimatorGreyShaman;
+        private static AnimationClip? creatureAnimationClipGreyShamanHeal; //Standing 1H Cast Spell 01 
+        private static Animator? creatureAnimatorHaldor;
+        private static AnimationClip? creatureAnimationClipHaldorGreet; //Greet//
+        private static Animator? creatureAnimatorPlayer;
+        private static AnimationClip? creatureAnimationClipPlayerEmoteCower; 
+        private static AnimationClip? creatureAnimationClipPlayerMace2; 
+        private static AnimationClip? creatureAnimationClipPlayerEmotePoint; 
+        private static AnimationClip? creatureAnimationClipPlayerEmoteDespair; 
+        private static Animator? creatureAnimatorBrenna;
+        private static AnimationClip? creatureAnimationClipBrennaGroundStab;
+        private static Animator? creatureAnimatorDvergr;
+        private static AnimationClip? creatureAnimationClipDvergrStaffRaise;
         
         
         // Animation Clip swappers
-        public static readonly Dictionary<string, AnimationClip> OutsideAnimations = new();
-        public static readonly Dictionary<string, RuntimeAnimatorController> CustomizedRuntimeControllers = new();
+        private static readonly Dictionary<string, AnimationClip> OutsideAnimations = new();
+        private static readonly Dictionary<string, RuntimeAnimatorController> CustomizedRuntimeControllers = new();
         private static readonly Dictionary<string, Dictionary<string, string>> replacementMap = new();
 
 
@@ -2184,44 +2210,36 @@ namespace LackingImaginationV2
                 }
             }
         }
+
+        [HarmonyPatch(typeof(TextsDialog), nameof(TextsDialog.ShowText), new Type[] { typeof(TextsDialog.TextInfo)})]
+        public class TextsDialog_Header_Fix
+        {
+            public static void Postfix(TextsDialog __instance, ref TextsDialog.TextInfo text)
+            {
+                string info = text.m_topic;
+                if (Player.m_localPlayer.m_knownTexts.ContainsKey(info))
+                {
+                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_label == info));
+                    if (tutorialText != null)
+                    {
+                        if(tutorialText.m_topic != "") __instance.m_textAreaTopic.text = Localization.instance.Localize(tutorialText.m_topic);
+                    }
+                }
+            }
+        }
         
-        // locationDictionary
-        //Dungeon Exp
-        // [HarmonyPatch(typeof(EnvMan), nameof(EnvMan.SetForceEnvironment))]
-        // public  class DungeonEnterDetection
-        // {
-        //     public static void Postfix(string env)
-        //     {
-        //         if(locationDictionary.ContainsKey(env))
-        //         {
-        //             ExpMethods.dungeonExpMethod(locationDictionary[env]);
-        //         }
-        //     }
-        // }
-        // [HarmonyPatch(typeof(MusicMan), nameof(MusicMan.HandleLocationMusic))]
-        // public class DungeonMusicDetection
-        // {
-        //     public static void Postfix(ref string currentMusic)
-        //     {
-        //         if(dungeonMusicDictionary.ContainsKey(currentMusic))
-        //         {
-        //             ExpMethods.dungeonExpMethod(dungeonMusicDictionary[currentMusic]);
-        //         }
-        //     }
-        // }
         
-        // [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
-        [HarmonyPatch(typeof(Player), "OnSpawned")]
-        public static class PlayerModNotification
+        [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
+        public static class Player_Mod_Info_Patch
         {
             public static void Postfix(Player __instance)
             {
                 Tutorial.TutorialText LI = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
-                    m_label ="1Lacking Imagination",
+                    m_label ="Lacking Imagination",
                     m_name = "Lacking_Imagination",
-                    m_text = "This World is vast and dangerous. \n Explore, Kill and Conquer to grow your power!",
+                    m_text = "This World is vast and dangerous. \nExplore, Kill and Conquer to grow your power!",
                     
                     m_topic = "Broaden your horizons!"
                 };
@@ -2317,7 +2335,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xMistlands",
                     m_name = "Mistlands_Exp",
-                    m_text = "The fallen land, struggling to regrow while despite the darkness coiled aroun its neck",
+                    m_text = "The fallen land, struggling to regrow despite the darkness coiled around its neck",
                      
                     m_topic = "Mistlands"
                 };
@@ -2357,9 +2375,9 @@ namespace LackingImaginationV2
                 {
                     m_label = "xEikthyr",
                     m_name = "Eikthyr_Exp",
-                    m_text = "Essence Power: Blitz \n " +
-                             "Active: Shoot a lightning cone forward(Weapon scaling). \n " +
-                             "Positive Passive: All attacks do bonus lightning damage. \n" +
+                    m_text = "Essence Power: Blitz \n\n" +
+                             "Active: Shoot a lightning cone forward(Weapon scaling). \n\n" +
+                             "Positive Passive: All attacks do bonus lightning damage. \n\n" +
                              "Negative Passive: When wet, you take added lightning damage. ",
                      
                     m_topic = "Eikthyr"
@@ -2372,11 +2390,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xBoneMass",
                     m_name = "BoneMass_Exp",
-                    m_text = "Essence Power: Mass Release \n" +
-                             "Active: Lob a projectile that summons ally skeletons and blobs on impact. \n " +
-                             "Positive Passive: When hit you have a 20% chance to release a poison cloud. \n" +
-                             "Positive Passive: You become resistant to pierce. \n" +
-                             "Negative Passive: You become very weak to blunt. \n" +
+                    m_text = "Essence Power: Mass Release \n\n" +
+                             "Active: Lob a projectile that summons ally skeletons and blobs on impact. \n\n" +
+                             "Positive Passive: When hit you have a 20% chance to release a poison cloud. \n\n" +
+                             "Positive Passive: You become resistant to pierce. \n\n" +
+                             "Negative Passive: You become very weak to blunt. \n\n" +
                              "Negative Passive: You become very weak to spirit.",
                      
                     m_topic = "BoneMass"
@@ -2389,11 +2407,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xModer",
                     m_name = "Moder_Exp",
-                    m_text = "Essence Power: Draconic Frost \n" +
-                             "Active: You fire a cone of ice shards that spawn ice on the ground(Weapon scaling). \n " +
-                             "Active(Block): You shoot an ice dragon breath. \n " +
-                             "Positive Passive: All attacks do added frost damage. \n" +
-                             "Negative Passive: The draconic essence makes you always feel cold. \n" +
+                    m_text = "Essence Power: Draconic Frost \n\n" +
+                             "Active: You fire a cone of ice shards that spawn ice on the ground(Weapon scaling). \n\n" +
+                             "Active(Block): You shoot an ice dragon breath. \n\n" +
+                             "Positive Passive: All attacks do added frost damage. \n\n" +
+                             "Negative Passive: The draconic essence makes you always feel cold. \n\n" +
                              "Consume freeze glands to calm & suppress the cold.",
                      
                     m_topic = "Moder"
@@ -2418,9 +2436,9 @@ namespace LackingImaginationV2
                 {
                     m_label = "xThe Elder",
                     m_name = "TheElder_Exp",
-                    m_text = "Essence Power: Ancient Awe \n" +
-                             "Active: Briefly root targets in place & grow the roots from under them. \n " +
-                             "Positive Passive: Multiplied regen. \n" +
+                    m_text = "Essence Power: Ancient Awe \n\n" +
+                             "Active: Briefly root targets in place & grow the roots from under them. \n\n" +
+                             "Positive Passive: Multiplied regen. \n\n" +
                              "Negative Passive: You become very weak to frost.",
                     
                     m_topic = "The Elder"
@@ -2433,12 +2451,12 @@ namespace LackingImaginationV2
                 {
                     m_label = "xYagluth",
                     m_name = "Yagluth_Exp",
-                    m_text = "Essence Power: Culmination \n" +
-                             "Active: Shoot a line of lightningfire.(Builds Static) \n" +
-                             "Active(Block): Call a rain of meteors.(Builds Static) \n" +
-                             "Active(Crouch): At the cost of some health, create a nova(Reduces Static) \n" +
-                             "Positive Passive: Static decreases over time. \n" +
-                             "Positive Passive: Immune to burning.(Builds Static) \n" +
+                    m_text = "Essence Power: Culmination \n\n" +
+                             "Active: Shoot a line of lightningfire.(Builds Static) \n\n" +
+                             "Active(Block): Call a rain of meteors.(Builds Static) \n\n" +
+                             "Active(Crouch): At the cost of some health, create a nova(Reduces Static) \n\n" +
+                             "Positive Passive: Static decreases over time. \n\n" +
+                             "Positive Passive: Immune to burning.(Builds Static) \n\n" +
                              "Negative Passive: If Static becomes full you will be struck by a Lightning bolt.(Resets Static)",
                      
                     m_topic = "Yagluth"
@@ -2453,9 +2471,9 @@ namespace LackingImaginationV2
                 {
                     m_label = "xAbomination",
                     m_name = "Abomination_Exp",
-                    m_text = "Essence Power: Bane \n" +
-                             "Active: Summons an ally Abomination.(Eats Wood) \n" +
-                             "Positive Passive: Increased armor. \n" +
+                    m_text = "Essence Power: Bane \n\n" +
+                             "Active: Summons an ally Abomination.(Eats Wood) \n\n" +
+                             "Positive Passive: Increased armor. \n\n" +
                              "Negative Passive: Reduced health during the day.",
                     
                      
@@ -2481,9 +2499,9 @@ namespace LackingImaginationV2
                 {
                     m_label = "xTroll",
                     m_name = "Troll_Exp",
-                    m_text = "Essence Power: Troll Toss \n" +
-                             "Active: Lob a boulder(Max Health scaling). \n" +
-                             "Positive Passive: Bonus health. \n" +
+                    m_text = "Essence Power: Troll Toss \n\n" +
+                             "Active: Lob a boulder(Max Health scaling). \n\n" +
+                             "Positive Passive: Bonus health. \n\n" +
                              "Negative Passive: You become very weak to pierce.",
                      
                     m_topic = "Troll"
@@ -2498,11 +2516,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xBlob",
                     m_name = "Blob_Exp",
-                    m_text = "Essence Power: Fumes \n" +
-                             "Active: Release a cloud of poison. \n" +
-                             "Positive Passive: 1 extra jump.\n" +
-                             "Positive Passive: At 50% hp, spawn 2 ally blobs to aid you.\n" +
-                             "Negative Passive: You become weak to blunt. \n" +
+                    m_text = "Essence Power: Fumes \n\n" +
+                             "Active: Release a cloud of poison. \n\n" +
+                             "Positive Passive: 1 extra jump.\n\n" +
+                             "Positive Passive: At 50% hp, spawn 2 ally blobs to aid you.\n\n" +
+                             "Negative Passive: You become weak to blunt. \n\n" +
                              "Negative Passive: You become weak to lightning.",
                      
                     m_topic = "Blob"
@@ -2515,9 +2533,9 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDeathsquito",
                     m_name = "Deathsquito_Exp",
-                    m_text = "Essence Power: Relentless \n" +
-                             "Active: For a duration of time your projectiles gain homing.\n" +
-                             "Positive Passive: Gain added pierce damage to projectiles.\n" +
+                    m_text = "Essence Power: Relentless \n\n" +
+                             "Active: For a duration of time your projectiles gain homing.\n\n" +
+                             "Positive Passive: Gain added pierce damage to projectiles.\n\n" +
                              "Negative Passive: Maximum health reduced by 50%.",
                      
                     m_topic = "Deathsquito"
@@ -2542,10 +2560,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDrake",
                     m_name = "Drake_Exp",
-                    m_text = "Essence Power: Three Freeze \n" +
-                             "Active: Fires a burst of 3 ice shards that freeze enemies for 3 seconds and applies freezing.\n" +
-                             "Positive Passive: You become very resistant to frost.\n" +
-                             "Negative Passive: You become weak to blunt.\n",
+                    m_text = "Essence Power: Three Freeze \n\n" +
+                             "Active: Fires a burst of 3 ice shards that freeze enemies for 3 seconds and \n" +
+                             "applies freezing.\n\n" +
+                             "Positive Passive: You become very resistant to frost.\n\n" +
+                             "Negative Passive: You become weak to blunt.",
                      
                     m_topic = "Drake"
                 };
@@ -2557,16 +2576,16 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDraugr Elite",
                     m_name = "DraugrElite_Exp",
-                    m_text = "Essence Power: Fallen Hero \n" +
-                             "Active: For a duration, increase the damage of Swords and Polearms(builds 5% Rot).\n" +
-                             "Positive Passive: Increase carry weight.\n" +
-                             "Positive Passive: Increase movement speed by 10%.\n" +
-                             "Positive Passive: A portion of damage received is instead gained as Rot.\n" +
-                             "Positive Passive: Entrails can be eaten to reduce Rot build up.\n" +
+                    m_text = "Essence Power: Fallen Hero \n\n" +
+                             "Active: For a duration, increase the damage of Swords and Polearms(builds 5% Rot).\n\n" +
+                             "Positive Passive: Increase carry weight.\n\n" +
+                             "Positive Passive: Increase movement speed by 10%.\n\n" +
+                             "Positive Passive: A portion of damage received is instead gained as Rot.\n\n" +
+                             "Positive Passive: Entrails can be eaten to reduce Rot build up.\n\n" +
                              "Negative Passive: If Rot build up reaches 100% the ability is locked, \n" +
-                             "                  damage reduction is removed and movement speed is reduced by 50%.\n" +
+                             "damage reduction is removed and movement speed is reduced by 50%.\n\n" +
                              "Synergy  Passive: If the Draugr Essence is also equipped, \n" +
-                             "                  a bonus potion of damage received is instead gained as Rot.",
+                             "a bonus potion of damage received is instead gained as Rot.",
                     
                     m_topic = "Draugr Elite"
                 };
@@ -2578,15 +2597,15 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDraugr",
                     m_name = "Draugr_Exp",
-                    m_text = "Essence Power: Forgotten \n" +
-                             "Active: For a duration, increase the damage of bows and axes(builds 3% Rot).\n" +
-                             "Positive Passive: Increase carry weight.\n" +
-                             "Positive Passive: A portion of damage received is instead gained as Rot.\n" +
-                             "Positive Passive: Entrails can be eaten to reduce Rot build up.\n" +
+                    m_text = "Essence Power: Forgotten \n\n" +
+                             "Active: For a duration, increase the damage of bows and axes(builds 3% Rot).\n\n" +
+                             "Positive Passive: Increase carry weight.\n\n" +
+                             "Positive Passive: A portion of damage received is instead gained as Rot.\n\n" +
+                             "Positive Passive: Entrails can be eaten to reduce Rot build up.\n\n" +
                              "Negative Passive: If Rot build up reaches 100% the ability is locked, \n" +
-                             "                  damage reduction is removed and movement speed is reduced by 50%.\n" +
+                             "damage reduction is removed and movement speed is reduced by 50%.\n\n" +
                              "Synergy  Passive: If the Draugr Elite Essence is also equipped, \n" +
-                             "                  a bonus potion of damage received is instead gained as Rot.",
+                             "a bonus potion of damage received is instead gained as Rot.",
                      
                     m_topic = "Draugr"
                 };
@@ -2598,12 +2617,12 @@ namespace LackingImaginationV2
                 {
                     m_label ="xFuling",
                     m_name = "Fuling_Exp",
-                    m_text = "Essence Power: Longinus \n" +
-                             "Active: Empower your next spear throw hit.\n" +
-                             "Positive Passive: Spears return when thrown.\n" +
-                             "Positive Passive: Gain increased block power.\n" +
-                             "Positive Passive: Gain bonus stamina when you carry coins.\n" +
-                             "Negative Passive: Lose a % of stamina when not carrying coins.\n",
+                    m_text = "Essence Power: Longinus \n\n" +
+                             "Active: Empower your next spear throw hit.\n\n" +
+                             "Positive Passive: Spears return when thrown.\n\n" +
+                             "Positive Passive: Gain increased block power.\n\n" +
+                             "Positive Passive: Gain bonus stamina when you carry coins.\n\n" +
+                             "Negative Passive: Lose a % of stamina when not carrying coins.\n\n",
                      
                     m_topic = "Fuling"
                 };
@@ -2615,11 +2634,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xGjall",
                     m_name = "Gjall_Exp",
-                    m_text = "Essence Power: Gjallarhorn \n" +
-                             "Active: A pair of entangled projectiles are fired, one explosive and the other summons ally ticks.\n" +
-                             "Positive Passive: Gain bonus armor.\n" +
-                             "Negative Passive: You become very weak to pierce.\n" +
-                             "Negative Passive: Your head becomes a weakpoint(double damage)(disabled).\n",
+                    m_text = "Essence Power: Gjallarhorn \n\n" +
+                             "Active: A pair of entangled projectiles are fired, one explosive and the other summons ally ticks.\n\n" +
+                             "Positive Passive: Gain bonus armor.\n\n" +
+                             "Negative Passive: You become very weak to pierce.\n\n" +
+                             "Negative Passive: Your head becomes a weakpoint(double damage)(disabled).\n\n",
                      
                     m_topic = "Gjall"
                 };
@@ -2631,10 +2650,10 @@ namespace LackingImaginationV2
                 {
                     m_label ="xGreydwarf Brute",
                     m_name = "GreydwarfBrute_Exp",
-                    m_text = "Essence Power: Bash \n" +
-                             "Active: Empower your next melee hit.\n" +
-                             "Positive Passive: Gain bonus health.\n" +
-                             "Negative Passive: Reduce the damage of ranged attacks.\n",
+                    m_text = "Essence Power: Bash \n\n" +
+                             "Active: Empower your next melee hit.\n\n" +
+                             "Positive Passive: Gain bonus health.\n\n" +
+                             "Negative Passive: Reduce the damage of ranged attacks.\n\n",
                      
                     m_topic = "Greydwarf Brute"
                 };
@@ -2646,11 +2665,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xGreydwarf Shaman",
                     m_name = "GreydwarfShaman_Exp",
-                    m_text = "Essence Power: Dubious Heal \n" +
-                             "Active: Cast an Aoe heal.\n" +
-                             "Positive Passive: Gain increased player regen.\n" +
-                             "Positive Passive: Gain a little bonus eitr.\n" +
-                             "Negative Passive: When hit you have a 1 in 20 chance to take 10% bonus poison damage.\n",
+                    m_text = "Essence Power: Dubious Heal \n\n" +
+                             "Active: Cast an Aoe heal.\n\n" +
+                             "Positive Passive: Gain increased player regen.\n\n" +
+                             "Positive Passive: Gain a little bonus eitr.\n\n" +
+                             "Negative Passive: When hit you have a 1 in 20 chance to take 10% bonus poison damage.\n\n",
                      
                     m_topic = "Greydwarf Shaman"
                 };
@@ -2662,11 +2681,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xGreydwarf",
                     m_name = "Greydwarf_Exp",
-                    m_text = "Essence Power: Pebble \n" +
-                             "Active: Throw a rock from your inventory.\n" +
-                             "Positive Passive: Gain increases carry weight.\n" +
-                             "Positive Passive: Gain 5% bonus movement speed.\n" +
-                             "Negative Passive: Forest Monsters do bonus damage to you.\n",
+                    m_text = "Essence Power: Pebble \n\n" +
+                             "Active: Throw a rock from your inventory.\n\n" +
+                             "Positive Passive: Gain increases carry weight.\n\n" +
+                             "Positive Passive: Gain 5% bonus movement speed.\n\n" +
+                             "Negative Passive: Forest Monsters do bonus damage to you.\n\n",
                      
                     m_topic = "Greydwarf"
                 };
@@ -2678,10 +2697,10 @@ namespace LackingImaginationV2
                 {
                     m_label ="xLeech",
                     m_name = "Leech_Exp",
-                    m_text = "Essence Power: Blood Siphon \n" +
-                             "Active: Mark nearby enemies and when you kill them, gain Siphon stacks.\n" +
-                             "Positive Passive: When hit, regain health if you have stacks.\n" +
-                             "Negative Passive: Eitr regen is halved and regen delay is doubled.\n",
+                    m_text = "Essence Power: Blood Siphon \n\n" +
+                             "Active: Mark nearby enemies and when you kill them, gain Siphon stacks.\n\n" +
+                             "Positive Passive: When hit, regain health if you have stacks.\n\n" +
+                             "Negative Passive: Eitr regen is halved and regen delay is doubled.\n\n",
                      
                     m_topic = "Leech"
                 };
@@ -2717,11 +2736,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xSkeleton",
                     m_name = "Skeleton_Exp",
-                    m_text = "Essence Power: Vigil \n" +
-                             "Active: Summon ally ghosts to fight alongside you.(Cost 1 Soul to cast)\n" +
-                             "Positive Passive: Gain bonus spirit damage equal to 10% of Souls.\n" +
-                             "Negative Passive: Kill skeletons to gain souls.\n" +
-                             "Synergy  Passive: If the Brenna Essence is also equipped, ally ghosts do bonus fire damage. \n" +
+                    m_text = "Essence Power: Vigil \n\n" +
+                             "Active: Summon ally ghosts to fight alongside you.(Cost 1 Soul to cast)\n\n" +
+                             "Positive Passive: Gain bonus spirit damage equal to 10% of Souls.\n\n" +
+                             "Negative Passive: Kill skeletons to gain souls.\n\n" +
+                             "Synergy  Passive: If the Brenna Essence is also equipped, ally ghosts do bonus fire damage. \n\n" +
                              "Synergy  Passive: If the Rancid Remains Essence is also equipped, ally ghosts do bonus poison damage.",
                      
                     m_topic = "Skeleton"
@@ -2734,10 +2753,10 @@ namespace LackingImaginationV2
                 {
                     m_label ="xSurtling",
                     m_name = "Surtling_Exp",
-                    m_text = "Essence Power: Harbinger \n" +
-                             "Active: Summon ally surtlings from the Ash Lands.(Sacrifice a surtling core to gain charges)\n" +
-                             "Positive Passive: The essence is your own personal campfire.\n" +
-                             "Negative Passive: You take damage when wet.\n",
+                    m_text = "Essence Power: Harbinger \n\n" +
+                             "Active: Summon ally surtlings from the Ash Lands.(Sacrifice a surtling core to gain charges)\n\n" +
+                             "Positive Passive: The essence is your own personal campfire.\n\n" +
+                             "Negative Passive: You take damage when wet.\n\n",
                      
                     m_topic = "Surtling"
                 };
@@ -2749,11 +2768,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xTick",
                     m_name = "Tick_Exp",
-                    m_text = "Essence Power: Blood Well \n" +
-                             "Active: Empower next hit to do bonus slash damage equal to Well stacks.\n" +
-                             "Positive Passive: Gain % LifeSteal.\n" +
-                             "Positive Passive: Gain Well stacks equal to life stolen.\n" +
-                             "Negative Passive: Armor is reduced.\n",
+                    m_text = "Essence Power: Blood Well \n\n" +
+                             "Active: Empower next hit to do bonus slash damage equal to Well stacks.\n\n" +
+                             "Positive Passive: Gain % LifeSteal.\n\n" +
+                             "Positive Passive: Gain Well stacks equal to life stolen.\n\n" +
+                             "Negative Passive: Armor is reduced.",
                      
                     m_topic = "Tick"
                 };
@@ -2768,11 +2787,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xCultist",
                     m_name = "Cultist_Exp",
-                    m_text = "Essence Power: Lone Sun\n " +
-                             "Active: Cast an Aoe fire field.\n" +
-                             "Positive Passive: You are immune to smoke.\n" +
-                             "Positive Passive: All attacks do bonus fire damage.\n" +
-                             "Negative Passive: When hit you have a 1 in 20 chance to take 10% bonus fire damage.\n",
+                    m_text = "Essence Power: Lone Sun\n\n" +
+                             "Active: Cast an Aoe fire field.\n\n" +
+                             "Positive Passive: You are immune to smoke.\n\n" +
+                             "Positive Passive: All attacks do bonus fire damage.\n\n" +
+                             "Negative Passive: When hit you have a 1 in 20 chance to take 10% bonus fire damage.",
                      
                     m_topic = "Cultist"
                 };
@@ -2784,10 +2803,10 @@ namespace LackingImaginationV2
                 {
                     m_label ="xFuling Berserker",
                     m_name = "FulingBerserker_Exp",
-                    m_text = "Essence Power: Giantization \n" +
-                             "Active: Double your size, gaining double health but halving stamina.\n" +
-                             "Positive Passive: Gain bonus health.\n" +
-                             "Negative Passive: Eitr reduced by 75%.\n",
+                    m_text = "Essence Power: Giantization \n\n" +
+                             "Active: Double your size, gaining double health but halving stamina.\n\n" +
+                             "Positive Passive: Gain bonus health.\n\n" +
+                             "Negative Passive: Eitr reduced by 75%.",
                      
                     m_topic = "Fuling Berserker"
                 };
@@ -2799,11 +2818,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xFuling Shaman",
                     m_name = "FulingShaman_Exp",
-                    m_text = "Essence Power: Ritual\n " +
-                             "Active: Create a shield that protects you.(Cost 5 coins)\n" +
-                             "Active(Shielded): Shoot a fireball.(Cost 1 coin)\n" +
-                             "Positive Passive: Gain bonus eitr.\n" +
-                             "Negative Passive: Reduce carry weight.\n",
+                    m_text = "Essence Power: Ritual\n\n" +
+                             "Active: Create a shield that protects you.(Cost 5 coins)\n\n" +
+                             "Active(Shielded): Shoot a fireball.(Cost 1 coin)\n\n" +
+                             "Positive Passive: Gain bonus eitr.\n\n" +
+                             "Negative Passive: Reduce carry weight.",
                      
                     m_topic = "Fuling Shaman"
                 };
@@ -2815,11 +2834,11 @@ namespace LackingImaginationV2
                 {
                     m_label ="xGrowth",
                     m_name = "Growth_Exp",
-                    m_text = "Essence Power: Ancient Tar\n " +
-                             "Active: Shoot a burst of 4 tar balls.(Weapon scaling)\n" +
-                             "Positive Passive: Attacks tar enemies.\n" +
-                             "Positive Passive: 2 extra jumps.\n" +
-                             "Negative Passive: You become very weak to fire.\n",
+                    m_text = "Essence Power: Ancient Tar\n\n" +
+                             "Active: Shoot a burst of 4 tar balls.(Weapon scaling)\n\n" +
+                             "Positive Passive: Attacks tar enemies.\n\n" +
+                             "Positive Passive: 2 extra jumps.\n\n" +
+                             "Negative Passive: You become very weak to fire.\n\n",
                      
                     m_topic = "Growth"
                 };
@@ -2831,12 +2850,12 @@ namespace LackingImaginationV2
                 {
                     m_label ="xRancid Remains",
                     m_name = "RancidRemains_Exp",
-                    m_text = "Essence Power: Rancorous\n" +
-                             "Active: Summon the bound mace Rancorous.\n" +
-                             "Active(Recast): Rancorous seconary attack chnages to a throw.\n" +
-                             "Active(Re-Recast): Rancorous seconary attack returns to normal.\n" +
-                             "Positive Passive: Sacrifice a fully upgraded Iron mace to Awaken Rancorous permanently.\n" +
-                             "Negative Passive: Armor is reduced.\n",
+                    m_text = "Essence Power: Rancorous\n\n" +
+                             "Active: Summon the bound mace Rancorous.\n\n" +
+                             "Active(Recast): Rancorous seconary attack chnages to a throw.\n\n" +
+                             "Active(Re-Recast): Rancorous seconary attack returns to normal.\n\n" +
+                             "Positive Passive: Sacrifice a fully upgraded Iron mace to Awaken Rancorous permanently.\n\n" +
+                             "Negative Passive: Armor is reduced.",
                      
                     m_topic = "Rancid Remains"
                 };
@@ -2848,13 +2867,13 @@ namespace LackingImaginationV2
                 {
                     m_label ="xSerpent",
                     m_name = "Serpent_Exp",
-                    m_text = "Essence Power: Sea King\n" +
-                             "Active: Shoots a Whirlpool that sucks enemies in.(Weapon scaling)\n" +
-                             "Passive: The essence wil crave a random known fish and eating it will," +
-                             "         increase the range and duration of Sea King.\n" +
-                             "         A higher quality fish can be eaten after to get a bigger buff.\n" +
-                             "         Perch>Pike>Trollfish>Tetra>Tuna>Coral Cod>Giant Herring>Grouper>\n" +
-                             "         Pufferfish>Anglerfish>Magmafish>Northern Salmon",
+                    m_text = "Essence Power: Sea King\n\n" +
+                             "Active: Shoots a Whirlpool that sucks enemies in.(Weapon scaling)\n\n" +
+                             "Passive: The essence wil crave a random known fish and eating it will,\n" +
+                             "increase the range and duration of Sea King.\n\n" +
+                             "A higher quality fish can be eaten after to get a bigger buff.\n" +
+                             "Perch>Pike>Trollfish>Tetra>Tuna>Coral Cod>Giant Herring>Grouper>\n" +
+                             "Pufferfish>Anglerfish>Magmafish>Northern Salmon",
                      
                     m_topic = "Serpent"
                 };
@@ -2866,10 +2885,10 @@ namespace LackingImaginationV2
                 {
                     m_label ="xUlv",
                     m_name = "Ulv_Exp",
-                    m_text = "Essence Power: Territorial Slumber\n" +
-                             "Active: Create a zone with a high chance to summon an ally ulv when an enemy dies inside.\n" +
-                             "Positive Passive: Gain bonus Comfort.\n" +
-                             "Positive Passive: Gain bonus stamina based of max comfort.\n" +
+                    m_text = "Essence Power: Territorial Slumber\n\n" +
+                             "Active: Create a zone with a high chance to summon an ally ulv when an enemy dies inside.\n\n" +
+                             "Positive Passive: Gain bonus Comfort.\n\n" +
+                             "Positive Passive: Gain bonus stamina based of max comfort.\n\n" +
                              "Negative Passive: Duration of rested reduced by half.",
                      
                     m_topic = "Ulv"
@@ -2882,12 +2901,12 @@ namespace LackingImaginationV2
                 {
                     m_label ="xWraith",
                     m_name = "Wraith_Exp",
-                    m_text = "Essence Power: Twin Souls\n" +
+                    m_text = "Essence Power: Twin Souls\n\n" +
                              "Active: Become intangible for a duration, moving through structures and creatures.\n" +
-                             "        Block and Crouch to move down.\n" +
-                             "Active(Block): If cast at night, summon an ally wraith(Dies at dawn).\n" +
-                             "Positive Passive: All attacks do bonus spirit damage during the day.\n" +
-                             "Negative Passive: Armor reduced.\n",
+                             "Block and Crouch to move down.\n\n" +
+                             "Active(Block): If cast at night, summon an ally wraith(Dies at dawn).\n\n" +
+                             "Positive Passive: All attacks do bonus spirit damage during the day.\n\n" +
+                             "Negative Passive: Armor reduced.",
                      
                     m_topic = "Wraith"
                 };
@@ -2901,13 +2920,13 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDvergr",
                     m_name = "Dvergr_Exp",
-                    m_text = "Essence Power: Randomize\n" +
-                             "Active: Cast one of three spells.(Cost 50 Eitr)\n" +
-                             "Active(Fire): Cast 1 of 2 fire ball types.(Weapon scaling)\n" +
-                             "Active(Ice): Cast a burst of ice shards.(Weapon scaling)\n" +
-                             "Active(Heal): Cast an Aoe Heal.\n" +
-                             "Positive Passive: Gain bonus eitr.\n" +
-                             "Positive Passive: Gain bonus pierce damage with crossbows.\n" +
+                    m_text = "Essence Power: Randomize\n\n" +
+                             "Active: Cast one of three spells.(Cost 50 Eitr)\n\n" +
+                             "Active(Fire): Cast 1 of 2 fire ball types.(Weapon scaling)\n\n" +
+                             "Active(Ice): Cast a burst of ice shards.(Weapon scaling)\n\n" +
+                             "Active(Heal): Cast an Aoe Heal.\n\n" +
+                             "Positive Passive: Gain bonus eitr.\n\n" +
+                             "Positive Passive: Gain bonus pierce damage with crossbows.\n\n" +
                              "Negative Passive: Health reduced by 10%.",
                      
                     m_topic = "Dvergr"
@@ -2920,10 +2939,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xBoar",
                     m_name = "Boar_Exp",
-                    m_text = "Essence Power: Reckless Charge\n" +
-                             "Active: For a duration, after running for 3 seconds you collide with the next enemy.\n" +
-                             "Positive Passive: When you gather your courage you gain bonus stamina.\n" +
-                             "Negative Passive: When near a fire you will cower in fear.\n",
+                    m_text = "Essence Power: Reckless Charge\n\n" +
+                             "Active: For a duration, after running for 3 seconds you collide with the next enemy.\n\n" +
+                             "Positive Passive: When you gather your courage you gain bonus stamina.\n\n" +
+                             "Negative Passive: When near a fire you will cower in fear.\n\n",
                      
                     m_topic = "Boar"
                 };
@@ -2935,10 +2954,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xDeer",
                     m_name = "Deer_Exp",
-                    m_text = "Essence Power: Horizon Haste\n" +
-                             "Active: For a duration, movement speed is increased.\n" +
-                             "Positive Passive: Stamina increased.\n" +
-                             "Positive Passive: Movement speed increased by 5%.\n" +
+                    m_text = "Essence Power: Horizon Haste\n\n" +
+                             "Active: For a duration, movement speed is increased.\n\n" +
+                             "Positive Passive: Stamina increased.\n\n" +
+                             "Positive Passive: Movement speed increased by 5%.\n\n" +
                              "Negative Passive: Health reduced by 5%.",
                      
                     m_topic = "Deer"
@@ -2951,10 +2970,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xHare",
                     m_name = "Hare_Exp",
-                    m_text = "Essence Power: Lucky Foot\n" +
-                             "Active: For a duration, movement speed is increased & jumps are doubled.\n" +
-                             "Positive Passive: Gain 1 bonus jump.\n" +
-                             "Positive Passive: Movement speed increased by 10%.\n" +
+                    m_text = "Essence Power: Lucky Foot\n\n" +
+                             "Active: For a duration, movement speed is increased & jumps are doubled.\n\n" +
+                             "Positive Passive: Gain 1 bonus jump.\n\n" +
+                             "Positive Passive: Movement speed increased by 10%.\n\n" +
                              "Negative Passive: Armor reduced.",
                      
                     m_topic = "Hare"
@@ -2967,10 +2986,10 @@ namespace LackingImaginationV2
                 {
                     m_label = "xLox",
                     m_name = "Lox_Exp",
-                    m_text = "Essence Power: Wild Tremor\n" +
-                             "Active: Stomp the ground causing an Aoe.\n" +
-                             "Positive Passive: Food eaten will gave bonus health.\n" +
-                             "Negative Passive: Duration of food reduced by 25%.\n",
+                    m_text = "Essence Power: Wild Tremor\n\n" +
+                             "Active: Stomp the ground causing an Aoe.\n\n" +
+                             "Positive Passive: Food eaten will gave bonus health.\n\n" +
+                             "Negative Passive: Duration of food reduced by 25%.",
                      
                     m_topic = "Lox"
                 };
@@ -2982,11 +3001,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xNeck",
                     m_name = "Neck_Exp",
-                    m_text = "Essence Power: Splash(Effect in progress)\n" + 
-                             "Active: Dash forward while swimming.(Weapon scaling)\n" +
-                             "Positive Passive: Swim speed doubled.\n" +
-                             "Positive Passive: You become weak to fire while wet.\n" +
-                             "Negative Passive: You become resistant to poison while wet.\n",
+                    m_text = "Essence Power: Splash(Effect in progress)\n\n" + 
+                             "Active: Dash forward while swimming.(Weapon scaling)\n\n" +
+                             "Positive Passive: Swim speed doubled.\n\n" +
+                             "Positive Passive: You become weak to fire while wet.\n\n" +
+                             "Negative Passive: You become resistant to poison while wet.",
                      
                     m_topic = "Neck"
                 };
@@ -2998,14 +3017,14 @@ namespace LackingImaginationV2
                 {
                     m_label = "xWolf",
                     m_name = "Wolf_Exp",
-                    m_text = "Essence Power: Ravenous Hunger\n" +
-                             "Active: For a duration, every 5th hit will deal a % of max health in slash damage.\n" +
-                             "Passive: Different effects based on number of foods eaten.\n" +
-                             "         3 foods: damage reduced by 25%.\n" +
-                             "         2 foods: damage increased by 25% & x bonus stamina.\n" +
-                             "         1 foods: damage increased by 50% & 2x bonus stamina.\n" +
-                             "         0 foods: damage increased by 100% & 3x bonus stamina.\n" +
-                             "         Below 3 foods run, sneak, dodge & jump stamina drain reduced by half." ,
+                    m_text = "Essence Power: Ravenous Hunger\n\n" +
+                             "Active: For a duration, every 5th hit will deal a % of max health in slash damage.\n\n" +
+                             "Passive: Different effects based on number of foods eaten.\n\n" +
+                             "3 foods: damage reduced by 25%.\n\n" +
+                             "2 foods: damage increased by 25% & x bonus stamina.\n\n" +
+                             "1 foods: damage increased by 50% & 2x bonus stamina.\n\n" +
+                             "0 foods: damage increased by 100% & 3x bonus stamina.\n\n" +
+                             "Below 3 foods run, sneak, dodge & jump stamina drain reduced by half." ,
                      
                     m_topic = "Wolf"
                 };
@@ -3019,12 +3038,12 @@ namespace LackingImaginationV2
                 {
                     m_label = "xBrenna",
                     m_name = "Brenna_Exp",
-                    m_text = "Essence Power: Vulcan\n" +
-                             "Active: Summon the bound mace Vulcan.\n" +
-                             "Active(Recast): Vulcan secondary attack changes to a throw.\n" +
-                             "Active(Re-Recast): Vulcan secondary attack returns to normal.\n" +
-                             "Positive Passive: Sacrifice a fully upgraded Krom to Awaken Vulcan permanently.\n" +
-                             "Negative Passive: Armor is reduced.\n",
+                    m_text = "Essence Power: Vulcan\n\n" +
+                             "Active: Summon the bound mace Vulcan.\n\n" +
+                             "Active(Recast): Vulcan secondary attack changes to a throw.\n\n" +
+                             "Active(Re-Recast): Vulcan secondary attack returns to normal.\n\n" +
+                             "Positive Passive: Sacrifice a fully upgraded Krom to Awaken Vulcan permanently.\n\n" +
+                             "Negative Passive: Armor is reduced.",
                      
                     m_topic = "Brenna"
                 };
@@ -3036,11 +3055,11 @@ namespace LackingImaginationV2
                 {
                     m_label = "xGeirrhafa",
                     m_name = "Geirrhafa_Exp",
-                    m_text = "Essence Power: Ice Age\n" +
-                             "Active: Case 3 ice waves & then summon icicles above enemies in range.\n" +
-                             "Positive Passive: Gain bonus eitr.\n" +
-                             "Positive Passive: All attacks do bonus frost damage.\n" +
-                             "Negative Passive:  When hit you have a 1 in 20 chance to take 10% bonus frost damage.\n",
+                    m_text = "Essence Power: Ice Age\n\n" +
+                             "Active: Case 3 ice waves & then summon icicles above enemies in range.\n\n" +
+                             "Positive Passive: Gain bonus eitr.\n\n" +
+                             "Positive Passive: All attacks do bonus frost damage.\n\n" +
+                             "Negative Passive:  When hit you have a 1 in 20 chance to take 10% bonus frost damage.",
                      
                     m_topic = "Geirrhafa"
                 };
@@ -3195,6 +3214,20 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_plainsFortHildirExp);
                 }
+                //Dvergr Tower
+                Tutorial.TutorialText _dvergrTowerExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xDvergr Tower",
+                    m_name = "DvergrTower_Exp",
+                    m_text = "A flickering beacon of life and civilization.",
+                     
+                    m_topic = "Dvergr Tower"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_dvergrTowerExp))
+                {
+                    Tutorial.instance.m_texts.Add(_dvergrTowerExp);
+                }
                 
                 //Boss Arenas
                 Tutorial.TutorialText _eikthyrSacrificeExp = new Tutorial.TutorialText
@@ -3275,6 +3308,219 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_seekerQueenSealExp);
                 }
+                //Vendors
+                Tutorial.TutorialText _haldorExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xHaldor",
+                    m_name = "Haldor_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Haldor"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_haldorExp))
+                {
+                    Tutorial.instance.m_texts.Add(_haldorExp);
+                }
+                Tutorial.TutorialText _hildirExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xHildir",
+                    m_name = "Hildir_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Hildir"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_hildirExp))
+                {
+                    Tutorial.instance.m_texts.Add(_hildirExp);
+                }
+                // Special
+                Tutorial.TutorialText _infestedTreeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xInfested Tree",
+                    m_name = "InfestedTree_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Infested Tree"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_infestedTreeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_infestedTreeExp);
+                }
+                Tutorial.TutorialText _drakeNestExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xDrake Nest",
+                    m_name = "DrakeNest_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Drake Nest"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_drakeNestExp))
+                {
+                    Tutorial.instance.m_texts.Add(_drakeNestExp);
+                }
+                Tutorial.TutorialText _tarPitExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xTar Pit",
+                    m_name = "TarPit_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Tar Pit"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_tarPitExp))
+                {
+                    Tutorial.instance.m_texts.Add(_tarPitExp);
+                }
+                Tutorial.TutorialText _dvergrHarbourExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xDvergr Harbour",
+                    m_name = "DvergrHarbour_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Dvergr Harbour"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_dvergrHarbourExp))
+                {
+                    Tutorial.instance.m_texts.Add(_dvergrHarbourExp);
+                }
+                //RuneStones
+                Tutorial.TutorialText _runestoneMeadowsExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Meadows",
+                    m_name = "MeadowRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Meadows Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneMeadowsExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneMeadowsExp);
+                }
+                Tutorial.TutorialText _runestoneBoarExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Boar",
+                    m_name = "BoarRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Boar Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneBoarExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneBoarExp);
+                }
+                Tutorial.TutorialText _runestoneBlackForestsExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Black Forests",
+                    m_name = "BlackForestRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Black Forests Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneBlackForestsExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneBlackForestsExp);
+                }
+                Tutorial.TutorialText _runestoneGreydwarfExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Greydwarf",
+                    m_name = "GreydwarfRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Greydwarf Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneGreydwarfExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneGreydwarfExp);
+                }
+                Tutorial.TutorialText _runestoneSwampsExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Swamps",
+                    m_name = "SwampRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Swamps Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneSwampsExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneSwampsExp);
+                }
+                Tutorial.TutorialText _runestoneDraugrExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Draugr",
+                    m_name = "DraugrRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Draugr Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneDraugrExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneDraugrExp);
+                }
+                Tutorial.TutorialText _runestoneMountainsExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Mountains",
+                    m_name = "MountainRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Mountains Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneMountainsExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneMountainsExp);
+                }
+                Tutorial.TutorialText _runestoneDrakeExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Drake",
+                    m_name = "DrakeRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Drake Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneDrakeExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneDrakeExp);
+                }
+                Tutorial.TutorialText _runestonePlainsExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Plains",
+                    m_name = "PlainsRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Plains Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestonePlainsExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestonePlainsExp);
+                }
+                Tutorial.TutorialText _runestoneMistlandsExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xRunestone Mistlands",
+                    m_name = "MistRune_Exp",
+                    m_text = "",
+                    
+                    m_topic = "Mistlands Runestone"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_runestoneMistlandsExp))
+                {
+                    Tutorial.instance.m_texts.Add(_runestoneMistlandsExp);
+                }
+                
+                
             }
         }
         

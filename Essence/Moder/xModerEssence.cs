@@ -84,7 +84,7 @@ namespace LackingImaginationV2
             yield return new WaitForSeconds(breathDelay);
             
             UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_dragon_coldbreath_start"), player.transform.position, Quaternion.identity);
-            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint() +player.transform.forward * 2f, player.transform.rotation, player.transform);
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_dragon_coldbreath"), player.GetCenterPoint() + player.transform.forward * 3f, player.transform.rotation, player.transform);
             
             // Create a HashSet to keep track of detected objects.
             HashSet<GameObject> detectedObjects = new HashSet<GameObject>();

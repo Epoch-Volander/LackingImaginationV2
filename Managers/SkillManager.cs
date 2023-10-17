@@ -280,7 +280,8 @@ public class Skill
             {
                 Skills.Skill skill = __instance.GetSkill(id);
                 skill.m_level += value;
-                skill.m_level = Mathf.Clamp(skill.m_level, 0f, 100f);
+                if (skill.m_info.m_skill != Skill.fromName("Imagination")) skill.m_level = Mathf.Clamp(skill.m_level, 0f, 100f);
+                else skill.m_level = Mathf.Clamp(skill.m_level, 0f, 1000f);
                 ___m_player.Message(MessageHud.MessageType.TopLeft,
                     "Skill increased " + Localization.instance.Localize("$skill_" + id) + ": " + (int)skill.m_level, 0,
                     skill.m_info.m_icon);

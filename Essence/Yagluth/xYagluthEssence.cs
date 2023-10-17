@@ -108,11 +108,11 @@ namespace LackingImaginationV2
 
             while (count <= maxUsages)
             {
-                Vector3 playerPosition = player.transform.position;
-                Vector3 forwardDirection = player.GetLookDir();
+                Vector3 playerPosition = player.transform.position ;
+                Vector3 forwardDirection = player.GetLookDir() * 8f;
                 Vector3 upDirection = player.transform.up;
                 
-                Vector3 spawnPosition = playerPosition + upDirection * 1.4f + forwardDirection * 2f;
+                Vector3 spawnPosition = playerPosition + forwardDirection  + (upDirection * 1.4f);
                 GameObject GO_CulminationBeamProjectile = UnityEngine.Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
 
                 Projectile P_CulminationBeamProjectile = GO_CulminationBeamProjectile.GetComponent<Projectile>();
@@ -243,7 +243,7 @@ namespace LackingImaginationV2
                 P_CulminationMeteorProjectile.m_ttl = 60f;
                 P_CulminationMeteorProjectile.m_gravity = 0.0f;
                 P_CulminationMeteorProjectile.m_rayRadius = 1f;
-                P_CulminationMeteorProjectile.m_aoe = 2f;
+                P_CulminationMeteorProjectile.m_aoe = 5f;
                 P_CulminationMeteorProjectile.m_hitNoise = 100f;
                 P_CulminationMeteorProjectile.m_owner = player;
                     
@@ -307,7 +307,7 @@ namespace LackingImaginationV2
                     }
                     if (int.Parse(YagluthStats[0]) >= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap - 19
                         && int.Parse(YagluthStats[0]) <= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap
-                        && !boolAura)
+                        && !boolAura && !__instance.IsDead() && !__instance.InCutscene() && !__instance.IsTeleporting())
                     {
                         Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("fx_Lightning"), __instance.GetCenterPoint(), Quaternion.identity);
                         Aura.transform.parent = __instance.transform;
@@ -326,6 +326,8 @@ namespace LackingImaginationV2
                         GameObject Lightning = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("lightningAOE"), __instance.transform.position, Quaternion.identity);
                         Aoe Aoe = Lightning.transform.Find("AOE_ROD").GetComponent<Aoe>();
                         Aoe.m_useTriggers = true;
+                        Aoe.m_hitOwner = true;
+                        Aoe.m_owner = __instance;
 
                         YagluthStats[0] = "0";
                     }

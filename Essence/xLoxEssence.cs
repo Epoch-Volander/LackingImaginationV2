@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Wild \nTremor";
         
+        private static float Delay = 0.3f;
+        
         private static readonly int Script_Breath_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "piece_nonsolid", "terrain", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "vehicle", "viewblock");
 
         public static void Process_Input(Player player, int position)
@@ -32,70 +35,62 @@ namespace LackingImaginationV2
                 //Effects, animations, and sounds
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
                 // UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_lox_death"), player.transform.position, Quaternion.identity);
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_lox_groundslam"), player.transform.position,Quaternion.identity);
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_lox_attack_stomp"), player.transform.position,Quaternion.identity);
                 
-                List<Character> allCharacters = new List<Character>();
-                allCharacters.Clear();
-                Character.GetCharactersInRange(player.transform.position, 10f, allCharacters);
-                foreach (Character ch in allCharacters)
-                {
-                    if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer)) 
-                        && !ch.m_tamed ||ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI)
-                    {
-                        HitData hitData = new HitData();
-                        hitData.m_damage.m_blunt = UnityEngine.Random.Range(10f, 15f);
-                        hitData.m_dir = ch.transform.position - player.transform.position;
-                        hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
-                        hitData.m_pushForce = 100f;
-                        hitData.m_point = ch.transform.position;
-                        hitData.SetAttacker(player);
-                        ch.Damage(hitData);
-                    }
-                }
-                
-                HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
-
-                Vector3 capsuleCenter = player.transform.position;
-                float capsuleRadius = 10f; // Radius of the capsule
-
-                // Perform the capsule overlap check with the specified layer mask
-                Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Breath_Layermask);
-
-                foreach (Collider collider in colliders)
-                {
-                    IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
-                    Character characterComponent = collider.gameObject.GetComponent<Character>();
-                    if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
-                    {
-                        // This is a valid target (creature) if it hasn't been detected before.
-                        if (!detectedObjects.Contains(collider.gameObject))
-                        {
-                            detectedObjects.Add(collider.gameObject);
-                            
-                            HitData hitData = new HitData();
-                            hitData.m_damage.m_blunt = UnityEngine.Random.Range(10f, 15f);
-                            hitData.m_dir = collider.transform.position - player.transform.position;
-                            hitData.m_dodgeable = true;
-                            hitData.m_blockable = true;
-                            hitData.m_hitCollider = collider;
-                            hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
-                            hitData.m_pushForce = 100f;
-                            hitData.m_point = collider.transform.position;
-                            hitData.SetAttacker(player);
-                            
-                            destructibleComponent.Damage(hitData);
-                        }
-                    }
-                }
-                
+                ScheduleStomp(player);
             }
             // else
             // {
             //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");
             // }
         }
+        private static void ScheduleStomp(Player player)
+        {
+            CoroutineRunner.Instance.StartCoroutine(ScheduleStompCoroutine(player));
+        }
         
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static IEnumerator ScheduleStompCoroutine(Player player)
+        {
+            yield return new WaitForSeconds(Delay);
+            
+            UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_lox_groundslam"), player.transform.position,Quaternion.identity);
+                
+            HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
+
+            Vector3 capsuleCenter = player.transform.position;
+            float capsuleRadius = 10f; // Radius of the capsule
+
+            // Perform the capsule overlap check with the specified layer mask
+            Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Breath_Layermask);
+
+            foreach (Collider collider in colliders)
+            {
+                IDestructible destructibleComponent = collider.gameObject.GetComponent<IDestructible>();
+                Character characterComponent = collider.gameObject.GetComponent<Character>();
+                if (destructibleComponent != null || (characterComponent != null && !characterComponent.IsOwner()))
+                {
+                    // This is a valid target (creature) if it hasn't been detected before.
+                    if (!detectedObjects.Contains(collider.gameObject))
+                    {
+                        detectedObjects.Add(collider.gameObject);
+                        
+                        HitData hitData = new HitData();
+                        hitData.m_damage.m_blunt = UnityEngine.Random.Range(10f, 15f);
+                        hitData.m_dir = collider.transform.position - player.transform.position;
+                        hitData.m_dodgeable = true;
+                        hitData.m_blockable = true;
+                        hitData.m_hitCollider = collider;
+                        hitData.ApplyModifier(((Player.m_localPlayer.GetCurrentWeapon().GetDamage().GetTotalDamage() ) * LackingImaginationGlobal.c_loxWildTremor));
+                        hitData.m_pushForce = 100f;
+                        hitData.m_point = collider.transform.position;
+                        hitData.SetAttacker(player);
+                        
+                        destructibleComponent.Damage(hitData);
+                    }
+                }
+            }
+        }
     }
 
 

@@ -720,11 +720,30 @@ namespace LackingImaginationV2
 
 
 
+         [HarmonyPatch(typeof(Player), nameof(Player.OnDeath))]
+         public class Player_OnDeath_Patch
+         {
+             public static void Prefix()
+             {
+                 if(xDeathsquitoEssence.Aura != null) UnityEngine.GameObject.Destroy(xDeathsquitoEssence.Aura);
+                 if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                 if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                 if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                 if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                 if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                 if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
+                 if(xYagluthEssencePassive.Aura != null)
+                 {
+                     UnityEngine.GameObject.Destroy(xYagluthEssencePassive.Aura);
+                     xYagluthEssencePassive.boolAura = false;
+                 }
+                 
+             }
+         }
 
 
 
-         
-        public static bool Ability1_Input_Down
+         public static bool Ability1_Input_Down
         {
             get
             {
