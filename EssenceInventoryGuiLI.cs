@@ -121,7 +121,7 @@ namespace LackingImaginationV2
                 return (InventoryGrid inventoryGrid, ItemDrop.ItemData item, Vector2i pos, InventoryGrid.Modifier mod) =>
                 {
                     EssenceItemData.equipedEssence = EssenceItemData.GetEquippedEssence();
-                    LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={ExpMethods.SkillLevelCalculator()}");
+                    // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={ExpMethods.SkillLevelCalculator()}");
                     // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={inventoryGrid}, item={InventoryGui.m_instance.m_dragItem?.m_shared.m_name}, pos={pos}, mod={mod}");
                      // LackingImaginationV2Plugin.Log($"OnSelected: inventoryGrid={inventoryGrid}, item={item?.m_shared.m_name}, pos={pos.x}, mod={mod}");
                     if (InventoryGui.m_instance.m_dragItem?.m_shared.m_name != null 

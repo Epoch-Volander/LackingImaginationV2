@@ -15,7 +15,7 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xDrakeEssence
+    public static class xDrakeEssence
     {
         private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
         

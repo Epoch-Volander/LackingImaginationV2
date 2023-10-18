@@ -86,7 +86,7 @@ namespace LackingImaginationV2
             { "Mistlands_DvergrTownEntrance2(Clone)", new List<string> {"InfectedMine_Exp", "12"} },
             //Vendors x2
             { "Vendor_BlackForest(Clone)", new List<string> {"Haldor_Exp", "4"} },
-            // { "Vendor_BlackForest(Clone)", new List<string> {"Hildir_Exp", "4"} },
+            { "Hildir_camp(Clone)", new List<string> {"Hildir_Exp", "4"} },
             //special x1
             { "InfestedTree01(Clone)", new List<string> {"InfestedTree_Exp", "3"} }, //swamp
             { "DrakeNest01(Clone)", new List<string> {"DrakeNest_Exp", "4"} }, // mountain
@@ -112,6 +112,9 @@ namespace LackingImaginationV2
             { "Mistlands_GuardTower1_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
             { "Mistlands_GuardTower2_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
             { "Mistlands_GuardTower3_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
+            { "Mistlands_Excavation1(Clone)", new List<string> {"DvergrExcavation_Exp", "18"} },
+            { "Mistlands_Excavation2(Clone)", new List<string> {"DvergrExcavation_Exp", "18"} },
+            { "Mistlands_Excavation3(Clone)", new List<string> {"DvergrExcavation_Exp", "18"} },
             //Altar x3
             { "Eikthyrnir(Clone)",  new List<string> {"EikthyrSacrifice_Exp", "3"} },
             { "GDKing(Clone)", new List<string> {"TheElderSacrifice_Exp", "6"} },
@@ -2888,7 +2891,7 @@ namespace LackingImaginationV2
                     m_text = "Essence Power: Territorial Slumber\n\n" +
                              "Active: Create a zone with a high chance to summon an ally ulv when an enemy dies inside.\n\n" +
                              "Positive Passive: Gain bonus Comfort.\n\n" +
-                             "Positive Passive: Gain bonus stamina based of max comfort.\n\n" +
+                             "Positive Passive: Gain bonus stamina based on max comfort.\n\n" +
                              "Negative Passive: Duration of rested reduced by half.",
                      
                     m_topic = "Ulv"
@@ -3214,7 +3217,7 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_plainsFortHildirExp);
                 }
-                //Dvergr Tower
+                //Dvergr 
                 Tutorial.TutorialText _dvergrTowerExp = new Tutorial.TutorialText
                 {
                     m_isMunin = true,
@@ -3228,7 +3231,19 @@ namespace LackingImaginationV2
                 {
                     Tutorial.instance.m_texts.Add(_dvergrTowerExp);
                 }
-                
+                Tutorial.TutorialText _dvergrExcavationExp = new Tutorial.TutorialText
+                {
+                    m_isMunin = true,
+                    m_label = "xDvergr Excavation",
+                    m_name = "DvergrExcavation_Exp",
+                    m_text = "The remains of mythic warriors lay beneath.",
+                     
+                    m_topic = "Dvergr Excavation"
+                };
+                if (!Tutorial.instance.m_texts.Contains(_dvergrExcavationExp))
+                {
+                    Tutorial.instance.m_texts.Add(_dvergrExcavationExp);
+                }
                 //Boss Arenas
                 Tutorial.TutorialText _eikthyrSacrificeExp = new Tutorial.TutorialText
                 {
@@ -3274,7 +3289,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xModer Altar",
                     m_name = "ModerSacrifice_Exp",
-                    m_text = "Something massive roosts here.",
+                    m_text = "The Queen of Drakes is nearby.",
                     
                     m_topic = "Moder Altar"
                 };
@@ -3314,7 +3329,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xHaldor",
                     m_name = "Haldor_Exp",
-                    m_text = "",
+                    m_text = "The roaming Dvergr trader of the Black Forest, his wares may interest you.",
                     
                     m_topic = "Haldor"
                 };
@@ -3327,7 +3342,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xHildir",
                     m_name = "Hildir_Exp",
-                    m_text = "",
+                    m_text = "The roaming Dvergr trader of the Meadows, she has a task for you.",
                     
                     m_topic = "Hildir"
                 };
@@ -3341,7 +3356,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xInfested Tree",
                     m_name = "InfestedTree_Exp",
-                    m_text = "",
+                    m_text = "This tree has been completely consumed by the lands poison.",
                     
                     m_topic = "Infested Tree"
                 };
@@ -3354,7 +3369,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xDrake Nest",
                     m_name = "DrakeNest_Exp",
-                    m_text = "",
+                    m_text = "Here her descendants roost.",
                     
                     m_topic = "Drake Nest"
                 };
@@ -3367,7 +3382,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xTar Pit",
                     m_name = "TarPit_Exp",
-                    m_text = "",
+                    m_text = "Try not to fall in.",
                     
                     m_topic = "Tar Pit"
                 };
@@ -3380,7 +3395,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xDvergr Harbour",
                     m_name = "DvergrHarbour_Exp",
-                    m_text = "",
+                    m_text = "The first signs of civilization.",
                     
                     m_topic = "Dvergr Harbour"
                 };
@@ -3394,7 +3409,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Meadows",
                     m_name = "MeadowRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about the meadows.",
                     
                     m_topic = "Meadows Runestone"
                 };
@@ -3407,7 +3422,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Boar",
                     m_name = "BoarRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about boars.",
                     
                     m_topic = "Boar Runestone"
                 };
@@ -3420,7 +3435,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Black Forests",
                     m_name = "BlackForestRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about the black forests",
                     
                     m_topic = "Black Forests Runestone"
                 };
@@ -3433,7 +3448,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Greydwarf",
                     m_name = "GreydwarfRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about greydwarfs.",
                     
                     m_topic = "Greydwarf Runestone"
                 };
@@ -3446,7 +3461,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Swamps",
                     m_name = "SwampRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about the swamps.",
                     
                     m_topic = "Swamps Runestone"
                 };
@@ -3459,7 +3474,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Draugr",
                     m_name = "DraugrRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about draugrs.",
                     
                     m_topic = "Draugr Runestone"
                 };
@@ -3472,7 +3487,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Mountains",
                     m_name = "MountainRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about the mountains.",
                     
                     m_topic = "Mountains Runestone"
                 };
@@ -3485,7 +3500,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Drake",
                     m_name = "DrakeRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about hatchlings.",
                     
                     m_topic = "Drake Runestone"
                 };
@@ -3498,7 +3513,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Plains",
                     m_name = "PlainsRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about the plains.",
                     
                     m_topic = "Plains Runestone"
                 };
@@ -3511,7 +3526,7 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label = "xRunestone Mistlands",
                     m_name = "MistRune_Exp",
-                    m_text = "",
+                    m_text = "An inscription about the mistlands.",
                     
                     m_topic = "Mistlands Runestone"
                 };

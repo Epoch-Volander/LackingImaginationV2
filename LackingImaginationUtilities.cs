@@ -732,12 +732,13 @@ namespace LackingImaginationV2
                  if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
                  if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                  if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
+                
                  if(xYagluthEssencePassive.Aura != null)
                  {
+                     xYagluthEssencePassive.YagluthStats[0] = "0";
                      UnityEngine.GameObject.Destroy(xYagluthEssencePassive.Aura);
                      xYagluthEssencePassive.boolAura = false;
                  }
-                 
              }
          }
 

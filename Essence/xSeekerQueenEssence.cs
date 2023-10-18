@@ -24,7 +24,8 @@ namespace LackingImaginationV2
             //
                 LackingImaginationV2Plugin.Log($"SeekerQueen Button was pressed");
             
-                LackingImaginationV2Plugin.Log($"{LackingImaginationV2Plugin.Ability1_Hotkey.Value.ToString()}");
+                // Location location = Location.GetLocation(Player.m_localPlayer.transform.position);
+                // LackingImaginationV2Plugin.Log($"{location.ToString()}");
                 
                 
                 

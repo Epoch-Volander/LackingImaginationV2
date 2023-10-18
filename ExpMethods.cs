@@ -151,25 +151,26 @@ namespace LackingImaginationV2
 
         public static int SkillLevelCalculator() // checks your progress
         {
-            // total     exp 597
-            // meadows   exp 15
-            // black     exp 66
-            // swamp     exp 69
-            // mountain  exp 116
-            // ocean     exp 12
-            // plains    exp 160
-            // mist      exp 144
-            // ash       exp 7
-            // north     exp 8
+            // total     exp 615
+            //                0     0         
+            // meadows  x exp 15    15
+            // black    x exp 66    81  
+            // swamp      exp 69    150 
+            // mountain x exp 116   266
+            // ocean      exp 12    278
+            // plains   x exp 160   438
+            // mist     x exp 162   600
+            // ash        exp 7     607
+            // north      exp 8     615
             int total = (int)Player.m_localPlayer.GetSkillLevel(Skill.fromName("Imagination"));
-            
+
             int slots;
-            if (total >= 80) slots = 5;
-            else if (total >= 60 && total < 80) slots = 4;
-            else if (total >= 40 && total < 60) slots = 3;
-            else if (total >= 20 && total < 40) slots = 2;
-            else slots = 1;
-            
+            if (total >= 550) slots = 5;                      //220
+            else if (total >= 330 && total < 550) slots = 4;  //170
+            else if (total >= 160 && total < 330) slots = 3; //110
+            else if (total >= 50 && total < 160) slots = 2;  //50
+            else slots = 1;                                  //0
+                                                             
             return slots;
         }
 

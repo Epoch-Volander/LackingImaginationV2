@@ -14,14 +14,12 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xFenringEssence // to do over, has leap animation to add
+    public static class xFenringEssence // to do over, has leap animation to add
     {
         public static string Ability_Name = "Moonlit \nLeap";
         public static void Process_Input(Player player, int position)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
-            
+           
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
                 LackingImaginationV2Plugin.Log($"xFenringEssence Button was pressed");

@@ -109,7 +109,7 @@ namespace LackingImaginationV2
             while (count <= maxUsages)
             {
                 Vector3 playerPosition = player.transform.position ;
-                Vector3 forwardDirection = player.GetLookDir() * 8f;
+                Vector3 forwardDirection = player.GetLookDir() * 5f;
                 Vector3 upDirection = player.transform.up;
                 
                 Vector3 spawnPosition = playerPosition + forwardDirection  + (upDirection * 1.4f);
