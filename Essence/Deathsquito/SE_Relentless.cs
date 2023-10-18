@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Relentless";
             m_icon = AbilityIcon;
-            m_tooltip = "Relentless";
+            m_tooltip = "Relentless: Projectiles gain homing.";
             m_name = "Relentless";
             m_ttl = m_baseTTL;
             m_stealthModifier = 0.1f;

@@ -19,7 +19,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Craving";
             m_icon = AbilityIcon;
-            m_tooltip = "Craving";
+            m_tooltip = "Craving: Consume the desired fish.";
             m_name = "Craving";
         }
 

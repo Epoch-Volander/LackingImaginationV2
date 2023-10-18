@@ -20,7 +20,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Satiated";
             m_icon = AbilityIcon;
-            m_tooltip = "Satiated";
+            m_tooltip = "Satiated: Increases the range and duration of Sea King.";
             m_name = "Satiated";
             m_ttl = m_baseTTL;
         }

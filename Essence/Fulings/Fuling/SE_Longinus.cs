@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Longinus";
             m_icon = AbilityIcon;
-            m_tooltip = "Longinus";
+            m_tooltip = "Longinus: Your next spear throw hit is empowered.";
             m_name = "Longinus";
             
             // m_startEffects = new EffectList

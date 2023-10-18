@@ -16,7 +16,7 @@ namespace LackingImaginationV2
 
     public class xSeekerEssence
     {
-        public static string Ability_Name = "PH";
+        public static string Ability_Name = "PH";//Become invisible and ride the seeker
         public static void Process_Input(Player player)
         {
             System.Random rnd = new System.Random();

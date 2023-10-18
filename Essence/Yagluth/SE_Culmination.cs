@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Culmination";
             m_icon = AbilityIcon;
-            m_tooltip = "Culmination";
+            m_tooltip = "Culmination: If Static becomes full you will be struck by a Lightning bolt.";
             m_name = "Culmination";
            
 

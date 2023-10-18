@@ -20,7 +20,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Calm";
             m_icon = AbilityIcon;
-            m_tooltip = "Calm";
+            m_tooltip = "Calm: The chill is suppressed.";
             m_name = "Calm";
             m_ttl = m_baseTTL;
         }

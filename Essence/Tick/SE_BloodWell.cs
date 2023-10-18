@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_BloodWell";
             m_icon = AbilityIcon;
-            m_tooltip = "Blood Well";
+            m_tooltip = "Blood Well: Empower next hit to do bonus slash damage equal to Well stacks.";
             m_name = "Blood Well";
             // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
 

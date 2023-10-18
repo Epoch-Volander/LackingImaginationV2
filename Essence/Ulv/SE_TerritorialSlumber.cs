@@ -25,7 +25,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_TerritorialSlumber";
             m_icon = AbilityIcon;
-            m_tooltip = "Territorial \nSlumber";
+            m_tooltip = "Territorial Slumber: Chance to summon an ally ulv when an enemy dies inside the zone.";
             m_name = "Territorial \nSlumber";
            
 

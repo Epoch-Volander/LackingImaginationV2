@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_LuckyFoot";
             m_icon = AbilityIcon;
-            m_tooltip = "Lucky \nFoot";
+            m_tooltip = "Lucky Foot: Movement speed is increased " +((LackingImaginationGlobal.c_hareLuckyFoot - 1f) * 100f).ToString("0") + "% & jumps are doubled.";
             m_name = "Lucky \nFoot";
             m_ttl = m_baseTTL;
             

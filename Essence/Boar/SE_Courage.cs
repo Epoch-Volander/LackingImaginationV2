@@ -19,7 +19,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Courage";
             m_icon = AbilityIcon;
-            m_tooltip = "Courage";
+            m_tooltip = "Courage: You no longer fear fire.";
             m_name = "Courage";
             m_ttl = m_baseTTL;
         }

@@ -248,23 +248,57 @@ namespace LackingImaginationV2
         //     }
         // }
 
-        // [HarmonyPatch(typeof(Attack),"GetProjectileSpawnPoint")]
-        // public static class FulingBerserker_GetProjectileSpawnPoint_Patch
-        // {
-        //     public static void Prefix(Attack __instance, ref Vector3 spawnPoint, out Vector3 aimDir)
-        //     {
-        //         
-        //         Debug.Log("DoubleProjectileSpawnHeightPatch Prefix called");
-        //
-        //         // Double the height where the projectile spawns
-        //         Debug.Log($"Original spawnPoint: {spawnPoint}");
-        //         // Double the height where the projectile spawns
-        //         spawnPoint += Vector3.up * 8 * __instance.m_attackHeight;
-        //         Debug.Log($"Modified spawnPoint: {spawnPoint}");
-        //         aimDir = default;
-        //         
-        //     }
-        // }
+        [HarmonyPatch(typeof(Attack),nameof(Attack.GetProjectileSpawnPoint))]
+        public static class FulingBerserker_GetProjectileSpawnPoint_Patch
+        {
+            // public static void Prefix(Attack __instance, ref Vector3 spawnPoint, out Vector3 aimDir)
+            // {
+            //     
+            //     Debug.Log("DoubleProjectileSpawnHeightPatch Prefix called");
+            //
+            //     // Double the height where the projectile spawns
+            //     Debug.Log($"Original spawnPoint: {spawnPoint}");
+            //     // Double the height where the projectile spawns
+            //     spawnPoint += Vector3.up * 8 * __instance.m_attackHeight;
+            //     Debug.Log($"Modified spawnPoint: {spawnPoint}");
+            //     aimDir = default;
+            //     
+            // }
+            
+            
+            
+            public static bool Prefix(Attack __instance,out Vector3 spawnPoint, out Vector3 aimDir)
+            {
+                spawnPoint = default;
+                aimDir = default;
+                if (ZNetScene.instance)
+                {
+                    if (__instance != null)
+                    {
+                        if (__instance.m_character.GetSEMan().HaveStatusEffect("SE_Giantization") && __instance.m_character.IsPlayer())
+                        {
+                            Transform attackOrigin = __instance.GetAttackOrigin();
+                            Transform transform = __instance.m_character.transform;
+                            spawnPoint = attackOrigin.position + transform.up * __instance.m_attackHeight * 2.0f + transform.forward * __instance.m_attackRange + transform.right * __instance.m_attackOffset;
+                            aimDir = __instance.m_character.GetAimDir(spawnPoint);
+
+                            if (!__instance.m_useCharacterFacing)
+                            {
+                                return false;
+                            }
+                            Vector3 forward = Vector3.forward;
+                            if (__instance.m_useCharacterFacingYAim)
+                                forward.y = aimDir.y;
+                            aimDir = transform.TransformDirection(forward);
+                            Debug.Log($"success");
+                            return false;
+                        }
+                    }
+                }
+                Debug.Log($"fail");
+                return true;
+            }
+        }
         
         // [HarmonyPatch(typeof(SpawnAbility),"SetupProjectile")]
         // public static class FulingBerserker_SetupProjectile_Patch

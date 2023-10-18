@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Ritual";
             m_icon = AbilityIcon;
-            m_tooltip = "Ritual Shield";
+            m_tooltip = "Ritual Shield: Create a shield that protects you.(Cost 5 coins)\nShoot a fireball.(Cost 1 coin)";
             m_name = "Ritual Shield";
             m_ttl = m_baseTTL;
             m_absorbDamage = 1f;

@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Forgotten";
             m_icon = AbilityIcon;
-            m_tooltip = "Forgotten";
+            m_tooltip = "Forgotten: Increase the damage of Bows and Axes by " +((bonusDmg - 1f) * 100f).ToString("0") + "%.";
             m_name = "Forgotten";
             m_ttl = m_baseTTL;
 

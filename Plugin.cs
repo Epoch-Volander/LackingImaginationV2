@@ -2601,7 +2601,7 @@ namespace LackingImaginationV2
                     m_label = "xDraugr",
                     m_name = "Draugr_Exp",
                     m_text = "Essence Power: Forgotten \n\n" +
-                             "Active: For a duration, increase the damage of bows and axes(builds 3% Rot).\n\n" +
+                             "Active: For a duration, increase the damage of Bows and Axes(builds 3% Rot).\n\n" +
                              "Positive Passive: Increase carry weight.\n\n" +
                              "Positive Passive: A portion of damage received is instead gained as Rot.\n\n" +
                              "Positive Passive: Entrails can be eaten to reduce Rot build up.\n\n" +

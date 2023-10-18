@@ -20,7 +20,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_RavenousHunger";
             m_icon = AbilityIcon;
-            m_tooltip = "Ravenous \nHunger";
+            m_tooltip = "Ravenous Hunger: Every 5th hit will deal " +((LackingImaginationGlobal.c_wolfRavenousHunger) * 100f).ToString("0") + "% of max health in slash damage.";
             m_name = "Ravenous \nHunger";
             m_ttl = m_baseTTL;
             

@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Vigil";
             m_icon = AbilityIcon;
-            m_tooltip = "Vigil";
+            m_tooltip = "Vigil: Summon ally ghosts to fight alongside you.(Gather Souls bt killing Skeletons)";
             m_name = "Vigil";
             
         }

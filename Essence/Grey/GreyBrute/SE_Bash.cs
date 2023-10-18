@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Bash";
             m_icon = AbilityIcon;
-            m_tooltip = "Bash";
+            m_tooltip = "Bash:  Your next melee hit is empowered.";
             m_name = "Bash";
             // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
 

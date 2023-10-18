@@ -33,7 +33,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_TwinSouls";
             m_icon = AbilityIcon;
-            m_tooltip = "Twin \nSouls";
+            m_tooltip = "Twin Souls: Become intangible, moving through structures and creatures. Block and Crouch to move down.";
             m_name = "Twin \nSouls";
             m_ttl = m_baseTTL;
 

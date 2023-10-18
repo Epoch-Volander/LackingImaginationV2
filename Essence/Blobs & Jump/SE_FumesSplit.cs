@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_FumesSplit";
             m_icon = AbilityIcon;
-            m_tooltip = "Fumes \nSplit";
+            m_tooltip = "Fumes Split: At 50% hp, spawn 2 ally blobs to aid you";
             m_name = "Fumes \nSplit";
             m_ttl = m_baseTTL;
            

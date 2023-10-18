@@ -31,7 +31,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_RecklessCharge";
             m_icon = AbilityIcon;
-            m_tooltip = "Reckless \nCharge";
+            m_tooltip = "Reckless Charge: After running for 3 seconds you collide with the next enemy.";
             m_name = "Reckless \nCharge";
             m_ttl = m_baseTTL;
 

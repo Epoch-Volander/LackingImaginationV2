@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_BloodSiphon";
             m_icon = AbilityIcon;
-            m_tooltip = "Blood \nSiphon";
+            m_tooltip = "Blood Siphon: Mark nearby enemies and when you kill them, gain Siphon stacks.";
             m_name = "Blood \nSiphon";
             // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
 

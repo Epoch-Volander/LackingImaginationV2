@@ -15,15 +15,24 @@ namespace LackingImaginationV2
 
         [Header("SE_Rot")]
         // public static float m_blood = int.Parse(xLeechEssencePassive.LeechStats[0]);
-        public static float m_blood = 200f;
+        public static float rot = 1f;
         
         
         public SE_Rot()
         {
+            if (EssenceItemData.equipedEssence.Contains("$item_draugr_essence")) rot -= xDraugrEssencePassive.DraugrRot;
+            if (EssenceItemData.equipedEssence.Contains("$item_draugrelite_essence")) rot -= xDraugrEliteEssencePassive.DraugrEliteRot;
+            if (EssenceItemData.equipedEssence.Contains("$item_draugr_essence") && EssenceItemData.equipedEssence.Contains("$item_draugrelite_essence"))
+            {
+                rot -= LackingImaginationGlobal.c_draugrSynergyRot;
+            }
+            
             base.name = "SE_Rot";
             m_icon = AbilityIcon;
-            m_tooltip = "Rot";
+            m_tooltip = "Rot: A portion of damage (" +((rot) * 100f).ToString("0") + "%) is reduced & is instead gained as Rot.";
             m_name = "Rot";
+           
+            
 
         }
 

@@ -25,7 +25,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Giantization";
             m_icon = AbilityIcon;
-            m_tooltip = "Giantization";
+            m_tooltip = "Giantization: Double your size, gaining double health but halving stamina.";
             m_name = "Giantization";
             m_ttl = m_baseTTL;
             

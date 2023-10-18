@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_ThreeFreeze";
             m_icon = AbilityIcon;
-            m_tooltip = "Three \nFreeze";
+            m_tooltip = "Three Freeze";
             m_name = "Three \nFreeze";
             m_ttl = m_baseTTL;
         }

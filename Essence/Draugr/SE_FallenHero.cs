@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_FallenHero";
             m_icon = AbilityIcon;
-            m_tooltip = "Fallen \nHero";
+            m_tooltip = "Fallen Hero: Increase the damage of Swords and Polearms by " +((bonusDmg - 1f) * 100f).ToString("0") + "%.";
             m_name = "Fallen \nHero";
             m_ttl = m_baseTTL;
 

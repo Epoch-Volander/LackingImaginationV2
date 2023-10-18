@@ -23,7 +23,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_HorizonHaste";
             m_icon = AbilityIcon;
-            m_tooltip = "Horizon \nHaste";
+            m_tooltip = "Horizon Haste: Movement speed is increased " +((LackingImaginationGlobal.c_deerHorizonHaste - 1f) * 100f).ToString("0") + "%.";
             m_name = "Horizon \nHaste";
             m_ttl = m_baseTTL;
             

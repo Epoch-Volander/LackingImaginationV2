@@ -18,7 +18,7 @@ namespace LackingImaginationV2
 
     public class xStoneGolemEssence
     {
-        public static string Ability_Name = "Core \nOverdrive"; // heavy armor
+        public static string Ability_Name = "Core \nOverdrive"; // heavy armor// summon sg,make body invis(lod group?) attack to player
         
         public static GameObject Aura;
         

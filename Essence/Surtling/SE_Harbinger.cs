@@ -21,7 +21,7 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Harbinger";
             m_icon = AbilityIcon;
-            m_tooltip = "Harbinger";
+            m_tooltip = "Harbinger: Summon ally surtlings.(Sacrifice a surtling core to gain charges)";
             m_name = "Harbinger";
             m_ttl = m_baseTTL;
             
