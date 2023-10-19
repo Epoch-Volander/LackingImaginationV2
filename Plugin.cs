@@ -192,54 +192,54 @@ namespace LackingImaginationV2
         {
             // { "Essence_Drop", new List<string> { "Essence", "An erie glow.", "Greydwarf", "0.5" } }
             //bosses
-            { "$item_eikthyr_essence", new List<string> { "Eikthyr_Essence_Drop","Eikthyr Essence", "Eikthyr", "0.5", "Blitz", "TrophyEikthyrEssence"} },
-            { "$item_elder_essence", new List<string> { "TheElder_Essence_Drop", "The Elder Essence", "gd_king", "0.5", "Ancient Awe", "EssenceTrophyTheElder" } },
-            { "$item_bonemass_essence", new List<string> { "BoneMass_Essence_Drop", "Bone Mass Essence", "Bonemass", "0.5", "Mass Release", "EssenceTrophyBonemass" } },
-            { "$item_dragonqueen_essence", new List<string> { "Moder_Essence_Drop", "Moder Essence", "Dragon", "0.5", "Draconic Frost", "EssenceTrophyDragonQueen" } },
-            { "$item_yagluth_essence", new List<string> { "Yagluth_Essence_Drop", "Yagluth Essence", "GoblinKing", "0.5", "Culmination", "EssenceTrophyGoblinKing" } },
-            { "$item_seekerqueen_essence", new List<string> { "SeekerQueen_Essence_Drop", "Seeker Queen Essence", "SeekerQueen", "0.5", "An erie glow.", "EssenceTrophySeekerQueen" } },
+            { "$item_eikthyr_essence", new List<string> { "Eikthyr_Essence_Drop","Eikthyr Essence", "Eikthyr", "0.1", "Blitz", "TrophyEikthyrEssence"} },
+            { "$item_elder_essence", new List<string> { "TheElder_Essence_Drop", "The Elder Essence", "gd_king", "0.1", "Ancient Awe", "EssenceTrophyTheElder" } },
+            { "$item_bonemass_essence", new List<string> { "BoneMass_Essence_Drop", "Bone Mass Essence", "Bonemass", "0.1", "Mass Release", "EssenceTrophyBonemass" } },
+            { "$item_dragonqueen_essence", new List<string> { "Moder_Essence_Drop", "Moder Essence", "Dragon", "0.1", "Draconic Frost", "EssenceTrophyDragonQueen" } },
+            { "$item_yagluth_essence", new List<string> { "Yagluth_Essence_Drop", "Yagluth Essence", "GoblinKing", "0.1", "Culmination", "EssenceTrophyGoblinKing" } },
+            { "$item_seekerqueen_essence", new List<string> { "SeekerQueen_Essence_Drop", "Seeker Queen Essence", "SeekerQueen", "0.1", "An erie glow.", "EssenceTrophySeekerQueen" } },
             
-            { "$item_abomination_essence", new List<string> { "Abomination_Essence_Drop", "Abomination Essence", "Abomination", "0.5", "Bane", "EssenceTrophyAbomination" } },
-            { "$item_stonegolem_essence", new List<string> { "StoneGolem_Essence_Drop", "Stone Golem Essence", "StoneGolem", "0.5", "Core Overdrive", "EssenceTrophySGolem" } },
-            { "$item_troll_essence", new List<string> { "Troll_Essence_Drop", "Troll Essence", "Troll", "0.5", "Troll Toss", "EssenceTrophyFrostTroll" } },
+            { "$item_abomination_essence", new List<string> { "Abomination_Essence_Drop", "Abomination Essence", "Abomination", "0.01", "Bane", "EssenceTrophyAbomination" } },
+            { "$item_stonegolem_essence", new List<string> { "StoneGolem_Essence_Drop", "Stone Golem Essence", "StoneGolem", "0.01", "Core Overdrive", "EssenceTrophySGolem" } },
+            { "$item_troll_essence", new List<string> { "Troll_Essence_Drop", "Troll Essence", "Troll", "0.01", "Troll Toss", "EssenceTrophyFrostTroll" } },
             
-            { "$item_blob_essence", new List<string> { "Blob_Essence_Drop", "Blob Essence", "Blob", "0.5", "Fumes", "EssenceTrophyBlob" } },
-            { "$item_boar_essence", new List<string> { "Boar_Essence_Drop", "Boar Essence", "Boar", "0.5", "Reckless Charge", "TrophyBoarEssence" } },
-            { "$item_cultist_essence", new List<string> { "Cultist_Essence_Drop", "Cultist Essence", "Fenring_Cultist", "0.5", "Lone Sun", "EssenceTrophyCultist" } },
-            { "$item_deathsquito_essence", new List<string> { "Deathsquito_Essence_Drop", "Deathsquito Essence", "Deathsquito", "0.5", "Relentless", "EssenceTrophyDeathsquito" } },
-            { "$item_deer_essence", new List<string> { "Deer_Essence_Drop", "Deer Essence", "Deer", "0.5", "Horizon Haste", "EssenceTrophyDeer" } },
-            { "$item_draugrelite_essence", new List<string> { "DraugrElite_Essence_Drop", "Draugr Elite Essence", "Draugr_Elite", "0.5", "Fallen Hero", "EssenceTrophyDraugrElite" } },
-            { "$item_draugr_essence", new List<string> { "Draugr_Essence_Drop", "Draugr Essence", "Draugr", "0.5", "Forgotten", "EssenceTrophyDraugr" } },
-            { "$item_dvergr_essence", new List<string> { "Dvergr_Essence_Drop", "Dvergr Essence", "Dverger", "0.5", "Randomize", "EssenceTrophyDvergr"} },
-            { "$item_fenring_essence", new List<string> { "Fenring_Essence_Drop", "Fenring Essence", "Fenring", "0.5", "Moonlit Leap", "EssenceTrophyFenring" } },
-            { "$item_gjall_essence", new List<string> { "Gjall_Essence_Drop", "Gjall Essence", "Gjall", "0.5", "Gjallarhorn", "EssenceTrophyGjall" } },
-            { "$item_goblin_essence", new List<string> { "Goblin_Essence_Drop", "Fuling Essence", "Goblin", "0.5", "Longinus", "EssenceTrophyGoblin" } },
-            { "$item_goblinbrute_essence", new List<string> { "GoblinBrute_Essence_Drop", "Fuling Berserker Essence", "GoblinBrute", "0.5", "Giantization", "TrophyGoblinBruteEssence" } },
-            { "$item_goblinshaman_essence", new List<string> { "GoblinShaman_Essence_Drop", "Fuling Shaman Essence", "GoblinShaman", "0.5", "Ritual", "EssenceTrophyGoblinShaman" } },
-            { "$item_greydwarf_essence", new List<string> { "Greydwarf_Essence_Drop", "Greydwarf Essence", "Greydwarf", "0.5", "Pebble", "EssenceTrophyGreydwarf" } },
-            { "$item_greydwarfbrute_essence", new List<string> { "GreydwarfBrute_Essence_Drop", "Greydwarf Brute Essence", "Greydwarf_Elite", "0.5", "Bash", "EssenceTrophyGreydwarfBrute" } },
-            { "$item_greydwarfshaman_essence", new List<string> { "GreydwarfShaman_Essence_Drop", "Greydwarf Shaman Essence", "Greydwarf_Shaman", "0.5", "Dubious Heal", "EssenceTrophyGreydwarfShaman" } },
-            { "$item_growth_essence", new List<string> { "Growth_Essence_Drop", "Growth Essence", "BlobTar", "0.5", "Ancient Tar", "EssenceTrophyGrowth" } },
-            { "$item_hare_essence", new List<string> { "Hare_Essence_Drop", "Hare Essence", "Hare", "0.5", "Lucky Foot", "EssenceTrophyHare" } },
-            { "$item_hatchling_essence", new List<string> { "Drake_Essence_Drop", "Drake Essence", "Hatchling", "0.5", "Three Freeze", "EssenceTrophyHatchling" } },
-            { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.5", "Blood Siphon", "EssenceTrophyLeech" } },
-            { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.5", "Wild Tremor", "TrophyLoxEssence" } },
-            { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.5", "Splash", "TrophyNeckEssence" } },
-            { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "Seeker", "0.5", "An erie glow.", "EssenceTrophySeeker" } },
-            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.5", "An erie glow.", "EsenceTrophySeekerBrute" } },
-            { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.5", "Sea King", "EssenceTrophySerpent" } },
-            { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.5", "Vigil", "EssenceTrophySkeleton" } },
-            { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.5", "Rancorous", "EssenceTrophySkeletonPoison" } },
-            { "$item_surtling_essence", new List<string> { "Surtling_Essence_Drop", "Surtling Essence", "Surtling", "0.5", "Harbinger", "EssenceTrophySurtling" } },
-            { "$item_tick_essence", new List<string> { "Tick_Essence_Drop", "Tick Essence", "Tick", "0.5", "Blood Well", "EssenceTrophyTick" } },
-            { "$item_ulv_essence", new List<string> { "Ulv_Essence_Drop", "Ulv Essence", "Ulv", "0.5", "Territorial Slumber", "EssenceTrophyUlv" } },
-            { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.5", "Ravenous Hunger", "TrophyWolfEssence" } },
-            { "$item_wraith_essence", new List<string> { "Wraith_Essence_Drop", "Wraith Essence", "Wraith", "0.5", "Twin Souls", "EssenceTrophyWraith" } },
+            { "$item_blob_essence", new List<string> { "Blob_Essence_Drop", "Blob Essence", "Blob", "0.005", "Fumes", "EssenceTrophyBlob" } },
+            { "$item_boar_essence", new List<string> { "Boar_Essence_Drop", "Boar Essence", "Boar", "0.005", "Reckless Charge", "TrophyBoarEssence" } },
+            { "$item_cultist_essence", new List<string> { "Cultist_Essence_Drop", "Cultist Essence", "Fenring_Cultist", "0.01", "Lone Sun", "EssenceTrophyCultist" } },//1
+            { "$item_deathsquito_essence", new List<string> { "Deathsquito_Essence_Drop", "Deathsquito Essence", "Deathsquito", "0.005", "Relentless", "EssenceTrophyDeathsquito" } },
+            { "$item_deer_essence", new List<string> { "Deer_Essence_Drop", "Deer Essence", "Deer", "0.005", "Horizon Haste", "EssenceTrophyDeer" } },
+            { "$item_draugrelite_essence", new List<string> { "DraugrElite_Essence_Drop", "Draugr Elite Essence", "Draugr_Elite", "0.005", "Fallen Hero", "EssenceTrophyDraugrElite" } },
+            { "$item_draugr_essence", new List<string> { "Draugr_Essence_Drop", "Draugr Essence", "Draugr", "0.005", "Forgotten", "EssenceTrophyDraugr" } },
+            { "$item_dvergr_essence", new List<string> { "Dvergr_Essence_Drop", "Dvergr Essence", "Dverger", "0.005", "Randomize", "EssenceTrophyDvergr"} },
+            { "$item_fenring_essence", new List<string> { "Fenring_Essence_Drop", "Fenring Essence", "Fenring", "0.01", "Moonlit Leap", "EssenceTrophyFenring" } },//1
+            { "$item_gjall_essence", new List<string> { "Gjall_Essence_Drop", "Gjall Essence", "Gjall", "0.01", "Gjallarhorn", "EssenceTrophyGjall" } },//1
+            { "$item_goblin_essence", new List<string> { "Goblin_Essence_Drop", "Fuling Essence", "Goblin", "0.005", "Longinus", "EssenceTrophyGoblin" } },
+            { "$item_goblinbrute_essence", new List<string> { "GoblinBrute_Essence_Drop", "Fuling Berserker Essence", "GoblinBrute", "0.01", "Giantization", "TrophyGoblinBruteEssence" } },//1
+            { "$item_goblinshaman_essence", new List<string> { "GoblinShaman_Essence_Drop", "Fuling Shaman Essence", "GoblinShaman", "0.01", "Ritual", "EssenceTrophyGoblinShaman" } },//1
+            { "$item_greydwarf_essence", new List<string> { "Greydwarf_Essence_Drop", "Greydwarf Essence", "Greydwarf", "0.005", "Pebble", "EssenceTrophyGreydwarf" } },
+            { "$item_greydwarfbrute_essence", new List<string> { "GreydwarfBrute_Essence_Drop", "Greydwarf Brute Essence", "Greydwarf_Elite", "0.005", "Bash", "EssenceTrophyGreydwarfBrute" } },
+            { "$item_greydwarfshaman_essence", new List<string> { "GreydwarfShaman_Essence_Drop", "Greydwarf Shaman Essence", "Greydwarf_Shaman", "0.005", "Dubious Heal", "EssenceTrophyGreydwarfShaman" } },
+            { "$item_growth_essence", new List<string> { "Growth_Essence_Drop", "Growth Essence", "BlobTar", "0.01", "Ancient Tar", "EssenceTrophyGrowth" } },//
+            { "$item_hare_essence", new List<string> { "Hare_Essence_Drop", "Hare Essence", "Hare", "0.005", "Lucky Foot", "EssenceTrophyHare" } },
+            { "$item_hatchling_essence", new List<string> { "Drake_Essence_Drop", "Drake Essence", "Hatchling", "0.005", "Three Freeze", "EssenceTrophyHatchling" } },
+            { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.005", "Blood Siphon", "EssenceTrophyLeech" } },
+            { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.005", "Wild Tremor", "TrophyLoxEssence" } },
+            { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.005", "Splash", "TrophyNeckEssence" } },
+            { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "Seeker", "0.005", "An erie glow.", "EssenceTrophySeeker" } },
+            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.01", "An erie glow.", "EsenceTrophySeekerBrute" } },//1
+            { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.05", "Sea King", "EssenceTrophySerpent" } },//5
+            { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.005", "Vigil", "EssenceTrophySkeleton" } },
+            { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.05", "Rancorous", "EssenceTrophySkeletonPoison" } },//5
+            { "$item_surtling_essence", new List<string> { "Surtling_Essence_Drop", "Surtling Essence", "Surtling", "0.005", "Harbinger", "EssenceTrophySurtling" } },
+            { "$item_tick_essence", new List<string> { "Tick_Essence_Drop", "Tick Essence", "Tick", "0.005", "Blood Well", "EssenceTrophyTick" } },
+            { "$item_ulv_essence", new List<string> { "Ulv_Essence_Drop", "Ulv Essence", "Ulv", "0.01", "Territorial Slumber", "EssenceTrophyUlv" } },//1
+            { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.005", "Ravenous Hunger", "TrophyWolfEssence" } },
+            { "$item_wraith_essence", new List<string> { "Wraith_Essence_Drop", "Wraith Essence", "Wraith", "0.01", "Twin Souls", "EssenceTrophyWraith" } },//1
             
-            { "$item_brenna_essence", new List<string> { "Brenna_Essence_Drop", "Brenna Essence", "Skeleton_Hildir", "0.5", "Vulcan", "EssenceTrophySkeletonHildir" } },
-            { "$item_geirrhafa_essence", new List<string> { "Geirrhafa_Essence_Drop", "Geirrhafa Essence", "Fenring_Cultist_Hildir", "0.5", "Ice Age.", "EssenceTrophyCultist_Hildir" } },
-            { "$item_zil_essence", new List<string> { "Zil_Essence_Drop", "Zil Essence", "GoblinShaman_Hildir", "0.5", "An erie glow.", "EssenceTrophyGoblinBruteBrosShaman" } },
-            { "$item_thungr_essence", new List<string> { "Thungr_Essence_Drop", "Thungr Essence", "GoblinBrute_Hildir", "0.5", "An erie glow.", "EssenceTrophyGoblinBruteBrosBrute" } },
+            { "$item_brenna_essence", new List<string> { "Brenna_Essence_Drop", "Brenna Essence", "Skeleton_Hildir", "1.0", "Vulcan", "EssenceTrophySkeletonHildir" } },
+            { "$item_geirrhafa_essence", new List<string> { "Geirrhafa_Essence_Drop", "Geirrhafa Essence", "Fenring_Cultist_Hildir", "1.0", "Ice Age.", "EssenceTrophyCultist_Hildir" } },
+            { "$item_zil_essence", new List<string> { "Zil_Essence_Drop", "Zil Essence", "GoblinShaman_Hildir", "1.0", "An erie glow.", "EssenceTrophyGoblinBruteBrosShaman" } },
+            { "$item_thungr_essence", new List<string> { "Thungr_Essence_Drop", "Thungr Essence", "GoblinBrute_Hildir", "1.0", "An erie glow.", "EssenceTrophyGoblinBruteBrosBrute" } },
         };
 
 
@@ -2242,7 +2242,8 @@ namespace LackingImaginationV2
                     m_isMunin = true,
                     m_label ="Lacking Imagination",
                     m_name = "Lacking_Imagination",
-                    m_text = "This World is vast and dangerous. \nExplore, Kill and Conquer to grow your power!",
+                    m_text = "This World is vast and dangerous. \nExplore, Kill and Conquer to grow your power!" +
+                             "\nGain more power at levels 50, 160, 330 & 550.",
                     
                     m_topic = "Broaden your horizons!"
                 };
