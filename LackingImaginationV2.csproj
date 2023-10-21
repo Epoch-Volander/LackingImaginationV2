@@ -128,6 +128,8 @@
         <Compile Include="EssenceInventoryGuiLI.cs" />
         <Compile Include="EssenceHumanoidLI.cs" />
         <Compile Include="EssenceItemData.cs" />
+        <Compile Include="Essence\1 Progress\SGolem\SE_GolemCore.cs" />
+        <Compile Include="Essence\1 Progress\SGolem\xStoneGolemEssence.cs" />
         <Compile Include="Essence\Blobs &amp; Jump\Hare\SE_LuckyFoot.cs" />
         <Compile Include="Essence\Blobs &amp; Jump\Hare\xHareEssence.cs" />
         <Compile Include="Essence\Blobs &amp; Jump\SE_FumesSplit.cs" />
@@ -167,8 +169,6 @@
         <Compile Include="Essence\Serpent\SE_Craving.cs" />
         <Compile Include="Essence\Serpent\SE_Satiated.cs" />
         <Compile Include="Essence\Serpent\xSeaSerpentEssence.cs" />
-        <Compile Include="Essence\SGolem\SE_GolemCore.cs" />
-        <Compile Include="Essence\SGolem\xStoneGolemEssence.cs" />
         <Compile Include="Essence\Skeleton\SE_Vigil.cs" />
         <Compile Include="Essence\Skeleton\xBrennaEssence.cs" />
         <Compile Include="Essence\Skeleton\xRancidRemainsEssence.cs" />
@@ -232,7 +232,6 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include=".gitignore" />
-        <Content Include="assets\brutebros.unitypackage" />
         <Content Include="assets\DropAssetBundleInThisFolder.txt" />
         <EmbeddedResource Include="assets\essence_bundle_2" />
         <EmbeddedResource Include="assets\sgasset" />

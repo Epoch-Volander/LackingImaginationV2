@@ -23,8 +23,10 @@ namespace LackingImaginationV2
         public static GameObject Aura;
         
         public static Animator prefabAnimator;
+        
+        private static readonly int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
 
-        private static bool able = false;
+        private static bool able = true;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -60,20 +62,58 @@ namespace LackingImaginationV2
 
                 if(able)
                 {
-                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
-                    Aura.transform.parent = player.transform;
+                    // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+                    // Aura.transform.parent = player.transform;
+                    //
+                    // prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
+                    // //
+                    // // LackingImaginationV2Plugin.Log($"xbefore");
+                    // //
+                    // prefabAnimator.SetBool("sleeping", false);
+                    // //
+                    // prefabAnimator.SetTrigger("Movement");
+                    // //
+                    // // prefabAnimator.SetTrigger("attack3");
+                    // //
+                    // // LackingImaginationV2Plugin.Log($"xafterd");
+                    
+                    Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("StoneGolem"), player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+                    
+                    // Aura.GetComponent<CapsuleCollider>().enabled = false;
+                    // Physics.IgnoreLayerCollision(Aura.layer, collisionMask);
+                    
+                    Aura.GetComponent<Rigidbody>().mass = 0f;
+                    Aura.GetComponent<Rigidbody>().angularDrag = 0f;
+                    Aura.GetComponent<Rigidbody>().drag = 0f;
+                    Aura.GetComponent<Rigidbody>().useGravity = false;
+                    Aura.GetComponent<Rigidbody>().freezeRotation = false;
+                    Aura.GetComponent<Rigidbody>().detectCollisions = false;
+                    
 
+                    // Aura.GetComponent<CapsuleCollider>().height = 0f;
+                    // Aura.GetComponent<CapsuleCollider>().radius = 0f;
+
+                    Aura.GetComponent<FootStep>().enabled = false;
+                    
+                    Aura.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
+                    Aura.GetComponent<Humanoid>().m_name = "CoreOverdrive";
+                    Aura.GetComponent<Humanoid>().SetMaxHealth(Aura.GetComponent<Humanoid>().GetMaxHealthBase() * 4f);
+                    Aura.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
+                    Aura.GetComponent<CharacterDrop>().m_dropsEnabled = false;
+                    foreach (CharacterDrop.Drop drop in Aura.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                     prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
-                    //
-                    // LackingImaginationV2Plugin.Log($"xbefore");
-                    //
                     prefabAnimator.SetBool("sleeping", false);
+                    
+                    // SE_TimedDeath se_timedeath = (SE_TimedDeath)ScriptableObject.CreateInstance(typeof(SE_TimedDeath));
+                    // // se_timedeath.lifeDuration = LackingImaginationGlobal.c_bonemassMassReleaseSummonDuration;
+                    // // se_timedeath.m_ttl = LackingImaginationGlobal.c_bonemassMassReleaseSummonDuration + 500f;
+                    // se_timedeath.lifeDuration = 30f;
+                    // se_timedeath.m_ttl = 500f;
                     //
-                    prefabAnimator.SetTrigger("Movement");
-                    //
-                    // prefabAnimator.SetTrigger("attack3");
-                    //
-                    // LackingImaginationV2Plugin.Log($"xafterd");
+                    // Aura.GetComponent<Humanoid>().GetSEMan().AddStatusEffect(se_timedeath);
+
+                    
+                    Aura.transform.parent = player.transform;
                 }
             
             

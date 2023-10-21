@@ -26,10 +26,7 @@ namespace LackingImaginationV2
             
         }
 
-        public override bool CanAdd(Character character)
-        {
-            return character.IsPlayer();
-        }
+       
         
     }
 }

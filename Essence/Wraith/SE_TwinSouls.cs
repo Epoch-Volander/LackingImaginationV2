@@ -23,7 +23,7 @@ namespace LackingImaginationV2
         // private float delayTimer = 0.4f; // Delay timer set to 1 second.
         // private bool isDelaying; // Flag to track whether we are in the delay period.
 
-        private readonly int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
+        private readonly int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character", "character_net", "character_ghost", "hitbox", "character_noenv", "viewblock");
         private readonly int collisionMaskDungeon = LayerMask.GetMask("piece", "piece_nonsolid", "static_solid", "Default_small", "vehicle", "character");
 
         private float Duration = m_baseTTL - 2f;
@@ -54,7 +54,7 @@ namespace LackingImaginationV2
 
             if (Duration > 2)
             {
-                if (Player.m_localPlayer != null && Player.m_localPlayer.GetEyePoint() != null)
+                if (this.m_character != null && this.m_character == Player.m_localPlayer && Player.m_localPlayer.GetEyePoint() != null)
                 {
                     // Collider[] colliders = Physics.OverlapSphere((Player.m_localPlayer.GetEyePoint() + Player.m_localPlayer.GetLookDir() * 0.5f), 0.7f, collisionMask);
                     // Collider[] colliders = Physics.OverlapSphere((Player.m_localPlayer.GetEyePoint()), 1.2f, collisionMask);
