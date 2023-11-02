@@ -26,7 +26,7 @@ namespace LackingImaginationV2
         
         private static readonly int collisionMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "vehicle", "character");
 
-        private static bool able = true;
+        private static bool able = false;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -77,7 +77,7 @@ namespace LackingImaginationV2
                     // //
                     // // LackingImaginationV2Plugin.Log($"xafterd");
                     
-                    Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("StoneGolem"), player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+                    Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("StoneGolem"), player.GetCenterPoint() - player.transform.up * 2.5f, Quaternion.identity);
                     
                     // Aura.GetComponent<CapsuleCollider>().enabled = false;
                     // Physics.IgnoreLayerCollision(Aura.layer, collisionMask);
@@ -87,9 +87,9 @@ namespace LackingImaginationV2
                     Aura.GetComponent<Rigidbody>().drag = 0f;
                     Aura.GetComponent<Rigidbody>().useGravity = false;
                     Aura.GetComponent<Rigidbody>().freezeRotation = false;
-                    Aura.GetComponent<Rigidbody>().detectCollisions = false;
-                    
+                    // Aura.GetComponent<Rigidbody>().detectCollisions = false;
 
+                    // Aura.GetComponent<CapsuleCollider>().enabled = false;
                     // Aura.GetComponent<CapsuleCollider>().height = 0f;
                     // Aura.GetComponent<CapsuleCollider>().radius = 0f;
 
@@ -103,7 +103,9 @@ namespace LackingImaginationV2
                     foreach (CharacterDrop.Drop drop in Aura.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                     prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
                     prefabAnimator.SetBool("sleeping", false);
-                    
+
+
+                    Aura.GetComponent<MonsterAI>().enabled = false;
                     // SE_TimedDeath se_timedeath = (SE_TimedDeath)ScriptableObject.CreateInstance(typeof(SE_TimedDeath));
                     // // se_timedeath.lifeDuration = LackingImaginationGlobal.c_bonemassMassReleaseSummonDuration;
                     // // se_timedeath.m_ttl = LackingImaginationGlobal.c_bonemassMassReleaseSummonDuration + 500f;

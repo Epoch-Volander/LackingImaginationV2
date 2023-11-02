@@ -28,18 +28,33 @@ namespace LackingImaginationV2
                 // spear boy
                 // return spear passive 
                 // 
-                
-                //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-                se_cd.m_ttl = LackingImaginationUtilities.xFulingCooldownTime;
-                player.GetSEMan().AddStatusEffect(se_cd);
+                
+                if(!player.GetSEMan().HaveStatusEffect("SE_Longinus".GetStableHashCode()))
+                {
+                    //Ability Cooldown
+                    se_cd.m_ttl = LackingImaginationUtilities.xFulingCooldownTime;
+                    player.GetSEMan().AddStatusEffect(se_cd);
 
-                SE_Longinus se_longinus = (SE_Longinus)ScriptableObject.CreateInstance(typeof(SE_Longinus));
-                player.GetSEMan().AddStatusEffect(se_longinus);
+                    SE_Longinus se_longinus = (SE_Longinus)ScriptableObject.CreateInstance(typeof(SE_Longinus));
+                    player.GetSEMan().AddStatusEffect(se_longinus);
 
 
-                Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
-                Aura.transform.parent = player.transform;
+                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
+                    Aura.transform.parent = player.transform;
+                }
+                else
+                {
+                    //Ability Cooldown
+                    se_cd.m_ttl = 1f;
+                    player.GetSEMan().AddStatusEffect(se_cd);
+                    
+                    Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
+
+                    if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                }
+                
+                
             }
             // else
             // {

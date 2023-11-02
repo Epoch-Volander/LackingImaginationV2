@@ -152,8 +152,14 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_TerritorialSlumber).m_icon = SE_TerritorialSlumber.AbilityIcon;
                     }
-                    
-                    
+                    else if (nameHash == "SE_Arrogance".GetHashCode())
+                    {
+                        (__result as SE_Arrogance).m_icon = SE_Arrogance.AbilityIcon;
+                    }
+                    else if (nameHash == "SE_Disdain".GetHashCode())
+                    {
+                        (__result as SE_Disdain).m_icon = SE_Disdain.AbilityIcon;
+                    }
                     
                     
                     
@@ -233,7 +239,8 @@ namespace LackingImaginationV2
                 SE_GolemCore.AbilityIcon = ZNetScene.instance.GetPrefab("Crystal").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Culmination.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinKing").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_TerritorialSlumber.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyUlv").GetComponent<ItemDrop>().m_itemData.GetIcon();
-                
+                SE_Arrogance.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinBruteBrosBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Disdain.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinBruteBrosBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
             }
         }
 
@@ -382,8 +389,14 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_TerritorialSlumber>());
             } 
-            
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Arrogance"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Arrogance>());
+            } 
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Disdain"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Disdain>());
+            } 
             
             
             

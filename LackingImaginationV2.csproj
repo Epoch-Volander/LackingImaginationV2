@@ -130,6 +130,9 @@
         <Compile Include="EssenceItemData.cs" />
         <Compile Include="Essence\1 Progress\SGolem\SE_GolemCore.cs" />
         <Compile Include="Essence\1 Progress\SGolem\xStoneGolemEssence.cs" />
+        <Compile Include="Essence\1 Progress\Thungr\SE_Arrogance.cs" />
+        <Compile Include="Essence\1 Progress\Thungr\SE_Disdain.cs" />
+        <Compile Include="Essence\1 Progress\Thungr\xThungrEssence.cs" />
         <Compile Include="Essence\Blobs &amp; Jump\Hare\SE_LuckyFoot.cs" />
         <Compile Include="Essence\Blobs &amp; Jump\Hare\xHareEssence.cs" />
         <Compile Include="Essence\Blobs &amp; Jump\SE_FumesSplit.cs" />
@@ -201,7 +204,6 @@
         <Compile Include="Essence\1 Progress\xSeekerEssence.cs" />
         <Compile Include="Essence\1 Progress\xSeekerQueenEssence.cs" />
         <Compile Include="Essence\1 Progress\xSeekerSoldierEssence.cs" />
-        <Compile Include="Essence\1 Progress\xThungrEssence.cs" />
         <Compile Include="Essence\1 Progress\xZilEssence.cs" />
         <Compile Include="ExpMethods.cs" />
         <Compile Include="Extra and Status Effects\CooldownStatusEffectsLI.cs" />

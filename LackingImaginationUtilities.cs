@@ -18,10 +18,6 @@ namespace LackingImaginationV2
     public static class LackingImaginationUtilities
     {
         
-        // private static int m_interactMask = LayerMask.GetMask("item", "piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "character", "character_net", "terrain", "vehicle");
-        // private static int m_LOSMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "terrain", "vehicle");
-
-
         public static Dictionary<string, string> abilityNameDictionary = new Dictionary<string, string>
         {
             { "$item_eikthyr_essence", xEikthyrEssence.Ability_Name },
@@ -712,7 +708,14 @@ namespace LackingImaginationV2
                  return Math.Max(LackingImaginationGlobal.c_rancidremainsRancorousCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
              }
          }
-
+         public static float xThungrCooldownTime
+         {
+             get
+             {
+                 // return Math.Max(LackingImaginationGlobal.c_rancidremainsRancorousCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
+                 return 5f;
+             }
+         }
 
 
 

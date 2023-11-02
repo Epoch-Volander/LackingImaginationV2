@@ -192,7 +192,7 @@ namespace LackingImaginationV2
         {
             // { "Essence_Drop", new List<string> { "Essence", "An erie glow.", "Greydwarf", "0.5" } }
             //bosses
-            { "$item_eikthyr_essence", new List<string> { "Eikthyr_Essence_Drop","Eikthyr Essence", "Eikthyr", "0.1", "Blitz", "TrophyEikthyrEssence"} },
+            { "$item_eikthyr_essence", new List<string> { "Eikthyr_Essence_Drop","Eikthyr Essence", "Eikthyr", "0.1", "Blitz", "EssenceTrophyEikthyr"} },
             { "$item_elder_essence", new List<string> { "TheElder_Essence_Drop", "The Elder Essence", "gd_king", "0.1", "Ancient Awe", "EssenceTrophyTheElder" } },
             { "$item_bonemass_essence", new List<string> { "BoneMass_Essence_Drop", "Bone Mass Essence", "Bonemass", "0.1", "Mass Release", "EssenceTrophyBonemass" } },
             { "$item_dragonqueen_essence", new List<string> { "Moder_Essence_Drop", "Moder Essence", "Dragon", "0.1", "Draconic Frost", "EssenceTrophyDragonQueen" } },
@@ -204,7 +204,7 @@ namespace LackingImaginationV2
             { "$item_troll_essence", new List<string> { "Troll_Essence_Drop", "Troll Essence", "Troll", "0.01", "Troll Toss", "EssenceTrophyFrostTroll" } },
             
             { "$item_blob_essence", new List<string> { "Blob_Essence_Drop", "Blob Essence", "Blob", "0.005", "Fumes", "EssenceTrophyBlob" } },
-            { "$item_boar_essence", new List<string> { "Boar_Essence_Drop", "Boar Essence", "Boar", "0.005", "Reckless Charge", "TrophyBoarEssence" } },
+            { "$item_boar_essence", new List<string> { "Boar_Essence_Drop", "Boar Essence", "Boar", "0.005", "Reckless Charge", "EssenceTrophyBoar" } },
             { "$item_cultist_essence", new List<string> { "Cultist_Essence_Drop", "Cultist Essence", "Fenring_Cultist", "0.01", "Lone Sun", "EssenceTrophyCultist" } },//1
             { "$item_deathsquito_essence", new List<string> { "Deathsquito_Essence_Drop", "Deathsquito Essence", "Deathsquito", "0.005", "Relentless", "EssenceTrophyDeathsquito" } },
             { "$item_deer_essence", new List<string> { "Deer_Essence_Drop", "Deer Essence", "Deer", "0.005", "Horizon Haste", "EssenceTrophyDeer" } },
@@ -214,7 +214,7 @@ namespace LackingImaginationV2
             { "$item_fenring_essence", new List<string> { "Fenring_Essence_Drop", "Fenring Essence", "Fenring", "0.01", "Moonlit Leap", "EssenceTrophyFenring" } },//1
             { "$item_gjall_essence", new List<string> { "Gjall_Essence_Drop", "Gjall Essence", "Gjall", "0.01", "Gjallarhorn", "EssenceTrophyGjall" } },//1
             { "$item_goblin_essence", new List<string> { "Goblin_Essence_Drop", "Fuling Essence", "Goblin", "0.005", "Longinus", "EssenceTrophyGoblin" } },
-            { "$item_goblinbrute_essence", new List<string> { "GoblinBrute_Essence_Drop", "Fuling Berserker Essence", "GoblinBrute", "0.01", "Giantization", "TrophyGoblinBruteEssence" } },//1
+            { "$item_goblinbrute_essence", new List<string> { "GoblinBrute_Essence_Drop", "Fuling Berserker Essence", "GoblinBrute", "0.01", "Giantization", "EssenceTrophyGoblinBrute" } },//1
             { "$item_goblinshaman_essence", new List<string> { "GoblinShaman_Essence_Drop", "Fuling Shaman Essence", "GoblinShaman", "0.01", "Ritual", "EssenceTrophyGoblinShaman" } },//1
             { "$item_greydwarf_essence", new List<string> { "Greydwarf_Essence_Drop", "Greydwarf Essence", "Greydwarf", "0.005", "Pebble", "EssenceTrophyGreydwarf" } },
             { "$item_greydwarfbrute_essence", new List<string> { "GreydwarfBrute_Essence_Drop", "Greydwarf Brute Essence", "Greydwarf_Elite", "0.005", "Bash", "EssenceTrophyGreydwarfBrute" } },
@@ -223,17 +223,17 @@ namespace LackingImaginationV2
             { "$item_hare_essence", new List<string> { "Hare_Essence_Drop", "Hare Essence", "Hare", "0.005", "Lucky Foot", "EssenceTrophyHare" } },
             { "$item_hatchling_essence", new List<string> { "Drake_Essence_Drop", "Drake Essence", "Hatchling", "0.005", "Three Freeze", "EssenceTrophyHatchling" } },
             { "$item_leech_essence", new List<string> { "Leech_Essence_Drop", "Leech Essence", "Leech", "0.005", "Blood Siphon", "EssenceTrophyLeech" } },
-            { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.005", "Wild Tremor", "TrophyLoxEssence" } },
-            { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.005", "Splash", "TrophyNeckEssence" } },
+            { "$item_lox_essence", new List<string> { "Lox_Essence_Drop", "Lox Essence", "Lox", "0.005", "Wild Tremor", "EssenceTrophyLox" } },
+            { "$item_neck_essence", new List<string> { "Neck_Essence_Drop", "Neck Essence", "Neck", "0.005", "Splash", "EssenceTrophyNeck" } },
             { "$item_seeker_essence", new List<string> { "Seeker_Essence_Drop","Seeker Essence", "Seeker", "0.005", "An erie glow.", "EssenceTrophySeeker" } },
-            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.01", "An erie glow.", "EsenceTrophySeekerBrute" } },//1
+            { "$item_seeker_brute_essence", new List<string> { "SeekerSoldier_Essence_Drop","Seeker Soldier Essence", "SeekerBrute", "0.01", "An erie glow.", "EssenceTrophySeekerBrute" } },//1
             { "$item_serpent_essence", new List<string> { "Serpent_Essence_Drop", "Sea Serpent Essence", "Serpent", "0.05", "Sea King", "EssenceTrophySerpent" } },//5
             { "$item_skeleton_essence", new List<string> { "Skeleton_Essence_Drop", "Skeleton Essence", "Skeleton", "0.005", "Vigil", "EssenceTrophySkeleton" } },
             { "$item_skeletonpoison_essence", new List<string> { "SkeletonPoison_Essence_Drop", "Rancid Remains Essence", "Skeleton_Poison", "0.05", "Rancorous", "EssenceTrophySkeletonPoison" } },//5
             { "$item_surtling_essence", new List<string> { "Surtling_Essence_Drop", "Surtling Essence", "Surtling", "0.005", "Harbinger", "EssenceTrophySurtling" } },
             { "$item_tick_essence", new List<string> { "Tick_Essence_Drop", "Tick Essence", "Tick", "0.005", "Blood Well", "EssenceTrophyTick" } },
             { "$item_ulv_essence", new List<string> { "Ulv_Essence_Drop", "Ulv Essence", "Ulv", "0.01", "Territorial Slumber", "EssenceTrophyUlv" } },//1
-            { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.005", "Ravenous Hunger", "TrophyWolfEssence" } },
+            { "$item_wolf_essence", new List<string> { "Wolf_Essence_Drop", "Wolf Essence", "Wolf", "0.005", "Ravenous Hunger", "EssenceTrophyWolf" } },
             { "$item_wraith_essence", new List<string> { "Wraith_Essence_Drop", "Wraith Essence", "Wraith", "0.01", "Twin Souls", "EssenceTrophyWraith" } },//1
             
             { "$item_brenna_essence", new List<string> { "Brenna_Essence_Drop", "Brenna Essence", "Skeleton_Hildir", "1.0", "Vulcan", "EssenceTrophySkeletonHildir" } },
@@ -242,6 +242,55 @@ namespace LackingImaginationV2
             { "$item_thungr_essence", new List<string> { "Thungr_Essence_Drop", "Thungr Essence", "GoblinBrute_Hildir", "1.0", "An erie glow.", "EssenceTrophyGoblinBruteBrosBrute" } },
         };
 
+        public static Dictionary<string, string> EssenceTrophyMaterials = new Dictionary<string, string>()
+        {
+            //Essence prefab, Trophy prefab
+            {"Eikthyr_Essence_Drop", "TrophyEikthyr"},
+            {"TheElder_Essence_Drop", "TrophyTheElder"},
+            {"BoneMass_Essence_Drop", "TrophyBonemass"},
+            {"Moder_Essence_Drop", "TrophyDragonQueen"},
+            {"Yagluth_Essence_Drop", "TrophyGoblinKing"},
+            {"SeekerQueen_Essence_Drop", "TrophySeekerQueen"},
+            {"Abomination_Essence_Drop", "TrophyAbomination"},
+            {"StoneGolem_Essence_Drop", "TrophySGolem"},
+            {"Troll_Essence_Drop", "TrophyFrostTroll"},
+            {"Blob_Essence_Drop", "TrophyBlob"},
+            {"Boar_Essence_Drop", "TrophyBoar"},
+            {"Cultist_Essence_Drop", "TrophyCultist"},
+            {"Deathsquito_Essence_Drop", "TrophyDeathsquito"},
+            {"Deer_Essence_Drop", "TrophyDeer"},
+            {"DraugrElite_Essence_Drop", "TrophyDraugrElite"},
+            {"Draugr_Essence_Drop", "TrophyDraugr"},
+            {"Dvergr_Essence_Drop", "TrophyDvergr"},
+            {"Fenring_Essence_Drop", "TrophyFenring"},
+            {"Gjall_Essence_Drop", "TrophyGjall"},
+            {"Goblin_Essence_Drop", "TrophyGoblin"},
+            {"GoblinBrute_Essence_Drop", "TrophyGoblinBrute"},
+            {"GoblinShaman_Essence_Drop", "TrophyGoblinShaman"},
+            {"Greydwarf_Essence_Drop", "TrophyGreydwarf"},
+            {"GreydwarfBrute_Essence_Drop", "TrophyGreydwarfBrute"},
+            {"GreydwarfShaman_Essence_Drop", "TrophyGreydwarfShaman"},
+            {"Growth_Essence_Drop", "TrophyGrowth"},
+            {"Hare_Essence_Drop", "TrophyHare"},
+            {"Drake_Essence_Drop", "TrophyHatchling"},
+            {"Leech_Essence_Drop", "TrophyLeech"},
+            {"Lox_Essence_Drop", "TrophyLox"},
+            {"Neck_Essence_Drop", "TrophyNeck"},
+            {"Seeker_Essence_Drop", "TrophySeeker"},
+            {"SeekerSoldier_Essence_Drop", "TrophySeekerBrute"},
+            {"Serpent_Essence_Drop", "TrophySerpent"},
+            {"Skeleton_Essence_Drop", "TrophySkeleton"},
+            {"SkeletonPoison_Essence_Drop", "TrophySkeletonPoison"},
+            {"Surtling_Essence_Drop", "TrophySurtling"},
+            {"Tick_Essence_Drop", "TrophyTick"},
+            {"Ulv_Essence_Drop", "TrophyUlv"},
+            {"Wolf_Essence_Drop", "TrophyWolf"},
+            {"Wraith_Essence_Drop", "TrophyWraith"},
+            {"Brenna_Essence_Drop", "TrophySkeletonHildir"},
+            {"Geirrhafa_Essence_Drop", "TrophyCultist_Hildir"},
+            {"Zil_Essence_Drop", "TrophyGoblinBruteBrosShaman"},
+            {"Thungr_Essence_Drop", "TrophyGoblinBruteBrosBrute"},
+        };
 
         // public static int EquipSlotCount => EquipSlotTypes.Count; // link this to imagination skill
         // public static int EquipSlotCount; // link this to imagination skill
@@ -1588,12 +1637,8 @@ namespace LackingImaginationV2
                         child.localPosition = new Vector3(0f, 2.5f, 0f);
                         child.localScale *= 0.75f;
                     }
-                    
-                    
                 }
-
-
-
+                
                 creatureAnimatorGeirrhafa = ZNetScene.instance.GetPrefab("Fenring_Cultist").gameObject.transform.Find("Visual").GetComponent<Animator>();
                 foreach (AnimationClip clip in creatureAnimatorGeirrhafa.runtimeAnimatorController.animationClips)
                 {
@@ -1687,6 +1732,18 @@ namespace LackingImaginationV2
                     {
                         creatureAnimationClipDvergrStaffRaise = clip;
                         break; 
+                    }
+                }
+                
+                
+                
+                
+                
+                //Material Fix
+                {
+                    foreach (KeyValuePair<string, string> kvp in EssenceTrophyMaterials)
+                    {
+                        ExpMethods.FixMaterials(kvp.Key, kvp.Value);
                     }
                 }
             }

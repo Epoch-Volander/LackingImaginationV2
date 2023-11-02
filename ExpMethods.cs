@@ -61,6 +61,99 @@ namespace LackingImaginationV2
             MaterialReplacer.RegisterGameObjectForShaderSwap(essenceBase.Prefab.transform.Find("attach").transform.Find(list[5]).gameObject, MaterialReplacer.ShaderType.CustomCreature);
         }
 
+        public static void FixMaterials(string key, string value)
+        {
+            // Find the key and value prefabs by name
+            GameObject valuePrefab = ObjectDB.instance?.GetItemPrefab(value);
+            GameObject keyPrefab = ObjectDB.instance?.GetItemPrefab(key).transform.Find("attach").transform.Find("Essence"+value).gameObject;
+
+            // GameObject keyPrefab = ObjectDB.instance?.GetItemPrefab(key);
+            // if (keyPrefab == null)
+            // {
+            //     Debug.LogError($"keyPrefab {key} is null");
+            // }
+            // else
+            // {
+            //     Transform attachTransform = keyPrefab.transform.Find("attach");
+            //     if (attachTransform == null)
+            //     {
+            //         Debug.LogError($"attachTransform {key} is null");
+            //     }
+            //     else
+            //     {
+            //         Transform essenceTransform = attachTransform.transform.Find("Essence" + value);
+            //         if (essenceTransform == null)
+            //         {
+            //             Debug.LogError($"essenceTransform {key} is null");
+            //         }
+            //         else
+            //         {
+            //             keyPrefab = essenceTransform.gameObject;
+            //         }
+            //     }
+            // }
+             
+            if (keyPrefab != null && valuePrefab != null)
+            {
+                CopyMaterialsRecursively(keyPrefab.transform, valuePrefab.transform);
+            }
+            else
+            {
+                Debug.LogError($"key {key} or value {value} prefab not found by name.");
+            }
+        }
+        
+        private static void CopyMaterialsRecursively(Transform keyTransform, Transform valueTransform)
+        {
+            // Copy materials from the value prefab to the key prefab
+            MeshRenderer keyRenderer = keyTransform.GetComponent<MeshRenderer>();
+            MeshRenderer valueRenderer = valueTransform.GetComponent<MeshRenderer>();
+
+            if (keyRenderer != null && valueRenderer != null)
+            {
+                Material[] valueMaterials = valueRenderer.sharedMaterials;
+
+                Material[] keyMaterials = new Material[valueMaterials.Length];
+                for (int i = 0; i < keyMaterials.Length; i++)
+                {
+                    if (valueMaterials[i] != null)
+                    {
+                        keyMaterials[i] = new Material(valueMaterials[i]);
+                    }
+                }
+
+                keyRenderer.materials = keyMaterials;
+            }
+
+            // Recursively process childr
+            for (int i = 0; i < keyTransform.childCount; i++)
+            {
+                Transform keyChild = keyTransform.GetChild(i);
+                Transform valueChild = valueTransform.GetChild(i);
+                CopyMaterialsRecursively(keyChild, valueChild);
+            }
+            
+            // Copy materials from the value prefab to the key prefab for ParticleSystemRenderer components
+            ParticleSystemRenderer keyParticleRenderer = keyTransform.GetComponent<ParticleSystemRenderer>();
+            ParticleSystemRenderer valueParticleRenderer = valueTransform.GetComponent<ParticleSystemRenderer>();
+
+            if (keyParticleRenderer != null && valueParticleRenderer != null)
+            {
+                Material valueMaterial = valueParticleRenderer.material;
+                if (valueMaterial != null)
+                {
+                    keyParticleRenderer.material = new Material(valueMaterial);
+                }
+            }
+
+            // Recursively process childr
+            for (int i = 0; i < keyTransform.childCount; i++)
+            {
+                Transform keyChild = keyTransform.GetChild(i);
+                Transform valueChild = valueTransform.GetChild(i);
+                CopyMaterialsRecursively(keyChild, valueChild);
+            }
+        }
         
         public static void LogGameObjectInfo(GameObject go, string indent = "")
         {
@@ -198,9 +291,30 @@ namespace LackingImaginationV2
             }
         }
         
-        // [HarmonyPatch(typeof(SkillManager.Skill), nameof(SkillManager.Skill.Patch_Skills_CheatRaiseskill))] //Made this changes to this 
-        
-        [HarmonyPatch(typeof(SkillsDialog), nameof(SkillsDialog.Setup))]
+         // private static bool Patch_Skills_CheatRaiseskill(Skills __instance, string name, float value, Player ___m_player)
+         // {
+         //     foreach (Skills.SkillType id in skills.Keys)
+         //     {
+         //         Skill skillDetails = skills[id];
+         //
+         //         if (string.Equals(skillDetails.internalSkillName, name, StringComparison.CurrentCultureIgnoreCase))
+         //         {
+         //             Skills.Skill skill = __instance.GetSkill(id);
+         //             skill.m_level += value;
+         //             if (skill.m_info.m_skill != Skill.fromName("Imagination")) skill.m_level = Mathf.Clamp(skill.m_level, 0f, 100f);
+         //             else skill.m_level = Mathf.Clamp(skill.m_level, 0f, 1000f);
+         //             ___m_player.Message(MessageHud.MessageType.TopLeft,
+         //                 "Skill increased " + Localization.instance.Localize("$skill_" + id) + ": " + (int)skill.m_level, 0,
+         //                 skill.m_info.m_icon);
+         //             Console.instance.Print("Skill " + skillDetails.internalSkillName + " = " + skill.m_level);
+         //             return false;
+         //         }
+         //     }
+         //
+         //     return true;
+         // }
+         
+        [HarmonyPatch(typeof(SkillsDialog), nameof(SkillsDialog.Setup))] // [HarmonyPatch(typeof(SkillManager.Skill), nameof(SkillManager.Skill.Patch_Skills_CheatRaiseskill))] //Made this changes to this 
         public class SkillsDialog_Setup_Patch
         {
             public static void Postfix(SkillsDialog __instance,ref Player player)
