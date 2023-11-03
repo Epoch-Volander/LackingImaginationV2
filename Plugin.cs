@@ -687,6 +687,7 @@ namespace LackingImaginationV2
                     LackingImaginationV2Plugin.li_stringList.Add(xYagluthEssencePassive.YagluthStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xBrennaEssencePassive.BrennaStats);
                     LackingImaginationV2Plugin.li_stringList.Add(xRancidRemainsEssencePassive.RancidRemainsStats);
+                    LackingImaginationV2Plugin.li_stringList.Add(xThungrEssencePassive.ThungrStats);
                     
                     ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
                     if (zPackage == null)
@@ -1734,9 +1735,6 @@ namespace LackingImaginationV2
                         break; 
                     }
                 }
-                
-                
-                
                 
                 
                 //Material Fix

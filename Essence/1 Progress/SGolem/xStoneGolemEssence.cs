@@ -62,10 +62,10 @@ namespace LackingImaginationV2
 
                 if(able)
                 {
-                    // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
-                    // Aura.transform.parent = player.transform;
+                    // AuraA = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.StoneGolem_Player, player.GetCenterPoint() - player.transform.up * 2f, Quaternion.identity);
+                    // AuraA.transform.parent = player.transform;
                     //
-                    // prefabAnimator = Aura.transform.Find("Visual").GetComponent<Animator>();
+                    // prefabAnimator = AuraA.transform.Find("Visual").GetComponent<Animator>();
                     // //
                     // // LackingImaginationV2Plugin.Log($"xbefore");
                     // //
@@ -79,19 +79,19 @@ namespace LackingImaginationV2
                     
                     Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("StoneGolem"), player.GetCenterPoint() - player.transform.up * 2.5f, Quaternion.identity);
                     
-                    // Aura.GetComponent<CapsuleCollider>().enabled = false;
-                    // Physics.IgnoreLayerCollision(Aura.layer, collisionMask);
+                    // AuraA.GetComponent<CapsuleCollider>().enabled = false;
+                    // Physics.IgnoreLayerCollision(AuraA.layer, collisionMask);
                     
                     Aura.GetComponent<Rigidbody>().mass = 0f;
                     Aura.GetComponent<Rigidbody>().angularDrag = 0f;
                     Aura.GetComponent<Rigidbody>().drag = 0f;
                     Aura.GetComponent<Rigidbody>().useGravity = false;
                     Aura.GetComponent<Rigidbody>().freezeRotation = false;
-                    // Aura.GetComponent<Rigidbody>().detectCollisions = false;
+                    // AuraA.GetComponent<Rigidbody>().detectCollisions = false;
 
-                    // Aura.GetComponent<CapsuleCollider>().enabled = false;
-                    // Aura.GetComponent<CapsuleCollider>().height = 0f;
-                    // Aura.GetComponent<CapsuleCollider>().radius = 0f;
+                    // AuraA.GetComponent<CapsuleCollider>().enabled = false;
+                    // AuraA.GetComponent<CapsuleCollider>().height = 0f;
+                    // AuraA.GetComponent<CapsuleCollider>().radius = 0f;
 
                     Aura.GetComponent<FootStep>().enabled = false;
                     
@@ -112,7 +112,7 @@ namespace LackingImaginationV2
                     // se_timedeath.lifeDuration = 30f;
                     // se_timedeath.m_ttl = 500f;
                     //
-                    // Aura.GetComponent<Humanoid>().GetSEMan().AddStatusEffect(se_timedeath);
+                    // AuraA.GetComponent<Humanoid>().GetSEMan().AddStatusEffect(se_timedeath);
 
                     
                     Aura.transform.parent = player.transform;

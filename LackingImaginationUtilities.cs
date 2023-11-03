@@ -712,8 +712,8 @@ namespace LackingImaginationV2
          {
              get
              {
-                 // return Math.Max(LackingImaginationGlobal.c_rancidremainsRancorousCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
-                 return 5f;
+                 return Math.Max(LackingImaginationGlobal.c_thungrTyrantCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
+                 
              }
          }
 

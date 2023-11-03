@@ -65,7 +65,7 @@ namespace LackingImaginationV2
             P_SeaKingProjectile.transform.localScale = Vector3.one;
             
             // LackingImaginationV2Plugin.Log($"Serpent {P_SeaKingProjectile.m_spawnOnHit.name}");
-            P_SeaKingProjectile.m_spawnOnHit.GetComponent<TimedDestruction>().m_timeout += xSeaSerpentEssencePassive.FishQuality;
+            P_SeaKingProjectile.m_spawnOnHit.GetComponent<TimedDestruction>().m_timeout = xSeaSerpentEssencePassive.FishQuality + 3f;
 
             RaycastHit hitInfo = default(RaycastHit);
             Vector3 player_position = player.transform.position;

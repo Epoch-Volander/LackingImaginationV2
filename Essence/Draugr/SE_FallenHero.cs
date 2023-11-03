@@ -12,7 +12,7 @@ namespace LackingImaginationV2
     {
         
         public static Sprite AbilityIcon;
-        public static float m_baseTTL = LackingImaginationUtilities.xDraugrEliteCooldownTime * LackingImaginationGlobal.c_draugreliteFallenHeroSED;
+        public static float m_baseTTL = Math.Min(LackingImaginationUtilities.xDraugrEliteCooldownTime * LackingImaginationGlobal.c_draugreliteFallenHeroSED, LackingImaginationUtilities.xDraugrEliteCooldownTime);
         
         [Header("SE_FallenHero")]
         public static float bonusDmg = LackingImaginationGlobal.c_draugreliteFallenHeroActive + 1f;

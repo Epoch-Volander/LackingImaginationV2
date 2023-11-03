@@ -15,7 +15,7 @@ namespace LackingImaginationV2
        
         
         [Header("SE_LuckyFoot")]
-        public static float m_baseTTL = LackingImaginationUtilities.xHareCooldownTime * LackingImaginationGlobal.c_hareLuckyFootSED;
+        public static float m_baseTTL = Math.Min(LackingImaginationUtilities.xHareCooldownTime * LackingImaginationGlobal.c_hareLuckyFootSED, LackingImaginationUtilities.xHareCooldownTime);
         
 
         public SE_LuckyFoot()

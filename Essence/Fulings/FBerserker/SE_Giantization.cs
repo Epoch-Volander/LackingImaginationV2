@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
         
         
-        private float giantDuration = LackingImaginationUtilities.xFulingBerserkerCooldownTime * LackingImaginationGlobal.c_fulingberserkerGiantizationSED;
+        private float giantDuration = Math.Min(LackingImaginationUtilities.xFulingBerserkerCooldownTime * LackingImaginationGlobal.c_fulingberserkerGiantizationSED, LackingImaginationUtilities.xFulingBerserkerCooldownTime);
         private float m_timer = 1f;
         
         [Header("SE_Giantization")]

@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         
         [Header("SE_TwinSouls")]
         
-        public static float m_baseTTL = LackingImaginationUtilities.xWriathCooldownTime * LackingImaginationGlobal.c_wraithTwinSoulsSED;
+        public static float m_baseTTL = Math.Min(LackingImaginationUtilities.xWriathCooldownTime * LackingImaginationGlobal.c_wraithTwinSoulsSED, LackingImaginationUtilities.xWriathCooldownTime);
 
         private bool hasCollided;
         // public Collider IgnoreCollision;

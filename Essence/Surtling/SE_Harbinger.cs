@@ -15,7 +15,7 @@ namespace LackingImaginationV2
        
         
         [Header("SE_Harbinger")]
-        public static float m_baseTTL = LackingImaginationUtilities.xSurtlingCooldownTime * LackingImaginationGlobal.c_surtlingHarbingerSED;
+        public static float m_baseTTL = Math.Min(LackingImaginationUtilities.xSurtlingCooldownTime * LackingImaginationGlobal.c_surtlingHarbingerSED, LackingImaginationUtilities.xSurtlingCooldownTime);
 
         public SE_Harbinger()
         {

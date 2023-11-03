@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         public static Sprite AbilityIcon;
 
         [Header("SE_HorizonHaste")]
-        public static float m_baseTTL = LackingImaginationUtilities.xDeerCooldownTime * LackingImaginationGlobal.c_deerHorizonHasteSED;
+        public static float m_baseTTL = Math.Min(LackingImaginationUtilities.xDeerCooldownTime * LackingImaginationGlobal.c_deerHorizonHasteSED, LackingImaginationUtilities.xDeathsquitoCooldownTime);
         private float speedDuration = LackingImaginationUtilities.xDeerCooldownTime * LackingImaginationGlobal.c_deerHorizonHasteSED;
         private float m_timer = 1f;
         

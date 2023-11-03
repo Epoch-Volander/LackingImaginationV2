@@ -15,7 +15,7 @@ namespace LackingImaginationV2
         
         [Header("SE_RecklessCharge")]
         
-        public static float m_baseTTL = LackingImaginationUtilities.xBoarCooldownTime * LackingImaginationGlobal.c_boarRecklessChargeSED;//
+        public static float m_baseTTL = Math.Min(LackingImaginationUtilities.xBoarCooldownTime * LackingImaginationGlobal.c_boarRecklessChargeSED, LackingImaginationUtilities.xBoarCooldownTime);//
 
         private  HashSet<GameObject> detectedObjects = new HashSet<GameObject>();
 

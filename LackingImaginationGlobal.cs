@@ -2352,10 +2352,63 @@ namespace LackingImaginationV2
                }
            }
        }
-       
-       
-       
-       
+       //Thungr
+       public static float c_thungrTyrantCD
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_thungrTyrantCD"];
+               }
+               catch
+               {
+                   return 300f;
+               }
+           }
+       }
+       public static float c_thungrTyrantSED
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_thungrTyrantSED"]/100;
+               }
+               catch
+               {
+                   return 0.5f;
+               }
+           }
+       }
+       public static float c_thungrTyrantArmor
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_thungrTyrantArmor"];
+               }
+               catch
+               {
+                   return 5f;
+               }
+           }
+       }
+       public static float c_thungrTyrantDisdain
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_thungrTyrantArmor"]/100;
+               }
+               catch
+               {
+                   return 0.5f;
+               }
+           }
+       }
         
         
         

@@ -290,12 +290,12 @@ namespace LackingImaginationV2
                             if (__instance.m_useCharacterFacingYAim)
                                 forward.y = aimDir.y;
                             aimDir = transform.TransformDirection(forward);
-                            Debug.Log($"success");
+                            // Debug.Log($"success");
                             return false;
                         }
                     }
                 }
-                Debug.Log($"fail");
+                // Debug.Log($"fail");
                 return true;
             }
         }

@@ -18,11 +18,11 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Tyrant";
 
-        private static string Mode1 = "Tyrant\n(Arrogance)";
-
-        private static string Mode2 = "Tyrant\n(Disdain)";
+        public static string Mode1 = "Tyrant\n(Arrogance)";
+        public static string Mode2 = "Tyrant\n(Disdain)";
         
-        public static GameObject Aura;
+        public static GameObject AuraA;
+        public static GameObject AuraD;
         public static GameObject AuraEnemy;
         
         public static void Process_Input(Player player, int position)
@@ -39,26 +39,52 @@ namespace LackingImaginationV2
                     Ability_Name = Mode1;
                 }
 
-                if (Ability_Name == Mode1 && !player.GetSEMan().HaveStatusEffect("SE_Arrogance".GetStableHashCode()))
+                if (Ability_Name == Mode1)
                 {
                     if (player.IsCrouching() && xThungrEssencePassive.ThungrStats.Any(item => item != "0"))
                     {
                         Ability_Name = Mode2;
                         se_cd.m_ttl = 1f;
                         player.GetSEMan().AddStatusEffect(se_cd);
+
+                        if (player.GetSEMan().HaveStatusEffect("SE_Arrogance".GetStableHashCode()))
+                        {
+                            player.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
+                            xThungrEssencePassive.Mark = null;
+
+                            if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                            if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                        }
+
                         return;
-                    } 
-                    se_cd.m_ttl = LackingImaginationUtilities.xThungrCooldownTime;
-                    player.GetSEMan().AddStatusEffect(se_cd);
-                    
-                    SE_Arrogance se_arrogance = (SE_Arrogance)ScriptableObject.CreateInstance(typeof(SE_Arrogance));
-                    player.GetSEMan().AddStatusEffect(se_arrogance);
+                    }
 
+                    if(!player.GetSEMan().HaveStatusEffect("SE_Arrogance".GetStableHashCode()))
+                    {
+                        se_cd.m_ttl = LackingImaginationUtilities.xThungrCooldownTime;
+                        player.GetSEMan().AddStatusEffect(se_cd);
 
-                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect
-                    Aura.transform.parent = player.transform;
+                        SE_Arrogance se_arrogance = (SE_Arrogance)ScriptableObject.CreateInstance(typeof(SE_Arrogance));
+                        player.GetSEMan().AddStatusEffect(se_arrogance);
+                        
+                        AuraA = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect Arrogance
+                        AuraA.transform.parent = player.transform;
+                    }
                     
+                    else if (player.GetSEMan().HaveStatusEffect("SE_Arrogance".GetStableHashCode()))
+                    {
+                        se_cd.m_ttl = LackingImaginationUtilities.xThungrCooldownTime * 0.1f;
+                        player.GetSEMan().AddStatusEffect(se_cd);
+                        
+                        player.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
+                        xThungrEssencePassive.Mark = null;
+
+                        if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                        if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                    }
+
                 }
+                
 
                 if (Ability_Name == Mode2)
                 {
@@ -67,21 +93,31 @@ namespace LackingImaginationV2
                         Ability_Name = Mode1;
                         se_cd.m_ttl = 1f;
                         player.GetSEMan().AddStatusEffect(se_cd);
+                        
+                        if (player.GetSEMan().HaveStatusEffect("SE_Disdain".GetStableHashCode()))
+                        {
+                            player.GetSEMan().RemoveStatusEffect("SE_Disdain".GetStableHashCode());
+                           
+                            if (xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                        }
+                        
                         return;
                     }
                     
+                    //Lingering effects
+                    SE_Disdain se_disdain = (SE_Disdain)ScriptableObject.CreateInstance(typeof(SE_Disdain));
+                    se_disdain.m_ttl = SE_Disdain.m_baseTTL;
+                    player.GetSEMan().AddStatusEffect(se_disdain);
                     
+                    se_cd.m_ttl = LackingImaginationUtilities.xThungrCooldownTime;
+                    player.GetSEMan().AddStatusEffect(se_cd);
+                
+                    //Effects, animations, and sounds
+
+                    AuraD = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect dISDAIN
+                    AuraD.transform.parent = player.transform;
                     
                 }
-                
-                
-                se_cd.m_ttl = LackingImaginationUtilities.xThungrCooldownTime;
-                player.GetSEMan().AddStatusEffect(se_cd);
-                
-                //Effects, animations, and sounds
-
-
-                
                 
                 
                 
@@ -101,7 +137,7 @@ namespace LackingImaginationV2
     {
         public static List<string> ThungrStats = new List<string>(){"0","0","0","0","0","0","0","0",};
 
-        private static Character Mark = null;
+        public static Character Mark = null;
         
 
         [HarmonyPatch(typeof(Character), nameof(Character.RPC_Damage))]
@@ -126,7 +162,7 @@ namespace LackingImaginationV2
                         return;
                     if ((UnityEngine.Object)__instance.m_baseAI != (UnityEngine.Object)null && (bool)(UnityEngine.Object)attacker && attacker.IsPlayer())
                     {
-                        if (attacker.GetSEMan().HaveStatusEffect("SE_Arrogance") && Mark == null)
+                        if (attacker.GetSEMan().HaveStatusEffect("SE_Arrogance") && Mark == null && __instance.GetBaseAI() != null && __instance.GetBaseAI() is MonsterAI)
                         {
                             Mark = __instance;
                             __instance.GetSEMan().AddStatusEffect("SE_Arrogance".GetStableHashCode());
@@ -144,36 +180,89 @@ namespace LackingImaginationV2
         }
         
         [HarmonyPatch(typeof(Character), nameof(Character.CustomFixedUpdate))]
-        public static class Leech_CustomFixedUpdate_Patch
+        public static class Thungr_CustomFixedUpdate_Patch
         {
             public static void Postfix(Character __instance)
             {
-                if (__instance.IsPlayer() && Mark != null)
+                if (__instance.IsPlayer() && Mark != null && __instance.GetSEMan().HaveStatusEffect("SE_Arrogance"))
                 {
                     if (Mark.IsDead() || (double)Mark.GetHealth() <= 0.0)
                     {
-                        ThungrStats[0] = (Mark.m_lastHit.m_damage.m_blunt * 0.25f).ToString();
-                        ThungrStats[1] = (Mark.m_lastHit.m_damage.m_pierce * 0.25f).ToString();
-                        ThungrStats[2] = (Mark.m_lastHit.m_damage.m_slash * 0.25f).ToString();
-                        ThungrStats[3] = (Mark.m_lastHit.m_damage.m_fire * 0.25f).ToString();
-                        ThungrStats[4] = (Mark.m_lastHit.m_damage.m_frost * 0.25f).ToString();
-                        ThungrStats[5] = (Mark.m_lastHit.m_damage.m_lightning * 0.25f).ToString();
-                        ThungrStats[6] = (Mark.m_lastHit.m_damage.m_poison * 0.25f).ToString();
-                        ThungrStats[7] = (Mark.m_lastHit.m_damage.m_spirit * 0.25f).ToString();
-
+                        if (Mark.m_lastHit != null && Mark.m_lastHit.GetAttacker() == __instance)
+                        {
+                            Humanoid mon = (Mark.GetBaseAI() as MonsterAI).m_character as Humanoid;
+                            if (mon != null)
+                            {
+                                ThungrStats[0] = (mon.GetCurrentWeapon().GetDamage().m_blunt * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[1] = (mon.GetCurrentWeapon().GetDamage().m_pierce * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[2] = (mon.GetCurrentWeapon().GetDamage().m_slash * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[3] = (mon.GetCurrentWeapon().GetDamage().m_fire * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[4] = (mon.GetCurrentWeapon().GetDamage().m_frost * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[5] = (mon.GetCurrentWeapon().GetDamage().m_lightning * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[6] = (mon.GetCurrentWeapon().GetDamage().m_poison * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                ThungrStats[7] = (mon.GetCurrentWeapon().GetDamage().m_spirit * LackingImaginationGlobal.c_thungrTyrantDisdain).ToString();
+                                    
+                                // Success effects and message
+                                __instance.Message(MessageHud.MessageType.Center, $"Enemy Dominated");
+                                
+                                xThungrEssence.Ability_Name = xThungrEssence.Mode2;
+                            }
+                        }
                         Mark = null;
+                        __instance.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
+                        
+                        if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                        if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
                     }
                 }
-                
                 
                 
                 
             }
         }
         
+        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
+        public static class Thungr_UpdateEnvStatusEffects_Patch
+        {
+            public static void Prefix(Player __instance, ref float dt)
+            {
+                if (!EssenceItemData.equipedEssence.Contains("$item_thungr_essence"))
+                {
+                    if (__instance.GetSEMan().HaveStatusEffect("SE_Arrogance"))
+                    {
+                        __instance.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetHashCode());
+                        Mark = null;
+                        
+                        if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                        if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                    }
+                    if (__instance.GetSEMan().HaveStatusEffect("SE_Disdain"))
+                    {
+                        __instance.GetSEMan().RemoveStatusEffect("SE_Disdain".GetHashCode());
+                        
+                        if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                    }
+                }
+
+                if (xThungrEssence.AuraD != null && !__instance.GetSEMan().HaveStatusEffect("SE_Disdain"))
+                {
+                    UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                }
+            }
+        }
         
-        
-        
+        [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
+        public static class Thungr_GetBodyArmor_Patch
+        {
+            public static void Postfix(Player __instance, ref float __result)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_thungr_essence"))
+                {
+                    __result += (-1.0f * __instance.m_equipmentMovementModifier * 100f) * LackingImaginationGlobal.c_thungrTyrantArmor;
+                    __result = Math.Max(__result, 0.0f);
+                }
+            }
+        }
         
         
         
