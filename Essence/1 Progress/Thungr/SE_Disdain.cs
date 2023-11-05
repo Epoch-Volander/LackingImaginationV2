@@ -22,7 +22,15 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Disdain";
             m_icon = AbilityIcon;
-            m_tooltip = "Disdain: .";
+            m_tooltip = "Disdain: Stolen Power.\n" +
+                        "Blunt:"+xThungrEssencePassive.ThungrStats[0]+"\n" +
+                        "Pierce:"+xThungrEssencePassive.ThungrStats[1]+"\n" +
+                        "Slash:"+xThungrEssencePassive.ThungrStats[2]+"\n" +
+                        "Fire:"+xThungrEssencePassive.ThungrStats[3]+"\n" +
+                        "Frost:"+xThungrEssencePassive.ThungrStats[4]+"\n" +
+                        "Lightning:"+xThungrEssencePassive.ThungrStats[5]+"\n" +
+                        "Poison:"+xThungrEssencePassive.ThungrStats[6]+"\n" +
+                        "Spirit:"+xThungrEssencePassive.ThungrStats[7]+"\n";
             m_name = "Disdain";
             m_ttl = m_baseTTL;
 

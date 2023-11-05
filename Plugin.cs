@@ -393,7 +393,7 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_ulvTerritorialSlumberCD;
         private static ConfigEntry<float>? li_brennaVulcanCD;
         private static ConfigEntry<float>? li_rancidremainsRancorousCD;
-        
+        private static ConfigEntry<float>? li_thungrTyrantCD;
         
         
         //Status Duration
@@ -410,7 +410,8 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_hareLuckyFootSED;
         private static ConfigEntry<float>? li_boarRecklessChargeSED;
         private static ConfigEntry<float>? li_ulvTerritorialSlumberSED;
-        
+        private static ConfigEntry<float>? li_thungrTyrantSED;
+
         
         //Essence
         private static ConfigEntry<float>? li_deerHorizonHaste;
@@ -516,7 +517,10 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_ulvTerritorialSlumberSummonHealth;
         private static ConfigEntry<float>? li_brennaVulcanArmor;
         private static ConfigEntry<float>? li_rancidremainsRancorousArmor;
-        
+        private static ConfigEntry<float>? li_thungrTyrantArmor;
+        private static ConfigEntry<float>? li_thungrTyrantArroganceEnemyBuff;
+        private static ConfigEntry<float>? li_thungrTyrantArrogancePlayerDebuff;
+        private static ConfigEntry<float>? li_thungrTyrantDisdain;
        
         
         // public static List<string> equipedEssence = new();
@@ -841,7 +845,7 @@ namespace LackingImaginationV2
             fx_BloodSiphon = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "LeechDebuff");
             fx_RavenousHunger = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "wolfHit");
             fx_Relentless = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "DeathEye");
-            fx_Vulcan = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "VulkanFloor");
+            fx_Vulcan = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "VulcanFloor");
             fx_Rancorous = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "RancorousFloor");
             fx_RecklessCharge = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarGuard");
             fx_RecklessChargeHit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarHit");
@@ -1106,7 +1110,13 @@ namespace LackingImaginationV2
             //rancidremains
             li_rancidremainsRancorousCD = config("Essence Rancid Remains Modifiers", "li_rancidremainsRancorousCD", 10f, "Cooldown");
             li_rancidremainsRancorousArmor = config("Essence Rancid Remains Modifiers", "li_rancidremainsRancorousArmor", 15f, "Modifies armor reduction amount");
-
+            //Thungr
+            li_thungrTyrantCD = config("Essence Thungr Modifiers", "li_thungrTyrantCD", 180f, "Cooldown");
+            li_thungrTyrantSED = config("Essence Thungr Modifiers", "li_thungrTyrantSED", 90f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_thungrTyrantArmor = config("Essence Thungr Modifiers", "li_thungrTyrantArmor", 5f, "Armor gained per 1% of movement speed reduced by equipment or lost per 1% of movement speed increased by equipment");
+            li_thungrTyrantArroganceEnemyBuff = config("Essence Thungr Modifiers", "li_thungrTyrantArroganceEnemyBuff", 75f, new ConfigDescription("Percentage of damage increase to Marked enemy", new AcceptableValueRange<float>(0f, 100f)));
+            li_thungrTyrantArrogancePlayerDebuff = config("Essence Thungr Modifiers", "li_thungrTyrantArrogancePlayerDebuff", 25f, new ConfigDescription("Percentage player damage is decrease to", new AcceptableValueRange<float>(0f, 100f)));
+            li_thungrTyrantDisdain = config("Essence Thungr Modifiers", "li_thungrTyrantDisdain", 50f, new ConfigDescription("Percentage of stats stolen from defeated enemy", new AcceptableValueRange<float>(0f, 100f)));
 
 
 
@@ -1164,6 +1174,7 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberCD", li_ulvTerritorialSlumberCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_brennaVulcanCD", li_brennaVulcanCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousCD", li_rancidremainsRancorousCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantCD", li_thungrTyrantCD.Value);
             
             //Status Duration
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHasteSED", li_deerHorizonHasteSED.Value);
@@ -1179,6 +1190,7 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_hareLuckyFootSED", li_hareLuckyFootSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargeSED", li_boarRecklessChargeSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSED", li_ulvTerritorialSlumberSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantSED", li_thungrTyrantSED.Value);
             
             // Essence
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHaste", li_deerHorizonHaste.Value);
@@ -1284,7 +1296,10 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSummonHealth", li_ulvTerritorialSlumberSummonHealth.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_brennaVulcanArmor", li_brennaVulcanArmor.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousArmor", li_rancidremainsRancorousArmor.Value);
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantArmor", li_thungrTyrantArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantArroganceEnemyBuff", li_thungrTyrantArroganceEnemyBuff.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantArrogancePlayerDebuff", li_thungrTyrantArrogancePlayerDebuff.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantDisdain", li_thungrTyrantDisdain.Value);
             
             
             _ = ConfigSync.AddConfigEntry(Sprintkey);
@@ -1353,6 +1368,7 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberCD);
             _ = ConfigSync.AddConfigEntry(li_brennaVulcanCD);
             _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousCD);
+            _ = ConfigSync.AddConfigEntry(li_thungrTyrantCD);
             
             //Status Duration
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHasteSED);
@@ -1368,7 +1384,9 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_hareLuckyFootSED);
             _ = ConfigSync.AddConfigEntry(li_boarRecklessChargeSED);
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSED);
-            
+            _ = ConfigSync.AddConfigEntry(li_thungrTyrantSED);
+                
+                
             // Essence
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHaste);
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHastePassive);
@@ -1473,7 +1491,10 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSummonHealth); 
             _ = ConfigSync.AddConfigEntry(li_brennaVulcanArmor);
             _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousArmor); 
-            
+            _ = ConfigSync.AddConfigEntry(li_thungrTyrantArmor);
+            _ = ConfigSync.AddConfigEntry(li_thungrTyrantArroganceEnemyBuff); 
+            _ = ConfigSync.AddConfigEntry(li_thungrTyrantArrogancePlayerDebuff);
+            _ = ConfigSync.AddConfigEntry(li_thungrTyrantDisdain); 
             
                 
             Assembly assembly = Assembly.GetExecutingAssembly();

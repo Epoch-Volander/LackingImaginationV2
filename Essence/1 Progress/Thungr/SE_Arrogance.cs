@@ -21,7 +21,9 @@ namespace LackingImaginationV2
         {
             base.name = "SE_Arrogance";
             m_icon = AbilityIcon;
-            m_tooltip = "Arrogance: .";
+            m_tooltip = "Arrogance: Player damage reduced to "
+                        + LackingImaginationGlobal.c_thungrTyrantArrogancePlayerDebuff * 100f 
+                        +"% and Marked enemy damage increased by "+LackingImaginationGlobal.c_thungrTyrantArroganceEnemyBuff *100f +"%.";
             m_name = "Arrogance";
             m_ttl = m_baseTTL;
             
@@ -31,11 +33,11 @@ namespace LackingImaginationV2
         {
             if (this.m_character.IsPlayer())
             {
-                hitData.m_damage.Modify(0.25f);
+                hitData.m_damage.Modify(LackingImaginationGlobal.c_thungrTyrantArrogancePlayerDebuff);
             }
             else
             {
-                hitData.m_damage.Modify(1.75f);
+                hitData.m_damage.Modify(1.0f + LackingImaginationGlobal.c_thungrTyrantArroganceEnemyBuff);
             }
             base.ModifyAttack(skill, ref hitData);
         }

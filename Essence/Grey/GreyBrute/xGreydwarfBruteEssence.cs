@@ -22,20 +22,33 @@ namespace LackingImaginationV2
 
         public static void Process_Input(Player player, int position)
         {
+            //Ability Cooldown
+            StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
+                if(!player.GetSEMan().HaveStatusEffect("SE_Bash".GetStableHashCode()))
+                {
+                    se_cd.m_ttl = LackingImaginationUtilities.xGreydwarfBruteCooldownTime;
+                    player.GetSEMan().AddStatusEffect(se_cd);
+
+                    SE_Bash se_bash = (SE_Bash)ScriptableObject.CreateInstance(typeof(SE_Bash));
+                    player.GetSEMan().AddStatusEffect(se_bash);
+
+                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Bash, player.GetCenterPoint(), Quaternion.identity);
+
+                    Aura.transform.parent = player.transform;
+                }
+                else
+                {
+                    //Ability Cooldown
+                    se_cd.m_ttl = 1f;
+                    player.GetSEMan().AddStatusEffect(se_cd);
+                    
+                    Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
+
+                    if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                }
                 
-                //Ability Cooldown
-                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-                se_cd.m_ttl = LackingImaginationUtilities.xGreydwarfBruteCooldownTime;
-                player.GetSEMan().AddStatusEffect(se_cd);
-
-                SE_Bash se_bash = (SE_Bash)ScriptableObject.CreateInstance(typeof(SE_Bash));
-                player.GetSEMan().AddStatusEffect(se_bash);
-
-                Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Bash, player.GetCenterPoint(), Quaternion.identity);
-
-                Aura.transform.parent = player.transform;
                 // GameObject mace = ZNetScene.instance.GetPrefab("skeleton_mace").transform.Find("attach").Find("mace").gameObject;
                 // GameObject[] effects = new[]
                 // {
@@ -68,6 +81,7 @@ namespace LackingImaginationV2
                 // status effect no timer, empowered attack, double effect for clubs, racid remains on hit cloud effect, grey and crit effect
 
             }
+           
             // else
             // {
             //     player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Gathering Power");

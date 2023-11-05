@@ -2363,7 +2363,7 @@ namespace LackingImaginationV2
                }
                catch
                {
-                   return 300f;
+                   return 180f;
                }
            }
        }
@@ -2395,13 +2395,41 @@ namespace LackingImaginationV2
                }
            }
        }
+       public static float c_thungrTyrantArroganceEnemyBuff
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_thungrTyrantArroganceEnemyBuff"]/100;
+               }
+               catch
+               {
+                   return 0.75f;
+               }
+           }
+       }
+       public static float c_thungrTyrantArrogancePlayerDebuff
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_thungrTyrantArrogancePlayerDebuff"]/100;
+               }
+               catch
+               {
+                   return 0.25f;
+               }
+           }
+       }
        public static float c_thungrTyrantDisdain
        {
            get
            {
                try
                {
-                   return ConfigStrings["li_thungrTyrantArmor"]/100;
+                   return ConfigStrings["li_thungrTyrantDisdain"]/100;
                }
                catch
                {
@@ -2409,7 +2437,21 @@ namespace LackingImaginationV2
                }
            }
        }
-        
+       //Zil
+       public static float c_zilSoulmassCD
+       {
+            get
+            {
+                try
+                {
+                    return ConfigStrings["li_zilSoulmassCD"];
+                }
+                catch
+                {
+                    return 5f;
+                }
+            }
+       }
         
         
         

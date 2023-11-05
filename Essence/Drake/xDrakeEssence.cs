@@ -20,10 +20,7 @@ namespace LackingImaginationV2
         private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
         
         public static string Ability_Name = "Three \nFreeze";
-
-        private static GameObject GO_ThreeFreezeProjectile;
-        private static Projectile P_ThreeFreezeProjectile;
-
+        
         private static float shotDelay = 0.2f;
 
         public static void Process_Input(Player player, int position)

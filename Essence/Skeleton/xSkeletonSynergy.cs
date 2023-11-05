@@ -450,7 +450,7 @@ namespace LackingImaginationV2
                                 inventory.RemoveItem(bound, 1);
                             }
                         }
-                        ScheduleDelay(__instance, 0.5f, true);
+                        ScheduleDelay(__instance, 0.5f, true, false);
                         return false;
                     }
                 }
@@ -474,32 +474,79 @@ namespace LackingImaginationV2
                                 inventory.RemoveItem(bound, 1);
                             }
                         }
-                        ScheduleDelay(__instance, 1.5f, false);
+                        ScheduleDelay(__instance, 1.5f, false, false);
+                        return false;
+                    }
+                }
+                if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence") && 
+                    (xBrennaEssencePassive.BrennaStats[0] == "true" && item.m_shared.m_name == "$item_sword_vulcan"))
+                {
+                    if(!Player.m_localPlayer.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(EssenceItemData.equipedEssence.IndexOf("$item_brenna_essence"))))
+                    {
+                        __instance.EquipItem(item);
+                        LackingImaginationV2Plugin.UseGuardianPower = false;
+                        SkeletonSynergyBrennaController = true;
+                        ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                        SkeletonSynergyBrennaController = false;
+                        
+                        ScheduleDelay(__instance, 0.5f, true, true);
+                        return false;
+                    }
+                }
+                if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence") && 
+                    (xRancidRemainsEssencePassive.RancidRemainsStats[0] == "false" && item.m_shared.m_name == "$item_mace_rancorous"))
+                {
+                    if(!Player.m_localPlayer.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(EssenceItemData.equipedEssence.IndexOf("$item_skeletonpoison_essence"))))
+                    {
+                        __instance.EquipItem(item);
+                        LackingImaginationV2Plugin.UseGuardianPower = false;
+                        SkeletonSynergyRancidController = true;
+                        ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                        SkeletonSynergyRancidController = false;
+                        
+                        ScheduleDelay(__instance, 1.5f, false, true);
                         return false;
                     }
                 }
                 return true;
             }
         }
-        public static void ScheduleDelay(Humanoid human, float equipDelay, bool swordmace)
+        public static void ScheduleDelay(Humanoid human, float equipDelay, bool swordmace, bool effect)
         {
-            CoroutineRunner.Instance.StartCoroutine(ScheduleDelayCoroutine(human, equipDelay, swordmace));
+            CoroutineRunner.Instance.StartCoroutine(ScheduleDelayCoroutine(human, equipDelay, swordmace, effect));
         }
         // ReSharper disable Unity.PerformanceAnalysis
-        private static IEnumerator ScheduleDelayCoroutine(Humanoid human, float equipDelay, bool swordmace)
+        private static IEnumerator ScheduleDelayCoroutine(Humanoid human, float equipDelay, bool swordmace, bool effect)
         {
-            if(swordmace)
+            if(!effect)
             {
-                yield return new WaitForSeconds(equipDelay);
-                xBrennaEssence.Process_Input(Player.m_localPlayer, EssenceItemData.equipedEssence.IndexOf("$item_brenna_essence"));
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_fireskeleton_nova"), human.transform.position + human.transform.up * 0.6f, Quaternion.identity);
+                if (swordmace)
+                {
+                    yield return new WaitForSeconds(equipDelay);
+                    xBrennaEssence.Process_Input(Player.m_localPlayer, EssenceItemData.equipedEssence.IndexOf("$item_brenna_essence"));
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_fireskeleton_nova"), human.transform.position + human.transform.up * 0.6f, Quaternion.identity);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(equipDelay);
+                    xRancidRemainsEssence.Process_Input(Player.m_localPlayer, EssenceItemData.equipedEssence.IndexOf("$item_skeletonpoison_essence"));
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+                }
             }
             else
             {
-                yield return new WaitForSeconds(equipDelay);
-                xRancidRemainsEssence.Process_Input(Player.m_localPlayer, EssenceItemData.equipedEssence.IndexOf("$item_skeletonpoison_essence"));
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+                if (swordmace)
+                {
+                    yield return new WaitForSeconds(equipDelay);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("fx_fireskeleton_nova"), human.transform.position + human.transform.up * 0.6f, Quaternion.identity);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(equipDelay);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+                    UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_skeleton_mace_hit"), human.transform.position, Quaternion.identity);
+                } 
             }
         }
         public static void ScheduleEquip(Player player, ref ItemDrop.ItemData item, float equipDelay)

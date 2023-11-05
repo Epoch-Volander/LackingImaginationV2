@@ -716,7 +716,14 @@ namespace LackingImaginationV2
                  
              }
          }
-
+         public static float xZilCooldownTime
+         {
+             get
+             {
+                 return Math.Max(LackingImaginationGlobal.c_zilSoulmassCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
+                 
+             }
+         }
 
 
 
@@ -735,7 +742,10 @@ namespace LackingImaginationV2
                  if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
                  if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                  if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
-                
+                 if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                 if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                 if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                 
                  if(xYagluthEssencePassive.Aura != null)
                  {
                      xYagluthEssencePassive.YagluthStats[0] = "0";
