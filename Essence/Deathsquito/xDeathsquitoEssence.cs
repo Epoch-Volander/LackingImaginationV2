@@ -72,7 +72,7 @@ namespace LackingImaginationV2
                         UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, __instance.transform.position + __instance.transform.up * 0.3f, Quaternion.identity).transform.parent = __instance.transform;
                     }
                     
-                    if (__instance.m_owner != null && IsTaegetInRange(__instance)) // Make sure the owner is a player
+                    if (__instance.m_owner != null && IsTargetInRange(__instance)) // Make sure the owner is a player
                     {
                         // homing logic
                         Vector3 targetPosition = GetHomingTargetPosition(__instance); // target logic
@@ -83,16 +83,15 @@ namespace LackingImaginationV2
                         // LackingImaginationV2Plugin.Log($"aim{__instance.m_vel}");
                     }
                     
-                    bool IsTaegetInRange(Projectile projectile)
+                    bool IsTargetInRange(Projectile projectile)
                     {
                         List<Character> allCharacters = new List<Character>();
                         allCharacters.Clear();
                         Character.GetCharactersInRange(projectile.transform.position, LackingImaginationGlobal.c_deathsquitoRelentlessHomingRange, allCharacters);
                         foreach (Character ch in allCharacters)
                         {
-                            if (ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer) || ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI)
+                            if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer) || ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI) && LineOfSight.LOS(ch, projectile.transform.position))
                             {
-                                // LackingImaginationV2Plugin.Log($"bool{ch.name}");
                                 return true;
                             }
                         }
@@ -103,8 +102,9 @@ namespace LackingImaginationV2
                     {
                         List<Character> allCharacters = new List<Character>();
                         allCharacters.Clear();
-                        Character.GetCharactersInRange(projectile.transform.position, LackingImaginationGlobal.c_deathsquitoRelentlessHomingRange, allCharacters);
+                        Character.GetCharactersInRange(projectile.transform.position, LackingImaginationGlobal.c_deathsquitoRelentlessHomingRange + 1f, allCharacters);
                         Character closestCharacter = null;
+                        Character backupCharacter = null;
                         float closestDistance = float.MaxValue;
                         foreach (Character ch in allCharacters)
                         {
@@ -114,25 +114,47 @@ namespace LackingImaginationV2
                                 if (distanceToCharacter < closestDistance)
                                 {
                                     closestDistance = distanceToCharacter;
-                                    closestCharacter = ch;
+                                    backupCharacter = ch;
+                                    if(LineOfSight.LOS(ch, projectile.transform.position)) closestCharacter = ch;
+
                                 }
                             }
                         }
-                        // LackingImaginationV2Plugin.Log($"target{closestCharacter.name}");
-                        try
-                        {
-                            return closestCharacter.GetHeadPoint();
-                        }
-                        catch 
+                        if(closestCharacter != null)
                         {
                             try
                             {
-                                return closestCharacter.GetCenterPoint();
+                                return closestCharacter.GetHeadPoint();
                             }
                             catch
                             {
-                                return closestCharacter.transform.position; 
+                                try
+                                {
+                                    return closestCharacter.GetCenterPoint();
+                                }
+                                catch
+                                {
+                                    return closestCharacter.transform.position + Vector3.up * 0.5f;
+                                }
                             }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                return backupCharacter.GetHeadPoint();
+                            }
+                            catch
+                            {
+                                try
+                                {
+                                    return backupCharacter.GetCenterPoint();
+                                }
+                                catch
+                                {
+                                    return backupCharacter.transform.position + Vector3.up * 0.5f;
+                                }
+                            } 
                         }
                     }
                 }

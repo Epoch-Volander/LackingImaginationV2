@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LackingImaginationV2
@@ -41,6 +42,79 @@ namespace LackingImaginationV2
             transform.localPosition =startPoint + new Vector3(circleX , helixY, circleZ);
         }
 
+    }
+
+    
+    
+    
+    
+    public class LineOfSight
+    {
+        public static bool LOS (Character hitChar, Vector3 origin)
+        {
+            bool line = false;
+            if(hitChar != null)
+            {
+                RaycastHit hitInfo = default(RaycastHit);
+                var rayDirection = hitChar.GetCenterPoint() - origin;
+                if(Physics.Raycast(origin, rayDirection, out hitInfo))
+                {
+                    if(Collision(hitChar, hitChar.GetCollider(), hitInfo))
+                    {
+                        line = true;
+                    }
+                    else
+                    {
+                        for(int i = 0; i < 8; i++)
+                        {
+                            Vector3 boundsSize = hitChar.GetCollider().bounds.size;
+                            var rayDirectionMod = (hitChar.GetCenterPoint() + new Vector3(boundsSize.x * (UnityEngine.Random.Range(-i, i) / 6f), boundsSize.y * (UnityEngine.Random.Range(-i, i) / 4f), boundsSize.z * (UnityEngine.Random.Range(-i, i) / 6f))) - origin;
+                            if (Physics.Raycast(origin, rayDirectionMod, out hitInfo))
+                            {
+                                if (Collision(hitChar, hitChar.GetCollider(), hitInfo))
+                                {
+                                    line = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return line;
+        }
+         
+        
+        private static bool Collision(Character chr, Collider col, RaycastHit hit)
+        {
+            if (hit.collider == chr.GetCollider())
+            {
+                return true;
+            }
+            Character ch = null;
+            hit.collider.gameObject.TryGetComponent<Character>(out ch);
+            bool flag = ch != null;
+            List<Component> components = new List<Component>();
+            components.Clear();
+            hit.collider.gameObject.GetComponents<Component>(components);
+            if (ch == null)
+            {
+                ch = (Character)hit.collider.GetComponentInParent(typeof(Character));
+                flag = ch != null;
+                if (ch == null)
+                {
+                    ch = (Character)hit.collider.GetComponentInChildren<Character>();
+                    flag = ch != null;
+                }
+            }
+            if(flag && ch == chr)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        
     }
 }
 
