@@ -18,7 +18,7 @@ namespace LackingImaginationV2
             base.name = "Ability1_CoolDown";
             m_icon = LackingImaginationV2Plugin.AbilitySprites[0];
             m_tooltip = LackingImaginationV2Plugin.AbilityNames[0]?.Replace("\n", "") + " Cooldown";
-            m_name = LackingImaginationV2Plugin.AbilityNames[0] + "\nCooldown";           
+            m_name = LackingImaginationV2Plugin.AbilityNames[0]?.Replace("\n", "") + " Cooldown";           
         }
 
         public override bool CanAdd(Character character)
@@ -37,7 +37,7 @@ namespace LackingImaginationV2
             base.name = "Ability2_CoolDown";
             m_icon = LackingImaginationV2Plugin.AbilitySprites[1];
             m_tooltip = LackingImaginationV2Plugin.AbilityNames[1]?.Replace("\n", "") + "Cooldown";
-            m_name = LackingImaginationV2Plugin.AbilityNames[1] + "\nCooldown";           
+            m_name = LackingImaginationV2Plugin.AbilityNames[1]?.Replace("\n", "")  + " Cooldown";           
         }
 
         public override bool CanAdd(Character character)
@@ -56,7 +56,7 @@ namespace LackingImaginationV2
             base.name = "Ability3_CoolDown";
             m_icon = LackingImaginationV2Plugin.AbilitySprites[2];
             m_tooltip = LackingImaginationV2Plugin.AbilityNames[2]?.Replace("\n", "") + " Cooldown";
-            m_name = LackingImaginationV2Plugin.AbilityNames[2] + "\nCooldown";           
+            m_name = LackingImaginationV2Plugin.AbilityNames[2]?.Replace("\n", "")  + " Cooldown";           
         }
 
         public override bool CanAdd(Character character)
@@ -75,7 +75,7 @@ namespace LackingImaginationV2
             base.name = "Ability4_CoolDown";
             m_icon = LackingImaginationV2Plugin.AbilitySprites[3];
             m_tooltip = LackingImaginationV2Plugin.AbilityNames[3]?.Replace("\n", "") + " Cooldown";
-            m_name = LackingImaginationV2Plugin.AbilityNames[3] + "\nCooldown";           
+            m_name = LackingImaginationV2Plugin.AbilityNames[3]?.Replace("\n", "")  + " Cooldown";           
         }
 
         public override bool CanAdd(Character character)
@@ -94,7 +94,7 @@ namespace LackingImaginationV2
             base.name = "Ability5_CoolDown";
             m_icon = LackingImaginationV2Plugin.AbilitySprites[4];
             m_tooltip = LackingImaginationV2Plugin.AbilityNames[4]?.Replace("\n", "") + " Cooldown";
-            m_name = LackingImaginationV2Plugin.AbilityNames[4] + "\nCooldown";           
+            m_name = LackingImaginationV2Plugin.AbilityNames[4]?.Replace("\n", "")  + "Cooldown";           
         }
 
         public override bool CanAdd(Character character)

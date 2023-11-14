@@ -78,9 +78,8 @@ namespace LackingImaginationV2
     public static class xZilEssencePassive
     {
         
-        
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.FixedUpdate))]
-        class Projectile_FixedUpdate_Patch
+        class Zil_FixedUpdate_Patch
         {
             static void Prefix(Projectile __instance)
             {
@@ -232,10 +231,38 @@ namespace LackingImaginationV2
                 }
                 
                 
-                
             }
 
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
     }
     

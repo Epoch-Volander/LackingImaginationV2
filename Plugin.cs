@@ -1779,7 +1779,8 @@ namespace LackingImaginationV2
                     creatureAnimationClipGreyShamanHeal != null && creatureAnimationClipHaldorGreet != null &&
                     creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null &&
                     creatureAnimationClipPlayerMace2 != null && creatureAnimationClipBrennaGroundStab != null &&
-                    creatureAnimationClipDvergrStaffRaise != null && creatureAnimationClipPlayerEmoteDespair != null) // ADD REST
+                    creatureAnimationClipDvergrStaffRaise != null && creatureAnimationClipPlayerEmoteDespair != null &&
+                    creatureAnimationClipBrennaGroundStab != null && creatureAnimationClipDvergrStaffRaise != null) // ADD REST
                 {
                     LogWarning($"animations good");
                     AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
@@ -2164,7 +2165,7 @@ namespace LackingImaginationV2
             }
         }
 
-        [HarmonyPatch(typeof(Player), "ActivateGuardianPower", null)]
+        [HarmonyPatch(typeof(Player), nameof(Player.ActivateGuardianPower), null)]
         public class ActivatePowerPrevention_Patch
         {
             public static bool Prefix(Player __instance, ref bool __result)
@@ -2178,7 +2179,7 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), "StartGuardianPower", null)]
+        [HarmonyPatch(typeof(Player), nameof(Player.StartGuardianPower), null)]
         public class StartPowerPrevention_Patch
         {
             public static bool Prefix(Player __instance, ref bool __result)
