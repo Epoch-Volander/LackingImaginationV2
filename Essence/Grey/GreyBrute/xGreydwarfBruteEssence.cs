@@ -18,7 +18,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Bash";
 
-        public static GameObject Aura;
+        // public static GameObject Aura;
 
         public static void Process_Input(Player player, int position)
         {
@@ -34,9 +34,8 @@ namespace LackingImaginationV2
                     SE_Bash se_bash = (SE_Bash)ScriptableObject.CreateInstance(typeof(SE_Bash));
                     player.GetSEMan().AddStatusEffect(se_bash);
 
-                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Bash, player.GetCenterPoint(), Quaternion.identity);
-
-                    Aura.transform.parent = player.transform;
+                    // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Bash, player.GetCenterPoint(), Quaternion.identity);
+                    // Aura.transform.parent = player.transform;
                 }
                 else
                 {
@@ -46,7 +45,7 @@ namespace LackingImaginationV2
                     
                     Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
 
-                    if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                    // if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                 }
                 
                 // GameObject mace = ZNetScene.instance.GetPrefab("skeleton_mace").transform.Find("attach").Find("mace").gameObject;
@@ -136,7 +135,7 @@ namespace LackingImaginationV2
                             
                             Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
                             
-                            if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                            // if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                             
                         }
                         if (hit.m_ranged)
@@ -161,7 +160,7 @@ namespace LackingImaginationV2
                 {
                     Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Bash".GetStableHashCode());
 
-                    if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                    // if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                 }
             }
         }

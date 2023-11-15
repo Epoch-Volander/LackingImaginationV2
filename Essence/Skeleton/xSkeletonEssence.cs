@@ -94,6 +94,10 @@ namespace LackingImaginationV2
             ghost.GetComponent<Humanoid>().m_name = "Ghost(Ally)";
             ghost.GetComponent<Humanoid>().SetMaxHealth(ghost.GetComponent<Humanoid>().GetMaxHealthBase() * 5f);
             ghost.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
+            ghost.AddComponent<Tameable>();
+            ghost.GetComponent<Tameable>().Tame();
+            ghost.GetComponent<Tameable>().m_unsummonDistance = 100f;
+            ghost.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
             CharacterDrop characterDrop = ghost.GetComponent<CharacterDrop>();
             if (characterDrop != null)  characterDrop.m_dropsEnabled = false;
             foreach (CharacterDrop.Drop drop in characterDrop.m_drops) drop.m_chance = 0f;

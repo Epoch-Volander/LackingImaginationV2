@@ -33,10 +33,12 @@ namespace LackingImaginationV2
                 Shield_Pay = RitualPay(5);
                 if (Shield_Pay)
                 {
+                    
                     int GatheredWealth = int.Parse(xFulingShamanEssencePassive.FulingShamanStats[1]);
                     if (GatheredWealth < LackingImaginationGlobal.c_fulingshamanRitualShieldGrowthCap)
                     {
-                        GatheredWealth++;  
+                        GatheredWealth += 5;
+                        GatheredWealth = (int)Math.Min(GatheredWealth, LackingImaginationGlobal.c_fulingshamanRitualShieldGrowthCap);
                         xFulingShamanEssencePassive.FulingShamanStats[1] = GatheredWealth.ToString();
                     }
                     
@@ -69,6 +71,14 @@ namespace LackingImaginationV2
                     Attack_Pay = RitualPay(1);
                     if (Attack_Pay)
                     { 
+                        int GatheredWealth = int.Parse(xFulingShamanEssencePassive.FulingShamanStats[1]);
+                        if (GatheredWealth < LackingImaginationGlobal.c_fulingshamanRitualShieldGrowthCap)
+                        {
+                            GatheredWealth++;
+                            GatheredWealth = (int)Math.Min(GatheredWealth, LackingImaginationGlobal.c_fulingshamanRitualShieldGrowthCap);
+                            xFulingShamanEssencePassive.FulingShamanStats[1] = GatheredWealth.ToString();
+                        } 
+                        
                         Vector3 vector = player.transform.position + player.transform.up  * 1.5f + player.GetLookDir() * .5f;// player.GetLookDir() * 2f;
                         GameObject prefab = ZNetScene.instance.GetPrefab("GoblinShaman_projectile_fireball");
                         GO_RitualProjectile = UnityEngine.Object.Instantiate(prefab, new Vector3(vector.x, vector.y, vector.z), Quaternion.identity);
@@ -121,7 +131,7 @@ namespace LackingImaginationV2
             // }
         }
 
-        static bool RitualPay(int cost)
+        public static bool RitualPay(int cost)
         {
             if (Player.m_localPlayer.m_inventory.CountItems("$item_coins") >= cost)
             {

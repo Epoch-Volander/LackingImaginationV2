@@ -162,14 +162,15 @@ namespace LackingImaginationV2
                         return;
                     if ((UnityEngine.Object)__instance.m_baseAI != (UnityEngine.Object)null && (bool)(UnityEngine.Object)attacker && attacker.IsPlayer())
                     {
-                        if (attacker.GetSEMan().HaveStatusEffect("SE_Arrogance") && Mark == null && __instance.GetBaseAI() != null && __instance.GetBaseAI() is MonsterAI)
+                        if (attacker.GetSEMan().HaveStatusEffect("SE_Arrogance") && Mark == null && __instance.GetBaseAI() != null /*&& __instance.GetBaseAI() is MonsterAI*/)
                         {
                             Mark = __instance;
                             __instance.GetSEMan().AddStatusEffect("SE_Arrogance".GetStableHashCode());
                             
+                            __instance.Message(MessageHud.MessageType.Center, $"{__instance.m_name.Replace("(Clone)", "")} is Enraged");
                             //add effect to the creature instance
                             
-                            xThungrEssence.AuraEnemy = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, __instance.transform.position, Quaternion.identity);/// change effect
+                            xThungrEssence.AuraEnemy = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, __instance.GetCenterPoint(), Quaternion.identity);/// change effect
                             xThungrEssence.AuraEnemy.transform.parent = __instance.transform;
                             
                         }

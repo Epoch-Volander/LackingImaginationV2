@@ -24,8 +24,22 @@ namespace LackingImaginationV2
             m_icon = AbilityIcon;
             m_tooltip = "Blood Well: Empower next hit to do bonus slash damage equal to Well stacks.";
             m_name = "Blood Well";
-            // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
-
+            
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_BloodWell,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = true,
+                        m_inheritParentRotation = true,
+                        // m_follow = true,
+                    }
+                }
+            };
         }
 
         public override bool CanAdd(Character character)

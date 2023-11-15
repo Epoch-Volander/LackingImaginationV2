@@ -20,7 +20,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Blood \nWell";
         
-        public static GameObject Aura;
+        // public static GameObject Aura;
         public static bool Activated;
         public static void Process_Input(Player player, int position)
         {
@@ -35,8 +35,8 @@ namespace LackingImaginationV2
                     
                     
                     Activated = true;// needs its own aura effect
-                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_BloodWell, player.GetCenterPoint(), Quaternion.identity);
-                    Aura.transform.parent = player.transform;
+                    // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_BloodWell, player.GetCenterPoint(), Quaternion.identity);
+                    // Aura.transform.parent = player.transform;
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace LackingImaginationV2
                             TickStats[0] = "0";
 
                             xTickEssence.Activated = false;
-                            if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                            // if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                         }
                         attacker.Heal(hit.GetTotalDamage() * LackingImaginationGlobal.c_tickBloodWellLifeSteal);
                         float blood = float.Parse(TickStats[0]) + (hit.GetTotalDamage() * LackingImaginationGlobal.c_tickBloodWellLifeSteal);
@@ -143,7 +143,7 @@ namespace LackingImaginationV2
                     if (xTickEssence.Activated)
                     {
                         xTickEssence.Activated = false;
-                        if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                        // if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                     }
                 }
             }

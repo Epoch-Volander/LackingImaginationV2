@@ -147,6 +147,10 @@ namespace LackingImaginationV2
             tenta.GetComponent<Humanoid>().m_name = "TentaRoot(Ally)";
             tenta.GetComponent<Humanoid>().SetMaxHealth(tenta.GetComponent<Humanoid>().GetMaxHealthBase() * 8f);
             tenta.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
+            tenta.AddComponent<Tameable>();
+            tenta.GetComponent<Tameable>().Tame();
+            tenta.GetComponent<Tameable>().m_unsummonDistance = 100f;
+            tenta.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
             CharacterDrop characterDrop = tenta.GetComponent<CharacterDrop>();
             if (characterDrop != null)  characterDrop.m_dropsEnabled = false;
             Roots.Add(tenta.GetComponent<Character>());

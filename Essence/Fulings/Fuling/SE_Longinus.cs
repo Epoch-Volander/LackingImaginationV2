@@ -8,7 +8,7 @@ using UnityEngine;
 namespace LackingImaginationV2
 
 {
-    public class SE_Longinus : StatusEffect
+    public class SE_Longinus :  SE_Stats //StatusEffect
     {
         
         public static Sprite AbilityIcon;
@@ -24,20 +24,21 @@ namespace LackingImaginationV2
             m_tooltip = "Longinus: Your next spear throw hit is empowered.";
             m_name = "Longinus";
             
-            // m_startEffects = new EffectList
-            // {
-            //     m_effectPrefabs = new EffectList.EffectData[]
-            //     {
-            //         new()
-            //         {
-            //             m_prefab = LackingImaginationV2Plugin.fx_Longinus,
-            //             m_enabled = true,
-            //             m_variant = -1,
-            //             m_attach = true,
-            //             // m_follow = true,
-            //         }
-            //     }
-            // };
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_Bash,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = true,
+                        m_inheritParentRotation = true,
+                        // m_follow = true,
+                    }
+                }
+            };
 
         }
 

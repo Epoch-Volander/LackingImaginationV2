@@ -138,6 +138,10 @@ namespace LackingImaginationV2
                             ch.m_faction = Character.Faction.Players;
                             ch.GetSEMan().AddStatusEffect(se_timedeath);
                             ch.SetMaxHealth(ch.GetMaxHealthBase() * 10f);
+                            ch.gameObject.AddComponent<Tameable>();
+                            ch.GetComponent<Tameable>().Tame();
+                            ch.GetComponent<Tameable>().m_unsummonDistance = 100f;
+                            ch.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                             ch.GetComponent<CharacterDrop>().m_dropsEnabled = false;
                             foreach (CharacterDrop.Drop drop in ch.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
                             MonsterAI ai = ch.GetBaseAI() as MonsterAI;

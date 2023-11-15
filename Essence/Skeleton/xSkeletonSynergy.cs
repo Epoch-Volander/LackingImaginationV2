@@ -478,7 +478,7 @@ namespace LackingImaginationV2
                         return false;
                     }
                 }
-                if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence") && 
+                if (EssenceItemData.equipedEssence.Contains("$item_brenna_essence") && __instance.IsCrouching() &&
                     (xBrennaEssencePassive.BrennaStats[0] == "true" && item.m_shared.m_name == "$item_sword_vulcan"))
                 {
                     if(!Player.m_localPlayer.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(EssenceItemData.equipedEssence.IndexOf("$item_brenna_essence"))))
@@ -493,7 +493,7 @@ namespace LackingImaginationV2
                         return false;
                     }
                 }
-                if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence") && 
+                if (EssenceItemData.equipedEssence.Contains("$item_skeletonpoison_essence") && __instance.IsCrouching() &&
                     (xRancidRemainsEssencePassive.RancidRemainsStats[0] == "false" && item.m_shared.m_name == "$item_mace_rancorous"))
                 {
                     if(!Player.m_localPlayer.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(EssenceItemData.equipedEssence.IndexOf("$item_skeletonpoison_essence"))))

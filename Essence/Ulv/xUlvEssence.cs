@@ -51,7 +51,7 @@ namespace LackingImaginationV2
         // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator ScheduleRingCoroutine(Player player, GameObject ring)
         {
-            while (ring != null)
+            while (ring != null && player != null && player.m_nview.IsOwner())
             {
                 float size = 9f;
                 Collider[] colliders = Physics.OverlapSphere(ring.transform.position, size, collisionMask);
@@ -82,7 +82,7 @@ namespace LackingImaginationV2
         {
             public static void Postfix(Character __instance)
             {
-                if (xUlvEssence.detectedObjects.Any() && __instance.IsPlayer() )
+                if (xUlvEssence.detectedObjects.Any() && __instance.IsPlayer() && __instance == Player.m_localPlayer)
                 {
                      List<GameObject> dead = new List<GameObject>();
                      foreach (GameObject gameObject in xUlvEssence.detectedObjects)
@@ -110,9 +110,14 @@ namespace LackingImaginationV2
                 GameObject Ulv = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Ulv"), position, Quaternion.identity);
                 Ulv.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                 Ulv.GetComponent<Humanoid>().m_name = "Ulv(Ally)";
+                Ulv.GetComponent<ZSyncTransform>().m_syncScale = true;
                 Ulv.GetComponent<Transform>().localScale = 0.8f * Vector3.one;
                 Ulv.GetComponent<Humanoid>().SetMaxHealth(Ulv.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_ulvTerritorialSlumberSummonHealth);
                 Ulv.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
+                Ulv.AddComponent<Tameable>();
+                Ulv.GetComponent<Tameable>().Tame();
+                Ulv.GetComponent<Tameable>().m_unsummonDistance = 100f;
+                Ulv.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                 CharacterDrop characterDrop = Ulv.GetComponent<CharacterDrop>();
                 if (characterDrop != null)  characterDrop.m_dropsEnabled = false;
                 foreach (CharacterDrop.Drop drop in characterDrop.m_drops) drop.m_chance = 0f;

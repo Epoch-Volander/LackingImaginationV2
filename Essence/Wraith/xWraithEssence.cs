@@ -22,7 +22,7 @@ namespace LackingImaginationV2
         
         public static Character Wraith;
         
-        public static GameObject Aura;
+        // public static GameObject Aura;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -37,9 +37,8 @@ namespace LackingImaginationV2
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_wraith_alerted"), player.transform.position, Quaternion.identity);
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_wraith_death"), player.transform.position, Quaternion.identity);
                 
-                Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_TwinSouls, player.GetCenterPoint(), Quaternion.identity);
-                
-                Aura.transform.parent = player.transform;
+                // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_TwinSouls, player.GetCenterPoint(), Quaternion.identity);
+                // Aura.transform.parent = player.transform;
                 
                 //Lingering effects
                 SE_TwinSouls se_twinsouls = (SE_TwinSouls)ScriptableObject.CreateInstance(typeof(SE_TwinSouls));
@@ -111,10 +110,10 @@ namespace LackingImaginationV2
                     }
                     xWraithEssence.Wraith = null;
                 }
-                if (xWraithEssence.Aura != null && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_TwinSouls"))
-                {
-                    if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
-                }
+                // if (xWraithEssence.Aura != null && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_TwinSouls"))
+                // {
+                //     if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
+                // }
             }
         }
         

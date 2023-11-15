@@ -49,9 +49,11 @@ namespace LackingImaginationV2
                 Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * 3f;
                 Vector3 randomPosition = player.transform.position + new Vector3(randomCirclePoint.x, 0f, randomCirclePoint.y);
                 GameObject baby = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Abomination"), randomPosition, Quaternion.identity);
-                baby.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
-                baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
                 baby.GetComponent<Humanoid>().m_name = "Bane";
+                baby.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
+                baby.GetComponent<ZSyncTransform>().m_syncScale = true;
+                baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
+                baby.GetComponent<FootStep>().m_effects.Clear();
                 baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_abominationBaneAllyHealth);
                 baby.GetComponent<Humanoid>().m_speed = LackingImaginationGlobal.c_abominationBaneAllySpeed;
                 baby.GetComponent<MonsterAI>().m_attackPlayerObjects = false;

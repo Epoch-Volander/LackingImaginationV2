@@ -17,52 +17,81 @@ namespace LackingImaginationV2
     public class xZilEssence
     {
         private static readonly int Script_Layermask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece_nonsolid", "terrain", "vehicle", "piece", "viewblock");
+        private static readonly int Script_Scan_Layermask = LayerMask.GetMask("Default");
         
         public static string Ability_Name = "Soulmass";
+        
+        private static bool Mass_Pay;
 
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             {
-
-                //Ability Cooldown
-                StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
-                se_cd.m_ttl = LackingImaginationUtilities.xZilCooldownTime;
-                player.GetSEMan().AddStatusEffect(se_cd);
-                
-                //Effects, animations, and sounds
-                for(int i = 0; i < 5; i++)
+                Mass_Pay = xFulingShamanEssence.RitualPay(10);
+                if (Mass_Pay)
                 {
-                    Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f; // player.GetLookDir() * 2f;
-                    GameObject prefab = ZNetScene.instance.GetPrefab("GoblinShaman_projectile_fireball");
-                    GameObject GO_SoulmassProjectile = UnityEngine.Object.Instantiate(prefab, new Vector3(vector.x, vector.y, vector.z), Quaternion.identity);
-                    Projectile P_SoulmassProjectile = GO_SoulmassProjectile.GetComponent<Projectile>();
-                    P_SoulmassProjectile.name = "Soulmass" + i;
-                    P_SoulmassProjectile.m_respawnItemOnHit = false;
-                    P_SoulmassProjectile.m_spawnOnHit = null;
-                    P_SoulmassProjectile.m_ttl = 60f;
-                    P_SoulmassProjectile.m_gravity = 0f;
-                    P_SoulmassProjectile.m_rayRadius = .2f;
-                    P_SoulmassProjectile.m_aoe = 3f;
-                    P_SoulmassProjectile.m_owner = player;
-                    P_SoulmassProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
-                    P_SoulmassProjectile.transform.localScale = Vector3.one;
+                    int GatheredWealth = int.Parse(xFulingShamanEssencePassive.FulingShamanStats[1]);
+                    if (GatheredWealth < LackingImaginationGlobal.c_fulingshamanRitualShieldGrowthCap)
+                    {
+                        GatheredWealth += 20;
+                        GatheredWealth = (int)Math.Min(GatheredWealth, LackingImaginationGlobal.c_fulingshamanRitualShieldGrowthCap);
+                        xFulingShamanEssencePassive.FulingShamanStats[1] = GatheredWealth.ToString();
+                    } 
+                    
+                    //Ability Cooldown
+                    StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                    se_cd.m_ttl = LackingImaginationUtilities.xZilCooldownTime;
+                    player.GetSEMan().AddStatusEffect(se_cd);
 
-                    RaycastHit hitInfo = default(RaycastHit);
-                    Vector3 player_position = player.transform.position;
-                    Vector3 target = (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (player_position + player.GetLookDir() * 1000f) : hitInfo.point;
-                    HitData hitData = new HitData();
-                    hitData.m_damage.m_fire = UnityEngine.Random.Range(1f, 2f);
-                    hitData.m_damage.m_blunt = UnityEngine.Random.Range(1f, 2f);
-                    hitData.m_damage.m_spirit = UnityEngine.Random.Range(1f, 2f);
-                    hitData.ApplyModifier(LackingImaginationGlobal.c_fulingshamanRitualProjectile);
-                    hitData.m_pushForce = 2f;
-                    hitData.SetAttacker(player);
-                    Vector3 a = Vector3.MoveTowards(GO_SoulmassProjectile.transform.position, target, 1f);
-                    P_SoulmassProjectile.Setup(player, (a - GO_SoulmassProjectile.transform.position) * 25f, -1f, hitData, null, null);
-                    GO_SoulmassProjectile = null;
+                    //Effects, animations, and sounds
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Vector3 capsuleCenter = player.transform.position;
+                        float capsuleRadius = 5f; // Radius of the capsule
+                        Collider[] colliders = Physics.OverlapSphere(capsuleCenter, capsuleRadius, Script_Scan_Layermask);
+
+                        if (!colliders.Any(collider => collider.GetComponent<Projectile>().name == "Soulmass" + i))
+                        {
+                            Vector3 vector = player.transform.position + player.transform.up * 1.5f + player.GetLookDir() * .5f; // player.GetLookDir() * 2f;
+                            GameObject prefab = ZNetScene.instance.GetPrefab("GoblinShaman_projectile_fireball");
+                            GameObject GO_SoulmassProjectile = UnityEngine.Object.Instantiate(prefab, new Vector3(vector.x, vector.y, vector.z), Quaternion.identity);
+                            Projectile P_SoulmassProjectile = GO_SoulmassProjectile.GetComponent<Projectile>();
+                            P_SoulmassProjectile.name = "Soulmass" + i;
+                            P_SoulmassProjectile.m_respawnItemOnHit = false;
+                            P_SoulmassProjectile.m_spawnOnHit = null;
+                            P_SoulmassProjectile.m_ttl = 60f;
+                            P_SoulmassProjectile.m_gravity = 0f;
+                            P_SoulmassProjectile.m_rayRadius = .2f;
+                            P_SoulmassProjectile.m_aoe = 3f;
+                            P_SoulmassProjectile.m_owner = player;
+                            P_SoulmassProjectile.transform.localRotation = Quaternion.LookRotation(player.GetAimDir(vector));
+                            P_SoulmassProjectile.transform.localScale = Vector3.one;
+                            Transform TrailEffect = P_SoulmassProjectile.gameObject.transform.Find("flames_world");
+                            if (TrailEffect != null)
+                            {
+                                TrailEffect.gameObject.SetActive(false);
+                            }
+
+                            RaycastHit hitInfo = default(RaycastHit);
+                            Vector3 player_position = player.transform.position;
+                            Vector3 target = (!Physics.Raycast(vector, player.GetLookDir(), out hitInfo, float.PositiveInfinity, Script_Layermask) || !(bool)hitInfo.collider) ? (player_position + player.GetLookDir() * 1000f) : hitInfo.point;
+                            HitData hitData = new HitData();
+                            hitData.m_damage.m_fire = UnityEngine.Random.Range(1f, 2f);
+                            hitData.m_damage.m_blunt = UnityEngine.Random.Range(1f, 2f);
+                            hitData.m_damage.m_spirit = UnityEngine.Random.Range(1f, 2f);
+                            hitData.ApplyModifier(LackingImaginationGlobal.c_zilSoulmassProjectile);
+                            hitData.m_pushForce = 2f;
+                            hitData.SetAttacker(player);
+                            Vector3 a = Vector3.MoveTowards(GO_SoulmassProjectile.transform.position, target, 1f);
+                            P_SoulmassProjectile.Setup(player, (a - GO_SoulmassProjectile.transform.position) * 25f, -1f, hitData, null, null);
+                            GO_SoulmassProjectile = null;
+                        }
+                    }
                 }
-                
+                else
+                {
+                    player.Message(MessageHud.MessageType.TopLeft, $"{Ability_Name} Requires Coin Sacrifice");
+                }
             }
             // else
             // {
@@ -109,7 +138,12 @@ namespace LackingImaginationV2
                         Vector3 toTarget = targetPosition - __instance.transform.position;
                         Vector3 newVelocity = toTarget.normalized * __instance.m_vel.magnitude;
                         __instance.m_vel = newVelocity * 0.5f;
-                        // __instance.m_didHit = true;
+                        
+                        Transform TrailEffect = __instance.gameObject.transform.Find("flames_world");
+                        if (TrailEffect != null)
+                        {
+                            TrailEffect.gameObject.SetActive(true);
+                        }
                     }
                 }
             }
@@ -229,13 +263,22 @@ namespace LackingImaginationV2
                     // If the player reference is not available, keep the current position
                     return projectile.transform.position;
                 }
-                
-                
             }
-
         }
         
-        
+        [HarmonyPatch(typeof(Player), nameof(Player.GetTotalFoodValue))]
+        class Zil_GetTotalFoodValue_Patch
+        {
+            public static void Postfix(Player __instance, ref float eitr, ref float hp)
+            {
+                if (EssenceItemData.equipedEssence.Contains("$item_zil_essence"))
+                {
+                    eitr += LackingImaginationGlobal.c_zilSoulmassPassiveEitr;
+                    hp -= (hp * 0.2f);
+                    
+                }
+            }
+        }
         
         
         

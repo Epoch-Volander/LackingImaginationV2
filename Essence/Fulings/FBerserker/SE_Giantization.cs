@@ -35,6 +35,7 @@ namespace LackingImaginationV2
                 {
                     new()
                     {
+                        
                         m_prefab = LackingImaginationV2Plugin.fx_Giantization,
                         m_enabled = true,
                         m_variant = -1,

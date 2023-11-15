@@ -27,6 +27,7 @@ namespace LackingImaginationV2
             m_stealthModifier = 0.1f;
             m_noiseModifier = 3f;
 
+            
         }
         
         public override void ModifyNoise(float baseNoise, ref float noise) => noise += baseNoise * this.m_noiseModifier;

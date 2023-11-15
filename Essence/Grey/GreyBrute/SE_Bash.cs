@@ -23,24 +23,22 @@ namespace LackingImaginationV2
             m_icon = AbilityIcon;
             m_tooltip = "Bash:  Your next melee hit is empowered.";
             m_name = "Bash";
-            // m_startEffects = ZNetScene.instance.GetPrefab("BossStone_Eikthyr").GetComponent<BossStone>().m_activateStep2;
-
-            // m_startEffects = new EffectList
-            // {
-            //     m_effectPrefabs = new EffectList.EffectData[]
-            //     {
-            //         new()
-            //         {
-            //             m_prefab = LackingImaginationV2Plugin.fx_Bash,
-            //             m_enabled = true,
-            //             m_variant = -1,
-            //             m_attach = true,
-            //             // m_follow = true,
-            //         }
-            //     }
-            // };
-            //
-            // m_stopEffects = new EffectList();
+            
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_Longinus,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = true,
+                        m_inheritParentRotation = true,
+                        // m_follow = true,
+                    }
+                }
+            };
         }
 
         public override bool CanAdd(Character character)

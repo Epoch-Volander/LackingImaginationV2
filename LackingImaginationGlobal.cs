@@ -2452,8 +2452,34 @@ namespace LackingImaginationV2
                 }
             }
        }
-        
-        
+       public static float c_zilSoulmassPassiveEitr
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_zilSoulmassPassiveEitr"];
+               }
+               catch
+               {
+                   return 100f;
+               }
+           }
+       }
+       public static float c_zilSoulmassProjectile
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_zilSoulmassProjectile"];
+               }
+               catch
+               {
+                   return 150f;
+               }
+           }
+       }
         
     }
     

@@ -37,6 +37,21 @@ namespace LackingImaginationV2
             m_name = "Twin \nSouls";
             m_ttl = m_baseTTL;
 
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_TwinSouls,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = true,
+                        m_inheritParentRotation = true,
+                        // m_follow = true,
+                    }
+                }
+            };
         }
         
         public override void Setup(Character character) => base.Setup(character);

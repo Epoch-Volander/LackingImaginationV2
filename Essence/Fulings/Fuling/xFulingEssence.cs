@@ -19,7 +19,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Longinus";
 
-        public static GameObject Aura;
+        // public static GameObject Aura;
 
         public static void Process_Input(Player player, int position)
         {
@@ -38,10 +38,9 @@ namespace LackingImaginationV2
 
                     SE_Longinus se_longinus = (SE_Longinus)ScriptableObject.CreateInstance(typeof(SE_Longinus));
                     player.GetSEMan().AddStatusEffect(se_longinus);
-
-
-                    Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
-                    Aura.transform.parent = player.transform;
+                    
+                    // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity);
+                    // Aura.transform.parent = player.transform;
                 }
                 else
                 {
@@ -49,9 +48,9 @@ namespace LackingImaginationV2
                     se_cd.m_ttl = 1f;
                     player.GetSEMan().AddStatusEffect(se_cd);
                     
-                    Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
+                    player.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
 
-                    if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                    // if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
                 }
                 
                 
@@ -173,7 +172,7 @@ namespace LackingImaginationV2
                             
                             Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
 
-                            if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                            // if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
                         }
                     }
 
@@ -235,7 +234,7 @@ namespace LackingImaginationV2
                 {
                     Player.m_localPlayer.GetSEMan().RemoveStatusEffect("SE_Longinus".GetStableHashCode());
 
-                    if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                    // if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
                 }
             }
         }

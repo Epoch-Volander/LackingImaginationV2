@@ -150,6 +150,10 @@ namespace LackingImaginationV2
             surt.GetComponent<Humanoid>().SetMaxHealth(surt.GetComponent<Humanoid>().GetMaxHealthBase() * 4f);
             surt.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
             surt.GetComponent<CharacterDrop>().m_dropsEnabled = false;
+            surt.AddComponent<Tameable>();
+            surt.GetComponent<Tameable>().Tame();
+            surt.GetComponent<Tameable>().m_unsummonDistance = 100f;
+            surt.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
             foreach (CharacterDrop.Drop drop in surt.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
             Surts.Add(surt.GetComponent<Character>());
         }

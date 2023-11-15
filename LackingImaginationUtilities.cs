@@ -736,12 +736,12 @@ namespace LackingImaginationV2
              public static void Prefix()
              {
                  if(xDeathsquitoEssence.Aura != null) UnityEngine.GameObject.Destroy(xDeathsquitoEssence.Aura);
-                 if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
-                 if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
+                 // if(xFulingEssence.Aura != null) UnityEngine.GameObject.Destroy(xFulingEssence.Aura);
+                 // if(xGreydwarfBruteEssence.Aura != null) UnityEngine.GameObject.Destroy(xGreydwarfBruteEssence.Aura);
                  if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
                  if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
-                 if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
-                 if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
+                 // if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                 // if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
                  if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
                  if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
                  if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);

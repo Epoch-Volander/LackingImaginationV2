@@ -89,9 +89,11 @@ namespace LackingImaginationV2
                 m_startEffects.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 ScheduleEffects(player, m_HandEffectsRight, m_HandEffectsLeft);
                 
-                System.Threading.Timer timerAoe = new System.Threading.Timer
-                    (_ => { ScheduleAoe(player); }, null, (int)(AoeDelay * 1000), System.Threading.Timeout.Infinite);
-                
+                // System.Threading.Timer timerAoe = new System.Threading.Timer
+                //     (_ => { ScheduleAoe(player); }, null, (int)(AoeDelay * 1000), System.Threading.Timeout.Infinite);
+
+                ScheduleAoe(player);
+
             }
             // else
             // {
@@ -128,6 +130,8 @@ namespace LackingImaginationV2
          // ReSharper disable Unity.PerformanceAnalysis
          private static IEnumerator ScheduleAoeCoroutine(Player player)
          {
+             yield return new WaitForSeconds(AoeDelay);
+             
              int AoeCast = 0;
              
              while (AoeCast < 3)

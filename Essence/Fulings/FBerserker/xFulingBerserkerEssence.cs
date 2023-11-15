@@ -14,7 +14,7 @@ using System.Threading;
 namespace LackingImaginationV2
 {
 
-    public class xFulingBerserkerEssence // still have to fix bow arrow aim and proj spawn point
+    public class xFulingBerserkerEssence 
     {
         private static readonly int m_LOSMask = LayerMask.GetMask("piece", "piece_nonsolid", "Default", "static_solid", "Default_small", "terrain");
         
@@ -39,8 +39,6 @@ namespace LackingImaginationV2
                     // A hit occurred, you can now access the distance to the hit point
                     float distanceToHit = hit.distance;
                     noRoof = false;
-                    // Now you can use the distanceToHit for whatever you need
-                    
                     // Debug.Log("Distance to the nearest solid object: " + distanceToHit);
                 }
                 else
@@ -99,41 +97,51 @@ namespace LackingImaginationV2
                 
                 if (!giant && __instance.IsPlayer() && __instance.GetSEMan().HaveStatusEffect("SE_Giantization") )
                 {
-                    float targetSize = 2.0f;
-                    float growthSpeed = 0.9f;
-                    float currentSize = Player.m_localPlayer.transform.localScale.x;
-                    
-                    if (currentSize < targetSize)
+                    if(__instance == Player.m_localPlayer)
                     {
-                        currentSize += growthSpeed * Time.deltaTime;
-                        currentSize = Mathf.Min(currentSize, targetSize); // Ensure we don't exceed the target size
-                        __instance.transform.localScale = currentSize * Vector3.one;
-                    }
-                    if (currentSize == targetSize)
-                    {
-                        xFulingBerserkerEssencePassive.giant = true;
+                        float targetSize = 2.0f;
+                        float growthSpeed = 0.9f;
+                        Player.m_localPlayer.GetComponent<ZSyncTransform>().m_syncScale = true;
+                        float currentSize = Player.m_localPlayer.transform.localScale.x;
 
-                        __instance.m_swimDepth *= 2f;
+                        if (currentSize < targetSize)
+                        {
+                            currentSize += growthSpeed * Time.deltaTime;
+                            currentSize = Mathf.Min(currentSize, targetSize); // Ensure we don't exceed the target size
+                            __instance.transform.localScale = currentSize * Vector3.one;
+                        }
+
+                        if (currentSize == targetSize)
+                        {
+                            xFulingBerserkerEssencePassive.giant = true;
+
+                            __instance.m_swimDepth *= 2f;
+                        }
                     }
                 }
 
                 if (giant && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_Giantization"))
                 {
-                    float targetSize = 1.0f;
-                    float shrinkSpeed = 0.9f; // You can adjust the speed as needed
-                    float currentSize = Player.m_localPlayer.transform.localScale.x; // Use the object's current scale
-                    
-                    if (currentSize > targetSize) // Assuming 1.0f is the original size, adjust as needed
+                    if (__instance == Player.m_localPlayer)
                     {
-                        currentSize -= shrinkSpeed * Time.deltaTime;
-                        currentSize = Mathf.Max(currentSize, targetSize); // Ensure we don't go smaller than the original size
-                        __instance.transform.localScale = currentSize * Vector3.one;
-                    }
-                    if (currentSize == targetSize)
-                    {
-                        xFulingBerserkerEssencePassive.giant = false;
+                        float targetSize = 1.0f;
+                        float shrinkSpeed = 0.9f; // You can adjust the speed as needed
+                        Player.m_localPlayer.GetComponent<ZSyncTransform>().m_syncScale = true;
+                        float currentSize = Player.m_localPlayer.transform.localScale.x; // Use the object's current scale
 
-                        __instance.m_swimDepth *= 0.5f;
+                        if (currentSize > targetSize) // Assuming 1.0f is the original size, adjust as needed
+                        {
+                            currentSize -= shrinkSpeed * Time.deltaTime;
+                            currentSize = Mathf.Max(currentSize, targetSize); // Ensure we don't go smaller than the original size
+                            __instance.transform.localScale = currentSize * Vector3.one;
+                        }
+
+                        if (currentSize == targetSize)
+                        {
+                            xFulingBerserkerEssencePassive.giant = false;
+
+                            __instance.m_swimDepth *= 0.5f;
+                        }
                     }
                 }
             }

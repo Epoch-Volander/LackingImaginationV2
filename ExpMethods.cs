@@ -207,7 +207,7 @@ namespace LackingImaginationV2
         }
         
         
-        public static void dungeonExpMethod(List<string> tutorialValue)  // Location progress
+        public static void DungeonExpMethod(List<string> tutorialValue)  // Location progress
         {
             Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_name == tutorialValue[0]));
             if (tutorialText != null)
@@ -302,7 +302,7 @@ namespace LackingImaginationV2
          //             Skills.Skill skill = __instance.GetSkill(id);
          //             skill.m_level += value;
          //             if (skill.m_info.m_skill != Skill.fromName("Imagination")) skill.m_level = Mathf.Clamp(skill.m_level, 0f, 100f);
-         //             else skill.m_level = Mathf.Clamp(skill.m_level, 0f, 1000f);
+         //             else skill.m_level = Mathf.Clamp(skill.m_level, 0f, 1000f); //here
          //             ___m_player.Message(MessageHud.MessageType.TopLeft,
          //                 "Skill increased " + Localization.instance.Localize("$skill_" + id) + ": " + (int)skill.m_level, 0,
          //                 skill.m_info.m_icon);
@@ -313,6 +313,10 @@ namespace LackingImaginationV2
          //
          //     return true;
          // }
+         
+         
+        //  [HarmonyPatch(typeof(SkillManager.Skill), nameof(SkillManager.Skill.Patch_Skills_CheatRaiseskill))] //Made this changes to this 
+
          
         [HarmonyPatch(typeof(SkillsDialog), nameof(SkillsDialog.Setup))] // [HarmonyPatch(typeof(SkillManager.Skill), nameof(SkillManager.Skill.Patch_Skills_CheatRaiseskill))] //Made this changes to this 
         public class SkillsDialog_Setup_Patch
@@ -327,19 +331,43 @@ namespace LackingImaginationV2
                     {
                         GameObject element = __instance.m_elements[index];
                         
-                        float skillLevel = player.GetSkills().GetSkillLevel(skill.m_info.m_skill);
-                        Utils.FindChild(element.transform, "leveltext").GetComponent<TMP_Text>().text = ((int) skill.m_level).ToString();
-                        TMP_Text component = Utils.FindChild(element.transform, "bonustext").GetComponent<TMP_Text>();
-                        if ((double) skillLevel != (double) Mathf.Floor(skill.m_level))
-                        {
-                            float num2 = skillLevel - skill.m_level;
-                            component.text = num2.ToString("+0");
-                        }
-                        else component.gameObject.SetActive(false);
+                        // float skillLevel = player.GetSkills().GetSkillLevel(skill.m_info.m_skill);
+                        // Utils.FindChild(element.transform, "leveltext").GetComponent<TMP_Text>().text = ((int) skill.m_level).ToString();
+                        // TMP_Text component = Utils.FindChild(element.transform, "bonustext").GetComponent<TMP_Text>();
+                        // if ((double) skillLevel != (double) Mathf.Floor(skill.m_level))
+                        // {
+                        //     float num2 = skillLevel - skill.m_level;
+                        //     component.text = num2.ToString("+0");
+                        // }
+                        // else component.gameObject.SetActive(false);
+                        //
+                        // // Here, we modify the levelbar setting.
+                        // Utils.FindChild(element.transform, "levelbar_total").GetComponent<GuiBar>().SetValue(skillLevel / 1000f);
+                        // Utils.FindChild(element.transform, "levelbar").GetComponent<GuiBar>().SetValue(skill.m_level / 1000f); // Change 100 to 1000 for the desired effect.
                         
+                        float skillLevel = player.GetSkills().GetSkillLevel(skill.m_info.m_skill);
+
+                        Transform levelTextTransform = element.transform.Find("leveltext");
+                        if (levelTextTransform != null) levelTextTransform.GetComponent<TMP_Text>().text = ((int)skill.m_level).ToString();
+                        
+                        TMP_Text component = element.transform.Find("bonustext")?.GetComponent<TMP_Text>();
+                        if (component != null)
+                        {
+                            if ((double)skillLevel != (double)Mathf.Floor(skill.m_level))
+                            {
+                                float num2 = skillLevel - skill.m_level;
+                                component.text = num2.ToString("+0");
+                            }
+                            else component.gameObject.SetActive(false);
+                        }
                         // Here, we modify the levelbar setting.
-                        Utils.FindChild(element.transform, "levelbar_total").GetComponent<GuiBar>().SetValue(skillLevel / 1000f);
-                        Utils.FindChild(element.transform, "levelbar").GetComponent<GuiBar>().SetValue(skill.m_level / 1000f); // Change 100 to 1000 for the desired effect.
+                        Transform levelBarTotalTransform = element.transform.Find("levelbar_total");
+                        Transform levelBarTransform = element.transform.Find("levelbar");
+
+                        if (levelBarTotalTransform != null) levelBarTotalTransform.GetComponent<GuiBar>().SetValue(skillLevel / 1000f);
+                        
+                        if (levelBarTransform != null) levelBarTransform.GetComponent<GuiBar>().SetValue(skill.m_level / 1000f); // Change 100 to 1000 for the desired effect.
+                        
                     }
                 }
             }

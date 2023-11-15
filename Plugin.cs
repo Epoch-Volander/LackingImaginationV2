@@ -549,6 +549,9 @@ namespace LackingImaginationV2
         public static GameObject? fx_Relentless;
         //Prefab3 //originals
         public static GameObject? p_SeaKing;
+        public static GameObject? fx_ocean_hit;
+        public static GameObject? WhirlPool2;
+            
         public static GameObject? fx_RecklessCharge;
         public static GameObject? fx_RecklessChargeHit;
         
@@ -853,6 +856,9 @@ namespace LackingImaginationV2
                 
             //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
+            fx_ocean_hit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "fx_ocean_hit");
+            WhirlPool2 = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "WhirlPool2");
+            
             
             //Prefab 4
             SG_Spiked_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_spikes_Player");
@@ -2275,7 +2281,7 @@ namespace LackingImaginationV2
                     {
                         if (locationDictionary.ContainsKey(location.name))
                         {
-                            ExpMethods.dungeonExpMethod(locationDictionary[location.name]);
+                            ExpMethods.DungeonExpMethod(locationDictionary[location.name]);
                         }
                     }
                 }
