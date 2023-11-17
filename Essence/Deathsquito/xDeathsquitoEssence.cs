@@ -18,7 +18,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Relentless";
 
-        public static GameObject Aura;
+        public static EffectList Aura;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -29,14 +29,40 @@ namespace LackingImaginationV2
                 se_cd.m_ttl = LackingImaginationUtilities.xDeathsquitoCooldownTime;
                 player.GetSEMan().AddStatusEffect(se_cd);
 
-                //Effects, animations, and sounds
-                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
-                Aura = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, player.transform.position + player.transform.up * 2.2f, Quaternion.identity);
-                Aura.transform.parent = player.transform;
-                
                 //Lingering effects
                 SE_Relentless se_relentless = (SE_Relentless)ScriptableObject.CreateInstance(typeof(SE_Relentless));
                 se_relentless.m_ttl = SE_Relentless.m_baseTTL;
+                
+                //Effects, animations, and sounds
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
+                Aura = new EffectList
+                {
+                    m_effectPrefabs = new EffectList.EffectData[]
+                    {
+                        new()
+                        {
+                            m_prefab = LackingImaginationV2Plugin.fx_Relentless,
+                            m_enabled = true,
+                            m_variant = 0,
+                            m_attach = false,
+                            m_follow = true,
+                            m_childTransform = "Head",
+                            // m_inheritParentScale = true,
+                            // m_multiplyParentVisualScale = true,
+                            // m_scale = true,
+                            m_inheritParentRotation = true,
+                        }
+                    }
+                };
+                Aura.m_effectPrefabs[0].m_prefab.GetComponent<TimedDestruction>().m_timeout = SE_Relentless.m_baseTTL;
+                Vector3 transformPosition = Aura.m_effectPrefabs[0].m_prefab.transform.position;
+                transformPosition.y += 0.4f;
+                Aura.m_effectPrefabs[0].m_prefab.transform.position = transformPosition;
+                Aura.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
+                
+                // Aura = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, player.transform.position + player.transform.up * 2.2f, Quaternion.identity);
+                // Aura.transform.parent = player.transform;
+                
 
                 //Apply effects
                 player.GetSEMan().AddStatusEffect(se_relentless);
@@ -173,17 +199,25 @@ namespace LackingImaginationV2
             }
         }
         
-        [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
-        public static class Deathsquito_UpdateEnvStatusEffects_Patch
-        {
-            public static void Prefix(Player __instance, ref float dt)
-            {
-                if (!__instance.GetSEMan().HaveStatusEffect("SE_Relentless") && xDeathsquitoEssence.Aura != null)
-                {
-                    if(xDeathsquitoEssence.Aura != null) UnityEngine.GameObject.Destroy(xDeathsquitoEssence.Aura);
-                }
-            }
-        }
+        // [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
+        // public static class Deathsquito_UpdateEnvStatusEffects_Patch
+        // {
+        //     public static void Prefix(Player __instance, ref float dt)
+        //     {
+        //         if (!__instance.GetSEMan().HaveStatusEffect("SE_Relentless") && xDeathsquitoEssence.Aura != null)
+        //         {
+        //             if(xDeathsquitoEssence.Aura.HasEffects())
+        //             {
+        //                 // if(xDeathsquitoEssence.Aura != null) xDeathsquitoEssence.Aura.m_effectPrefabs.;
+        //                 foreach (EffectList.EffectData effectPrefab in xDeathsquitoEssence.Aura.m_effectPrefabs)
+        //                 {
+        //                     if (effectPrefab.m_enabled)
+        //                         effectPrefab.m_enabled = false;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         
         
         //add negative

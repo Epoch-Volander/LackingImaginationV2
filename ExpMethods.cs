@@ -103,7 +103,7 @@ namespace LackingImaginationV2
             }
         }
         
-        private static void CopyMaterialsRecursively(Transform keyTransform, Transform valueTransform)
+        public static void CopyMaterialsRecursively(Transform keyTransform, Transform valueTransform)
         {
             // Copy materials from the value prefab to the key prefab
             MeshRenderer keyRenderer = keyTransform.GetComponent<MeshRenderer>();

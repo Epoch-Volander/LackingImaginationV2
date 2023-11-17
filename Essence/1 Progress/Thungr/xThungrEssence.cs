@@ -151,7 +151,6 @@ namespace LackingImaginationV2
                         return;
                     if ((UnityEngine.Object)hit.GetAttacker() == (UnityEngine.Object)Player.m_localPlayer)
                     {
-                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
                         __instance.m_localPlayerHasHit = true;
                     }
                     

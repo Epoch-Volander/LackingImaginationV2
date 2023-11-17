@@ -146,6 +146,7 @@ namespace LackingImaginationV2
             tenta.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
             tenta.GetComponent<Humanoid>().m_name = "TentaRoot(Ally)";
             tenta.GetComponent<Humanoid>().SetMaxHealth(tenta.GetComponent<Humanoid>().GetMaxHealthBase() * 8f);
+            // tenta.GetComponent<Humanoid>().Invoke();
             tenta.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
             tenta.AddComponent<Tameable>();
             tenta.GetComponent<Tameable>().Tame();
@@ -166,7 +167,7 @@ namespace LackingImaginationV2
         {
             public static void Postfix(Character __instance)
             {
-                if (xElderEssence.Roots.Any() && __instance.IsPlayer() && !__instance.GetSEMan().HaveStatusEffect("SE_AncientAwe"))
+                if (xElderEssence.Roots.Any() && __instance.IsPlayer() && __instance == Player.m_localPlayer && !__instance.GetSEMan().HaveStatusEffect("SE_AncientAwe"))
                 {
                     foreach (Character root in xElderEssence.Roots)
                     {

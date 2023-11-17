@@ -547,6 +547,12 @@ namespace LackingImaginationV2
         public static GameObject? fx_BloodSiphon;
         public static GameObject? fx_RavenousHunger;
         public static GameObject? fx_Relentless;
+        public static GameObject? fx_brenna;
+        public static GameObject? fx_rancid;
+
+        
+        
+        
         //Prefab3 //originals
         public static GameObject? p_SeaKing;
         public static GameObject? fx_ocean_hit;
@@ -853,7 +859,9 @@ namespace LackingImaginationV2
             fx_RecklessCharge = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarGuard");
             fx_RecklessChargeHit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarHit");
             
-                
+            fx_brenna = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Skeleton_Hildir_Fire");
+            fx_rancid = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Skeleton_poison_drip");
+            
             //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
             fx_ocean_hit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "fx_ocean_hit");
@@ -1564,7 +1572,7 @@ namespace LackingImaginationV2
         }
         
 
-        [HarmonyPatch(typeof(ZoneSystem), "Start")]
+        [HarmonyPatch(typeof(ZoneSystem), nameof(ZoneSystem.Start))]
         public static class ZoneSystem_Awake_Patch
         {
             public static void Postfix(ZoneSystem __instance)
@@ -1578,7 +1586,26 @@ namespace LackingImaginationV2
                         break;
                     }
                 }
-               
+
+                //Fire Head Effect
+                {
+                    GameObject ClonePrefab = fx_brenna.transform.Find("fx_Torch_Carried").gameObject;
+                    GameObject OriginalPrefab = ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject;
+                    if (ClonePrefab != null && OriginalPrefab != null)
+                    {
+                        ExpMethods.CopyMaterialsRecursively(ClonePrefab.transform, OriginalPrefab.transform);
+                    }
+                }
+                //Poison drip Effect
+                {
+                    GameObject ClonePrefab = fx_rancid.transform.Find("vfx_drippingwater").gameObject;
+                    GameObject OriginalPrefab =  ZNetScene.instance.GetPrefab("Skeleton_Poison").transform.Find("Visual").transform.Find("vfx_drippingwater").gameObject;
+                    if (ClonePrefab != null && OriginalPrefab != null)
+                    {
+                        ExpMethods.CopyMaterialsRecursively(ClonePrefab.transform, OriginalPrefab.transform);
+                    }
+                }
+                
                 //Brenna Sword
                 {
                     GO_VulcanSword = ObjectDB.instance?.GetItemPrefab("Vulcan");

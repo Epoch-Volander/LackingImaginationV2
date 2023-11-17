@@ -24,7 +24,7 @@ namespace LackingImaginationV2
         private static float deleteDelay = 3600f;
         public static bool Throwable;
         
-        public static GameObject Aura;
+        // public static GameObject Aura;
         public static void Process_Input(Player player, int position)
         {
               if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -61,9 +61,14 @@ namespace LackingImaginationV2
                       Throwable = true;
                       ItemDrop.ItemData mace = player.m_inventory.GetItem(PoisonMace.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
                       xSkeletonSynergy.ScheduleEquip(player, ref mace, equipDelay);
-                      GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Poison").transform.Find("Visual").transform.Find("vfx_drippingwater").gameObject);
-                      Aura = UnityEngine.GameObject.Instantiate(prefab, player.GetHeadPoint(), Quaternion.identity);
-                      Aura.transform.parent = player.transform;
+                      // GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Poison").transform.Find("Visual").transform.Find("vfx_drippingwater").gameObject);
+                      
+                      RancidThrow se_rancidthrow = (RancidThrow)ScriptableObject.CreateInstance(typeof(RancidThrow));
+                      
+                      player.GetSEMan().AddStatusEffect(se_rancidthrow);
+                      
+                      // Aura = UnityEngine.GameObject.Instantiate(prefab, player.GetHeadPoint(), Quaternion.identity);
+                      // Aura.transform.parent = player.transform;
                       //fix this
                       UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Rancorous, player.transform.position + player.transform.up * 0.2f, Quaternion.identity);
 
@@ -76,7 +81,8 @@ namespace LackingImaginationV2
 
                       Throwable = false;
                     
-                      if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                      // if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                      if(player.GetSEMan().HaveStatusEffect("RancidThrow".GetStableHashCode()))player.GetSEMan().RemoveStatusEffect("RancidThrow".GetStableHashCode());
                   }
                 
                   //Effects, animations, and sounds

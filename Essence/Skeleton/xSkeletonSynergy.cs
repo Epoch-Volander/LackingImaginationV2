@@ -22,7 +22,9 @@ namespace LackingImaginationV2
     public class xSkeletonSynergy
     {
         public static bool SkeletonSynergyBrennaController = false;
+        private static float BrennaAnimationTimer = 2.25f;
         public static bool SkeletonSynergyRancidController = false;
+        private static float RancidRemainsAnimationTimer = 2.25f;
         private static float equipDelay;
 
         private static List<string> boundVulkanList = new List<string>()
@@ -163,7 +165,7 @@ namespace LackingImaginationV2
                 {
                     if(__instance.IsItemEquiped(item)) __instance.UnequipItem(item);
                     inventory.RemoveItem(item);
-                    if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    if(__instance.GetSEMan().HaveStatusEffect("BrennaThrow".GetStableHashCode()))__instance.GetSEMan().RemoveStatusEffect("BrennaThrow".GetStableHashCode());
                     xBrennaEssence.Throwable = false;
                     InventoryGui.instance.SetupDragItem((ItemDrop.ItemData) null, (Inventory) null, 1);
                     inventory.Changed();
@@ -175,7 +177,7 @@ namespace LackingImaginationV2
                 {
                     if(__instance.IsItemEquiped(item)) __instance.UnequipItem(item);
                     inventory.RemoveItem(item);
-                    if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                    if(__instance.GetSEMan().HaveStatusEffect("RancidThrow".GetStableHashCode()))__instance.GetSEMan().RemoveStatusEffect("RancidThrow".GetStableHashCode());
                     xRancidRemainsEssence.Throwable = false;
                     InventoryGui.instance.SetupDragItem((ItemDrop.ItemData) null, (Inventory) null, 1);
                     inventory.Changed();
@@ -197,7 +199,7 @@ namespace LackingImaginationV2
                     fromInventory.RemoveItem(item);
                     InventoryGui.instance.SetupDragItem((ItemDrop.ItemData) null, (Inventory) null, 1);
                     // __instacne.RemoveItem(item);
-                    if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    if(Player.m_localPlayer.GetSEMan().HaveStatusEffect("BrennaThrow".GetStableHashCode()))Player.m_localPlayer.GetSEMan().RemoveStatusEffect("BrennaThrow".GetStableHashCode());
                     xBrennaEssence.Throwable = false;
                     
                     __instance.Changed();
@@ -211,7 +213,7 @@ namespace LackingImaginationV2
                     fromInventory.RemoveItem(item);
                     InventoryGui.instance.SetupDragItem((ItemDrop.ItemData) null, (Inventory) null, 1);
                     // __instacne.RemoveItem(item);
-                    if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    if(Player.m_localPlayer.GetSEMan().HaveStatusEffect("BrennaThrow".GetStableHashCode()))Player.m_localPlayer.GetSEMan().RemoveStatusEffect("BrennaThrow".GetStableHashCode());
                     xRancidRemainsEssence.Throwable = false;
                     
                     __instance.Changed();
@@ -232,7 +234,7 @@ namespace LackingImaginationV2
                 {
                     __instance.RemoveItem(__instance.GetItemAt(x, y));
 
-                    if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    if(Player.m_localPlayer.GetSEMan().HaveStatusEffect("BrennaThrow".GetStableHashCode()))Player.m_localPlayer.GetSEMan().RemoveStatusEffect("BrennaThrow".GetStableHashCode());
                     xBrennaEssence.Throwable = false;
                     
                     __instance.Changed();
@@ -242,7 +244,7 @@ namespace LackingImaginationV2
                 {
                     __instance.RemoveItem(__instance.GetItemAt(x, y));
 
-                    if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
+                    if(Player.m_localPlayer.GetSEMan().HaveStatusEffect("RancidThrow".GetStableHashCode()))Player.m_localPlayer.GetSEMan().RemoveStatusEffect("RancidThrow".GetStableHashCode());
                     xRancidRemainsEssence.Throwable = false;
                     
                     __instance.Changed();
@@ -320,27 +322,34 @@ namespace LackingImaginationV2
                 if (weapon == "fire")
                 {
                     xBrennaEssence.Throwable = false;
-                    ScheduleDelete(xBrennaEssence.Aura);
+                    ScheduleDelete("Brenna");
                 }
                 else if (weapon == "poison")
                 {
                     xRancidRemainsEssence.Throwable = false;
-                    ScheduleDelete(xRancidRemainsEssence.Aura);
+                    ScheduleDelete("RancidRemains");
                 }
                 
                 
                 return false;
             }
-            private static void ScheduleDelete(GameObject aura)
+            private static void ScheduleDelete(string aura)
             {
                 CoroutineRunner.Instance.StartCoroutine(ScheduleDeleteCoroutine(aura));
             }
             // ReSharper disable Unity.PerformanceAnalysis
-            private static IEnumerator ScheduleDeleteCoroutine(GameObject aura)
+            private static IEnumerator ScheduleDeleteCoroutine(string aura)
             {
                 yield return new WaitForSeconds(2f);
             
-                if(aura != null) UnityEngine.GameObject.Destroy(aura);
+                if(aura == "Brenna")
+                {
+                    if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("BrennaThrow".GetStableHashCode())) Player.m_localPlayer.GetSEMan().RemoveStatusEffect("BrennaThrow".GetStableHashCode());
+                }
+                else if (aura == "RancidRemains")
+                {
+                    if(Player.m_localPlayer.GetSEMan().HaveStatusEffect("RancidThrow".GetStableHashCode()))Player.m_localPlayer.GetSEMan().RemoveStatusEffect("RancidThrow".GetStableHashCode());
+                }
             }    
         }
         
@@ -404,7 +413,6 @@ namespace LackingImaginationV2
                         return;
                     if ((UnityEngine.Object) hit.GetAttacker() == (UnityEngine.Object) Player.m_localPlayer)
                     {
-                        Game.instance.IncrementPlayerStat(__instance.IsPlayer() ? PlayerStatType.PlayerHits : PlayerStatType.EnemyHits);
                         __instance.m_localPlayerHasHit = true;
                     }
                     if (!__instance.m_nview.IsOwner() || (double) __instance.GetHealth() <= 0.0 || __instance.IsDead() || __instance.IsTeleporting() || __instance.InCutscene() || hit.m_dodgeable && __instance.IsDodgeInvincible())
@@ -438,7 +446,10 @@ namespace LackingImaginationV2
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
                         SkeletonSynergyBrennaController = true;
+                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                        // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.Brenna, BrennaAnimationTimer);
+                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerFalse");
                         SkeletonSynergyBrennaController = false;
 
                         inventory.RemoveItem(item);
@@ -462,7 +473,10 @@ namespace LackingImaginationV2
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
                         SkeletonSynergyRancidController = true;
+                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                        // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.RancidRemains, RancidRemainsAnimationTimer);
+                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerFalse");
                         SkeletonSynergyRancidController = false;
 
                         inventory.RemoveItem(item);
@@ -486,7 +500,10 @@ namespace LackingImaginationV2
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
                         SkeletonSynergyBrennaController = true;
+                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                        // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.Brenna, BrennaAnimationTimer);
+                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerFalse");
                         SkeletonSynergyBrennaController = false;
                         
                         ScheduleDelay(__instance, 0.5f, true, true);
@@ -501,7 +518,10 @@ namespace LackingImaginationV2
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
                         SkeletonSynergyRancidController = true;
+                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
+                        // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.RancidRemains, RancidRemainsAnimationTimer);
+                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerFalse");
                         SkeletonSynergyRancidController = false;
                         
                         ScheduleDelay(__instance, 1.5f, false, true);

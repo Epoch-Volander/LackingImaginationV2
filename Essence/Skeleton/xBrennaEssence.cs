@@ -30,13 +30,37 @@ namespace LackingImaginationV2
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
-            { 
+            {
+                
                 Awakened = Boolean.Parse(xBrennaEssencePassive.BrennaStats[0]);
                 GameObject FireSword = Awakened ? LackingImaginationV2Plugin.GO_VulcanSword : LackingImaginationV2Plugin.GO_VulcanSwordBroken;
                 
                 // LackingImaginationV2Plugin.Log($"Brenna Button was pressed");
                 //Ability Cooldown
                 StatusEffect se_cd = LackingImaginationUtilities.CDEffect(position);
+                
+                
+                // GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject);
+                //
+                //  Aura = new EffectList
+                // {
+                //     m_effectPrefabs = new EffectList.EffectData[]
+                //     {
+                //         new()
+                //         {
+                //             m_prefab = prefab,
+                //             m_enabled = true,
+                //             m_variant = 0,
+                //             m_attach = false,
+                //             m_follow = true,
+                //             m_childTransform = "Head",
+                //             // m_inheritParentScale = true,
+                //             // m_multiplyParentVisualScale = true,
+                //             // m_scale = true,
+                //             m_inheritParentRotation = true,
+                //         }
+                //     }
+                // };
 
                 if (!player.m_inventory.ContainsItemByName(FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name))
                 {
@@ -65,9 +89,16 @@ namespace LackingImaginationV2
                     //add aura, maybe brenna head flames
                     ItemDrop.ItemData sword = player.m_inventory.GetItem(FireSword.GetComponent<ItemDrop>().m_itemData.m_shared.m_name);
                     xSkeletonSynergy.ScheduleEquip(player, ref sword, equipDelay);
-                    GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject);
-                    Aura = UnityEngine.GameObject.Instantiate(prefab, player.GetHeadPoint(), Quaternion.identity);
-                    Aura.transform.parent = player.transform;
+                    
+                    BrennaThrow se_brennathrow = (BrennaThrow)ScriptableObject.CreateInstance(typeof(BrennaThrow));
+                    // Aura =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject);
+                    // se_brennathrow.m_startEffects.m_effectPrefabs[0].m_prefab = Aura;
+                    
+                    player.GetSEMan().AddStatusEffect(se_brennathrow);
+                    
+                    // GameObject prefab =  ExpMethods.DeepCopy(ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject);
+                    // Aura = UnityEngine.GameObject.Instantiate(prefab, player.GetHeadPoint(), Quaternion.identity);
+                    // Aura.transform.parent = player.transform;
                     UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Vulcan, player.transform.position + player.transform.up * 0.2f, Quaternion.identity);
                 }
                 else
@@ -77,8 +108,8 @@ namespace LackingImaginationV2
                     player.GetSEMan().AddStatusEffect(se_cd);
 
                     Throwable = false;
-                    
-                    if(xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    // if (xBrennaEssence.Aura != null) UnityEngine.GameObject.Destroy(xBrennaEssence.Aura);
+                    if(player.GetSEMan().HaveStatusEffect("BrennaThrow".GetStableHashCode()))player.GetSEMan().RemoveStatusEffect("BrennaThrow".GetStableHashCode());
                 }
                 
                 //Effects, animations, and sounds

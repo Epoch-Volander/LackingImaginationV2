@@ -119,10 +119,73 @@ namespace LackingImaginationV2
         {
             return character.IsPlayer();
         }
-        
     }
-    
-    
-    
+
+    public class BrennaThrow : SE_Stats
+    {
+        
+        public BrennaThrow()
+        {
+            base.name = "BrennaThrow";
+           
+            
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_brenna,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = false,
+                        m_follow = true,
+                        m_childTransform = "Helmet_attach",
+                        m_inheritParentScale = true,
+                        m_multiplyParentVisualScale = true,
+                        m_scale = true,
+                        m_inheritParentRotation = true,
+                    }
+                }
+            };
+        }
+        public override bool CanAdd(Character character)
+        {
+            return character.IsPlayer();
+        }
+    }    
+    public class RancidThrow : SE_Stats
+    {
+        
+        public RancidThrow()
+        {
+            base.name = "RancidThrow";
+           
+            
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_rancid,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = false,
+                        m_follow = true,
+                        m_childTransform = "Spine2",
+                        m_inheritParentScale = true,
+                        m_multiplyParentVisualScale = true,
+                        m_scale = true,
+                        m_inheritParentRotation = true,
+                    }
+                }
+            };
+        }
+        public override bool CanAdd(Character character)
+        {
+            return character.IsPlayer();
+        }
+    }   
     
 }

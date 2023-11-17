@@ -271,6 +271,16 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<RitualProjectileCooldown>());
             }
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "BrennaThrow"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<BrennaThrow>());
+            } 
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "RancidThrow"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<RancidThrow>());
+            } 
+            
+            
         }
 
 
