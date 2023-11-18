@@ -121,7 +121,7 @@ namespace LackingImaginationV2
         }
     }
 
-    public class BrennaThrow : SE_Stats
+    public class BrennaThrow : StatusEffect
     {
         
         public BrennaThrow()
@@ -154,7 +154,7 @@ namespace LackingImaginationV2
             return character.IsPlayer();
         }
     }    
-    public class RancidThrow : SE_Stats
+    public class RancidThrow : StatusEffect
     {
         
         public RancidThrow()

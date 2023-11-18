@@ -30,12 +30,16 @@ namespace LackingImaginationV2
                 {
                     new()
                     {
-                        m_prefab = LackingImaginationV2Plugin.fx_Longinus,
+                        m_prefab = LackingImaginationV2Plugin.fx_Bash,
                         m_enabled = true,
                         m_variant = -1,
-                        m_attach = true,
+                        m_attach = false,
+                        m_follow = true,
+                        m_inheritParentScale = true,
+                        m_multiplyParentVisualScale = true,
+                        m_scale = true,
                         m_inheritParentRotation = true,
-                        // m_follow = true,
+                        m_childTransform = "Hips",
                     }
                 }
             };

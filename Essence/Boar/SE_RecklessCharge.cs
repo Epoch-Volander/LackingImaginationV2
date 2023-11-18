@@ -25,7 +25,28 @@ namespace LackingImaginationV2
         
         private float Duration = m_baseTTL - 1f;
         private float m_timer = 1f;
-        private GameObject Aura;
+        // private GameObject Aura;
+        
+        EffectList EffectAura = new EffectList
+        {
+            m_effectPrefabs = new EffectList.EffectData[]
+            {
+                new()
+                {
+                    m_prefab = LackingImaginationV2Plugin.fx_RecklessCharge,
+                    m_enabled = true,
+                    m_variant = 0,
+                    m_attach = false,
+                    m_follow = true,
+                    m_inheritParentScale = true,
+                    m_multiplyParentVisualScale = true,
+                    m_scale = true,
+                    m_inheritParentRotation = true,
+                    m_childTransform = "Hips",
+                }
+            }
+        };
+        
 
         public SE_RecklessCharge()
         {
@@ -34,7 +55,7 @@ namespace LackingImaginationV2
             m_tooltip = "Reckless Charge: After running for 3 seconds you collide with the next enemy.";
             m_name = "Reckless \nCharge";
             m_ttl = m_baseTTL;
-
+            
         }
         
         public override void Setup(Character character) => base.Setup(character);
@@ -59,18 +80,21 @@ namespace LackingImaginationV2
                 if (!Player.m_localPlayer.IsRunning())
                 {
                     isRunning = 0f;
-                    if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
+                    // if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
                     detectedObjects.Clear();
                 }
                     
                 if (isRunning > 3f)
                 {
-                    if(Aura == null)
-                    {
-                        Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_RecklessCharge, Player.m_localPlayer.GetCenterPoint() + Player.m_localPlayer.transform.forward * 0.5f, Quaternion.identity);
-                        Aura.transform.parent = Player.m_localPlayer.transform;
-                        Aura.transform.rotation = Player.m_localPlayer.transform.rotation;
-                    }
+                    // if(Aura == null)
+                    // {
+                    //     EffectAura.Create(Player.m_localPlayer.GetCenterPoint(), Player.m_localPlayer.transform.rotation, Player.m_localPlayer.transform, Player.m_localPlayer.GetRadius() * 2f, Player.m_localPlayer.GetPlayerModel());
+                    //     // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_RecklessCharge, Player.m_localPlayer.GetCenterPoint() + Player.m_localPlayer.transform.forward * 0.5f, Quaternion.identity);
+                    //     // Aura.transform.parent = Player.m_localPlayer.transform;
+                    //     // Aura.transform.rotation = Player.m_localPlayer.transform.rotation;
+                    // }
+                    EffectAura.Create(Player.m_localPlayer.GetCenterPoint(), Player.m_localPlayer.transform.rotation, Player.m_localPlayer.transform, Player.m_localPlayer.GetRadius() * 2f, Player.m_localPlayer.GetPlayerModel());
+
                     Vector3 sizeScan = Vector3.one * 0.5f;
                     Vector3 size = Vector3.one * 1.2f; 
                     Collider[] colliderScan = Physics.OverlapBox(Player.m_localPlayer.transform.position + Player.m_localPlayer.transform.up  * 1.4f, sizeScan , Quaternion.identity, collisionMask);
@@ -125,16 +149,16 @@ namespace LackingImaginationV2
                     {
                         hasHit = false;
                         isRunning = 0f;
-                        if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
+                        // if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
                         detectedObjects.Clear();
                     }
                 }
             }
             else
             {
-                if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
+                // if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
             }
-            if(Player.m_localPlayer.IsDead()) if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
+            // if(Player.m_localPlayer.IsDead()) if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
         }
 
         public override bool CanAdd(Character character)

@@ -66,6 +66,25 @@ namespace LackingImaginationV2
                      }
                  }
                  
+                 EffectList m_enemyEffects = new EffectList
+                 {
+                     m_effectPrefabs = new EffectList.EffectData[]
+                     {
+                         new()
+                         {
+                             m_prefab = LackingImaginationV2Plugin.fx_BloodSiphon,
+                             m_enabled = true,
+                             m_variant = 0,
+                             m_attach = true,
+                             m_follow = true,
+                             m_inheritParentScale = true,
+                             m_multiplyParentVisualScale = true,
+                             m_scale = true,
+                             m_inheritParentRotation = true,
+                         }
+                     }
+                 };
+                 
                 List<Character> allCharacters = new List<Character>();
                 allCharacters.Clear();
                 Character.GetCharactersInRange(player.transform.position, 25f, allCharacters);
@@ -79,8 +98,10 @@ namespace LackingImaginationV2
                         if (!Marked.Contains(ch))
                         {
                             Marked.Add(ch);
-                            GameObject effect = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, ch.transform.position, Quaternion.identity);
-                            effect.transform.parent = ch.transform;
+                            // GameObject effect = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, ch.transform.position, Quaternion.identity);
+                            // effect.transform.parent = ch.transform;
+                            m_enemyEffects.Create(ch.GetCenterPoint(), ch.transform.rotation, ch.transform, ch.GetRadius() * 2f);
+                            
                         }
                     }
                 }

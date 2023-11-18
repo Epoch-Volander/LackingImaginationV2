@@ -21,6 +21,7 @@ namespace LackingImaginationV2
         public static string Ability_Name = "Blood \nWell";
         
         // public static GameObject Aura;
+        public static EffectList Aura;
         public static bool Activated;
         public static void Process_Input(Player player, int position)
         {
@@ -35,8 +36,29 @@ namespace LackingImaginationV2
                     
                     
                     Activated = true;// needs its own aura effect
+                    
+                    Aura = new EffectList
+                    {
+                        m_effectPrefabs = new EffectList.EffectData[]
+                        {
+                            new()
+                            {
+                                m_prefab = LackingImaginationV2Plugin.fx_BloodWell,
+                                m_enabled = true,
+                                m_variant = 0,
+                                m_attach = false,
+                                m_follow = true,
+                                m_inheritParentScale = true,
+                                m_multiplyParentVisualScale = true,
+                                m_scale = true,
+                                m_inheritParentRotation = true,
+                                m_childTransform = "Hips",
+                            }
+                        }
+                    };
                     // Aura = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_BloodWell, player.GetCenterPoint(), Quaternion.identity);
                     // Aura.transform.parent = player.transform;
+                    Aura.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 }
                 else
                 {
@@ -100,6 +122,17 @@ namespace LackingImaginationV2
 
                             xTickEssence.Activated = false;
                             // if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
+                            
+                            if ((bool) (UnityEngine.Object)  xTickEssence.Aura.m_effectPrefabs[0].m_prefab)
+                            {
+                                ZNetView component = xTickEssence.Aura.m_effectPrefabs[0].m_prefab.GetComponent<ZNetView>();
+                                if (component.IsValid())
+                                {
+                                    component.ClaimOwnership();
+                                    component.Destroy();
+                                }
+                            }
+                            
                         }
                         attacker.Heal(hit.GetTotalDamage() * LackingImaginationGlobal.c_tickBloodWellLifeSteal);
                         float blood = float.Parse(TickStats[0]) + (hit.GetTotalDamage() * LackingImaginationGlobal.c_tickBloodWellLifeSteal);

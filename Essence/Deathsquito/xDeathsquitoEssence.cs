@@ -55,9 +55,9 @@ namespace LackingImaginationV2
                     }
                 };
                 Aura.m_effectPrefabs[0].m_prefab.GetComponent<TimedDestruction>().m_timeout = SE_Relentless.m_baseTTL;
-                Vector3 transformPosition = Aura.m_effectPrefabs[0].m_prefab.transform.position;
-                transformPosition.y += 0.4f;
-                Aura.m_effectPrefabs[0].m_prefab.transform.position = transformPosition;
+                // Vector3 transformPosition = Aura.m_effectPrefabs[0].m_prefab.transform.position;
+                // transformPosition.y += 0.4f;
+                // Aura.m_effectPrefabs[0].m_prefab.transform.position = transformPosition;
                 Aura.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 
                 // Aura = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, player.transform.position + player.transform.up * 2.2f, Quaternion.identity);

@@ -30,7 +30,7 @@ namespace LackingImaginationV2
                 {
                     new()
                     {
-                        m_prefab = LackingImaginationV2Plugin.fx_Bash,
+                        m_prefab = LackingImaginationV2Plugin.fx_Longinus,
                         m_enabled = true,
                         m_variant = -1,
                         m_attach = false,
@@ -39,7 +39,7 @@ namespace LackingImaginationV2
                         m_multiplyParentVisualScale = true,
                         m_scale = true,
                         m_inheritParentRotation = true,
-                        m_childTransform = "Spine",
+                        m_childTransform = "Hips",
                     }
                 }
             };
