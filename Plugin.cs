@@ -394,7 +394,7 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_brennaVulcanCD;
         private static ConfigEntry<float>? li_rancidremainsRancorousCD;
         private static ConfigEntry<float>? li_thungrTyrantCD;
-        
+        private static ConfigEntry<float>? li_zilSoulmassCD;
         
         //Status Duration
         private static ConfigEntry<float>? li_deerHorizonHasteSED;
@@ -521,6 +521,8 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_thungrTyrantArroganceEnemyBuff;
         private static ConfigEntry<float>? li_thungrTyrantArrogancePlayerDebuff;
         private static ConfigEntry<float>? li_thungrTyrantDisdain;
+        private static ConfigEntry<float>? li_zilSoulmassProjectile;
+        private static ConfigEntry<float>? li_zilSoulmassPassiveEitr;
        
         
         // public static List<string> equipedEssence = new();
@@ -547,10 +549,12 @@ namespace LackingImaginationV2
         public static GameObject? fx_BloodSiphon;
         public static GameObject? fx_RavenousHunger;
         public static GameObject? fx_Relentless;
-        public static GameObject? fx_brenna;
-        public static GameObject? fx_rancid;
+        public static GameObject? fx_Brenna;
+        public static GameObject? fx_Rancid;
 
-        
+        public static GameObject? fx_Disdain;
+        public static GameObject? fx_ArroBuff;
+        public static GameObject? fx_ArroDebuff;
         
         
         //Prefab3 //originals
@@ -859,9 +863,13 @@ namespace LackingImaginationV2
             fx_RecklessCharge = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarGuard");
             fx_RecklessChargeHit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "BoarHit");
             
-            fx_brenna = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Skeleton_Hildir_Fire");
-            fx_rancid = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Skeleton_poison_drip");
+            fx_Brenna = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Skeleton_Hildir_Fire");
+            fx_Rancid = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Skeleton_poison_drip");
             
+            fx_Disdain = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "ThungrDisdain");
+            fx_ArroBuff = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "ThungrBuff");
+            fx_ArroDebuff = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "ThungrDebuff");
+       
             //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
             fx_ocean_hit = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "fx_ocean_hit");
@@ -1131,8 +1139,10 @@ namespace LackingImaginationV2
             li_thungrTyrantArroganceEnemyBuff = config("Essence Thungr Modifiers", "li_thungrTyrantArroganceEnemyBuff", 75f, new ConfigDescription("Percentage of damage increase to Marked enemy", new AcceptableValueRange<float>(0f, 100f)));
             li_thungrTyrantArrogancePlayerDebuff = config("Essence Thungr Modifiers", "li_thungrTyrantArrogancePlayerDebuff", 25f, new ConfigDescription("Percentage player damage is decrease to", new AcceptableValueRange<float>(0f, 100f)));
             li_thungrTyrantDisdain = config("Essence Thungr Modifiers", "li_thungrTyrantDisdain", 50f, new ConfigDescription("Percentage of stats stolen from defeated enemy", new AcceptableValueRange<float>(0f, 100f)));
-
-
+            //Zil
+            li_zilSoulmassCD = config("Essence Zil Modifiers", "li_zilSoulmassCD", 30f, "Cooldown");
+            li_zilSoulmassProjectile = config("Essence Zil Modifiers", "li_zilSoulmassProjectile", 150f, "Modifies the damage of Soulmass Projectile");
+            li_zilSoulmassPassiveEitr = config("Essence Zil Modifiers", "li_zilSoulmassPassiveEitr", 50f, "Modifies bonus Eitr passive");
 
 
             
@@ -1189,6 +1199,7 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_brennaVulcanCD", li_brennaVulcanCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousCD", li_rancidremainsRancorousCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantCD", li_thungrTyrantCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_zilSoulmassCD", li_zilSoulmassCD.Value);
             
             //Status Duration
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHasteSED", li_deerHorizonHasteSED.Value);
@@ -1314,7 +1325,8 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantArroganceEnemyBuff", li_thungrTyrantArroganceEnemyBuff.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantArrogancePlayerDebuff", li_thungrTyrantArrogancePlayerDebuff.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantDisdain", li_thungrTyrantDisdain.Value);
-            
+            LackingImaginationGlobal.ConfigStrings.Add("li_zilSoulmassProjectile", li_zilSoulmassProjectile.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_zilSoulmassPassiveEitr", li_zilSoulmassPassiveEitr.Value);
             
             _ = ConfigSync.AddConfigEntry(Sprintkey);
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
@@ -1383,6 +1395,8 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_brennaVulcanCD);
             _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousCD);
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantCD);
+            _ = ConfigSync.AddConfigEntry(li_zilSoulmassCD);
+            
             
             //Status Duration
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHasteSED);
@@ -1509,7 +1523,8 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantArroganceEnemyBuff); 
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantArrogancePlayerDebuff);
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantDisdain); 
-            
+            _ = ConfigSync.AddConfigEntry(li_zilSoulmassProjectile);
+            _ = ConfigSync.AddConfigEntry(li_zilSoulmassPassiveEitr); 
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
@@ -1589,7 +1604,7 @@ namespace LackingImaginationV2
 
                 //Fire Head Effect
                 {
-                    GameObject ClonePrefab = fx_brenna.transform.Find("fx_Torch_Carried").gameObject;
+                    GameObject ClonePrefab = fx_Brenna.transform.Find("fx_Torch_Carried").gameObject;
                     GameObject OriginalPrefab = ZNetScene.instance.GetPrefab("Skeleton_Hildir").transform.Find("Visual").transform.Find("_skeleton_base").transform.Find("Armature").transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("Neck").transform.Find("Head").transform.Find("fx_Torch_Carried").gameObject;
                     if (ClonePrefab != null && OriginalPrefab != null)
                     {
@@ -1598,7 +1613,7 @@ namespace LackingImaginationV2
                 }
                 //Poison drip Effect
                 {
-                    GameObject ClonePrefab = fx_rancid.transform.Find("vfx_drippingwater").gameObject;
+                    GameObject ClonePrefab = fx_Rancid.transform.Find("vfx_drippingwater").gameObject;
                     GameObject OriginalPrefab =  ZNetScene.instance.GetPrefab("Skeleton_Poison").transform.Find("Visual").transform.Find("vfx_drippingwater").gameObject;
                     if (ClonePrefab != null && OriginalPrefab != null)
                     {
