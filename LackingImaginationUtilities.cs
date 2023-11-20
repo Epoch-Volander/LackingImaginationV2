@@ -11,7 +11,6 @@ using TMPro;
 using UnityEngine.UI;
 
 
-
 namespace LackingImaginationV2
 {
 
@@ -127,7 +126,33 @@ namespace LackingImaginationV2
                  }
              }
          }
-         
+
+         private static List<string> Ability_CoolDowns = new List<string>()
+         {
+             "Ability1_CoolDown",
+             "Ability2_CoolDown",
+             "Ability3_CoolDown",
+             "Ability4_CoolDown",
+             "Ability5_CoolDown",
+         };
+
+         [HarmonyPatch(typeof(SEMan), nameof(SEMan.GetHUDStatusEffects))]
+         public static class SEMan_GetHUDStatusEffects_Patch
+         {
+             public static bool Prefix(SEMan __instance,ref List<StatusEffect> effects)
+             {
+                 foreach (StatusEffect statusEffect in __instance.m_statusEffects)
+                 {
+                     if(!Ability_CoolDowns.Contains(statusEffect.name))
+                     {
+                         if ((bool)(UnityEngine.Object)statusEffect.m_icon)
+                             effects.Add(statusEffect);
+                     }
+                 }
+                 return false;
+             }
+         }
+
          public static void AbilityInputPlugin(int position, Player player, Rigidbody body, float altitude, float ground)
         {
             if (EssenceItemData.equipedEssence[position] == "$item_eikthyr_essence")
@@ -262,7 +287,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_seeker_brute_essence")
             {
-                xSeekerSoldierEssence.Process_Input(Player.m_localPlayer);
+                xSeekerSoldierEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_leech_essence")
@@ -724,7 +749,14 @@ namespace LackingImaginationV2
                  
              }
          }
-
+         public static float xSeekerSoldierCooldownTime
+         {
+             get
+             {
+                 return Math.Max(LackingImaginationGlobal.c_seekersoldierReverberationCD, 1f) * LackingImaginationGlobal.g_CooldownModifer;
+                 
+             }
+         }
 
 
 
@@ -742,14 +774,25 @@ namespace LackingImaginationV2
                  // if(xRancidRemainsEssence.Aura != null) UnityEngine.GameObject.Destroy(xRancidRemainsEssence.Aura);
                  // if(xTickEssence.Aura != null) UnityEngine.GameObject.Destroy(xTickEssence.Aura);
                  // if(xWraithEssence.Aura != null) UnityEngine.GameObject.Destroy(xWraithEssence.Aura);
-                 if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
-                 if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
-                 if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                 // if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                 // if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                 // if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
                  
                  if(xYagluthEssencePassive.Aura != null)
                  {
                      xYagluthEssencePassive.YagluthStats[0] = "0";
-                     UnityEngine.GameObject.Destroy(xYagluthEssencePassive.Aura);
+                     foreach (GameObject startEffectInstance in xYagluthEssencePassive.Aura)
+                     {
+                         if ((bool)(UnityEngine.Object) startEffectInstance)
+                         {
+                             ZNetView component = startEffectInstance.GetComponent<ZNetView>();
+                             if (component.IsValid())
+                             {
+                                 component.ClaimOwnership();
+                                 component.Destroy();
+                             }
+                         }
+                     }
                      xYagluthEssencePassive.boolAura = false;
                  }
              }

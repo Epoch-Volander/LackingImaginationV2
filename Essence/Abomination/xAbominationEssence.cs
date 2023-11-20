@@ -95,7 +95,7 @@ namespace LackingImaginationV2
     }
 
     [HarmonyPatch]
-    public static class xAbominationEssencePassive
+    public class xAbominationEssencePassive
     {
         [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Abomination_GetBodyArmor_Patch

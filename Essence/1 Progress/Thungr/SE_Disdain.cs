@@ -34,6 +34,25 @@ namespace LackingImaginationV2
             m_name = "Disdain";
             m_ttl = m_baseTTL;
 
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_Disdain,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = false,
+                        m_follow = true,
+                        m_inheritParentScale = true,
+                        m_multiplyParentVisualScale = true,
+                        m_scale = true,
+                        m_inheritParentRotation = true,
+                    }
+                }
+            };
+            
         }
         
         public override bool CanAdd(Character character)

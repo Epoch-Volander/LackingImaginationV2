@@ -286,7 +286,7 @@ namespace LackingImaginationV2
         public static List<string> YagluthStats = new List<string>() { "0" };
 
         private static float timer = 30f;
-        public static GameObject Aura;
+        public static GameObject[] Aura;
         public static bool boolAura;
         
         [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
@@ -309,16 +309,48 @@ namespace LackingImaginationV2
                         && int.Parse(YagluthStats[0]) <= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap
                         && !boolAura && !__instance.IsDead() && !__instance.InCutscene() && !__instance.IsTeleporting())
                     {
-                        Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("fx_Lightning"), __instance.GetCenterPoint(), Quaternion.identity);
-                        Aura.transform.parent = __instance.transform;
-                        Aura.transform.Find("sfx").GetComponent<ZSFX>().m_minVol = 0.2f;
-                        Aura.transform.Find("sfx").GetComponent<ZSFX>().m_maxVol = 0.2f;
-                        Aura.transform.Find("sfx").GetComponent<ZSFX>().m_vol = 0.2f;
+                        EffectList m_starteffect = new EffectList
+                        {
+                            m_effectPrefabs = new EffectList.EffectData[]
+                            {
+                                new()
+                                {
+                                    m_prefab = ZNetScene.instance.GetPrefab("fx_Lightning"),
+                                    m_enabled = true,
+                                    m_variant = 0,
+                                    m_attach = false,
+                                    m_follow = true,
+                                    m_inheritParentScale = true,
+                                    m_multiplyParentVisualScale = true,
+                                    m_scale = true,
+                                    m_inheritParentRotation = true,
+                                }
+                            }
+                        };
+                        
+                        // Aura = UnityEngine.GameObject.Instantiate(ZNetScene.instance.GetPrefab("fx_Lightning"), __instance.GetCenterPoint(), Quaternion.identity);
+                        // Aura.transform.parent = __instance.transform;
+                        m_starteffect.m_effectPrefabs[0].m_prefab.transform.Find("sfx").GetComponent<ZSFX>().m_minVol = 0.2f;
+                        m_starteffect.m_effectPrefabs[0].m_prefab.transform.Find("sfx").GetComponent<ZSFX>().m_maxVol = 0.2f;
+                        m_starteffect.m_effectPrefabs[0].m_prefab.transform.Find("sfx").GetComponent<ZSFX>().m_vol = 0.2f;
+                        Aura = m_starteffect.Create(__instance.GetCenterPoint(), __instance.transform.rotation, __instance.transform, __instance.GetRadius() * 2f, __instance.GetPlayerModel());
+                        
                         boolAura = true;
                     }
                     if (int.Parse(YagluthStats[0]) < (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap - 19 && boolAura)
                     {
-                        if(Aura != null) UnityEngine.GameObject.Destroy(Aura);
+                        foreach (GameObject startEffectInstance in Aura)
+                        {
+                            if ((bool)(UnityEngine.Object) startEffectInstance)
+                            {
+                                ZNetView component = startEffectInstance.GetComponent<ZNetView>();
+                                if (component.IsValid())
+                                {
+                                    component.ClaimOwnership();
+                                    component.Destroy();
+                                }
+                            }
+                        }
                         boolAura = false;
                     }
                     if (int.Parse(YagluthStats[0]) > (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap)

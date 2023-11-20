@@ -18,7 +18,7 @@ namespace LackingImaginationV2
     {
         public static string Ability_Name = "Relentless";
 
-        public static EffectList Aura;
+        public static GameObject[] Aura;
         public static void Process_Input(Player player, int position)
         {
             if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
@@ -35,7 +35,7 @@ namespace LackingImaginationV2
                 
                 //Effects, animations, and sounds
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("vfx_odin_despawn"), player.transform.position, Quaternion.identity);
-                Aura = new EffectList
+                EffectList m_starteffect = new EffectList
                 {
                     m_effectPrefabs = new EffectList.EffectData[]
                     {
@@ -54,11 +54,11 @@ namespace LackingImaginationV2
                         }
                     }
                 };
-                Aura.m_effectPrefabs[0].m_prefab.GetComponent<TimedDestruction>().m_timeout = SE_Relentless.m_baseTTL;
+                m_starteffect.m_effectPrefabs[0].m_prefab.GetComponent<TimedDestruction>().m_timeout = SE_Relentless.m_baseTTL;
                 // Vector3 transformPosition = Aura.m_effectPrefabs[0].m_prefab.transform.position;
                 // transformPosition.y += 0.4f;
                 // Aura.m_effectPrefabs[0].m_prefab.transform.position = transformPosition;
-                Aura.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
+                Aura = m_starteffect.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 
                 // Aura = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, player.transform.position + player.transform.up * 2.2f, Quaternion.identity);
                 // Aura.transform.parent = player.transform;

@@ -27,6 +27,24 @@ namespace LackingImaginationV2
             m_name = "Arrogance";
             m_ttl = m_baseTTL;
             
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                        m_prefab = LackingImaginationV2Plugin.fx_ArroBuff,
+                        m_enabled = true,
+                        m_variant = 0,
+                        m_attach = false,
+                        m_follow = true,
+                        m_inheritParentScale = true,
+                        m_multiplyParentVisualScale = true,
+                        m_scale = true,
+                        m_inheritParentRotation = true,
+                    }
+                }
+            };
         }
         
         public override void ModifyAttack(Skills.SkillType skill, ref HitData hitData)

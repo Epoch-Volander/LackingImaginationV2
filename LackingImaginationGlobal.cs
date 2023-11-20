@@ -2448,23 +2448,9 @@ namespace LackingImaginationV2
                 }
                 catch
                 {
-                    return 5f;
+                    return 30f;
                 }
             }
-       }
-       public static float c_zilSoulmassPassiveEitr
-       {
-           get
-           {
-               try
-               {
-                   return ConfigStrings["li_zilSoulmassPassiveEitr"];
-               }
-               catch
-               {
-                   return 100f;
-               }
-           }
        }
        public static float c_zilSoulmassProjectile
        {
@@ -2480,6 +2466,63 @@ namespace LackingImaginationV2
                }
            }
        }
+       public static float c_zilSoulmassPassiveEitr
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_zilSoulmassPassiveEitr"];
+               }
+               catch
+               {
+                   return 100f;
+               }
+           }
+       }
+       //Seeker Soldier
+       public static float c_seekersoldierReverberationCD
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_seekersoldierReverberationCD"];
+               }
+               catch
+               {
+                   return 30f;
+               }
+           }
+       }
+       public static float c_seekersoldierReverberationArmor
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_seekersoldierReverberationArmor"];
+               }
+               catch
+               {
+                   return 75f;
+               }
+           }
+       }
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
         
     }
     

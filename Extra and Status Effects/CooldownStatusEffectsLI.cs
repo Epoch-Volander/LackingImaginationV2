@@ -135,7 +135,7 @@ namespace LackingImaginationV2
                 {
                     new()
                     {
-                        m_prefab = LackingImaginationV2Plugin.fx_brenna,
+                        m_prefab = LackingImaginationV2Plugin.fx_Brenna,
                         m_enabled = true,
                         m_variant = -1,
                         m_attach = false,
@@ -168,7 +168,7 @@ namespace LackingImaginationV2
                 {
                     new()
                     {
-                        m_prefab = LackingImaginationV2Plugin.fx_rancid,
+                        m_prefab = LackingImaginationV2Plugin.fx_Rancid,
                         m_enabled = true,
                         m_variant = -1,
                         m_attach = false,

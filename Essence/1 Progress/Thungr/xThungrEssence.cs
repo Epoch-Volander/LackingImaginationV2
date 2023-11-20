@@ -21,9 +21,9 @@ namespace LackingImaginationV2
         public static string Mode1 = "Tyrant\n(Arrogance)";
         public static string Mode2 = "Tyrant\n(Disdain)";
         
-        public static GameObject AuraA;
-        public static GameObject AuraD;
-        public static GameObject AuraEnemy;
+        // public static GameObject AuraA;
+        // public static GameObject AuraD;
+        // public static GameObject AuraEnemy;
         
         public static void Process_Input(Player player, int position)
         {
@@ -50,10 +50,11 @@ namespace LackingImaginationV2
                         if (player.GetSEMan().HaveStatusEffect("SE_Arrogance".GetStableHashCode()))
                         {
                             player.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
+                            xThungrEssencePassive.Mark.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
                             xThungrEssencePassive.Mark = null;
 
-                            if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
-                            if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                            // if (xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                            // if (xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
                         }
 
                         return;
@@ -65,10 +66,11 @@ namespace LackingImaginationV2
                         player.GetSEMan().AddStatusEffect(se_cd);
 
                         SE_Arrogance se_arrogance = (SE_Arrogance)ScriptableObject.CreateInstance(typeof(SE_Arrogance));
+                        se_arrogance.m_startEffects.m_effectPrefabs[0].m_prefab = LackingImaginationV2Plugin.fx_ArroDebuff;
                         player.GetSEMan().AddStatusEffect(se_arrogance);
                         
-                        AuraA = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect Arrogance
-                        AuraA.transform.parent = player.transform;
+                        // AuraA = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect Arrogance
+                        // AuraA.transform.parent = player.transform;
                     }
                     
                     else if (player.GetSEMan().HaveStatusEffect("SE_Arrogance".GetStableHashCode()))
@@ -77,10 +79,11 @@ namespace LackingImaginationV2
                         player.GetSEMan().AddStatusEffect(se_cd);
                         
                         player.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
+                        xThungrEssencePassive.Mark.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
                         xThungrEssencePassive.Mark = null;
 
-                        if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
-                        if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                        // if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                        // if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
                     }
 
                 }
@@ -98,7 +101,7 @@ namespace LackingImaginationV2
                         {
                             player.GetSEMan().RemoveStatusEffect("SE_Disdain".GetStableHashCode());
                            
-                            if (xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                            // if (xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
                         }
                         
                         return;
@@ -114,8 +117,8 @@ namespace LackingImaginationV2
                 
                     //Effects, animations, and sounds
 
-                    AuraD = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect dISDAIN
-                    AuraD.transform.parent = player.transform;
+                    // AuraD = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect dISDAIN
+                    // AuraD.transform.parent = player.transform;
                     
                 }
                 
@@ -169,8 +172,8 @@ namespace LackingImaginationV2
                             __instance.Message(MessageHud.MessageType.Center, $"{__instance.m_name.Replace("(Clone)", "")} is Enraged");
                             //add effect to the creature instance
                             
-                            xThungrEssence.AuraEnemy = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, __instance.GetCenterPoint(), Quaternion.identity);/// change effect
-                            xThungrEssence.AuraEnemy.transform.parent = __instance.transform;
+                            // xThungrEssence.AuraEnemy = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_BloodSiphon, __instance.GetCenterPoint(), Quaternion.identity);/// change effect
+                            // xThungrEssence.AuraEnemy.transform.parent = __instance.transform;
                             
                         }
                     }
@@ -211,8 +214,8 @@ namespace LackingImaginationV2
                         Mark = null;
                         __instance.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetStableHashCode());
                         
-                        if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
-                        if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                        // if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                        // if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
                     }
                 }
                 
@@ -232,23 +235,20 @@ namespace LackingImaginationV2
                     if (__instance.GetSEMan().HaveStatusEffect("SE_Arrogance"))
                     {
                         __instance.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetHashCode());
+                        Mark.GetSEMan().RemoveStatusEffect("SE_Arrogance".GetHashCode());
                         Mark = null;
                         
-                        if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
-                        if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
+                        // if(xThungrEssence.AuraA != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraA);
+                        // if(xThungrEssence.AuraEnemy != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraEnemy);
                     }
                     if (__instance.GetSEMan().HaveStatusEffect("SE_Disdain"))
                     {
                         __instance.GetSEMan().RemoveStatusEffect("SE_Disdain".GetHashCode());
                         
-                        if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
+                        // if(xThungrEssence.AuraD != null) UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
                     }
                 }
-
-                if (xThungrEssence.AuraD != null && !__instance.GetSEMan().HaveStatusEffect("SE_Disdain"))
-                {
-                    UnityEngine.GameObject.Destroy(xThungrEssence.AuraD);
-                }
+                
             }
         }
         
