@@ -40,9 +40,12 @@ namespace LackingImaginationV2
         public static List<ItemDrop.ItemData> GetEquippedEssenceData()
         {
             List<ItemDrop.ItemData> essencehand = new();
-            for (var i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; ++i)
+            if (Player.m_localPlayer != null && Player.m_localPlayer.GetEssenceSlotInventory() != null)
             {
-                essencehand.Add(Player.m_localPlayer.GetEssenceSlotInventory().GetItemAt(i,0));
+                for (var i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; ++i)
+                {
+                    essencehand.Add(Player.m_localPlayer.GetEssenceSlotInventory().GetItemAt(i, 0));
+                }
             }
             return essencehand;
         }
@@ -50,10 +53,13 @@ namespace LackingImaginationV2
         public static List<string> GetEquippedEssence()
         {
             List<string> essencehand = new();
-            for (var i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; ++i)
+            if (Player.m_localPlayer != null && Player.m_localPlayer.GetEssenceSlotInventory() != null)
             {
-                // LackingImaginationV2Plugin.Log($"{i}item={Player.m_localPlayer.GetEssenceSlotInventory().GetItemAt(i,0)?.m_shared.m_name}");
-                essencehand.Add(Player.m_localPlayer.GetEssenceSlotInventory().GetItemAt(i,0)?.m_shared.m_name);
+                for (var i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; ++i)
+                {
+                    // LackingImaginationV2Plugin.Log($"{i}item={Player.m_localPlayer.GetEssenceSlotInventory().GetItemAt(i,0)?.m_shared.m_name}");
+                    essencehand.Add(Player.m_localPlayer.GetEssenceSlotInventory().GetItemAt(i, 0)?.m_shared.m_name);
+                }
             }
             return essencehand;
         }

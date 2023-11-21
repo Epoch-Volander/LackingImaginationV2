@@ -160,7 +160,10 @@ namespace LackingImaginationV2
                     {
                         (__result as SE_Disdain).m_icon = SE_Disdain.AbilityIcon;
                     }
-                    
+                    else if (nameHash == "SE_Reverberation".GetHashCode())
+                    {
+                        (__result as SE_Reverberation).m_icon = SE_Reverberation.AbilityIcon;
+                    }
                     
                     
                     
@@ -241,6 +244,8 @@ namespace LackingImaginationV2
                 SE_TerritorialSlumber.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyUlv").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Arrogance.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinBruteBrosBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
                 SE_Disdain.AbilityIcon = ZNetScene.instance.GetPrefab("TrophyGoblinBruteBrosBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                SE_Reverberation.AbilityIcon = ZNetScene.instance.GetPrefab("TrophySeekerBrute").GetComponent<ItemDrop>().m_itemData.GetIcon();
+                
             }
         }
 
@@ -407,7 +412,10 @@ namespace LackingImaginationV2
             {
                 odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Disdain>());
             } 
-            
+            if (!(bool)odb.m_StatusEffects.Find((StatusEffect se) => se.name == "SE_Reverberation"))
+            {
+                odb.m_StatusEffects.Add(ScriptableObject.CreateInstance<SE_Reverberation>());
+            } 
             
             
             

@@ -41,7 +41,7 @@ namespace LackingImaginationV2
             var pkg = new ZPackage();
             EssenceSlotInventory.Save(pkg);
             SaveValue(_player, nameof(EssenceSlotInventory), pkg.GetBase64());
-
+        
         }
         
         public static void Load(Player fromPlayer)
@@ -52,7 +52,7 @@ namespace LackingImaginationV2
                 return;
             }
             _player = fromPlayer;
-
+        
             if (LoadValue(fromPlayer, nameof(EssenceSlotInventory), out var essenceSlotData))
             {
                 var pkg = new ZPackage(essenceSlotData);
@@ -61,7 +61,10 @@ namespace LackingImaginationV2
             
                 if (!LackingImaginationV2Plugin.EssenceSlotsEnabled.Value)
                 {
-                    _player.m_inventory.MoveAll(EssenceSlotInventory);
+                    if (_player != null && _player.m_inventory != null)
+                    {
+                        _player.m_inventory.MoveAll(EssenceSlotInventory);
+                    }
             
                     pkg = new ZPackage(essenceSlotData);
                     EssenceSlotInventory.Save(pkg);
@@ -128,7 +131,7 @@ namespace LackingImaginationV2
     }
 
     
-    [HarmonyPatch(typeof(Player), "Save")]
+    [HarmonyPatch(typeof(Player), nameof(Player.Save))]
     public static class Player_Save_Patch
     {
         public static bool Prefix(Player __instance)
@@ -137,8 +140,8 @@ namespace LackingImaginationV2
             return true;
         }
     }
-
-    [HarmonyPatch(typeof(Player), "Load")]
+    
+    [HarmonyPatch(typeof(Player), nameof(Player.Load))]
     public static class Player_Load_Patch
     {
         public static void Postfix(Player __instance)
@@ -146,11 +149,6 @@ namespace LackingImaginationV2
             EssencePlayerData.Load(__instance);
             EssencePlayerData.OnInventoryChanged();
             
-            EssenceItemData.equipedEssence = EssenceItemData.GetEquippedEssence();
-            EssenceItemData.equipedEssenceData = EssenceItemData.GetEquippedEssenceData();
-            LackingImaginationUtilities.NameEssence();
-            LackingImaginationUtilities.InitiateEssenceStatus(Hud.m_instance);
-            EssencePlayerData.OnInventoryChanged();
         }
     }
 }

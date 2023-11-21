@@ -128,6 +128,8 @@
         <Compile Include="EssenceInventoryGuiLI.cs" />
         <Compile Include="EssenceHumanoidLI.cs" />
         <Compile Include="EssenceItemData.cs" />
+        <Compile Include="Essence\1 Progress\SeekerSol\SE_Reverberation.cs" />
+        <Compile Include="Essence\1 Progress\SeekerSol\xSeekerSoldierEssence.cs" />
         <Compile Include="Essence\1 Progress\SGolem\SE_GolemCore.cs" />
         <Compile Include="Essence\1 Progress\SGolem\xStoneGolemEssence.cs" />
         <Compile Include="Essence\1 Progress\Thungr\SE_Arrogance.cs" />
@@ -204,7 +206,6 @@
         <Compile Include="Essence\1 Progress\Fenring\xFenringEssence.cs" />
         <Compile Include="Essence\1 Progress\xSeekerEssence.cs" />
         <Compile Include="Essence\1 Progress\xSeekerQueenEssence.cs" />
-        <Compile Include="Essence\1 Progress\xSeekerSoldierEssence.cs" />
         <Compile Include="ExpMethods.cs" />
         <Compile Include="Extra and Status Effects\CooldownStatusEffectsLI.cs" />
         <Compile Include="Extra and Status Effects\CoroutineRunner.cs" />
@@ -213,6 +214,7 @@
         <Compile Include="Extra and Status Effects\RPC_LI.cs" />
         <Compile Include="Extra and Status Effects\SE_TimedDeath.cs" />
         <Compile Include="LackingImaginationGlobal.cs" />
+        <Compile Include="LackingImaginationTutorials.cs" />
         <Compile Include="LackingImaginationUtilities.cs" />
         <Compile Include="Managers\CreatureManager.cs" />
         <Compile Include="Managers\ItemDataManager.cs" />

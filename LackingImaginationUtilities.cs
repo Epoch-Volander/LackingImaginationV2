@@ -97,8 +97,13 @@ namespace LackingImaginationV2
             EssenceItemData.equipedEssence = EssenceItemData.GetEquippedEssence();
             for (int i = 0; i < LackingImaginationV2Plugin.EquipSlotCount; i++)
             {
-                if (EssenceItemData.equipedEssence[i] != null && LackingImaginationV2Plugin.abilitiesStatus[i] == null)
+                if (EssenceItemData.equipedEssence[i] != null /*&& LackingImaginationV2Plugin.abilitiesStatus[i] == null*/)
                 {
+                    if(LackingImaginationV2Plugin.abilitiesStatus[i] != null)
+                    {
+                        UnityEngine.Object.Destroy(LackingImaginationV2Plugin.abilitiesStatus[i].gameObject);
+                    }
+                    
                     RectTransform rectTransform = UnityEngine.Object.Instantiate(hud.m_statusEffectTemplate, pos, rot, t);
                     rectTransform.gameObject.SetActive(value: true);
                     rectTransform.gameObject.transform.localScale *= 1.35f;
@@ -126,7 +131,7 @@ namespace LackingImaginationV2
                  }
              }
          }
-
+         
          private static List<string> Ability_CoolDowns = new List<string>()
          {
              "Ability1_CoolDown",

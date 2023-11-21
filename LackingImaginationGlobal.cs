@@ -2495,6 +2495,20 @@ namespace LackingImaginationV2
                }
            }
        }
+       public static float c_seekersoldierReverberationSED
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_seekersoldierReverberationSED"]/100;
+               }
+               catch
+               {
+                   return 0.8f;
+               }
+           }
+       }
        public static float c_seekersoldierReverberationArmor
        {
            get
