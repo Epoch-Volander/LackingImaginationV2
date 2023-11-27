@@ -44,7 +44,7 @@ namespace LackingImaginationV2
                             m_prefab = ZNetScene.instance.GetPrefab("fx_fenring_burning_hand"),
                             m_enabled = true,
                             m_variant = 0,
-                            m_attach = false,
+                            m_attach = true,
                             m_follow = true,
                             m_childTransform = "RightHandMiddle3_end"
                         }

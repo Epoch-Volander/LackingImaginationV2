@@ -33,7 +33,7 @@ namespace LackingImaginationV2
                         m_prefab = LackingImaginationV2Plugin.fx_Longinus,
                         m_enabled = true,
                         m_variant = -1,
-                        m_attach = false,
+                        m_attach = true,
                         m_follow = true,
                         m_inheritParentScale = true,
                         m_multiplyParentVisualScale = true,
