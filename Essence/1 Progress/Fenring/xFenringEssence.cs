@@ -17,9 +17,14 @@ namespace LackingImaginationV2
     public static class xFenringEssence // to do over, has leap animation to add
     {
         public static string Ability_Name = "Moonlit \nLeap";
+        
+        public static bool FenringController = false;
+        
         public static void Process_Input(Player player, int position)
         {
            
+            
+            
             // if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
             // {
             //     LackingImaginationV2Plugin.Log($"xFenringEssence Button was pressed");

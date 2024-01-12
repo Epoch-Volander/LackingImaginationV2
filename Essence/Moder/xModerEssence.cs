@@ -54,9 +54,11 @@ namespace LackingImaginationV2
                 if (player.IsBlocking())//just frost
                 {
                     LackingImaginationV2Plugin.UseGuardianPower = false;
-                    ModerController = true;
+                    // ModerController = true;
+                    RPC_LI.AnimationCaller("Moder", true);
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                    ModerController = false;
+                    // ModerController = false;
+                    RPC_LI.AnimationCaller("Moder", false);
 
                     ScheduleBreath(player);
                 }

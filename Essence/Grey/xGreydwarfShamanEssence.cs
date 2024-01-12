@@ -53,9 +53,11 @@ namespace LackingImaginationV2
             yield return new WaitForSeconds(animDelay);
             
             LackingImaginationV2Plugin.UseGuardianPower = false;
-            GreydwarfShamanController = true;
+            // GreydwarfShamanController = true;
+            RPC_LI.AnimationCaller("Greydwarf", true);
             ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-            GreydwarfShamanController = false;
+            // GreydwarfShamanController = false;
+            RPC_LI.AnimationCaller("Greydwarf", false);
             
             yield return new WaitForSeconds(healDelay);
             

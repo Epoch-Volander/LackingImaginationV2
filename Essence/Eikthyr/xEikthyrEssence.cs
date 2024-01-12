@@ -42,10 +42,11 @@ namespace LackingImaginationV2
                 UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("sfx_eikthyr_death"), player.transform.position, Quaternion.identity);
                
                 LackingImaginationV2Plugin.UseGuardianPower = false;
-                EikthyrController = true;
+                // EikthyrController = true;
+                RPC_LI.AnimationCaller("Eikthyr", true);
                 ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                EikthyrController = false;
-              
+                // EikthyrController = false;
+                RPC_LI.AnimationCaller("Eikthyr", false);
                 
                 ScheduleLightning(player);
 

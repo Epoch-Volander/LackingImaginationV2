@@ -287,7 +287,7 @@ namespace LackingImaginationV2
             }
             if (EssenceItemData.equipedEssence[position] == "$item_seeker_essence")
             {
-                xSeekerEssence.Process_Input(Player.m_localPlayer);
+                xSeekerEssence.Process_Input(Player.m_localPlayer, position);
                 return;
             }
             if (EssenceItemData.equipedEssence[position] == "$item_seeker_brute_essence")
@@ -803,8 +803,30 @@ namespace LackingImaginationV2
              }
          }
 
+         [HarmonyPatch(typeof(Menu), nameof(Menu.OnLogoutYes))]
+        public class _OnLogoutYes_Patch
+        {
+            public static void Prefix()
+            {
+               Player.m_localPlayer.GetSEMan().RemoveAllStatusEffects();
+               Debug.Log("Logout");
+            }
+        }
+        
+        [HarmonyPatch(typeof(Menu),  nameof(Menu.OnQuitYes))]
+        public class _OnQuitYes_Patch
+        {
+            public static void Prefix()
+            {
+                Player.m_localPlayer.GetSEMan().RemoveAllStatusEffects();
+            }
+        }
 
-
+        
+        
+        
+        
+        
          public static bool Ability1_Input_Down
         {
             get

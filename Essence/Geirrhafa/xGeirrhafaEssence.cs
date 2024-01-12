@@ -82,11 +82,13 @@ namespace LackingImaginationV2
                     }
                 };
                 LackingImaginationV2Plugin.UseGuardianPower = false;
-                GeirrhafaController = true;
-                RPC_LI.SendStringToServer("GeirrhafaControllerTrue");
+                // GeirrhafaController = true;
+                // RPC_LI.SendStringToServer("GeirrhafaControllerTrue");
+                RPC_LI.AnimationCaller("Geirrhafa", true);
                 ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                RPC_LI.SendStringToServer("GeirrhafaControllerFalse");
-                GeirrhafaController = false;
+                // RPC_LI.SendStringToServer("GeirrhafaControllerFalse");
+                // GeirrhafaController = false;
+                RPC_LI.AnimationCaller("Geirrhafa", false);
 
                 m_startEffects.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
                 ScheduleEffects(player, m_HandEffectsRight, m_HandEffectsLeft);

@@ -109,13 +109,15 @@ namespace LackingImaginationV2
             {
                 GameObject Ulv = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Ulv"), position, Quaternion.identity);
                 Ulv.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
-                Ulv.GetComponent<Humanoid>().m_name = "Ulv(Ally)";
+                // Ulv.GetComponent<Humanoid>().m_name = "Ulv(Ally)";
                 Ulv.GetComponent<ZSyncTransform>().m_syncScale = true;
-                Ulv.GetComponent<Transform>().localScale = 0.8f * Vector3.one;
+                Ulv.GetComponent<ZNetView>().SetLocalScale(0.7f * Vector3.one);
                 Ulv.GetComponent<Humanoid>().SetMaxHealth(Ulv.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_ulvTerritorialSlumberSummonHealth);
                 Ulv.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
                 Ulv.AddComponent<Tameable>();
-                Ulv.GetComponent<Tameable>().Tame();
+                // Ulv.GetComponent<Tameable>().Tame();
+                Ulv.GetComponent<Character>().SetTamed(true);
+                Ulv.GetComponent<Tameable>().SetText("Ulv(Ally)");
                 Ulv.GetComponent<Tameable>().m_unsummonDistance = 100f;
                 Ulv.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                 CharacterDrop characterDrop = Ulv.GetComponent<CharacterDrop>();

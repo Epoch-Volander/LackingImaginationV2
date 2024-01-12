@@ -47,7 +47,7 @@ namespace LackingImaginationV2
                                     m_prefab = LackingImaginationV2Plugin.fx_BloodWell,
                                     m_enabled = true,
                                     m_variant = 0,
-                                    m_attach = false,
+                                    m_attach = true,
                                     m_follow = true,
                                     m_inheritParentScale = true,
                                     m_multiplyParentVisualScale = true,

@@ -817,7 +817,7 @@ namespace LackingImaginationV2
                     m_label = "xBrenna",
                     m_name = "Brenna_Exp",
                     m_text = "Essence Power: Vulcan\n\n" +
-                             "Active: Summon the bound mace Vulcan.\n\n" +
+                             "Active: Summon the bound great sword Vulcan.\n\n" +
                              "Active(Recast): Vulcan secondary attack changes to a throw.\n\n" +
                              "Active(Re-Recast): Vulcan secondary attack returns to normal.\n\n" +
                              "Positive Passive: Sacrifice a fully upgraded Krom to Awaken Vulcan permanently.\n\n" +

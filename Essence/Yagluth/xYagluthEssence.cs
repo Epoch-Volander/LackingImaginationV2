@@ -47,10 +47,12 @@ namespace LackingImaginationV2
                 if (player.IsBlocking())
                 {
                     LackingImaginationV2Plugin.UseGuardianPower = false;
-                    YagluthController1 = true;
+                    // YagluthController1 = true;
+                    RPC_LI.AnimationCaller("Yagluth1", true);
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                    YagluthController1 = false;
-
+                    // YagluthController1 = false;
+                    RPC_LI.AnimationCaller("Yagluth1", false);
+                    
                     ScheduleMeteor(player);
                     staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
                     staticCharge += 20;
@@ -59,9 +61,11 @@ namespace LackingImaginationV2
                 else if (player.IsCrouching())
                 {
                     LackingImaginationV2Plugin.UseGuardianPower = false;
-                    YagluthController2 = true;
+                    // YagluthController2 = true;
+                    RPC_LI.AnimationCaller("Yagluth2", true);
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                    YagluthController2 = false;
+                    // YagluthController2 = false;
+                    RPC_LI.AnimationCaller("Yagluth2", false);
 
                     ScheduleNova(player);
                     staticCharge = int.Parse(xYagluthEssencePassive.YagluthStats[0]);
@@ -296,15 +300,16 @@ namespace LackingImaginationV2
             {
                 if (EssenceItemData.equipedEssence.Contains("$item_yagluth_essence"))
                 {
-                    if(YagluthStats[0] != "0")
+                    if(int.Parse(YagluthStats[0]) > 0)
                     {
                         timer -= dt;
                         if (timer <= 0f)
                         {
-                            timer = 30f;
-                            YagluthStats[0] = (int.Parse(YagluthStats[0]) - 5).ToString();
+                            timer = 60f;
+                            YagluthStats[0] = (int.Parse(YagluthStats[0]) - 10).ToString();
                         }
                     }
+                    if (int.Parse(YagluthStats[0]) < 0) YagluthStats[0] = "0";
                     if (int.Parse(YagluthStats[0]) >= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap - 19
                         && int.Parse(YagluthStats[0]) <= (int)LackingImaginationGlobal.c_yagluthCulminationStaticCap
                         && !boolAura && !__instance.IsDead() && !__instance.InCutscene() && !__instance.IsTeleporting())
@@ -318,7 +323,7 @@ namespace LackingImaginationV2
                                     m_prefab = ZNetScene.instance.GetPrefab("fx_Lightning"),
                                     m_enabled = true,
                                     m_variant = 0,
-                                    m_attach = false,
+                                    m_attach = true,
                                     m_follow = true,
                                     m_inheritParentScale = true,
                                     m_multiplyParentVisualScale = true,

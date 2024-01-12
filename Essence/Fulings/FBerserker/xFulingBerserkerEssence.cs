@@ -108,7 +108,10 @@ namespace LackingImaginationV2
                         {
                             currentSize += growthSpeed * Time.deltaTime;
                             currentSize = Mathf.Min(currentSize, targetSize); // Ensure we don't exceed the target size
-                            __instance.transform.localScale = currentSize * Vector3.one;
+                            // __instance.transform.localScale = currentSize * Vector3.one;
+                            RPC_LI.SizeCaller(currentSize, Game.instance.GetPlayerProfile().GetPlayerID());
+                            
+                            // __instance.GetComponent<ZNetView>().SetLocalScale(currentSize * Vector3.one);
                         }
 
                         if (currentSize == targetSize)
@@ -133,7 +136,11 @@ namespace LackingImaginationV2
                         {
                             currentSize -= shrinkSpeed * Time.deltaTime;
                             currentSize = Mathf.Max(currentSize, targetSize); // Ensure we don't go smaller than the original size
-                            __instance.transform.localScale = currentSize * Vector3.one;
+                            // __instance.transform.localScale = currentSize * Vector3.one;
+                            
+                            RPC_LI.SizeCaller(currentSize, Game.instance.GetPlayerProfile().GetPlayerID());
+                            
+                            // __instance.GetComponent<ZNetView>().SetLocalScale(currentSize * Vector3.one);
                         }
 
                         if (currentSize == targetSize)

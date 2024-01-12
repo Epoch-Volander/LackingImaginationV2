@@ -47,7 +47,7 @@ namespace LackingImaginationV2
                                 m_prefab = ZNetScene.instance.GetPrefab("fx_fenring_frost_hand_aoestart"),
                                 m_enabled = true,
                                 m_variant = 0,
-                                m_attach = false,
+                                m_attach = true,
                                 m_follow = true,
                                 m_childTransform = "RightHand_Attach"
                             }
@@ -77,9 +77,11 @@ namespace LackingImaginationV2
                     }
 
                     LackingImaginationV2Plugin.UseGuardianPower = false;
-                    ElderController = true;
+                    // ElderController = true;
+                    RPC_LI.AnimationCaller("Elder", true);
                     ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                    ElderController = false;
+                    // ElderController = false;
+                    RPC_LI.AnimationCaller("Elder", false);
 
                     SE_AncientAwe se_ancientawe = (SE_AncientAwe)ScriptableObject.CreateInstance(typeof(SE_AncientAwe));
                     se_ancientawe.m_ttl = SE_AncientAwe.m_baseTTL;
@@ -144,12 +146,12 @@ namespace LackingImaginationV2
             Vector3 randomPosition = currentCharacter.transform.position + new Vector3(randomCirclePoint.x, 0f, randomCirclePoint.y);
             GameObject tenta = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("TentaRoot"), randomPosition, Quaternion.identity);   
             tenta.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
-            tenta.GetComponent<Humanoid>().m_name = "TentaRoot(Ally)";
+            // tenta.GetComponent<Humanoid>().m_name = "TentaRoot(Ally)";
             tenta.GetComponent<Humanoid>().SetMaxHealth(tenta.GetComponent<Humanoid>().GetMaxHealthBase() * 8f);
-            // tenta.GetComponent<Humanoid>().Invoke();
             tenta.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
             tenta.AddComponent<Tameable>();
-            tenta.GetComponent<Tameable>().Tame();
+            tenta.GetComponent<Character>().SetTamed(true);
+            tenta.GetComponent<Tameable>().SetText("TentaRoot(Ally)");
             tenta.GetComponent<Tameable>().m_unsummonDistance = 100f;
             tenta.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
             CharacterDrop characterDrop = tenta.GetComponent<CharacterDrop>();

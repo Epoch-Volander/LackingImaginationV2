@@ -57,9 +57,11 @@ namespace LackingImaginationV2
                 m_HandEffectsRight.Create(player.GetCenterPoint(), player.transform.rotation, player.transform, player.GetRadius() * 2f, player.GetPlayerModel());
 
                 LackingImaginationV2Plugin.UseGuardianPower = false;
-                CultistController = true;
+                // CultistController = true;
+                RPC_LI.AnimationCaller("Cultist", true);
                 ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                CultistController = false;
+                // CultistController = false;
+                RPC_LI.AnimationCaller("Cultist", false);
 
                 GameObject prefab = ZNetScene.instance.GetPrefab("DvergerStaffFire_fire_aoe");
 

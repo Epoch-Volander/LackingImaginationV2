@@ -57,136 +57,6 @@ namespace LackingImaginationV2
         // public Texture2D tex;
         // private Sprite mySprite;
         // private SpriteRenderer sr;
-
-
-        public static Dictionary<Heightmap.Biome, List<string>> biomeDictionary = new Dictionary<Heightmap.Biome, List<string>>
-        {
-            { Heightmap.Biome.Meadows, new List<string> {"Meadows_Exp", "1"} },
-            { Heightmap.Biome.BlackForest, new List<string> {"BlackForest_Exp", "2"} },
-            { Heightmap.Biome.Swamp, new List<string> {"Swamp_Exp", "3"} },
-            { Heightmap.Biome.Ocean, new List<string> {"Ocean_Exp", "4"} },
-            { Heightmap.Biome.Mountain, new List<string> {"Mountain_Exp", "4"} },
-            { Heightmap.Biome.Plains, new List<string> {"Plains_Exp", "5"} },
-            { Heightmap.Biome.Mistlands, new List<string> {"Mistlands_Exp", "6"} },
-            { Heightmap.Biome.AshLands, new List<string> {"AshLands_Exp", "7"} },
-            { Heightmap.Biome.DeepNorth, new List<string> {"DeepNorth_Exp", "8"} }
-        };
-        
-        public static Dictionary<string, List<string>> locationDictionary = new Dictionary<string,List<string>>
-        {
-            // dungeaonx2
-            { "Crypt2(Clone)",  new List<string> {"BurialChambers_Exp", "4"} },
-            { "Crypt3(Clone)", new List<string> {"BurialChambers_Exp", "4"} },
-            { "Crypt4(Clone)", new List<string> {"BurialChambers_Exp", "4"} },
-            { "TrollCave02(Clone)", new List<string> {"TrollCave_Exp", "4"} },
-            { "SunkenCrypt4(Clone)", new List<string> {"SunkenCrypt_Exp", "6"} },
-            { "MountainCave02(Clone)", new List<string> {"FrostCave_Exp", "8"} },
-            { "GoblinCamp2(Clone)", new List<string> {"GoblinCamp_Exp", "10"} },
-            { "Mistlands_DvergrTownEntrance1(Clone)", new List<string> {"InfectedMine_Exp", "12"} },
-            { "Mistlands_DvergrTownEntrance2(Clone)", new List<string> {"InfectedMine_Exp", "12"} },
-            //Vendors x2
-            { "Vendor_BlackForest(Clone)", new List<string> {"Haldor_Exp", "4"} },
-            { "Hildir_camp(Clone)", new List<string> {"Hildir_Exp", "4"} },
-            //special x1
-            { "InfestedTree01(Clone)", new List<string> {"InfestedTree_Exp", "3"} }, //swamp
-            { "DrakeNest01(Clone)", new List<string> {"DrakeNest_Exp", "4"} }, // mountain
-            { "TarPit1(Clone)", new List<string> {"TarPit_Exp", "5"} }, // plains
-            { "TarPit2(Clone)", new List<string> {"TarPit_Exp", "5"} }, // plains
-            { "TarPit3(Clone)", new List<string> {"TarPit_Exp", "5"} }, // plains
-            { "Mistlands_Harbour1(Clone)", new List<string> {"DvergrHarbour_Exp", "6"} }, // mist
-            // Runestones x1
-            { "Runestone_Meadows(Clone)",  new List<string> {"MeadowRune_Exp", "1"} }, //meadow
-            { "Runestone_Boars(Clone)", new List<string> {"BoarRune_Exp", "1"} }, //meadow
-            { "Runestone_BlackForest(Clone)", new List<string> {"BlackForestRune_Exp", "2"} }, //black
-            { "Runestone_Greydwarfs(Clone)", new List<string> {"GreydwarfRune_Exp", "2"} }, //black
-            { "Runestone_Swamps(Clone)", new List<string> {"SwampRune_Exp", "3"} }, //swamp
-            { "Runestone_Draugr(Clone)", new List<string> {"DraugrRune_Exp", "3"} }, //swamp
-            { "Runestone_Mountains(Clone)", new List<string> {"MountainRune_Exp", "4"} }, // mountain
-            { "DrakeLorestone(Clone)", new List<string> {"DrakeRune_Exp", "4"} }, // mountain
-            { "Runestone_Plains(Clone)", new List<string> {"PlainsRune_Exp", "5"} }, // plains
-            { "Runestone_Mistlands(Clone)",  new List<string> {"MistRune_Exp", "6"} }, // mist
-            //mini boss locationsx3
-            { "Hildir_crypt(Clone)", new List<string> {"ForestCryptHildir_Exp", "6"} },
-            { "Hildir_cave(Clone)", new List<string> {"CaveHildir_Exp", "12"} },
-            { "Hildir_plainsfortress(Clone)", new List<string> {"PlainsFortHildir_Exp", "15"} },
-            { "Mistlands_GuardTower1_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
-            { "Mistlands_GuardTower2_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
-            { "Mistlands_GuardTower3_new(Clone)", new List<string> {"DvergrTower_Exp", "18"} },
-            { "Mistlands_Excavation1(Clone)", new List<string> {"DvergrExcavation_Exp", "18"} },
-            { "Mistlands_Excavation2(Clone)", new List<string> {"DvergrExcavation_Exp", "18"} },
-            { "Mistlands_Excavation3(Clone)", new List<string> {"DvergrExcavation_Exp", "18"} },
-            //Altar x3
-            { "Eikthyrnir(Clone)",  new List<string> {"EikthyrSacrifice_Exp", "3"} },
-            { "GDKing(Clone)", new List<string> {"TheElderSacrifice_Exp", "6"} },
-            { "Bonemass(Clone)", new List<string> {"BoneMassSacrifice_Exp", "9"} },
-            { "Dragonqueen(Clone)", new List<string> {"ModerSacrifice_Exp", "12"} },
-            { "GoblinKing(Clone)", new List<string> {"YagluthSacrifice_Exp", "15"} },
-            { "Mistlands_DvergrBossEntrance1(Clone)", new List<string> {"SeekerQueenSeal_Exp", "18"} },
-        };
-        
-        public static Dictionary<string, List<string>> trophyDictionary = new Dictionary<string, List<string>>
-        {
-            //  item name                                 tutorial name, level gain
-            //BOSS x5
-            { "$item_trophy_eikthyr", new List<string> { "Eikthyr_Exp", "5" } },
-            { "$item_trophy_elder", new List<string> { "TheElder_Exp", "10" } },
-            { "$item_trophy_bonemass", new List<string> { "BoneMass_Exp", "15" } },
-            { "$item_trophy_dragonqueen", new List<string> { "Moder_Exp", "20" } },
-            { "$item_trophy_goblinking", new List<string> { "Yagluth_Exp", "25" } },
-            { "$item_trophy_seekerqueen", new List<string> { "SeekerQueen_Exp", "30" } },
-            //Meadow
-            { "$item_trophy_boar", new List<string> { "Boar_Exp", "1" } }, 
-            { "$item_trophy_deer", new List<string> { "Deer_Exp", "1" } },
-            { "$item_trophy_greydwarf", new List<string> { "Greydwarf_Exp", "1" } },
-            { "$item_trophy_neck", new List<string> { "Neck_Exp", "1" } },
-            //Black
-            { "$item_trophy_greydwarfbrute", new List<string> { "GreydwarfBrute_Exp", "2" } },
-            { "$item_trophy_greydwarfshaman", new List<string> { "GreydwarfShaman_Exp", "2" } },
-            { "$item_trophy_skeleton", new List<string> { "Skeleton_Exp", "2" } },
-            //Area Black x2
-            { "$item_trophy_troll", new List<string> { "Troll_Exp", "4" } },
-            { "$item_trophy_skeletonpoison", new List<string> { "RancidRemains_Exp", "4" } },
-            //Swamp
-            { "$item_trophy_blob", new List<string> { "Blob_Exp", "3" } },
-            { "$item_trophy_draugrelite", new List<string> { "DraugrElite_Exp", "3" } },
-            { "$item_trophy_draugr", new List<string> { "Draugr_Exp", "3" } },
-            { "$item_trophy_leech", new List<string> { "Leech_Exp", "3" } },
-            { "$item_trophy_surtling", new List<string> { "Surtling_Exp", "3" } },
-            //Area Swamp x2
-            { "$item_trophy_abomination", new List<string> { "Abomination_Exp", "6" } },
-            { "$item_trophy_wraith", new List<string> { "Wraith_Exp", "6" } },
-            //Mountain
-            { "$item_trophy_fenring", new List<string> { "Fenring_Exp", "4" } },
-            { "$item_trophy_hatchling", new List<string> { "Drake_Exp", "4" } },
-            { "$item_trophy_ulv", new List<string> { "Ulv_Exp", "4" } },
-            { "$item_trophy_wolf", new List<string> { "Wolf_Exp", "4" } },
-            //Area Mountain x2
-            { "$item_trophy_sgolem", new List<string> { "StoneGolem_Exp", "8" } },
-            { "$item_trophy_cultist", new List<string> { "Cultist_Exp", "8" } },
-            //Ocean x2
-            { "$item_trophy_serpent", new List<string> { "Serpent_Exp", "8" } },
-            //Plains
-            { "$item_trophy_deathsquito", new List<string> { "Deathsquito_Exp", "5" } },
-            { "$item_trophy_goblin", new List<string> { "Fuling_Exp", "5" } },
-            { "$item_trophy_growth", new List<string> { "Growth_Exp", "5" } },
-            { "$item_trophy_lox", new List<string> { "Lox_Exp", "5" } },
-            //Area Plains x2
-            { "$item_trophy_goblinbrute", new List<string> { "FulingBerserker_Exp", "10" } }, 
-            { "$item_trophy_goblinshaman", new List<string> { "FulingShaman_Exp", "10" } },
-            //Mist
-            { "$item_trophy_gjall", new List<string> { "Gjall_Exp", "6" } },
-            { "$item_trophy_hare", new List<string> { "Hare_Exp", "6" } },
-            { "$item_trophy_seeker", new List<string> { "Seeker_Exp", "6" } },
-            { "$item_trophy_tick", new List<string> { "Tick_Exp", "6" } },
-            //Area Mist x2
-            { "$item_trophy_dvergr", new List<string> { "Dvergr_Exp", "12" } },
-            { "$item_trophy_seeker_brute", new List<string> { "SeekerSoldier_Exp", "12" } },
-            //Mini Boss x4
-            { "$item_trophy_cultist_hildir", new List<string> { "Geirrhafa_Exp", "16" } },
-            { "$item_trophy_skeleton_hildir", new List<string> { "Brenna_Exp", "8" } },
-            { "$item_trophy_shamanbro", new List<string> { "Zil_Exp", "20" } },
-            { "$item_trophy_brutebro", new List<string> { "Thungr_Exp", "20" } },
-        };
         
         public static Dictionary<string, List<string>> ItemBundleUnwrapDict = new Dictionary<string, List<string>>()
         {
@@ -395,6 +265,7 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_rancidremainsRancorousCD;
         private static ConfigEntry<float>? li_thungrTyrantCD;
         private static ConfigEntry<float>? li_zilSoulmassCD;
+        private static ConfigEntry<float>? li_seekersoldierReverberationCD;
         
         //Status Duration
         private static ConfigEntry<float>? li_deerHorizonHasteSED;
@@ -411,7 +282,7 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_boarRecklessChargeSED;
         private static ConfigEntry<float>? li_ulvTerritorialSlumberSED;
         private static ConfigEntry<float>? li_thungrTyrantSED;
-
+        private static ConfigEntry<float>? li_seekersoldierReverberationSED;
         
         //Essence
         private static ConfigEntry<float>? li_deerHorizonHaste;
@@ -523,7 +394,9 @@ namespace LackingImaginationV2
         private static ConfigEntry<float>? li_thungrTyrantDisdain;
         private static ConfigEntry<float>? li_zilSoulmassProjectile;
         private static ConfigEntry<float>? li_zilSoulmassPassiveEitr;
-       
+        private static ConfigEntry<float>? li_seekersoldierReverberationArmor;
+        private static ConfigEntry<float>? li_seekersoldierReverberationReflection;
+        
         
         // public static List<string> equipedEssence = new();
         private static LackingImaginationV2Plugin _instance;
@@ -555,7 +428,8 @@ namespace LackingImaginationV2
         public static GameObject? fx_Disdain;
         public static GameObject? fx_ArroBuff;
         public static GameObject? fx_ArroDebuff;
-        
+
+        public static GameObject? fx_Reverberation;
         
         //Prefab3 //originals
         public static GameObject? p_SeaKing;
@@ -603,199 +477,11 @@ namespace LackingImaginationV2
         private static readonly Dictionary<string, AnimationClip> OutsideAnimations = new();
         private static readonly Dictionary<string, RuntimeAnimatorController> CustomizedRuntimeControllers = new();
         private static readonly Dictionary<string, Dictionary<string, string>> replacementMap = new();
+        private static bool _firstInit;
 
 
 
-
-        public static List<List<string>> li_stringList = new List<List<string>>();
-
-        [HarmonyPatch(typeof(PlayerProfile), "SavePlayerToDisk", null)]
-        public static class Save_LI_StringList_Patch
-        {
-            public static void Postfix(PlayerProfile __instance, string ___m_filename, string ___m_playerName)
-            {
-                LackingImaginationV2Plugin.Log($"sav{LackingImaginationV2Plugin.li_stringList.Count}");
-                foreach (List<string> subList in LackingImaginationV2Plugin.li_stringList)
-                {
-                    LackingImaginationV2Plugin.Log($"Sub-list count: {subList.Count}");
-                    foreach (string item in subList)
-                    {
-                        LackingImaginationV2Plugin.Log($"Item: {item}");
-                    }
-
-                    LackingImaginationV2Plugin.Log("End of sub-list");
-                }
-
-                try
-                {
-                    Directory.CreateDirectory(Utils.GetSaveDataPath(FileHelpers.FileSource.Local) +
-                                              "/characters/LackingI");
-                    string text = Utils.GetSaveDataPath(FileHelpers.FileSource.Local) + "/characters/LackingI/" +
-                                  ___m_filename + "_li_strings.fch";
-                    string text3 = Utils.GetSaveDataPath(FileHelpers.FileSource.Local) + "/characters/LackingI/" +
-                                   ___m_filename + "_li_strings.fch.new";
-                    ZPackage zPackage = new ZPackage();
-
-                    // Serialize the string list data
-                    zPackage.Write(LackingImaginationV2Plugin.li_stringList.Count);
-                    foreach (var strList in LackingImaginationV2Plugin.li_stringList)
-                    {
-                        zPackage.Write(strList.Count);
-                        foreach (var str in strList)
-                        {
-                            zPackage.Write(str);
-                        }
-                    }
-
-                    byte[] array = zPackage.GenerateHash();
-                    byte[] array2 = zPackage.GetArray();
-                    FileStream fileStream = File.Create(text3);
-                    BinaryWriter binaryWriter = new BinaryWriter(fileStream);
-                    binaryWriter.Write(array2.Length);
-                    binaryWriter.Write(array2);
-                    binaryWriter.Write(array.Length);
-                    binaryWriter.Write(array);
-                    binaryWriter.Flush();
-                    fileStream.Flush(flushToDisk: true);
-                    fileStream.Close();
-                    fileStream.Dispose();
-                    if (File.Exists(text))
-                    {
-                        File.Delete(text);
-                    }
-
-                    File.Move(text3, text);
-                }
-                catch (NullReferenceException ex)
-                {
-                    LackingImaginationV2Plugin.Log($"failed to save");
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(PlayerProfile), "LoadPlayerFromDisk", null)]
-        public class Load_LI_StringList_Patch
-        {
-            public static void Postfix(PlayerProfile __instance, string ___m_filename, string ___m_playerName)
-            {
-                try
-                {
-                    if (LackingImaginationV2Plugin.li_stringList == null)
-                    {
-                        LackingImaginationV2Plugin.li_stringList = new List<List<string>>();
-                    }
-
-                    LackingImaginationV2Plugin.li_stringList.Clear();
-
-                    LackingImaginationV2Plugin.li_stringList.Add(xLoxEssencePassive.LoxEaten);
-                    LackingImaginationV2Plugin.li_stringList.Add(xWolfEssencePassive.WolfStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xFulingShamanEssencePassive.FulingShamanStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xSurtlingEssencePassive.SurtlingStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xNeckEssencePassive.NeckStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xLeechEssencePassive.LeechStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xGreydwarfEssencePassive.GreydwarfStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xSkeletonEssencePassive.SkeletonStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xDraugrRot.RotStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xDraugrEssencePassive.DraugrStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xDraugrEliteEssencePassive.DraugrEliteStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xSeaSerpentEssencePassive.SeaSerpentStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xTickEssencePassive.TickStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xStoneGolemEssencePassive.StoneGolemStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xYagluthEssencePassive.YagluthStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xBrennaEssencePassive.BrennaStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xRancidRemainsEssencePassive.RancidRemainsStats);
-                    LackingImaginationV2Plugin.li_stringList.Add(xThungrEssencePassive.ThungrStats);
-                    
-                    ZPackage zPackage = LoadStringDataFromDisk(___m_filename);
-                    if (zPackage == null)
-                    {
-                        // No data for the string lists
-                        goto LoadExit;
-                    }
-
-                    int listCount = zPackage.ReadInt();
-                    for (int i = 0; i < listCount; i++)
-                    {
-                        int strCount = zPackage.ReadInt();
-                        if (li_stringList[i].Count == 0)
-                        {
-                            for (int j = 0; j < strCount; j++)
-                            {
-                                string str = zPackage.ReadString();
-                                li_stringList[i].Add(str);
-                            }
-                        }
-                        else
-                        {
-                            for (int j = 0; j < strCount; j++)
-                            {
-                                string str = zPackage.ReadString();
-                                li_stringList[i][j] = str;
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogWarning("Exception while loading string list: " + ex.ToString());
-                }
-
-                LoadExit: ;
-            }
-
-            private static ZPackage LoadStringDataFromDisk(string m_filename)
-            {
-                string text = Utils.GetSaveDataPath(FileHelpers.FileSource.Local) + "/characters/LackingI/" +
-                              m_filename + "_li_strings.fch";
-                FileStream fileStream = null;
-                try
-                {
-                    fileStream = File.OpenRead(text);
-                }
-                catch
-                {
-                    return null;
-                }
-
-                if (fileStream == null)
-                {
-                    return null;
-                }
-
-                byte[] data;
-
-                BinaryReader binaryReader = null;
-                try
-                {
-                    binaryReader = new BinaryReader(fileStream);
-                    int count = binaryReader.ReadInt32();
-                    data = binaryReader.ReadBytes(count);
-                    int count2 = binaryReader.ReadInt32();
-                    binaryReader.ReadBytes(count2);
-                }
-                catch
-                {
-                    if (binaryReader != null)
-                    {
-                        binaryReader.Close();
-                    }
-
-                    fileStream.Dispose();
-                    return null;
-                }
-                finally
-                {
-                    if (binaryReader != null)
-                    {
-                        binaryReader.Close();
-                    }
-                }
-
-                fileStream.Dispose();
-                return new ZPackage(data);
-            }
-        }
-
+       
         
         
         public enum Toggle
@@ -844,9 +530,15 @@ namespace LackingImaginationV2
             Rancorous.Name.English("Rancorous"); 
             Rancorous.Description.English("The malice of a nameless sinner permeates the weapon.");
 
-            
+
+            // Creature SeekerPlayer = new Creature("seekerp", "SeekerPlayer");
             
 
+            
+            
+            
+            
+            
 
             //Prefabs 2
             fx_Giantization = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "RotVariant1");
@@ -869,6 +561,8 @@ namespace LackingImaginationV2
             fx_Disdain = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "ThungrDisdain");
             fx_ArroBuff = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "ThungrBuff");
             fx_ArroDebuff = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "ThungrDebuff");
+            
+            fx_Reverberation = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Thorns");
        
             //Prefab 3
             p_SeaKing = ItemManager.PrefabManager.RegisterPrefab("essence_bundle_2", "Serpent_projectile");
@@ -877,14 +571,14 @@ namespace LackingImaginationV2
             
             
             //Prefab 4
-            SG_Spiked_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_spikes_Player");
-            StoneGolem_Player = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_Player");
-            SG_Hat = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_hat_Player");
-            SG_Club_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_clubs_Player");
-            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack1_spike_Player");
-            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack2_left_groundslam_Player");
-            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack3_spikesweep_Player");
-            ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack_doublesmash_Player");
+            // SG_Spiked_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_spikes_Player");
+            // StoneGolem_Player = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_Player");
+            // SG_Hat = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_hat_Player");
+            // SG_Club_Arms = ItemManager.PrefabManager.RegisterPrefab("sgasset", "StoneGolem_clubs_Player");
+            // ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack1_spike_Player");
+            // ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack2_left_groundslam_Player");
+            // ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack3_spikesweep_Player");
+            // ItemManager.PrefabManager.RegisterPrefab("sgasset", "stonegolem_attack_doublesmash_Player");
             
             
             //Sound Prefabs
@@ -1143,8 +837,15 @@ namespace LackingImaginationV2
             li_zilSoulmassCD = config("Essence Zil Modifiers", "li_zilSoulmassCD", 30f, "Cooldown");
             li_zilSoulmassProjectile = config("Essence Zil Modifiers", "li_zilSoulmassProjectile", 150f, "Modifies the damage of Soulmass Projectile");
             li_zilSoulmassPassiveEitr = config("Essence Zil Modifiers", "li_zilSoulmassPassiveEitr", 50f, "Modifies bonus Eitr passive");
+            //Seeker Soldier
+            li_seekersoldierReverberationCD = config("Essence Seeker Soldier Modifiers", "li_seekersoldierReverberationCD", 30f, "Cooldown");
+            li_seekersoldierReverberationSED = config("Essence Seeker Soldier Modifiers", "li_seekersoldierReverberationSED", 80f, new ConfigDescription("Percentage of Cooldown that the status effect will last", new AcceptableValueRange<float>(0f, 100f)));
+            li_seekersoldierReverberationArmor = config("Essence Seeker Soldier Modifiers", "li_seekersoldierReverberationArmor", 75f, "Bonus Armor passive");
+            li_seekersoldierReverberationReflection = config("Essence Seeker Soldier Modifiers", "li_seekersoldierReverberationReflection", 75f, new ConfigDescription("Percentage of Armor Returned as Damage", new AcceptableValueRange<float>(0f, 1000f)));
 
-
+            
+            
+            
             
             LackingImaginationGlobal.ConfigStrings = new Dictionary<string, float>();
             LackingImaginationGlobal.ConfigStrings.Clear();
@@ -1200,6 +901,7 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_rancidremainsRancorousCD", li_rancidremainsRancorousCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantCD", li_thungrTyrantCD.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_zilSoulmassCD", li_zilSoulmassCD.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seekersoldierReverberationCD", li_seekersoldierReverberationCD.Value);
             
             //Status Duration
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHasteSED", li_deerHorizonHasteSED.Value);
@@ -1216,6 +918,8 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_boarRecklessChargeSED", li_boarRecklessChargeSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_ulvTerritorialSlumberSED", li_ulvTerritorialSlumberSED.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantSED", li_thungrTyrantSED.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seekersoldierReverberationSED", li_seekersoldierReverberationSED.Value);
+            
             
             // Essence
             LackingImaginationGlobal.ConfigStrings.Add("li_deerHorizonHaste", li_deerHorizonHaste.Value);
@@ -1327,6 +1031,9 @@ namespace LackingImaginationV2
             LackingImaginationGlobal.ConfigStrings.Add("li_thungrTyrantDisdain", li_thungrTyrantDisdain.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_zilSoulmassProjectile", li_zilSoulmassProjectile.Value);
             LackingImaginationGlobal.ConfigStrings.Add("li_zilSoulmassPassiveEitr", li_zilSoulmassPassiveEitr.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seekersoldierReverberationArmor", li_seekersoldierReverberationArmor.Value);
+            LackingImaginationGlobal.ConfigStrings.Add("li_seekersoldierReverberationReflection", li_seekersoldierReverberationReflection.Value);
+            
             
             _ = ConfigSync.AddConfigEntry(Sprintkey);
             _ = ConfigSync.AddConfigEntry(Ability1_Hotkey);
@@ -1396,6 +1103,8 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_rancidremainsRancorousCD);
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantCD);
             _ = ConfigSync.AddConfigEntry(li_zilSoulmassCD);
+            _ = ConfigSync.AddConfigEntry(li_seekersoldierReverberationCD);
+            
             
             
             //Status Duration
@@ -1413,7 +1122,7 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_boarRecklessChargeSED);
             _ = ConfigSync.AddConfigEntry(li_ulvTerritorialSlumberSED);
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantSED);
-                
+            _ = ConfigSync.AddConfigEntry(li_seekersoldierReverberationSED);
                 
             // Essence
             _ = ConfigSync.AddConfigEntry(li_deerHorizonHaste);
@@ -1525,6 +1234,10 @@ namespace LackingImaginationV2
             _ = ConfigSync.AddConfigEntry(li_thungrTyrantDisdain); 
             _ = ConfigSync.AddConfigEntry(li_zilSoulmassProjectile);
             _ = ConfigSync.AddConfigEntry(li_zilSoulmassPassiveEitr); 
+            _ = ConfigSync.AddConfigEntry(li_seekersoldierReverberationArmor);
+            _ = ConfigSync.AddConfigEntry(li_seekersoldierReverberationReflection); 
+            
+            
                 
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
@@ -1598,6 +1311,12 @@ namespace LackingImaginationV2
                     if (transform_harbinger.name == "gas_flame")
                     {
                         LackingImaginationV2Plugin.fx_Harbinger = transform_harbinger.gameObject;
+                        LackingImaginationV2Plugin.fx_Harbinger.AddComponent<ZNetView>();
+                        LackingImaginationV2Plugin.fx_Harbinger.AddComponent<ZSyncTransform>();
+                        LackingImaginationV2Plugin.fx_Harbinger.AddComponent<TimedDestruction>();
+                        LackingImaginationV2Plugin.fx_Harbinger.GetComponent<ZSyncTransform>().m_syncPosition = true;
+                        LackingImaginationV2Plugin.fx_Harbinger.GetComponent<ZSyncTransform>().m_syncRotation = true;
+                        LackingImaginationV2Plugin.fx_Harbinger.GetComponent<ZSyncTransform>().m_syncScale = true;
                         break;
                     }
                 }
@@ -1821,61 +1540,67 @@ namespace LackingImaginationV2
         {
             private static void Postfix(Player __instance)
             {
-                
-                if (creatureAnimationClipGeirrhafaIceNova != null && creatureAnimationClipElderSummon != null &&
-                    creatureAnimationClipCultistSpray != null && creatureAnimationClipFenringLeapAttack != null &&
-                    creatureAnimationClipGreyShamanHeal != null && creatureAnimationClipHaldorGreet != null &&
-                    creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null &&
-                    creatureAnimationClipPlayerMace2 != null && creatureAnimationClipBrennaGroundStab != null &&
-                    creatureAnimationClipDvergrStaffRaise != null && creatureAnimationClipPlayerEmoteDespair != null &&
-                    creatureAnimationClipBrennaGroundStab != null && creatureAnimationClipDvergrStaffRaise != null) // ADD REST
+                if (__instance == Player.m_localPlayer)
                 {
-                    LogWarning($"animations good");
-                    AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
-                    OutsideAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
-                    AnimationClip copyOfcreatureAnimationClipElderSummon = Instantiate(creatureAnimationClipElderSummon);
-                    OutsideAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
-                    AnimationClip copyOfcreatureAnimationClipCultistSpray = Instantiate(creatureAnimationClipCultistSpray);
-                    OutsideAnimations["AttackSpray"] = copyOfcreatureAnimationClipCultistSpray;
-                    AnimationClip copyOfcreatureAnimationClipFenringLeapAttack = Instantiate(creatureAnimationClipFenringLeapAttack);
-                    OutsideAnimations["FenringLeap"] = copyOfcreatureAnimationClipFenringLeapAttack;
-                    AnimationClip copyOfcreatureAnimationClipGreyShamanHeal = Instantiate(creatureAnimationClipGreyShamanHeal);
-                    OutsideAnimations["GreyShamanHeal"] = copyOfcreatureAnimationClipGreyShamanHeal;
-                    AnimationClip copyOfcreatureAnimationClipHaldorGreet = Instantiate(creatureAnimationClipHaldorGreet);
-                    OutsideAnimations["HaldorGreet"] = copyOfcreatureAnimationClipHaldorGreet;
-                    AnimationClip copyOfcreatureAnimationClipPlayerEmoteCower = Instantiate(creatureAnimationClipPlayerEmoteCower);
-                    OutsideAnimations["PlayerCower"] = copyOfcreatureAnimationClipPlayerEmoteCower;
-                    AnimationClip copyOfcreatureAnimationClipPlayerEmotePoint = Instantiate(creatureAnimationClipPlayerEmotePoint);
-                    OutsideAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
-                    AnimationClip copyOfcreatureAnimationClipPlayerMace2 = Instantiate(creatureAnimationClipPlayerMace2);
-                    OutsideAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
-                    AnimationClip copyOfcreatureAnimationClipPlayerEmoteDespair = Instantiate(creatureAnimationClipPlayerEmoteDespair);
-                    OutsideAnimations["PlayerDespair"] = copyOfcreatureAnimationClipPlayerEmoteDespair;
-                    AnimationClip copyOfcreatureAnimationClipBrennaGroundStab = Instantiate(creatureAnimationClipBrennaGroundStab);
-                    OutsideAnimations["GroundStab"] = copyOfcreatureAnimationClipBrennaGroundStab;
-                    AnimationClip copyOfcreatureAnimationClipDvergrStaffRaise = Instantiate(creatureAnimationClipDvergrStaffRaise);
-                    OutsideAnimations["RaiseStaff"] = copyOfcreatureAnimationClipDvergrStaffRaise;
-                    
-                    
-                    LackingImaginationV2Plugin.InitAnimation();
+                    if (_firstInit) return;
 
-                    if (CustomizedRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
+                    if (creatureAnimationClipGeirrhafaIceNova != null && creatureAnimationClipElderSummon != null &&
+                        creatureAnimationClipCultistSpray != null && creatureAnimationClipFenringLeapAttack != null &&
+                        creatureAnimationClipGreyShamanHeal != null && creatureAnimationClipHaldorGreet != null &&
+                        creatureAnimationClipPlayerEmoteCower != null && creatureAnimationClipPlayerEmotePoint != null &&
+                        creatureAnimationClipPlayerMace2 != null && creatureAnimationClipBrennaGroundStab != null &&
+                        creatureAnimationClipDvergrStaffRaise != null && creatureAnimationClipPlayerEmoteDespair != null &&
+                        creatureAnimationClipBrennaGroundStab != null && creatureAnimationClipDvergrStaffRaise != null) // ADD REST
                     {
-                        CustomizedRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["AttackSprayControl"] = MakeAOC(replacementMap["AttackSpray"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController);// unused, use it
-                        CustomizedRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController);// unused
-                        CustomizedRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["PlayerDespairControl"] = MakeAOC(replacementMap["PlayerDespair"], __instance.m_animator.runtimeAnimatorController);
-                        CustomizedRuntimeControllers["SkeletonGroundStabControl"] = MakeAOC(replacementMap["GroundStab"], __instance.m_animator.runtimeAnimatorController);// upgrade anim, equip first
-                        CustomizedRuntimeControllers["DvergrRaiseStaffControl"] = MakeAOC(replacementMap["RaiseStaff"], __instance.m_animator.runtimeAnimatorController);// upgrade anim, equip first
+                        // LogWarning($"animations good");
+                        AnimationClip copyOfCreatureAnimationClipGeirrhafaIceNova = Instantiate(creatureAnimationClipGeirrhafaIceNova);
+                        OutsideAnimations["IceNova"] = copyOfCreatureAnimationClipGeirrhafaIceNova;
+                        AnimationClip copyOfcreatureAnimationClipElderSummon = Instantiate(creatureAnimationClipElderSummon);
+                        OutsideAnimations["RootSummon"] = copyOfcreatureAnimationClipElderSummon;
+                        AnimationClip copyOfcreatureAnimationClipCultistSpray = Instantiate(creatureAnimationClipCultistSpray);
+                        OutsideAnimations["AttackSpray"] = copyOfcreatureAnimationClipCultistSpray;
+                        AnimationClip copyOfcreatureAnimationClipFenringLeapAttack = Instantiate(creatureAnimationClipFenringLeapAttack);
+                        OutsideAnimations["FenringLeap"] = copyOfcreatureAnimationClipFenringLeapAttack;
+                        AnimationClip copyOfcreatureAnimationClipGreyShamanHeal = Instantiate(creatureAnimationClipGreyShamanHeal);
+                        OutsideAnimations["GreyShamanHeal"] = copyOfcreatureAnimationClipGreyShamanHeal;
+                        AnimationClip copyOfcreatureAnimationClipHaldorGreet = Instantiate(creatureAnimationClipHaldorGreet);
+                        OutsideAnimations["HaldorGreet"] = copyOfcreatureAnimationClipHaldorGreet;
+                        AnimationClip copyOfcreatureAnimationClipPlayerEmoteCower = Instantiate(creatureAnimationClipPlayerEmoteCower);
+                        OutsideAnimations["PlayerCower"] = copyOfcreatureAnimationClipPlayerEmoteCower;
+                        AnimationClip copyOfcreatureAnimationClipPlayerEmotePoint = Instantiate(creatureAnimationClipPlayerEmotePoint);
+                        OutsideAnimations["PlayerPoint"] = copyOfcreatureAnimationClipPlayerEmotePoint;
+                        AnimationClip copyOfcreatureAnimationClipPlayerMace2 = Instantiate(creatureAnimationClipPlayerMace2);
+                        OutsideAnimations["PlayerMace2"] = copyOfcreatureAnimationClipPlayerMace2;
+                        AnimationClip copyOfcreatureAnimationClipPlayerEmoteDespair = Instantiate(creatureAnimationClipPlayerEmoteDespair);
+                        OutsideAnimations["PlayerDespair"] = copyOfcreatureAnimationClipPlayerEmoteDespair;
+                        AnimationClip copyOfcreatureAnimationClipBrennaGroundStab = Instantiate(creatureAnimationClipBrennaGroundStab);
+                        OutsideAnimations["GroundStab"] = copyOfcreatureAnimationClipBrennaGroundStab;
+                        AnimationClip copyOfcreatureAnimationClipDvergrStaffRaise = Instantiate(creatureAnimationClipDvergrStaffRaise);
+                        OutsideAnimations["RaiseStaff"] = copyOfcreatureAnimationClipDvergrStaffRaise;
 
+
+                        LackingImaginationV2Plugin.InitAnimation();
+
+                        if (CustomizedRuntimeControllers.Count == 0 && Player.m_localPlayer is not null)
+                        {
+                            CustomizedRuntimeControllers["Original"] = MakeAOC(new Dictionary<string, string>(), __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["IceNovaControl"] = MakeAOC(replacementMap["IceNova"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["RootSummonControl"] = MakeAOC(replacementMap["RootSummon"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["AttackSprayControl"] = MakeAOC(replacementMap["AttackSpray"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["FenringLeapControl"] = MakeAOC(replacementMap["FenringLeap"], __instance.m_animator.runtimeAnimatorController); // unused, use it
+                            CustomizedRuntimeControllers["GreyShamanHealControl"] = MakeAOC(replacementMap["GreyShamanHeal"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["HaldorGreetControl"] = MakeAOC(replacementMap["HaldorGreet"], __instance.m_animator.runtimeAnimatorController); // unused
+                            CustomizedRuntimeControllers["PlayerCowerControl"] = MakeAOC(replacementMap["PlayerCowerEmote"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["PlayerPointControl"] = MakeAOC(replacementMap["PlayerPointEmote"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["PlayerMace2Control"] = MakeAOC(replacementMap["PlayerMace2"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["PlayerDespairControl"] = MakeAOC(replacementMap["PlayerDespair"], __instance.m_animator.runtimeAnimatorController);
+                            CustomizedRuntimeControllers["SkeletonGroundStabControl"] = MakeAOC(replacementMap["GroundStab"], __instance.m_animator.runtimeAnimatorController); // upgrade anim, equip first
+                            CustomizedRuntimeControllers["DvergrRaiseStaffControl"] = MakeAOC(replacementMap["RaiseStaff"], __instance.m_animator.runtimeAnimatorController); // upgrade anim, equip first
+
+                        }
                     }
+
+                    _firstInit = true;
                 }
             }
         }
@@ -1950,7 +1675,10 @@ namespace LackingImaginationV2
                     {
                         controllerName = "DvergrRaiseStaffControl";
                     }
-                    
+                    if (xFenringEssence.FenringController)
+                    {
+                        controllerName = "FenringLeapControl";
+                    }
                     
                     
                     // if called before the first Player Start
@@ -1970,1700 +1698,15 @@ namespace LackingImaginationV2
             }
             player.m_animator.runtimeAnimatorController = replace;
             player.m_animator.Update(Time.deltaTime);
+            
         }
         
-        
-        
-        
-        
-        
-        public static bool TakeInput(Player p)
-        {
-            bool result = (!(bool)Chat.instance || !Chat.instance.HasFocus()) && !Console.IsVisible() && !TextInput.IsVisible() && !StoreGui.IsVisible() && !InventoryGui.IsVisible() && !Menu.IsVisible() && (!(bool)TextViewer.instance || !TextViewer.instance.IsVisible()) && !Minimap.IsOpen() && !GameCamera.InFreeFly();
-            if (p.IsDead() || p.InCutscene() || p.IsTeleporting())
-            {
-                result = false;
-            }
-            return result;
-        }
-
-        
-        int maxJumps = xBlobEssencePassive.canDoubleJump + xGrowthEssencePassive.canDoubleJump;
-        public static int jumpCount = 0;
-
-        [HarmonyPatch(typeof(Player), (nameof(Player.Update)), null)]
-        public class AbilityInput_Postfix
-        {
-            public static bool Prefix(Player __instance, ref float ___m_maxAirAltitude, ref Rigidbody ___m_body, ref float ___m_lastGroundTouch /*,ref Animator ___m_animator, float ___m_waterLevel*/)
-            {
-                
-                Player localPlayer = Player.m_localPlayer;
-                if (localPlayer != null && playerEnabled)
-                {
-                    if (LackingImaginationV2Plugin.TakeInput(localPlayer) && !localPlayer.InPlaceMode() && LackingImaginationUtilities.Ability1_Input_Down)
-                    {
-                        LackingImaginationUtilities.AbilityInputPlugin(0, __instance, ___m_body, ___m_maxAirAltitude, ___m_lastGroundTouch);
-                        return false;
-                    }
-                    if (LackingImaginationV2Plugin.TakeInput(localPlayer) && !localPlayer.InPlaceMode() && LackingImaginationUtilities.Ability2_Input_Down)
-                    {
-                        LackingImaginationUtilities.AbilityInputPlugin(1, __instance, ___m_body, ___m_maxAirAltitude, ___m_lastGroundTouch);
-                        return false;
-                    }
-                    if (LackingImaginationV2Plugin.TakeInput(localPlayer) && !localPlayer.InPlaceMode() && LackingImaginationUtilities.Ability3_Input_Down)
-                    {
-                        LackingImaginationUtilities.AbilityInputPlugin(2, __instance, ___m_body, ___m_maxAirAltitude, ___m_lastGroundTouch);
-                        return false;
-                    }
-                    if (LackingImaginationV2Plugin.TakeInput(localPlayer) && !localPlayer.InPlaceMode() && LackingImaginationUtilities.Ability4_Input_Down)
-                    {
-                        LackingImaginationUtilities.AbilityInputPlugin(3, __instance, ___m_body, ___m_maxAirAltitude, ___m_lastGroundTouch);
-                        return false;
-                    }
-                    if (LackingImaginationV2Plugin.TakeInput(localPlayer) && !localPlayer.InPlaceMode() && LackingImaginationUtilities.Ability5_Input_Down)
-                    {
-                        LackingImaginationUtilities.AbilityInputPlugin(4, __instance, ___m_body, ___m_maxAirAltitude, ___m_lastGroundTouch);
-                        return false;
-                    }
-                    
-                    int maxJumps = xBlobEssencePassive.canDoubleJump + xGrowthEssencePassive.canDoubleJump + xHareEssencePassive.canDoubleJump;
-
-                    if (__instance.GetSEMan().HaveStatusEffect("SE_LuckyFoot")) maxJumps *= 2;
-                    
-                    if (ZInput.GetButtonDown("Jump") && !__instance.IsDead() && !__instance.InAttack() && !__instance.IsEncumbered() 
-                        && !__instance.InDodge() && !__instance.IsKnockedBack())
-                    {
-                        // LackingImaginationV2Plugin.Log($"x {maxJumps}");
-                        if (!__instance.IsOnGround() && LackingImaginationV2Plugin.jumpCount < maxJumps) // Check if there are remaining jumps
-                        {
-                            Vector3 velVec = __instance.GetVelocity();
-                            velVec.y = 0f;                    
-                            ___m_body.velocity = (velVec * 2f) + new Vector3(0, 10f, 0f); // You can adjust the jump velocity as needed
-                            LackingImaginationV2Plugin.jumpCount++;
-                            ___m_maxAirAltitude = 0;
-                            ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("jump");
-                        }
-                        else if (__instance.IsOnGround())
-                        {
-                            LackingImaginationV2Plugin.jumpCount = 0; // Reset jump count when landing
-                        }
-                    }
-                }
-                return true;
-            }
-        }
-        
-
-        
-        [HarmonyPatch(typeof(Hud), nameof(Hud.UpdateStatusEffects))]
-        public static class Skill_Icon_Patch
-        {
-            public static void Postfix(Hud __instance)
-            {
-                if(__instance != null && showAbilityIcons.Value)
-                {
-                    if(abilitiesStatus == null)
-                    { 
-                        Debug.Log("== null plug");
-                        abilitiesStatus = new List<RectTransform>();
-                        abilitiesStatus.Clear(); 
-                        for (int i = 0; i < EquipSlotCount; i++) 
-                        {
-                            LackingImaginationV2Plugin.abilitiesStatus.Add(null);
-                        }
-                    }
-                    if (abilitiesStatus != null)
-                    {
-                        for (int j = 0; j < abilitiesStatus.Count; j++)
-                        {
-                            if (abilitiesStatus[j] != null)
-                            {
-                                RectTransform rectTransform2 = abilitiesStatus[j];
-                                Image component = rectTransform2.Find("Icon").GetComponent<Image>();
-                                string iconText = "";
-                                if (j == 0)
-                                {
-                                    component.sprite = AbilitySprites[0];
-                                    if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability1_CoolDown"))
-                                    {
-                                        component.color = abilityCooldownColor;
-                                        iconText = StatusEffect.GetTimeString(Player.m_localPlayer.GetSEMan()
-                                            .GetStatusEffect("Ability1_CoolDown".GetStableHashCode())
-                                            .GetRemaningTime());
-                                    }
-                                    else
-                                    {
-                                        component.color = Color.white;
-                                        iconText = Ability1_Hotkey.Value.ToString();
-                                        if (Ability1_Combokey.Value != KeyCode.None)
-                                        {
-                                            iconText += " + " + Ability1_Combokey.Value.ToString();
-                                        }
-                                    }
-                                }
-                                else if (j == 1)
-                                {
-
-                                    component.sprite = AbilitySprites[1];
-                                    if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability2_CoolDown"))
-                                    {
-                                        component.color = abilityCooldownColor;
-                                        iconText = StatusEffect.GetTimeString(Player.m_localPlayer.GetSEMan()
-                                            .GetStatusEffect("Ability2_CoolDown".GetStableHashCode())
-                                            .GetRemaningTime());
-                                    }
-                                    else
-                                    {
-                                        component.color = Color.white;
-                                        iconText = Ability2_Hotkey.Value.ToString();
-                                        if (Ability2_Combokey.Value != KeyCode.None)
-                                        {
-                                            iconText += " + " + Ability2_Combokey.Value.ToString();
-                                        }
-                                    }
-                                }
-                                else if (j == 2)
-                                {
-                                    component.sprite = AbilitySprites[2];
-                                    if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability3_CoolDown"))
-                                    {
-                                        component.color = abilityCooldownColor;
-                                        iconText = StatusEffect.GetTimeString(Player.m_localPlayer.GetSEMan()
-                                            .GetStatusEffect("Ability3_CoolDown".GetStableHashCode())
-                                            .GetRemaningTime());
-                                    }
-                                    else
-                                    {
-                                        component.color = Color.white;
-                                        iconText = Ability3_Hotkey.Value.ToString();
-                                        if (Ability3_Combokey.Value != KeyCode.None)
-                                        {
-                                            iconText += " + " + Ability3_Combokey.Value.ToString();
-                                        }
-                                    }
-                                }
-                                else if (j == 3)
-                                {
-                                    component.sprite = AbilitySprites[3];
-                                    if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability4_CoolDown"))
-                                    {
-                                        component.color = abilityCooldownColor;
-                                        iconText = StatusEffect.GetTimeString(Player.m_localPlayer.GetSEMan()
-                                            .GetStatusEffect("Ability4_CoolDown".GetStableHashCode())
-                                            .GetRemaningTime());
-                                    }
-                                    else
-                                    {
-                                        component.color = Color.white;
-                                        iconText = Ability4_Hotkey.Value.ToString();
-                                        if (Ability4_Combokey.Value != KeyCode.None)
-                                        {
-                                            iconText += " + " + Ability4_Combokey.Value.ToString();
-                                        }
-                                    }
-                                }
-                                else if (j == 4)
-                                {
-                                    component.sprite = AbilitySprites[4];
-                                    if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Ability5_CoolDown"))
-                                    {
-                                        component.color = abilityCooldownColor;
-                                        iconText = StatusEffect.GetTimeString(Player.m_localPlayer.GetSEMan()
-                                            .GetStatusEffect("Ability5_CoolDown".GetStableHashCode())
-                                            .GetRemaningTime());
-                                    }
-                                    else
-                                    {
-                                        component.color = Color.white;
-                                        iconText = Ability5_Hotkey.Value.ToString();
-                                        if (Ability5_Combokey.Value != KeyCode.None)
-                                        {
-                                            iconText += " + " + Ability5_Combokey.Value.ToString();
-                                        }
-                                    }
-                                }
-                                //rectTransform2.GetComponentInChildren<Text>().text = Localization.instance.Localize((Ability1.Name).ToString());
-                                TMP_Text component2 = rectTransform2.Find("TimeText").GetComponent<TMP_Text>();
-                                if (!string.IsNullOrEmpty(iconText))
-                                {
-                                    component2.gameObject.SetActive(value: true);
-                                    component2.text = iconText;
-                                }
-                                else
-                                {
-                                    component2.gameObject.SetActive(value: false);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(Player), "Update")]
-        public static class AbilityInput_Prefix
-        {
-            public static bool Prefix(Player __instance)
-            {
-                if (ZInput.GetButtonDown("GP") || ZInput.GetButtonDown("JoyGP"))
-                {
-                    LackingImaginationV2Plugin.UseGuardianPower = true;
-                }
-                return true;
-            }
-        }
-
-        [HarmonyPatch(typeof(Player), nameof(Player.ActivateGuardianPower), null)]
-        public class ActivatePowerPrevention_Patch
-        {
-            public static bool Prefix(Player __instance, ref bool __result)
-            {                
-                if (!UseGuardianPower)
-                {
-                    __result = false;
-                    return false;
-                }
-                return true;
-            }
-        }
-        
-        [HarmonyPatch(typeof(Player), nameof(Player.StartGuardianPower), null)]
-        public class StartPowerPrevention_Patch
-        {
-            public static bool Prefix(Player __instance, ref bool __result)
-            {
-                if (!UseGuardianPower)
-                {
-                    __result = false;
-                    return false;
-                }
-                return true;
-            }
-        }
-
-
-
-        
-        
-        
-        // public enum Theme
-        // {
-        //     None = 0,
-        //     Crypt = 1,
-        //     SunkenCrypt = 2,
-        //     Cave = 4,
-        //     ForestCrypt = 8,
-        //     GoblinCamp = 16, // 0x00000010
-        //     MeadowsVillage = 32, // 0x00000020
-        //     MeadowsFarm = 64, // 0x00000040
-        //     DvergerTown = 128, // 0x00000080
-        //     DvergerBoss = 256, // 0x00000100
-        //     ForestCryptHildir = 512, // 0x00000200
-        //     CaveHildir = 1024, // 0x00000400
-        //     PlainsFortHildir = 2048, // 0x00000800
-        // }
-        
-        
-        
-        
-        // public static Location GetLocation(Vector3 point, bool checkDungeons = true)
-        // {
-        //     if (Character.InInterior(point))
-        //         return Location.GetZoneLocation(point);
-        //     foreach (Location allLocation in Location.m_allLocations)
-        //     {
-        //         if (allLocation.IsInside(point, 0.0f))
-        //             return allLocation;
-        //     }
-        //     return (Location) null;
-        // }
         
         
         
         
         
        
-        
-        //Trophy Exp
-        [HarmonyPatch(typeof(Player), "OnInventoryChanged")]
-        public static class OnInventoryChangedLackingImagination
-        {
-            public static void Postfix(Player __instance)
-            {
-                if (__instance.m_isLoading)
-                    return;
-                foreach (ItemDrop.ItemData allItem in __instance.m_inventory.GetAllItems())
-                {
-                    __instance.AddKnownItem(allItem);
-
-                    foreach (KeyValuePair<string, List<string>> kvp in trophyDictionary)
-                    {
-                        ExpMethods.TrophyExpMethod(kvp.Value, kvp.Key, allItem.m_shared.m_name);
-                    }
-                }
-                __instance.UpdateKnownRecipesList();
-                __instance.UpdateAvailablePiecesList();
-            }
-        }
-        
-        // biomeDictionary //locationDictionary
-        //Biome Exp //All exp now
-        public static float m_biomeTimer;
-        [HarmonyPatch(typeof(Player), nameof(Player.UpdateBiome))]
-        public class BiomeExp
-        {
-            public static void Prefix(Player __instance, ref float dt)
-            {
-                if (__instance.InIntro())
-                    return;
-                if ((double) LackingImaginationV2Plugin.m_biomeTimer == 0.0)
-                {
-                    Location location = Location.GetLocation(__instance.transform.position);
-                    if(location != null && !string.IsNullOrEmpty(location.name))
-                    {
-                        if (locationDictionary.ContainsKey(location.name))
-                        {
-                            ExpMethods.DungeonExpMethod(locationDictionary[location.name]);
-                        }
-                    }
-                }
-                LackingImaginationV2Plugin.m_biomeTimer += dt;
-                if ((double) LackingImaginationV2Plugin.m_biomeTimer <= 1.0)
-                    return;
-                LackingImaginationV2Plugin.m_biomeTimer = 0.0f;
-                foreach (KeyValuePair<Heightmap.Biome, List<string>> kvp in biomeDictionary)
-                {
-                    ExpMethods.BiomeExpMethod(kvp.Key, kvp.Value);
-                    // Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value}");
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(TextsDialog), nameof(TextsDialog.ShowText), new Type[] { typeof(TextsDialog.TextInfo)})]
-        public class TextsDialog_Header_Fix
-        {
-            public static void Postfix(TextsDialog __instance, ref TextsDialog.TextInfo text)
-            {
-                string info = text.m_topic;
-                if (Player.m_localPlayer.m_knownTexts.ContainsKey(info))
-                {
-                    Tutorial.TutorialText tutorialText = Tutorial.instance.m_texts.Find((Predicate<Tutorial.TutorialText>)(x => x.m_label == info));
-                    if (tutorialText != null)
-                    {
-                        if(tutorialText.m_topic != "") __instance.m_textAreaTopic.text = Localization.instance.Localize(tutorialText.m_topic);
-                    }
-                }
-            }
-        }
-        
-        
-        [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
-        public static class Player_Mod_Info_Patch
-        {
-            public static void Postfix(Player __instance)
-            {
-                Tutorial.TutorialText LI = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label ="Lacking Imagination",
-                    m_name = "Lacking_Imagination",
-                    m_text = "This World is vast and dangerous. \nExplore, Kill and Conquer to grow your power!" +
-                             "\nGain more power at levels 50, 160, 330 & 550.",
-                    
-                    m_topic = "Broaden your horizons!"
-                };
-                if (!Tutorial.instance.m_texts.Contains(LI))
-                {
-                    Tutorial.instance.m_texts.Add(LI);
-                }
-
-                __instance.ShowTutorial("Lacking_Imagination");
-                
-                //Biome Entries
-                Tutorial.TutorialText _blackForestExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xBlack Forest",
-                    m_name = "BlackForest_Exp",
-                    m_text = "The Black Forest, home of the wood spirits, invaded by the lesser undead.",
-                     
-                    m_topic = "Black Forest"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_blackForestExp))
-                {
-                    Tutorial.instance.m_texts.Add(_blackForestExp);
-                }
-
-                Tutorial.TutorialText _medowsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xMeadows",
-                    m_name = "Meadows_Exp",
-                    m_text = "A peaceful land, yet untouched by evil.",
-                     
-                    m_topic = "Meadows"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_medowsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_medowsExp);
-                }
-                Tutorial.TutorialText _plainsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xPlains",
-                    m_name = "Plains_Exp",
-                    m_text = "A vast land claimed under the rule of the Eternal Blaze.",
-                     
-                    m_topic = "Plains"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_plainsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_plainsExp);
-                }
-                Tutorial.TutorialText _mountainExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xMountain",
-                    m_name = "Mountain_Exp",
-                    m_text = "Frigid spears piercing out from the lands, dominated by the Sky Empresses kin.",
-                     
-                    m_topic = "Mountain"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_mountainExp))
-                {
-                    Tutorial.instance.m_texts.Add(_mountainExp);
-                }
-                Tutorial.TutorialText _oceanExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xOcean",
-                    m_name = "Ocean_Exp",
-                    m_text = "Turbulent winds and deep waters, the shadow of death rises from below.",
-                     
-                    m_topic = "Ocean"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_oceanExp))
-                {
-                    Tutorial.instance.m_texts.Add(_oceanExp);
-                }
-                Tutorial.TutorialText _swampExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xSwamp",
-                    m_name = "Swamp_Exp",
-                    m_text = "A poisoned land, rife with filth and the sobering truth of mortality, discovered all too late. \n Will you be the same?",
-                     
-                    m_topic = "Swamp"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_swampExp))
-                {
-                    Tutorial.instance.m_texts.Add(_swampExp);
-                }
-                Tutorial.TutorialText _mistLandsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xMistlands",
-                    m_name = "Mistlands_Exp",
-                    m_text = "The fallen land, struggling to regrow despite the darkness coiled around its neck",
-                     
-                    m_topic = "Mistlands"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_mistLandsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_mistLandsExp);
-                } 
-                Tutorial.TutorialText _ashLandsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xAshLands",
-                    m_name = "AshLands_Exp",
-                    m_text = "",
-                     
-                    m_topic = "AshLands"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_ashLandsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_ashLandsExp);
-                } 
-                Tutorial.TutorialText _deepNorthExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xDeep North",
-                    m_name = "DeepNorth_Exp",
-                    m_text = "",
-                     
-                    m_topic = "Deep North"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_deepNorthExp))
-                {
-                    Tutorial.instance.m_texts.Add(_deepNorthExp);
-                }
-
-                // Boss Trophy Entries
-                Tutorial.TutorialText _eikthyrExp = new Tutorial.TutorialText
-                {
-                    m_label = "xEikthyr",
-                    m_name = "Eikthyr_Exp",
-                    m_text = "Essence Power: Blitz \n\n" +
-                             "Active: Shoot a lightning cone forward(Weapon scaling). \n\n" +
-                             "Positive Passive: All attacks do bonus lightning damage. \n\n" +
-                             "Negative Passive: When wet, you take added lightning damage. ",
-                     
-                    m_topic = "Eikthyr"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_eikthyrExp))
-                {
-                    Tutorial.instance.m_texts.Add(_eikthyrExp);
-                }
-                Tutorial.TutorialText _bonemassExp = new Tutorial.TutorialText
-                {
-                    m_label = "xBoneMass",
-                    m_name = "BoneMass_Exp",
-                    m_text = "Essence Power: Mass Release \n\n" +
-                             "Active: Lob a projectile that summons ally skeletons and blobs on impact. \n\n" +
-                             "Positive Passive: When hit you have a 20% chance to release a poison cloud. \n\n" +
-                             "Positive Passive: You become resistant to pierce. \n\n" +
-                             "Negative Passive: You become very weak to blunt. \n\n" +
-                             "Negative Passive: You become very weak to spirit.",
-                     
-                    m_topic = "BoneMass"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_bonemassExp))
-                {
-                    Tutorial.instance.m_texts.Add(_bonemassExp);
-                }
-                Tutorial.TutorialText _moderExp = new Tutorial.TutorialText
-                {
-                    m_label = "xModer",
-                    m_name = "Moder_Exp",
-                    m_text = "Essence Power: Draconic Frost \n\n" +
-                             "Active: You fire a cone of ice shards that spawn ice on the ground(Weapon scaling). \n\n" +
-                             "Active(Block): You shoot an ice dragon breath. \n\n" +
-                             "Positive Passive: All attacks do added frost damage. \n\n" +
-                             "Negative Passive: The draconic essence makes you always feel cold. \n\n" +
-                             "Consume freeze glands to calm & suppress the cold.",
-                     
-                    m_topic = "Moder"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_moderExp))
-                {
-                    Tutorial.instance.m_texts.Add(_moderExp);
-                } 
-                Tutorial.TutorialText _seekerQueenExp = new Tutorial.TutorialText
-                {
-                    m_label = "xSeeker Queen",
-                    m_name = "SeekerQueen_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Seeker Queen"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_seekerQueenExp))
-                {
-                    Tutorial.instance.m_texts.Add(_seekerQueenExp);
-                }
-                Tutorial.TutorialText _theElderExp = new Tutorial.TutorialText
-                {
-                    m_label = "xThe Elder",
-                    m_name = "TheElder_Exp",
-                    m_text = "Essence Power: Ancient Awe \n\n" +
-                             "Active: Briefly root targets in place & grow the roots from under them. \n\n" +
-                             "Positive Passive: Multiplied regen. \n\n" +
-                             "Negative Passive: You become very weak to frost.",
-                    
-                    m_topic = "The Elder"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_theElderExp))
-                {
-                    Tutorial.instance.m_texts.Add(_theElderExp);
-                }
-                Tutorial.TutorialText _yagluthrExp = new Tutorial.TutorialText
-                {
-                    m_label = "xYagluth",
-                    m_name = "Yagluth_Exp",
-                    m_text = "Essence Power: Culmination \n\n" +
-                             "Active: Shoot a line of lightningfire.(Builds Static) \n\n" +
-                             "Active(Block): Call a rain of meteors.(Builds Static) \n\n" +
-                             "Active(Crouch): At the cost of some health, create a nova(Reduces Static) \n\n" +
-                             "Positive Passive: Static decreases over time. \n\n" +
-                             "Positive Passive: Immune to burning.(Builds Static) \n\n" +
-                             "Negative Passive: If Static becomes full you will be struck by a Lightning bolt.(Resets Static)",
-                     
-                    m_topic = "Yagluth"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_yagluthrExp))
-                {
-                    Tutorial.instance.m_texts.Add(_yagluthrExp);
-                }
-
-                //Mini-Boss Trophy Entries
-                Tutorial.TutorialText _abominationExp = new Tutorial.TutorialText
-                {
-                    m_label = "xAbomination",
-                    m_name = "Abomination_Exp",
-                    m_text = "Essence Power: Bane \n\n" +
-                             "Active: Summons an ally Abomination.(Eats Wood) \n\n" +
-                             "Positive Passive: Increased armor. \n\n" +
-                             "Negative Passive: Reduced health during the day.",
-                    
-                     
-                    m_topic = "Abomination"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_abominationExp))
-                {
-                    Tutorial.instance.m_texts.Add(_abominationExp);
-                }
-                Tutorial.TutorialText _stoneGolemExp = new Tutorial.TutorialText
-                {
-                    m_label = "xStone Golem",
-                    m_name = "StoneGolem_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Stone Golem"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_stoneGolemExp))
-                {
-                    Tutorial.instance.m_texts.Add(_stoneGolemExp);
-                }
-                Tutorial.TutorialText _trollExp = new Tutorial.TutorialText
-                {
-                    m_label = "xTroll",
-                    m_name = "Troll_Exp",
-                    m_text = "Essence Power: Troll Toss \n\n" +
-                             "Active: Lob a boulder(Max Health scaling). \n\n" +
-                             "Positive Passive: Bonus health. \n\n" +
-                             "Negative Passive: You become very weak to pierce.",
-                     
-                    m_topic = "Troll"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_trollExp))
-                {
-                    Tutorial.instance.m_texts.Add(_trollExp);
-                }
-                
-                //Enemy Trophy Entries
-                Tutorial.TutorialText _blobExp = new Tutorial.TutorialText
-                {
-                    m_label = "xBlob",
-                    m_name = "Blob_Exp",
-                    m_text = "Essence Power: Fumes \n\n" +
-                             "Active: Release a cloud of poison. \n\n" +
-                             "Positive Passive: 1 extra jump.\n\n" +
-                             "Positive Passive: At 50% hp, spawn 2 ally blobs to aid you.\n\n" +
-                             "Negative Passive: You become weak to blunt. \n\n" +
-                             "Negative Passive: You become weak to lightning.",
-                     
-                    m_topic = "Blob"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_blobExp))
-                {
-                    Tutorial.instance.m_texts.Add(_blobExp);
-                }
-                Tutorial.TutorialText _deathsquitoExp = new Tutorial.TutorialText
-                {
-                    m_label = "xDeathsquito",
-                    m_name = "Deathsquito_Exp",
-                    m_text = "Essence Power: Relentless \n\n" +
-                             "Active: For a duration of time your projectiles gain homing.\n\n" +
-                             "Positive Passive: Gain added pierce damage to projectiles.\n\n" +
-                             "Negative Passive: Maximum health reduced by 50%.",
-                     
-                    m_topic = "Deathsquito"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_deathsquitoExp))
-                {
-                    Tutorial.instance.m_texts.Add(_deathsquitoExp);
-                }
-                Tutorial.TutorialText _fenringExp = new Tutorial.TutorialText
-                {
-                    m_label = "xFenring",
-                    m_name = "Fenring_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Fenring"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_fenringExp))
-                {
-                    Tutorial.instance.m_texts.Add(_fenringExp);
-                }
-                Tutorial.TutorialText _drakeExp = new Tutorial.TutorialText
-                {
-                    m_label = "xDrake",
-                    m_name = "Drake_Exp",
-                    m_text = "Essence Power: Three Freeze \n\n" +
-                             "Active: Fires a burst of 3 ice shards that freeze enemies for 3 seconds and \n" +
-                             "applies freezing.\n\n" +
-                             "Positive Passive: You become very resistant to frost.\n\n" +
-                             "Negative Passive: You become weak to blunt.",
-                     
-                    m_topic = "Drake"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_drakeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_drakeExp);
-                }
-                Tutorial.TutorialText _draugrEliteExp = new Tutorial.TutorialText
-                {
-                    m_label = "xDraugr Elite",
-                    m_name = "DraugrElite_Exp",
-                    m_text = "Essence Power: Fallen Hero \n\n" +
-                             "Active: For a duration, increase the damage of Swords and Polearms(builds 5% Rot).\n\n" +
-                             "Positive Passive: Increase carry weight.\n\n" +
-                             "Positive Passive: Increase movement speed by 10%.\n\n" +
-                             "Positive Passive: A portion of damage received is instead gained as Rot.\n\n" +
-                             "Positive Passive: Entrails can be eaten to reduce Rot build up.\n\n" +
-                             "Negative Passive: If Rot build up reaches 100% the ability is locked, \n" +
-                             "damage reduction is removed and movement speed is reduced by 50%.\n\n" +
-                             "Synergy  Passive: If the Draugr Essence is also equipped, \n" +
-                             "a bonus potion of damage received is instead gained as Rot.",
-                    
-                    m_topic = "Draugr Elite"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_draugrEliteExp))
-                {
-                    Tutorial.instance.m_texts.Add(_draugrEliteExp);
-                }
-                Tutorial.TutorialText _draugrExp = new Tutorial.TutorialText
-                {
-                    m_label = "xDraugr",
-                    m_name = "Draugr_Exp",
-                    m_text = "Essence Power: Forgotten \n\n" +
-                             "Active: For a duration, increase the damage of Bows and Axes(builds 3% Rot).\n\n" +
-                             "Positive Passive: Increase carry weight.\n\n" +
-                             "Positive Passive: A portion of damage received is instead gained as Rot.\n\n" +
-                             "Positive Passive: Entrails can be eaten to reduce Rot build up.\n\n" +
-                             "Negative Passive: If Rot build up reaches 100% the ability is locked, \n" +
-                             "damage reduction is removed and movement speed is reduced by 50%.\n\n" +
-                             "Synergy  Passive: If the Draugr Elite Essence is also equipped, \n" +
-                             "a bonus potion of damage received is instead gained as Rot.",
-                     
-                    m_topic = "Draugr"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_draugrExp))
-                {
-                    Tutorial.instance.m_texts.Add(_draugrExp);
-                }
-                Tutorial.TutorialText _fulingExp = new Tutorial.TutorialText
-                {
-                    m_label ="xFuling",
-                    m_name = "Fuling_Exp",
-                    m_text = "Essence Power: Longinus \n\n" +
-                             "Active: Empower your next spear throw hit.\n\n" +
-                             "Positive Passive: Spears return when thrown.\n\n" +
-                             "Positive Passive: Gain increased block power.\n\n" +
-                             "Positive Passive: Gain bonus stamina when you carry coins.\n\n" +
-                             "Negative Passive: Lose a % of stamina when not carrying coins.\n\n",
-                     
-                    m_topic = "Fuling"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_fulingExp))
-                {
-                    Tutorial.instance.m_texts.Add(_fulingExp);
-                } 
-                Tutorial.TutorialText _gjallExp = new Tutorial.TutorialText
-                {
-                    m_label ="xGjall",
-                    m_name = "Gjall_Exp",
-                    m_text = "Essence Power: Gjallarhorn \n\n" +
-                             "Active: A pair of entangled projectiles are fired, one explosive and the other summons ally ticks.\n\n" +
-                             "Positive Passive: Gain bonus armor.\n\n" +
-                             "Negative Passive: You become very weak to pierce.\n\n" +
-                             "Negative Passive: Your head becomes a weakpoint(double damage)(disabled).\n\n",
-                     
-                    m_topic = "Gjall"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_gjallExp))
-                {
-                    Tutorial.instance.m_texts.Add(_gjallExp);
-                }
-                Tutorial.TutorialText _greydwarfBruteExp = new Tutorial.TutorialText
-                {
-                    m_label ="xGreydwarf Brute",
-                    m_name = "GreydwarfBrute_Exp",
-                    m_text = "Essence Power: Bash \n\n" +
-                             "Active: Empower your next melee hit.\n\n" +
-                             "Positive Passive: Gain bonus health.\n\n" +
-                             "Negative Passive: Reduce the damage of ranged attacks.\n\n",
-                     
-                    m_topic = "Greydwarf Brute"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_greydwarfBruteExp))
-                {
-                    Tutorial.instance.m_texts.Add(_greydwarfBruteExp);
-                }
-                Tutorial.TutorialText _greydwarfShamanExp = new Tutorial.TutorialText
-                {
-                    m_label ="xGreydwarf Shaman",
-                    m_name = "GreydwarfShaman_Exp",
-                    m_text = "Essence Power: Dubious Heal \n\n" +
-                             "Active: Cast an Aoe heal.\n\n" +
-                             "Positive Passive: Gain increased player regen.\n\n" +
-                             "Positive Passive: Gain a little bonus eitr.\n\n" +
-                             "Negative Passive: When hit you have a 1 in 20 chance to take 10% bonus poison damage.\n\n",
-                     
-                    m_topic = "Greydwarf Shaman"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_greydwarfShamanExp))
-                {
-                    Tutorial.instance.m_texts.Add(_greydwarfShamanExp);
-                }
-                Tutorial.TutorialText _greydwarfExp = new Tutorial.TutorialText
-                {
-                    m_label ="xGreydwarf",
-                    m_name = "Greydwarf_Exp",
-                    m_text = "Essence Power: Pebble \n\n" +
-                             "Active: Throw a rock from your inventory.\n\n" +
-                             "Positive Passive: Gain increases carry weight.\n\n" +
-                             "Positive Passive: Gain 5% bonus movement speed.\n\n" +
-                             "Negative Passive: Forest Monsters do bonus damage to you.\n\n",
-                     
-                    m_topic = "Greydwarf"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_greydwarfExp))
-                {
-                    Tutorial.instance.m_texts.Add(_greydwarfExp);
-                }
-                Tutorial.TutorialText _leechfExp = new Tutorial.TutorialText
-                {
-                    m_label ="xLeech",
-                    m_name = "Leech_Exp",
-                    m_text = "Essence Power: Blood Siphon \n\n" +
-                             "Active: Mark nearby enemies and when you kill them, gain Siphon stacks.\n\n" +
-                             "Positive Passive: When hit, regain health if you have stacks.\n\n" +
-                             "Negative Passive: Eitr regen is halved and regen delay is doubled.\n\n",
-                     
-                    m_topic = "Leech"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_leechfExp))
-                {
-                    Tutorial.instance.m_texts.Add(_leechfExp);
-                }
-                Tutorial.TutorialText _seekerSoldierExp = new Tutorial.TutorialText
-                {
-                    m_label ="xSeeker Soldier",
-                    m_name = "SeekerSoldier_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Seeker Soldier"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_seekerSoldierExp))
-                {
-                    Tutorial.instance.m_texts.Add(_seekerSoldierExp);
-                }    
-                Tutorial.TutorialText _seekerExp = new Tutorial.TutorialText
-                {
-                    m_label ="xSeeker",
-                    m_name = "Seeker_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Seeker"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_seekerExp))
-                {
-                    Tutorial.instance.m_texts.Add(_seekerExp);
-                } 
-                Tutorial.TutorialText _skeletonExp = new Tutorial.TutorialText
-                {
-                    m_label ="xSkeleton",
-                    m_name = "Skeleton_Exp",
-                    m_text = "Essence Power: Vigil \n\n" +
-                             "Active: Summon ally ghosts to fight alongside you.(Cost 1 Soul to cast)\n\n" +
-                             "Positive Passive: Gain bonus spirit damage equal to 10% of Souls.\n\n" +
-                             "Negative Passive: Kill skeletons to gain souls.\n\n" +
-                             "Synergy  Passive: If the Brenna Essence is also equipped, ally ghosts do bonus fire damage. \n\n" +
-                             "Synergy  Passive: If the Rancid Remains Essence is also equipped, ally ghosts do bonus poison damage.",
-                     
-                    m_topic = "Skeleton"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_skeletonExp))
-                {
-                    Tutorial.instance.m_texts.Add(_skeletonExp);
-                } 
-                Tutorial.TutorialText _surtlingExp = new Tutorial.TutorialText
-                {
-                    m_label ="xSurtling",
-                    m_name = "Surtling_Exp",
-                    m_text = "Essence Power: Harbinger \n\n" +
-                             "Active: Summon ally surtlings from the Ash Lands.(Sacrifice a surtling core to gain charges)\n\n" +
-                             "Positive Passive: The essence is your own personal campfire.\n\n" +
-                             "Negative Passive: You take damage when wet.\n\n",
-                     
-                    m_topic = "Surtling"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_surtlingExp))
-                {
-                    Tutorial.instance.m_texts.Add(_surtlingExp);
-                }
-                Tutorial.TutorialText _tickExp = new Tutorial.TutorialText
-                {
-                    m_label ="xTick",
-                    m_name = "Tick_Exp",
-                    m_text = "Essence Power: Blood Well \n\n" +
-                             "Active: Empower next hit to do bonus slash damage equal to Well stacks.\n\n" +
-                             "Positive Passive: Gain % LifeSteal.\n\n" +
-                             "Positive Passive: Gain Well stacks equal to life stolen.\n\n" +
-                             "Negative Passive: Armor is reduced.",
-                     
-                    m_topic = "Tick"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_tickExp))
-                {
-                    Tutorial.instance.m_texts.Add(_tickExp);
-                }
-                    
-                    
-                //Dungeon Enemy Trophy Entries
-                Tutorial.TutorialText _cultistExp = new Tutorial.TutorialText
-                {
-                    m_label = "xCultist",
-                    m_name = "Cultist_Exp",
-                    m_text = "Essence Power: Lone Sun\n\n" +
-                             "Active: Cast an Aoe fire field.\n\n" +
-                             "Positive Passive: You are immune to smoke.\n\n" +
-                             "Positive Passive: All attacks do bonus fire damage.\n\n" +
-                             "Negative Passive: When hit you have a 1 in 20 chance to take 10% bonus fire damage.",
-                     
-                    m_topic = "Cultist"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_cultistExp))
-                {
-                    Tutorial.instance.m_texts.Add(_cultistExp);
-                }
-                Tutorial.TutorialText _fulingBerserkerExp = new Tutorial.TutorialText
-                {
-                    m_label ="xFuling Berserker",
-                    m_name = "FulingBerserker_Exp",
-                    m_text = "Essence Power: Giantization \n\n" +
-                             "Active: Double your size, gaining double health but halving stamina.\n\n" +
-                             "Positive Passive: Gain bonus health.\n\n" +
-                             "Negative Passive: Eitr reduced by 75%.",
-                     
-                    m_topic = "Fuling Berserker"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_fulingBerserkerExp))
-                {
-                    Tutorial.instance.m_texts.Add(_fulingBerserkerExp);
-                }
-                Tutorial.TutorialText _fulingShamanExp = new Tutorial.TutorialText
-                {
-                    m_label ="xFuling Shaman",
-                    m_name = "FulingShaman_Exp",
-                    m_text = "Essence Power: Ritual\n\n" +
-                             "Active: Create a shield that protects you.(Cost 5 coins)\n\n" +
-                             "Active(Shielded): Shoot a fireball.(Cost 1 coin)\n\n" +
-                             "Positive Passive: Gain bonus eitr.\n\n" +
-                             "Negative Passive: Reduce carry weight.",
-                     
-                    m_topic = "Fuling Shaman"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_fulingShamanExp))
-                {
-                    Tutorial.instance.m_texts.Add(_fulingShamanExp);
-                }
-                Tutorial.TutorialText _growthExp = new Tutorial.TutorialText
-                {
-                    m_label ="xGrowth",
-                    m_name = "Growth_Exp",
-                    m_text = "Essence Power: Ancient Tar\n\n" +
-                             "Active: Shoot a burst of 4 tar balls.(Weapon scaling)\n\n" +
-                             "Positive Passive: Attacks tar enemies.\n\n" +
-                             "Positive Passive: 2 extra jumps.\n\n" +
-                             "Negative Passive: You become very weak to fire.\n\n",
-                     
-                    m_topic = "Growth"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_growthExp))
-                {
-                    Tutorial.instance.m_texts.Add(_growthExp);
-                }
-                Tutorial.TutorialText _rancidRemainsExp = new Tutorial.TutorialText
-                {
-                    m_label ="xRancid Remains",
-                    m_name = "RancidRemains_Exp",
-                    m_text = "Essence Power: Rancorous\n\n" +
-                             "Active: Summon the bound mace Rancorous.\n\n" +
-                             "Active(Recast): Rancorous seconary attack chnages to a throw.\n\n" +
-                             "Active(Re-Recast): Rancorous seconary attack returns to normal.\n\n" +
-                             "Positive Passive: Sacrifice a fully upgraded Iron mace to Awaken Rancorous permanently.\n\n" +
-                             "Negative Passive: Armor is reduced.",
-                     
-                    m_topic = "Rancid Remains"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_rancidRemainsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_rancidRemainsExp);
-                }
-                Tutorial.TutorialText _serpentExp = new Tutorial.TutorialText
-                {
-                    m_label ="xSerpent",
-                    m_name = "Serpent_Exp",
-                    m_text = "Essence Power: Sea King\n\n" +
-                             "Active: Shoots a Whirlpool that sucks enemies in.(Weapon scaling)\n\n" +
-                             "Passive: The essence wil crave a random known fish and eating it will,\n" +
-                             "increase the range and duration of Sea King.\n\n" +
-                             "A higher quality fish can be eaten after to get a bigger buff.\n" +
-                             "Perch>Pike>Trollfish>Tetra>Tuna>Coral Cod>Giant Herring>Grouper>\n" +
-                             "Pufferfish>Anglerfish>Magmafish>Northern Salmon",
-                     
-                    m_topic = "Serpent"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_serpentExp))
-                {
-                    Tutorial.instance.m_texts.Add(_serpentExp);
-                }
-                Tutorial.TutorialText _ulvExp = new Tutorial.TutorialText
-                {
-                    m_label ="xUlv",
-                    m_name = "Ulv_Exp",
-                    m_text = "Essence Power: Territorial Slumber\n\n" +
-                             "Active: Create a zone with a high chance to summon an ally ulv when an enemy dies inside.\n\n" +
-                             "Positive Passive: Gain bonus Comfort.\n\n" +
-                             "Positive Passive: Gain bonus stamina based on max comfort.\n\n" +
-                             "Negative Passive: Duration of rested reduced by half.",
-                     
-                    m_topic = "Ulv"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_ulvExp))
-                {
-                    Tutorial.instance.m_texts.Add(_ulvExp);
-                }
-                Tutorial.TutorialText _wraithExp = new Tutorial.TutorialText
-                {
-                    m_label ="xWraith",
-                    m_name = "Wraith_Exp",
-                    m_text = "Essence Power: Twin Souls\n\n" +
-                             "Active: Become intangible for a duration, moving through structures and creatures.\n" +
-                             "Block and Crouch to move down.\n\n" +
-                             "Active(Block): If cast at night, summon an ally wraith(Dies at dawn).\n\n" +
-                             "Positive Passive: All attacks do bonus spirit damage during the day.\n\n" +
-                             "Negative Passive: Armor reduced.",
-                     
-                    m_topic = "Wraith"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_wraithExp))
-                {
-                    Tutorial.instance.m_texts.Add(_wraithExp);
-                }
-                    
-                //Animal Trophy Entries
-                Tutorial.TutorialText _dvergrExp = new Tutorial.TutorialText
-                {
-                    m_label = "xDvergr",
-                    m_name = "Dvergr_Exp",
-                    m_text = "Essence Power: Randomize\n\n" +
-                             "Active: Cast one of three spells.(Cost 50 Eitr)\n\n" +
-                             "Active(Fire): Cast 1 of 2 fire ball types.(Weapon scaling)\n\n" +
-                             "Active(Ice): Cast a burst of ice shards.(Weapon scaling)\n\n" +
-                             "Active(Heal): Cast an Aoe Heal.\n\n" +
-                             "Positive Passive: Gain bonus eitr.\n\n" +
-                             "Positive Passive: Gain bonus pierce damage with crossbows.\n\n" +
-                             "Negative Passive: Health reduced by 10%.",
-                     
-                    m_topic = "Dvergr"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_dvergrExp))
-                {
-                    Tutorial.instance.m_texts.Add(_dvergrExp);
-                }
-                Tutorial.TutorialText _boarExp = new Tutorial.TutorialText
-                {
-                    m_label = "xBoar",
-                    m_name = "Boar_Exp",
-                    m_text = "Essence Power: Reckless Charge\n\n" +
-                             "Active: For a duration, after running for 3 seconds you collide with the next enemy.\n\n" +
-                             "Positive Passive: When you gather your courage you gain bonus stamina.\n\n" +
-                             "Negative Passive: When near a fire you will cower in fear.\n\n",
-                     
-                    m_topic = "Boar"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_boarExp))
-                {
-                    Tutorial.instance.m_texts.Add(_boarExp);
-                }
-                Tutorial.TutorialText _deerExp = new Tutorial.TutorialText
-                {
-                    m_label = "xDeer",
-                    m_name = "Deer_Exp",
-                    m_text = "Essence Power: Horizon Haste\n\n" +
-                             "Active: For a duration, movement speed is increased.\n\n" +
-                             "Positive Passive: Stamina increased.\n\n" +
-                             "Positive Passive: Movement speed increased by 5%.\n\n" +
-                             "Negative Passive: Health reduced by 5%.",
-                     
-                    m_topic = "Deer"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_deerExp))
-                {
-                    Tutorial.instance.m_texts.Add(_deerExp);
-                } 
-                Tutorial.TutorialText _hareExp = new Tutorial.TutorialText
-                {
-                    m_label = "xHare",
-                    m_name = "Hare_Exp",
-                    m_text = "Essence Power: Lucky Foot\n\n" +
-                             "Active: For a duration, movement speed is increased & jumps are doubled.\n\n" +
-                             "Positive Passive: Gain 1 bonus jump.\n\n" +
-                             "Positive Passive: Movement speed increased by 10%.\n\n" +
-                             "Negative Passive: Armor reduced.",
-                     
-                    m_topic = "Hare"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_hareExp))
-                {
-                    Tutorial.instance.m_texts.Add(_hareExp);
-                }
-                Tutorial.TutorialText _loxExp = new Tutorial.TutorialText
-                {
-                    m_label = "xLox",
-                    m_name = "Lox_Exp",
-                    m_text = "Essence Power: Wild Tremor\n\n" +
-                             "Active: Stomp the ground causing an Aoe.\n\n" +
-                             "Positive Passive: Food eaten will gave bonus health.\n\n" +
-                             "Negative Passive: Duration of food reduced by 25%.",
-                     
-                    m_topic = "Lox"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_loxExp))
-                {
-                    Tutorial.instance.m_texts.Add(_loxExp);
-                }
-                Tutorial.TutorialText _neckExp = new Tutorial.TutorialText
-                {
-                    m_label = "xNeck",
-                    m_name = "Neck_Exp",
-                    m_text = "Essence Power: Splash(Effect in progress)\n\n" + 
-                             "Active: Dash forward while swimming.(Weapon scaling)\n\n" +
-                             "Positive Passive: Swim speed doubled.\n\n" +
-                             "Positive Passive: You become weak to fire while wet.\n\n" +
-                             "Negative Passive: You become resistant to poison while wet.",
-                     
-                    m_topic = "Neck"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_neckExp))
-                {
-                    Tutorial.instance.m_texts.Add(_neckExp);
-                }
-                Tutorial.TutorialText _wolfExp = new Tutorial.TutorialText
-                {
-                    m_label = "xWolf",
-                    m_name = "Wolf_Exp",
-                    m_text = "Essence Power: Ravenous Hunger\n\n" +
-                             "Active: For a duration, every 5th hit will deal a % of max health in slash damage.\n\n" +
-                             "Passive: Different effects based on number of foods eaten.\n\n" +
-                             "3 foods: damage reduced by 25%.\n\n" +
-                             "2 foods: damage increased by 25% & x bonus stamina.\n\n" +
-                             "1 foods: damage increased by 50% & 2x bonus stamina.\n\n" +
-                             "0 foods: damage increased by 100% & 3x bonus stamina.\n\n" +
-                             "Below 3 foods run, sneak, dodge & jump stamina drain reduced by half." ,
-                     
-                    m_topic = "Wolf"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_wolfExp))
-                {
-                    Tutorial.instance.m_texts.Add(_wolfExp);
-                }
-                
-                //Hildr Enemies
-                Tutorial.TutorialText _brennaExp = new Tutorial.TutorialText
-                {
-                    m_label = "xBrenna",
-                    m_name = "Brenna_Exp",
-                    m_text = "Essence Power: Vulcan\n\n" +
-                             "Active: Summon the bound mace Vulcan.\n\n" +
-                             "Active(Recast): Vulcan secondary attack changes to a throw.\n\n" +
-                             "Active(Re-Recast): Vulcan secondary attack returns to normal.\n\n" +
-                             "Positive Passive: Sacrifice a fully upgraded Krom to Awaken Vulcan permanently.\n\n" +
-                             "Negative Passive: Armor is reduced.",
-                     
-                    m_topic = "Brenna"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_brennaExp))
-                {
-                    Tutorial.instance.m_texts.Add(_brennaExp);
-                }
-                Tutorial.TutorialText _geirrhafaExp = new Tutorial.TutorialText
-                {
-                    m_label = "xGeirrhafa",
-                    m_name = "Geirrhafa_Exp",
-                    m_text = "Essence Power: Ice Age\n\n" +
-                             "Active: Case 3 ice waves & then summon icicles above enemies in range.\n\n" +
-                             "Positive Passive: Gain bonus eitr.\n\n" +
-                             "Positive Passive: All attacks do bonus frost damage.\n\n" +
-                             "Negative Passive:  When hit you have a 1 in 20 chance to take 10% bonus frost damage.",
-                     
-                    m_topic = "Geirrhafa"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_geirrhafaExp))
-                {
-                    Tutorial.instance.m_texts.Add(_geirrhafaExp);
-                }
-                Tutorial.TutorialText _zilExp = new Tutorial.TutorialText
-                {
-                    m_label = "xZil",
-                    m_name = "Zil_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Zil"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_zilExp))
-                {
-                    Tutorial.instance.m_texts.Add(_zilExp);
-                }
-                Tutorial.TutorialText _thungrExp = new Tutorial.TutorialText
-                {
-                    m_label = "xThungr",
-                    m_name = "Thungr_Exp",
-                    m_text = "Essence Power: ",
-                     
-                    m_topic = "Thungr"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_thungrExp))
-                {
-                    Tutorial.instance.m_texts.Add(_thungrExp);
-                }
-
-                //Dungeon Entries
-                Tutorial.TutorialText _infectedMineExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xInfected Mine",
-                    m_name = "InfectedMine_Exp",
-                    m_text = "An echo of prosperity, now a den of malice.",
-                     
-                    m_topic = "Infected Mine"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_infectedMineExp))
-                {
-                    Tutorial.instance.m_texts.Add(_infectedMineExp);
-                }
-                Tutorial.TutorialText _frostCaveExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xFrost Cave",
-                    m_name = "FrostCave_Exp",
-                    m_text = "To resist the madness of the frost, flame itself was deified in this place.",
-                     
-                    m_topic = "Frost Cave"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_frostCaveExp))
-                {
-                    Tutorial.instance.m_texts.Add(_frostCaveExp);
-                }
-                Tutorial.TutorialText _sunkenCryptExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xSunken Crypt",
-                    m_name = "SunkenCrypt_Exp",
-                    m_text = "The treasures within gather warriors far and wide to their demise.",
-                     
-                    m_topic = "Sunken Crypt"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_sunkenCryptExp))
-                {
-                    Tutorial.instance.m_texts.Add(_sunkenCryptExp);
-                }
-                Tutorial.TutorialText _burialChambersExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xBurial Chambers",
-                    m_name = "BurialChambers_Exp",
-                    m_text = "A resting place for the fallen, though they seem rather restless.",
-                     
-                    m_topic = "Burial Chambers"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_burialChambersExp))
-                {
-                    Tutorial.instance.m_texts.Add(_burialChambersExp);
-                }
-                Tutorial.TutorialText _trollCaveExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xTroll Cave",
-                    m_name = "TrollCave_Exp",
-                    m_text = "Large eyes peer out from the darkness.",
-                     
-                    m_topic = "Troll Cave"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_trollCaveExp))
-                {
-                    Tutorial.instance.m_texts.Add(_trollCaveExp);
-                }
-
-                //Open Dungeons
-                Tutorial.TutorialText _goblinCampExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xFuling Camp",
-                    m_name = "GoblinCamp_Exp",
-                    m_text = "The kin gather in worship of their king.",
-                     
-                    m_topic = "Fuling Camp"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_goblinCampExp))
-                {
-                    Tutorial.instance.m_texts.Add(_goblinCampExp);
-                }
-                
-                //Hildir Dungeons
-                Tutorial.TutorialText _forestCryptHildirExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xSmouldering Tomb",
-                    m_name = "ForestCryptHildir_Exp",
-                    m_text = "The wails of suffering and hellfire can be heard even from here.",
-                     
-                    m_topic = "Smouldering Tomb"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_forestCryptHildirExp))
-                {
-                    Tutorial.instance.m_texts.Add(_forestCryptHildirExp);
-                }
-                Tutorial.TutorialText _caveHildirExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xHowling Cavern",
-                    m_name = "CaveHildir_Exp",
-                    m_text = "Madness within madness, forsaken by the flame, this place embraced the frost.",
-                    
-                    m_topic = "Howling Cavern"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_caveHildirExp))
-                {
-                    Tutorial.instance.m_texts.Add(_caveHildirExp);
-                }
-                Tutorial.TutorialText _plainsFortHildirExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xSealed Tower",
-                    m_name = "PlainsFortHildir_Exp",
-                    m_text = "A fortress of brotherhood, it's residents seek to overthrow their king.",
-                     
-                    m_topic = "Sealed Tower"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_plainsFortHildirExp))
-                {
-                    Tutorial.instance.m_texts.Add(_plainsFortHildirExp);
-                }
-                //Dvergr 
-                Tutorial.TutorialText _dvergrTowerExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xDvergr Tower",
-                    m_name = "DvergrTower_Exp",
-                    m_text = "A flickering beacon of life and civilization.",
-                     
-                    m_topic = "Dvergr Tower"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_dvergrTowerExp))
-                {
-                    Tutorial.instance.m_texts.Add(_dvergrTowerExp);
-                }
-                Tutorial.TutorialText _dvergrExcavationExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xDvergr Excavation",
-                    m_name = "DvergrExcavation_Exp",
-                    m_text = "The remains of mythic warriors lay beneath.",
-                     
-                    m_topic = "Dvergr Excavation"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_dvergrExcavationExp))
-                {
-                    Tutorial.instance.m_texts.Add(_dvergrExcavationExp);
-                }
-                //Boss Arenas
-                Tutorial.TutorialText _eikthyrSacrificeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xEikthyr Altar",
-                    m_name = "EikthyrSacrifice_Exp",
-                    m_text = "The air around the altar sparks with electricity.",
-                    
-                    m_topic = "Eikthyr Altar"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_eikthyrSacrificeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_eikthyrSacrificeExp);
-                }
-                Tutorial.TutorialText _theElderSacrificeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xThe Elder Altar",
-                    m_name = "TheElderSacrifice_Exp",
-                    m_text = "The roots seem to shift below your feet.",
-                    
-                    m_topic = "The Elder Altar"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_theElderSacrificeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_theElderSacrificeExp);
-                }
-                Tutorial.TutorialText _boneMassSacrificeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xBoneMass Altar",
-                    m_name = "BoneMassSacrifice_Exp",
-                    m_text = "A powerful mage must have made this, but to do or create what?",
-                    
-                    m_topic = "BoneMass Altar"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_boneMassSacrificeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_boneMassSacrificeExp);
-                }
-                Tutorial.TutorialText _moderSacrificeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xModer Altar",
-                    m_name = "ModerSacrifice_Exp",
-                    m_text = "The Queen of Drakes is nearby.",
-                    
-                    m_topic = "Moder Altar"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_moderSacrificeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_moderSacrificeExp);
-                }
-                Tutorial.TutorialText _yagluthSacrificeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xYagluth Altar",
-                    m_name = "YagluthSacrifice_Exp",
-                    m_text = "Not content with mastery of fire, here the king sought to take mastery of lightning.",
-                    
-                    m_topic = "Yagluth Altar"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_yagluthSacrificeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_yagluthSacrificeExp);
-                }
-                Tutorial.TutorialText _seekerQueenSealExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xSeeker Queen Seal",
-                    m_name = "SeekerQueenSeal_Exp",
-                    m_text = "The epitome of pestilence is sealed within these walls.",
-                    
-                    m_topic = "Seeker Queen Seal"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_seekerQueenSealExp))
-                {
-                    Tutorial.instance.m_texts.Add(_seekerQueenSealExp);
-                }
-                //Vendors
-                Tutorial.TutorialText _haldorExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xHaldor",
-                    m_name = "Haldor_Exp",
-                    m_text = "The roaming Dvergr trader of the Black Forest, his wares may interest you.",
-                    
-                    m_topic = "Haldor"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_haldorExp))
-                {
-                    Tutorial.instance.m_texts.Add(_haldorExp);
-                }
-                Tutorial.TutorialText _hildirExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xHildir",
-                    m_name = "Hildir_Exp",
-                    m_text = "The roaming Dvergr trader of the Meadows, she has a task for you.",
-                    
-                    m_topic = "Hildir"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_hildirExp))
-                {
-                    Tutorial.instance.m_texts.Add(_hildirExp);
-                }
-                // Special
-                Tutorial.TutorialText _infestedTreeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xInfested Tree",
-                    m_name = "InfestedTree_Exp",
-                    m_text = "This tree has been completely consumed by the lands poison.",
-                    
-                    m_topic = "Infested Tree"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_infestedTreeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_infestedTreeExp);
-                }
-                Tutorial.TutorialText _drakeNestExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xDrake Nest",
-                    m_name = "DrakeNest_Exp",
-                    m_text = "Here her descendants roost.",
-                    
-                    m_topic = "Drake Nest"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_drakeNestExp))
-                {
-                    Tutorial.instance.m_texts.Add(_drakeNestExp);
-                }
-                Tutorial.TutorialText _tarPitExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xTar Pit",
-                    m_name = "TarPit_Exp",
-                    m_text = "Try not to fall in.",
-                    
-                    m_topic = "Tar Pit"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_tarPitExp))
-                {
-                    Tutorial.instance.m_texts.Add(_tarPitExp);
-                }
-                Tutorial.TutorialText _dvergrHarbourExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xDvergr Harbour",
-                    m_name = "DvergrHarbour_Exp",
-                    m_text = "The first signs of civilization.",
-                    
-                    m_topic = "Dvergr Harbour"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_dvergrHarbourExp))
-                {
-                    Tutorial.instance.m_texts.Add(_dvergrHarbourExp);
-                }
-                //RuneStones
-                Tutorial.TutorialText _runestoneMeadowsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Meadows",
-                    m_name = "MeadowRune_Exp",
-                    m_text = "An inscription about the meadows.",
-                    
-                    m_topic = "Meadows Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneMeadowsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneMeadowsExp);
-                }
-                Tutorial.TutorialText _runestoneBoarExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Boar",
-                    m_name = "BoarRune_Exp",
-                    m_text = "An inscription about boars.",
-                    
-                    m_topic = "Boar Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneBoarExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneBoarExp);
-                }
-                Tutorial.TutorialText _runestoneBlackForestsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Black Forests",
-                    m_name = "BlackForestRune_Exp",
-                    m_text = "An inscription about the black forests",
-                    
-                    m_topic = "Black Forests Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneBlackForestsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneBlackForestsExp);
-                }
-                Tutorial.TutorialText _runestoneGreydwarfExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Greydwarf",
-                    m_name = "GreydwarfRune_Exp",
-                    m_text = "An inscription about greydwarfs.",
-                    
-                    m_topic = "Greydwarf Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneGreydwarfExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneGreydwarfExp);
-                }
-                Tutorial.TutorialText _runestoneSwampsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Swamps",
-                    m_name = "SwampRune_Exp",
-                    m_text = "An inscription about the swamps.",
-                    
-                    m_topic = "Swamps Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneSwampsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneSwampsExp);
-                }
-                Tutorial.TutorialText _runestoneDraugrExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Draugr",
-                    m_name = "DraugrRune_Exp",
-                    m_text = "An inscription about draugrs.",
-                    
-                    m_topic = "Draugr Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneDraugrExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneDraugrExp);
-                }
-                Tutorial.TutorialText _runestoneMountainsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Mountains",
-                    m_name = "MountainRune_Exp",
-                    m_text = "An inscription about the mountains.",
-                    
-                    m_topic = "Mountains Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneMountainsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneMountainsExp);
-                }
-                Tutorial.TutorialText _runestoneDrakeExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Drake",
-                    m_name = "DrakeRune_Exp",
-                    m_text = "An inscription about hatchlings.",
-                    
-                    m_topic = "Drake Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneDrakeExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneDrakeExp);
-                }
-                Tutorial.TutorialText _runestonePlainsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Plains",
-                    m_name = "PlainsRune_Exp",
-                    m_text = "An inscription about the plains.",
-                    
-                    m_topic = "Plains Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestonePlainsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestonePlainsExp);
-                }
-                Tutorial.TutorialText _runestoneMistlandsExp = new Tutorial.TutorialText
-                {
-                    m_isMunin = true,
-                    m_label = "xRunestone Mistlands",
-                    m_name = "MistRune_Exp",
-                    m_text = "An inscription about the mistlands.",
-                    
-                    m_topic = "Mistlands Runestone"
-                };
-                if (!Tutorial.instance.m_texts.Contains(_runestoneMistlandsExp))
-                {
-                    Tutorial.instance.m_texts.Add(_runestoneMistlandsExp);
-                }
-                
-                
-            }
-        }
         
       
         

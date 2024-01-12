@@ -127,14 +127,33 @@ namespace LackingImaginationV2
 
                     // Move the projectile to the new position
                     __instance.transform.position = newPosition;
+
+                    float range;
+                    switch (__instance.name)
+                    {
+                        case "Soulmass0":
+                            range = 10f;
+                            break;
+                        case "Soulmass1":
+                        case "Soulmass2":
+                            range = 20f;
+                            break;
+                        case "Soulmass3":
+                        case "Soulmass4":
+                            range = 30f;
+                            break;
+                        default:
+                            range = 10f;
+                            break;
+                    }
                     
-                    bool shouldFire = IsTargetInRange(__instance);
+                    bool shouldFire = IsTargetInRange(__instance, range);
 
                     if (shouldFire && !__instance.m_didHit)
                     {
                         __instance.name = "SoulmassReleased";
                         // Modify the behavior to fire the projectile
-                        Vector3 targetPosition = GetTargetPosition(__instance);
+                        Vector3 targetPosition = GetTargetPosition(__instance, range);
                         Vector3 toTarget = targetPosition - __instance.transform.position;
                         Vector3 newVelocity = toTarget.normalized * __instance.m_vel.magnitude;
                         __instance.m_vel = newVelocity * 0.5f;
@@ -148,11 +167,11 @@ namespace LackingImaginationV2
                 }
             }
             
-            static bool IsTargetInRange(Projectile projectile)
+            static bool IsTargetInRange(Projectile projectile, float range)
             {
                 List<Character> allCharacters = new List<Character>();
                 allCharacters.Clear();
-                Character.GetCharactersInRange(projectile.transform.position, 20f, allCharacters);
+                Character.GetCharactersInRange(projectile.transform.position, range, allCharacters);
                 foreach (Character ch in allCharacters)
                 {
                     if ((ch.GetBaseAI() != null && ch.GetBaseAI() is MonsterAI && ch.GetBaseAI().IsEnemy(Player.m_localPlayer) || ch.GetBaseAI() != null && ch.GetBaseAI() is AnimalAI) && LineOfSight.LOS(ch, projectile.transform.position))
@@ -162,11 +181,11 @@ namespace LackingImaginationV2
                 }
                 return false;
             }
-            static Vector3 GetTargetPosition(Projectile projectile)
+            static Vector3 GetTargetPosition(Projectile projectile, float range)
             {
                 List<Character> allCharacters = new List<Character>();
                 allCharacters.Clear();
-                Character.GetCharactersInRange(projectile.transform.position, 21f, allCharacters);
+                Character.GetCharactersInRange(projectile.transform.position, range + 1f, allCharacters);
                 Character closestCharacter = null;
                 Character backupCharacter = null;
                 float closestDistance = float.MaxValue;

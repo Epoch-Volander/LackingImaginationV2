@@ -169,10 +169,23 @@ namespace LackingImaginationV2
                 }
             }
         }
-        
+
+        private static List<Character> PreSummon = new List<Character>();
+
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
         public static class Gjall_SpawnOnHit_Patch
         {
+            public static void Prefix(Projectile __instance)
+            {
+                if (__instance.name == "GjallarhornSpawn")
+                {
+                    Vector3 vector3 = __instance.transform.position + __instance.transform.TransformDirection(__instance.m_spawnOffset);
+                    
+                    PreSummon.Clear();
+                    Character.GetCharactersInRange(vector3, 60f, PreSummon);
+                }
+            }
+            
             public static void Postfix(Projectile __instance, ref GameObject go)
             {
                 if (__instance.name == "GjallarhornSpawn")
@@ -183,12 +196,12 @@ namespace LackingImaginationV2
                      
                      Vector3 vector3 = __instance.transform.position + __instance.transform.TransformDirection(__instance.m_spawnOffset);
 
-                     List<Character> allCharacters = new List<Character>();
+                    List<Character> allCharacters = new List<Character>();
                     allCharacters.Clear();
-                    Character.GetCharactersInRange(vector3, 30f, allCharacters);
+                    Character.GetCharactersInRange(vector3, 50f, allCharacters);
                     foreach (Character ch in allCharacters)
                     {
-                        if (ch.GetBaseAI() != null && ch.name == "Tick(Clone)" && ch.GetHealth() == ch.GetMaxHealth())
+                        if (ch.GetBaseAI() != null && ch.name == "Tick(Clone)" && ch.GetHealth() == ch.GetMaxHealth() && !PreSummon.Contains(ch))
                         {
                              // LackingImaginationV2Plugin.Log($"Bo{ch.name}");
                             ch.name += "Ally";
@@ -196,7 +209,8 @@ namespace LackingImaginationV2
                             ch.GetSEMan().AddStatusEffect(se_timedeath);
                             ch.SetMaxHealth(ch.GetMaxHealthBase() * 2f);
                             ch.gameObject.AddComponent<Tameable>();
-                            ch.GetComponent<Tameable>().Tame();
+                            ch.SetTamed(true);
+                            ch.GetComponent<Tameable>().SetText("Tick(Ally)");
                             ch.GetComponent<Tameable>().m_unsummonDistance = 100f;
                             ch.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                             ch.GetComponent<CharacterDrop>().m_dropsEnabled = false;
@@ -208,6 +222,7 @@ namespace LackingImaginationV2
                             }
                         }
                     }
+                    PreSummon.Clear();
                 }
             }
         }

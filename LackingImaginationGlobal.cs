@@ -2523,7 +2523,20 @@ namespace LackingImaginationV2
                }
            }
        }
-       
+       public static float c_seekersoldierReverberationReflection
+       {
+           get
+           {
+               try
+               {
+                   return ConfigStrings["li_seekersoldierReverberationReflection"]/100;
+               }
+               catch
+               {
+                   return 0.75f;
+               }
+           }
+       }
        
        
        

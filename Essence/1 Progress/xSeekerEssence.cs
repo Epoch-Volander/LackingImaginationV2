@@ -17,19 +17,30 @@ namespace LackingImaginationV2
     public class xSeekerEssence
     {
         public static string Ability_Name = "PH";//Become invisible and ride the seeker
-        public static void Process_Input(Player player)
+        public static void Process_Input(Player player, int position)
         {
-            System.Random rnd = new System.Random();
-            Vector3 pVec = default(Vector3);
-            
-                LackingImaginationV2Plugin.Log($"Seeker Button was pressed");
-            
-            
+            if (!player.GetSEMan().HaveStatusEffect(LackingImaginationUtilities.CooldownString(position)))
+            {
+
+                // LackingImaginationV2Plugin.Log($"Seeker Button was pressed");
+                UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("SeekerPlayer"), player.transform.position, Quaternion.identity);
+                
+                
+                
+            }
         }
         
 
 
     }
 
-
+    [HarmonyPatch]
+    public class xSeekerEssencePassive
+    {
+        
+        
+        
+        
+        
+    }
 }

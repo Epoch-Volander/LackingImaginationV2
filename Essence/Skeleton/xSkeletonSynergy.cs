@@ -127,7 +127,7 @@ namespace LackingImaginationV2
         }
         
         [HarmonyPatch(typeof(Menu),  nameof(Menu.OnQuit), null)]
-        public class Skele_Remove_QuitYes_Patch
+        public class Skele_Remove_OnQuit_Patch
         {
             public static bool Prefix()
             {
@@ -445,12 +445,14 @@ namespace LackingImaginationV2
                     {
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
-                        SkeletonSynergyBrennaController = true;
-                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerTrue");
+                        // SkeletonSynergyBrennaController = true;
+                        RPC_LI.AnimationCaller("Brenna", true);
+                        // RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
                         // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.Brenna, BrennaAnimationTimer);
-                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerFalse");
-                        SkeletonSynergyBrennaController = false;
+                        // RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerFalse");
+                        // SkeletonSynergyBrennaController = false;
+                        RPC_LI.AnimationCaller("Brenna", false);
 
                         inventory.RemoveItem(item);
                         xBrennaEssencePassive.BrennaStats[0] = "true";
@@ -472,12 +474,14 @@ namespace LackingImaginationV2
                     {
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
-                        SkeletonSynergyRancidController = true;
-                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerTrue");
+                        // SkeletonSynergyRancidController = true;
+                        RPC_LI.AnimationCaller("RancidRemains", true);
+                        // RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
                         // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.RancidRemains, RancidRemainsAnimationTimer);
-                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerFalse");
-                        SkeletonSynergyRancidController = false;
+                        // RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerFalse");
+                        // SkeletonSynergyRancidController = false;
+                        RPC_LI.AnimationCaller("RancidRemains", false);
 
                         inventory.RemoveItem(item);
                         xRancidRemainsEssencePassive.RancidRemainsStats[0] = "true";
@@ -499,12 +503,14 @@ namespace LackingImaginationV2
                     {
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
-                        SkeletonSynergyBrennaController = true;
-                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerTrue");
+                        // SkeletonSynergyBrennaController = true;
+                        RPC_LI.AnimationCaller("Brenna", true);
+                        // RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
                         // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.Brenna, BrennaAnimationTimer);
-                        RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerFalse");
-                        SkeletonSynergyBrennaController = false;
+                        // RPC_LI.SendStringToServer("SkeletonSynergyBrennaControllerFalse");
+                        // SkeletonSynergyBrennaController = false;
+                        RPC_LI.AnimationCaller("Brenna", false);
                         
                         ScheduleDelay(__instance, 0.5f, true, true);
                         return false;
@@ -517,12 +523,14 @@ namespace LackingImaginationV2
                     {
                         __instance.EquipItem(item);
                         LackingImaginationV2Plugin.UseGuardianPower = false;
-                        SkeletonSynergyRancidController = true;
-                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerTrue");
+                        // SkeletonSynergyRancidController = true;
+                        RPC_LI.AnimationCaller("RancidRemains", true);
+                        // RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerTrue");
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance)).SetTrigger("gpower");
                         // AnimationDelay.ScheduleAnimation(AnimationDelay.EssenceAnim.RancidRemains, RancidRemainsAnimationTimer);
-                        RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerFalse");
-                        SkeletonSynergyRancidController = false;
+                        // RPC_LI.SendStringToServer("SkeletonSynergyRancidControllerFalse");
+                        // SkeletonSynergyRancidController = false;
+                        RPC_LI.AnimationCaller("RancidRemains", false);
                         
                         ScheduleDelay(__instance, 1.5f, false, true);
                         return false;

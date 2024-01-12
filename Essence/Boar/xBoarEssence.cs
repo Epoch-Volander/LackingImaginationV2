@@ -71,9 +71,11 @@ namespace LackingImaginationV2
                     if ((double) Time.time - (double) nearFire < 6.0 && (bool) (UnityEngine.Object) FireArea)
                     {
                         LackingImaginationV2Plugin.UseGuardianPower = false;
-                        xBoarEssence.BoarController = true;
+                        // xBoarEssence.BoarController = true;
+                        RPC_LI.AnimationCaller("Boar", true);
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(Player.m_localPlayer)).SetTrigger("gpower");
-                        xBoarEssence.BoarController = false;
+                        // xBoarEssence.BoarController = false;
+                        RPC_LI.AnimationCaller("Boar", false);
                         nearFire = 0f;
                         Player.m_localPlayer.GetSEMan().AddStatusEffect("SE_Courage".GetStableHashCode());
                     }

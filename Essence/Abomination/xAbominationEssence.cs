@@ -49,10 +49,11 @@ namespace LackingImaginationV2
                 Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * 3f;
                 Vector3 randomPosition = player.transform.position + new Vector3(randomCirclePoint.x, 0f, randomCirclePoint.y);
                 GameObject baby = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Abomination"), randomPosition, Quaternion.identity);
-                baby.GetComponent<Humanoid>().m_name = "Bane";
+                // baby.GetComponent<Humanoid>().m_name = "Bane";
                 baby.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
                 baby.GetComponent<ZSyncTransform>().m_syncScale = true;
-                baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
+                // baby.GetComponent<ZNetView>().SetLocalScale(0.5f * Vector3.one);
+                // baby.GetComponent<Transform>().localScale = 0.5f * Vector3.one;
                 baby.GetComponent<FootStep>().m_effects.Clear();
                 baby.GetComponent<Humanoid>().SetMaxHealth(baby.GetComponent<Humanoid>().GetMaxHealthBase() * LackingImaginationGlobal.c_abominationBaneAllyHealth);
                 baby.GetComponent<Humanoid>().m_speed = LackingImaginationGlobal.c_abominationBaneAllySpeed;
@@ -63,8 +64,10 @@ namespace LackingImaginationV2
                 baby.GetComponent<MonsterAI>().m_consumeSearchInterval = 10f;
                 baby.AddComponent<Tameable>();
                 // baby.GetComponent<Tameable>().m_startsTamed = true;
-                baby.GetComponent<Tameable>().Tame();
+                baby.GetComponent<Character>().SetTamed(true);
+                // baby.GetComponent<Tameable>().Tame();
                 baby.GetComponent<Tameable>().m_commandable = true;
+                baby.GetComponent<Tameable>().SetText("Bane");
                 baby.GetComponent<Tameable>().Command(player);
                 baby.GetComponent<Tameable>().m_unSummonEffect = new EffectList()
                 {
@@ -97,6 +100,32 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xAbominationEssencePassive
     {
+        [HarmonyPatch(typeof(Tameable), nameof(Tameable.RPC_SetName))]
+        public static class Abomination_RPC_Look_Away
+        {
+            public static void Prefix(Tameable __instance, ref string name)
+            {
+                if(name == "Bane" /*&& __instance.m_nview.GetZDO().GetString(ZDOVars.s_tamedName) == "Abomination(Clone)"*/)
+                {
+                    if (!__instance.m_nview.IsValid() || !__instance.m_nview.IsOwner() || !__instance.m_character.IsTamed()) 
+                        return;
+                    Debug.Log("GSev11111111111");
+                    __instance.m_nview.GetZDO().Set(ZDOVars.s_scaleHash, (0.5f * Vector3.one));
+                    __instance.m_nview.GetZDO().Set(ZDOVars.s_scaleScalarHash, (0.5f * Vector3.one).x);
+                    
+                }
+            }
+        }
+        
+        // public void RPC_SetName(long sender, string name, string authorId)
+        // {
+        //     if (!this.m_nview.IsValid() || !this.m_nview.IsOwner() || !this.m_character.IsTamed())
+        //         return;
+        //     this.m_nview.GetZDO().Set(ZDOVars.s_tamedName, name);
+        //     this.m_nview.GetZDO().Set(ZDOVars.s_tamedNameAuthor, authorId);
+        // }
+        
+        
         [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
         public static class Abomination_GetBodyArmor_Patch
         {

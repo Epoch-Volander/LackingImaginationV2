@@ -67,6 +67,8 @@ namespace LackingImaginationV2
 
                         SE_Arrogance se_arrogance = (SE_Arrogance)ScriptableObject.CreateInstance(typeof(SE_Arrogance));
                         se_arrogance.m_startEffects.m_effectPrefabs[0].m_prefab = LackingImaginationV2Plugin.fx_ArroDebuff;
+                        se_arrogance.m_startEffects.m_effectPrefabs[0].m_inheritParentScale = false;
+                        se_arrogance.m_startEffects.m_effectPrefabs[0].m_childTransform = "Hips";
                         player.GetSEMan().AddStatusEffect(se_arrogance);
                         
                         // AuraA = UnityEngine.GameObject.Instantiate(LackingImaginationV2Plugin.fx_Longinus, player.GetCenterPoint(), Quaternion.identity); /// change effect Arrogance

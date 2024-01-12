@@ -112,9 +112,22 @@ namespace LackingImaginationV2
     [HarmonyPatch]
     public class xBoneMassEssencePassive
     {
+        private static List<Character> PreSummon = new List<Character>();
+        
         [HarmonyPatch(typeof(Projectile),  nameof(Projectile.SpawnOnHit))]
         public static class BoneMass_SpawnOnHit_Patch
         {
+            public static void Prefix(Projectile __instance)
+            {
+                if (__instance.name == "Mass Release")
+                {
+                    Vector3 vector3 = __instance.transform.position + __instance.transform.TransformDirection(__instance.m_spawnOffset);
+                    
+                    PreSummon.Clear();
+                    Character.GetCharactersInRange(vector3, 60f, PreSummon);
+                }
+            }
+            
             public static void Postfix(Projectile __instance, ref GameObject go)
             {
                 if (__instance.name == "Mass Release")
@@ -127,7 +140,7 @@ namespace LackingImaginationV2
 
                      List<Character> allCharacters = new List<Character>();
                     allCharacters.Clear();
-                    Character.GetCharactersInRange(vector3, 30f, allCharacters);
+                    Character.GetCharactersInRange(vector3, 50f, allCharacters);
                     foreach (Character ch in allCharacters)
                     {
                         if (ch.GetBaseAI() != null && ch.name == "Skeleton(Clone)" && ch.GetHealth() == ch.GetMaxHealth() 
@@ -139,7 +152,8 @@ namespace LackingImaginationV2
                             ch.GetSEMan().AddStatusEffect(se_timedeath);
                             ch.SetMaxHealth(ch.GetMaxHealthBase() * 10f);
                             ch.gameObject.AddComponent<Tameable>();
-                            ch.GetComponent<Tameable>().Tame();
+                            // ch.GetComponent<Tameable>().Tame();
+                            ch.SetTamed(true);
                             ch.GetComponent<Tameable>().m_unsummonDistance = 100f;
                             ch.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
                             ch.GetComponent<CharacterDrop>().m_dropsEnabled = false;
@@ -151,6 +165,7 @@ namespace LackingImaginationV2
                             }
                         }
                     }
+                    PreSummon.Clear();
                 }
             }
         }

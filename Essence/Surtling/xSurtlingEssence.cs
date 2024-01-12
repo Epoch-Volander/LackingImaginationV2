@@ -24,7 +24,7 @@ namespace LackingImaginationV2
         
         private static float minDistanceBetweenCharacters = LackingImaginationGlobal.c_surtlingHarbingerMinDistance; // Set the minimum distance between characters
         
-        public static List<GameObject> Rifts = new List<GameObject>();
+        public static List<GameObject[]> Rifts = new List<GameObject[]>();
         public static List<Character> Surts = new List<Character>();
         
         public static void Process_Input(Player player, int position)
@@ -58,9 +58,11 @@ namespace LackingImaginationV2
                         // UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Harbinger, player.transform.position, Quaternion.identity);
                     
                         LackingImaginationV2Plugin.UseGuardianPower = false;
-                        SurtlingController = true;
+                        // SurtlingController = true;
+                        RPC_LI.AnimationCaller("Surtling", true);
                         ((ZSyncAnimation)typeof(Player).GetField("m_zanim", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player)).SetTrigger("gpower");
-                        SurtlingController = false;
+                        // SurtlingController = false;
+                        RPC_LI.AnimationCaller("Surtling", false);
                         
                         //Lingering effects
                         SE_Harbinger se_harbinger = (SE_Harbinger)ScriptableObject.CreateInstance(typeof(SE_Harbinger));
@@ -93,8 +95,31 @@ namespace LackingImaginationV2
                                 }
                                 if (!tooClose)
                                 {
-                                    GameObject effectInstance = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Harbinger, currentCharacter.transform.position, Quaternion.identity);
-                                    Rifts.Add(effectInstance);
+                                    // GameObject effectInstance = UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Harbinger, currentCharacter.transform.position, Quaternion.identity);
+                                    
+                                    EffectList m_starteffect = new EffectList
+                                    {
+                                        m_effectPrefabs = new EffectList.EffectData[]
+                                        {
+                                            new()
+                                            {
+                                                m_prefab = LackingImaginationV2Plugin.fx_Harbinger,
+                                                m_enabled = true,
+                                                m_variant = 0,
+                                                m_attach = false,
+                                                m_follow = false,
+                                                // m_inheritParentScale = true,
+                                                // m_multiplyParentVisualScale = true,
+                                                // m_scale = true,
+                                            }
+                                        }
+                                    };
+                                    
+                                    m_starteffect.m_effectPrefabs[0].m_prefab.GetComponent<TimedDestruction>().m_timeout = SE_Harbinger.m_baseTTL;
+                                    
+                                    GameObject[] Aura = m_starteffect.Create(currentCharacter.transform.position, Quaternion.identity);
+                                    Rifts.Add(Aura);
+                                    
                                     // Add the current character to the list of affected characters
                                     affectedCharacters.Add(currentCharacter);
                                     
@@ -146,12 +171,13 @@ namespace LackingImaginationV2
             GameObject surt = UnityEngine.Object.Instantiate(ZNetScene.instance.GetPrefab("Surtling"), randomPosition, Quaternion.identity);
             
             surt.GetComponent<Humanoid>().m_faction = Character.Faction.Players;
-            surt.GetComponent<Humanoid>().m_name = "Surtling(Ally)";
             surt.GetComponent<Humanoid>().SetMaxHealth(surt.GetComponent<Humanoid>().GetMaxHealthBase() * 4f);
             surt.GetComponent<MonsterAI>().m_attackPlayerObjects = false;
             surt.GetComponent<CharacterDrop>().m_dropsEnabled = false;
             surt.AddComponent<Tameable>();
-            surt.GetComponent<Tameable>().Tame();
+            surt.GetComponent<Character>().SetTamed(true);
+            surt.GetComponent<Tameable>().SetText("Surtling(Ally)");
+            // surt.GetComponent<Tameable>().m_nview.GetZDO().Set(ZDOVars.s_tamedName, "Surtling(Ally)");
             surt.GetComponent<Tameable>().m_unsummonDistance = 100f;
             surt.GetComponent<Tameable>().m_unsummonOnOwnerLogoutSeconds = 3f;
             foreach (CharacterDrop.Drop drop in surt.GetComponent<CharacterDrop>().m_drops) drop.m_chance = 0f;
@@ -174,9 +200,13 @@ namespace LackingImaginationV2
             {
                 if (xSurtlingEssence.Rifts.Any() && __instance.IsPlayer() && __instance == Player.m_localPlayer && !__instance.GetSEMan().HaveStatusEffect("SE_Harbinger"))
                 {
-                    foreach (GameObject rift in xSurtlingEssence.Rifts)
+                    foreach (GameObject[] rift in xSurtlingEssence.Rifts)
                     {
-                        UnityEngine.Object.Destroy(rift);
+                       
+                        foreach (GameObject auraObject in rift)
+                        {
+                            UnityEngine.Object.Destroy(auraObject);
+                        }
                     }
                     xSurtlingEssence.Rifts.Clear();
                     foreach (Character surt in xSurtlingEssence.Surts)

@@ -44,7 +44,7 @@ namespace LackingImaginationV2
                             m_prefab = LackingImaginationV2Plugin.fx_Relentless,
                             m_enabled = true,
                             m_variant = 0,
-                            m_attach = false,
+                            m_attach = true,
                             m_follow = true,
                             m_childTransform = "Head",
                             // m_inheritParentScale = true,
@@ -79,6 +79,7 @@ namespace LackingImaginationV2
     public static class xDeathsquitoEssencePassive
     {
         private static List<Projectile> arrows = new List<Projectile>();
+        private static List<GameObject[]> eyes = new List<GameObject[]>();
 
         [HarmonyPatch(typeof(Projectile), nameof(Projectile.FixedUpdate))]
         public class Deathsquito_FixedUpdate_Patch
@@ -95,7 +96,30 @@ namespace LackingImaginationV2
 
                     if (!arrows.Contains(__instance))
                     { 
-                        UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, __instance.transform.position + __instance.transform.up * 0.3f, Quaternion.identity).transform.parent = __instance.transform;
+                        // UnityEngine.Object.Instantiate(LackingImaginationV2Plugin.fx_Relentless, __instance.transform.position + __instance.transform.up * 0.3f, Quaternion.identity).transform.parent = __instance.transform;
+                        EffectList m_starteffect = new EffectList
+                        {
+                            m_effectPrefabs = new EffectList.EffectData[]
+                            {
+                                new()
+                                {
+                                    m_prefab = LackingImaginationV2Plugin.fx_Relentless,
+                                    m_enabled = true,
+                                    m_variant = 0,
+                                    m_attach = true,
+                                    m_follow = true,
+                                    // m_inheritParentScale = true,
+                                    // m_multiplyParentVisualScale = true,
+                                    // m_scale = true,
+                                    m_inheritParentRotation = true,
+                                }
+                            }
+                        };
+                        
+                        arrows.Add(__instance);
+                        m_starteffect.Create(__instance.transform.position + __instance.transform.up * 0.3f, __instance.transform.rotation, __instance.transform);
+                        // eyes.Add(m_starteffect.Create(__instance.transform.position + __instance.transform.up * 0.3f, __instance.transform.rotation, __instance.transform));
+
                     }
                     
                     if (__instance.m_owner != null && IsTargetInRange(__instance)) // Make sure the owner is a player

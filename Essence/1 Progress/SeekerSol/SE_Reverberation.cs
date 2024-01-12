@@ -25,11 +25,37 @@ namespace LackingImaginationV2
             m_name = "Reverberation";
             m_ttl = m_baseTTL;
             
-
+            m_startEffects = new EffectList
+            {
+                m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new()
+                    {
+                         m_prefab = LackingImaginationV2Plugin.fx_Reverberation,
+                        m_enabled = true,
+                        m_variant = -1,
+                        m_attach = true,
+                        m_follow = true,
+                        m_inheritParentScale = true,
+                        m_multiplyParentVisualScale = true,
+                        m_scale = true,
+                        m_inheritParentRotation = true,
+                        m_childTransform = "Spine2",
+                    }
+                }
+            };
             
         }
+
         
-       
+        public override void ModifyDamageMods(ref HitData.DamageModifiers modifiers)
+        {
+            modifiers.m_fire = HitData.DamageModifier.Weak;
+            modifiers.m_poison = HitData.DamageModifier.Weak;
+            modifiers.m_frost = HitData.DamageModifier.Weak;
+            modifiers.m_lightning = HitData.DamageModifier.Weak;
+            modifiers.m_spirit = HitData.DamageModifier.Weak;
+        }
         
         
         public override bool CanAdd(Character character)
